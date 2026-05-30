@@ -1,0 +1,141 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marked-ai-tools.local/schemas/leaderboard_submission.schema.json",
+  "title": "The Marked Bench Leaderboard Submission",
+  "type": "object",
+  "required": [
+    "schema",
+    "created_at",
+    "system_name",
+    "system_version",
+    "submitter",
+    "suite_id",
+    "suite_version",
+    "suite_hash",
+    "report_schema",
+    "report_path",
+    "report_sha256",
+    "overall_score",
+    "case_count",
+    "failure_count",
+    "validation_warnings",
+    "disclosures",
+    "notes"
+  ],
+  "properties": {
+    "schema": {
+      "const": "marked_bench.leaderboard-submission.v1"
+    },
+    "created_at": {
+      "type": "number"
+    },
+    "system_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "system_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "submitter": {
+      "type": "string",
+      "minLength": 1
+    },
+    "suite_id": {
+      "enum": [
+        "marked-bench-contradiction-standard",
+        "marked-bench-contradiction-adversarial"
+      ]
+    },
+    "suite_version": {
+      "enum": [
+        "0.1.0",
+        "0.2.0"
+      ]
+    },
+    "suite_hash": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "report_schema": {
+      "const": "marked_bench.contradiction-benchmark-report.v1"
+    },
+    "report_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "report_sha256": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "overall_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "case_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "failure_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "validation_warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "disclosures": {
+      "type": "object",
+      "required": [
+        "system_description",
+        "model",
+        "prompting",
+        "preprocessing",
+        "retrieval",
+        "postprocessing",
+        "training_data",
+        "runtime"
+      ],
+      "properties": {
+        "system_description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "prompting": {
+          "type": "string",
+          "minLength": 1
+        },
+        "preprocessing": {
+          "type": "string",
+          "minLength": 1
+        },
+        "retrieval": {
+          "type": "string",
+          "minLength": 1
+        },
+        "postprocessing": {
+          "type": "string",
+          "minLength": 1
+        },
+        "training_data": {
+          "type": "string",
+          "minLength": 1
+        },
+        "runtime": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

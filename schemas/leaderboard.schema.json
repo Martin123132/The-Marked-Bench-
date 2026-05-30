@@ -1,0 +1,127 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marked-ai-tools.local/schemas/leaderboard.schema.json",
+  "title": "The Marked Bench Leaderboard",
+  "type": "object",
+  "required": [
+    "schema",
+    "created_at",
+    "entry_count",
+    "rejected_count",
+    "entries",
+    "rejected"
+  ],
+  "properties": {
+    "schema": {
+      "const": "marked_bench.benchmark-leaderboard.v1"
+    },
+    "created_at": {
+      "type": "number"
+    },
+    "entry_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "rejected_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "rank",
+          "system_name",
+          "suite_id",
+          "suite_version",
+          "suite_hash",
+          "report_schema",
+          "report_path",
+          "report_sha256",
+          "overall_score",
+          "case_count",
+          "failure_count",
+          "type_accuracy",
+          "contradiction_macro_f1",
+          "detection_f1",
+          "calibration_brier_score",
+          "calibration_ece",
+          "coverage_index",
+          "validation_warnings"
+        ],
+        "properties": {
+          "rank": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "system_name": {
+            "type": "string"
+          },
+          "suite_id": {
+            "type": "string"
+          },
+          "suite_version": {
+            "type": "string"
+          },
+          "suite_hash": {
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{64}$"
+          },
+          "report_schema": {
+            "type": "string"
+          },
+          "report_path": {
+            "type": "string"
+          },
+          "report_sha256": {
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{64}$"
+          },
+          "overall_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "case_count": {
+            "type": "integer"
+          },
+          "failure_count": {
+            "type": "integer"
+          },
+          "type_accuracy": {
+            "type": "number"
+          },
+          "contradiction_macro_f1": {
+            "type": "number"
+          },
+          "detection_f1": {
+            "type": "number"
+          },
+          "calibration_brier_score": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "calibration_ece": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "coverage_index": {
+            "type": "number"
+          },
+          "validation_warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "rejected": {
+      "type": "array"
+    }
+  }
+}

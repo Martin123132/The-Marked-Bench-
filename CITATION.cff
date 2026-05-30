@@ -1,0 +1,18 @@
+﻿cff-version: 1.2.0
+title: "The Marked Bench"
+message: "If you use this benchmark suite, please cite it using this metadata."
+type: software
+authors:
+  - family-names: "Ollett"
+    given-names: "Martin"
+version: "0.2.0"
+date-released: "2026-05-31"
+repository-code: "https://github.com/Martin123132/The-Marked-Bench-"
+abstract: "A versioned benchmark suite for evaluating contradiction detection and classification in AI systems."
+license: "LicenseRef-Motion-TimeSpace-Non-Commercial"
+keywords:
+  - AI evaluation
+  - benchmark
+  - contradiction detection
+  - reasoning
+  - AI safety

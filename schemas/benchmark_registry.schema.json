@@ -1,0 +1,161 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marked-ai-tools.local/schemas/benchmark_registry.schema.json",
+  "title": "The Marked Bench Registry",
+  "type": "object",
+  "required": [
+    "schema",
+    "project",
+    "benchmark_family",
+    "default_track",
+    "schemas",
+    "schema_ids",
+    "governance_docs",
+    "tracks"
+  ],
+  "properties": {
+    "schema": {
+      "const": "marked_bench.benchmark-registry.v1"
+    },
+    "project": {
+      "type": "string"
+    },
+    "benchmark_family": {
+      "type": "string"
+    },
+    "default_track": {
+      "type": "string"
+    },
+    "schemas": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "schema_ids": {
+      "type": "object",
+      "required": [
+        "suite_manifest",
+        "benchmark_report",
+        "predictions",
+        "leaderboard",
+        "leaderboard_submission"
+      ],
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "governance_docs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tracks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/track"
+      }
+    }
+  },
+  "$defs": {
+    "label": {
+      "enum": [
+        "direct_negation",
+        "property_mismatch",
+        "definitional_violation",
+        "universal_counterexample",
+        "temporal_conflict",
+        "none"
+      ]
+    },
+    "track": {
+      "type": "object",
+      "required": [
+        "name",
+        "title",
+        "status",
+        "suite_id",
+        "suite_version",
+        "suite_hash",
+        "case_count",
+        "labels",
+        "profile",
+        "suite_manifest",
+        "report_schema",
+        "prediction_schema",
+        "leaderboard",
+        "baseline_reports",
+        "commands"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "suite_id": {
+          "type": "string"
+        },
+        "suite_version": {
+          "type": "string"
+        },
+        "suite_hash": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "case_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/label"
+          }
+        },
+        "profile": {
+          "type": "object"
+        },
+        "suite_manifest": {
+          "type": "string"
+        },
+        "report_schema": {
+          "type": "string"
+        },
+        "prediction_schema": {
+          "type": "string"
+        },
+        "leaderboard": {
+          "type": "string"
+        },
+        "baseline_reports": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "commands": {
+          "type": "object",
+          "required": [
+            "run_baseline",
+            "export_prediction_template",
+            "score_predictions",
+            "create_submission",
+            "validate_report",
+            "validate_submission",
+            "build_leaderboard"
+          ],
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,101 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marked-ai-tools.local/schemas/contradiction_predictions.schema.json",
+  "title": "The Marked Bench Contradiction Prediction Submission",
+  "description": "External system predictions before they are scored into a benchmark report. JSONL uses one prediction object per line with the same prediction shape.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/prediction_array"
+    },
+    {
+      "type": "object",
+      "required": [
+        "schema",
+        "suite_id",
+        "suite_version",
+        "suite_hash",
+        "predictions"
+      ],
+      "properties": {
+        "schema": {
+          "const": "marked_bench.contradiction-predictions.v1"
+        },
+        "suite_id": {
+          "enum": [
+            "marked-bench-contradiction-standard",
+            "marked-bench-contradiction-adversarial"
+          ]
+        },
+        "suite_version": {
+          "enum": [
+            "0.1.0",
+            "0.2.0"
+          ]
+        },
+        "suite_hash": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/label"
+          }
+        },
+        "predictions": {
+          "$ref": "#/$defs/prediction_array"
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "label": {
+      "enum": [
+        "direct_negation",
+        "property_mismatch",
+        "definitional_violation",
+        "universal_counterexample",
+        "temporal_conflict",
+        "none"
+      ]
+    },
+    "prediction": {
+      "type": "object",
+      "required": [
+        "case_id",
+        "predicted"
+      ],
+      "properties": {
+        "case_id": {
+          "type": "string"
+        },
+        "premise": {
+          "type": "string"
+        },
+        "query": {
+          "type": "string"
+        },
+        "predicted": {
+          "$ref": "#/$defs/label"
+        },
+        "detector_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "detector_note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "prediction_array": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/prediction"
+      }
+    }
+  }
+}

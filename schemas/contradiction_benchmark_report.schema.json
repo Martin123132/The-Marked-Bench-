@@ -1,0 +1,214 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marked-ai-tools.local/schemas/contradiction_benchmark_report.schema.json",
+  "title": "The Marked Bench Contradiction Benchmark Report",
+  "type": "object",
+  "required": [
+    "schema",
+    "suite_id",
+    "suite_version",
+    "suite_hash",
+    "system_name",
+    "created_at",
+    "duration_seconds",
+    "case_count",
+    "overall_score",
+    "metrics",
+    "confusion_matrix",
+    "failures",
+    "case_results",
+    "suite_cases"
+  ],
+  "properties": {
+    "schema": {
+      "const": "marked_bench.contradiction-benchmark-report.v1"
+    },
+    "suite_id": {
+      "enum": [
+        "marked-bench-contradiction-standard",
+        "marked-bench-contradiction-adversarial"
+      ]
+    },
+    "suite_version": {
+      "enum": [
+        "0.1.0",
+        "0.2.0"
+      ]
+    },
+    "suite_hash": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "system_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "number"
+    },
+    "duration_seconds": {
+      "type": "number",
+      "minimum": 0
+    },
+    "case_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "overall_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "metrics": {
+      "type": "object",
+      "required": [
+        "type_accuracy",
+        "contradiction_type_accuracy",
+        "contradiction_macro_f1",
+        "coverage_index",
+        "calibration",
+        "detection",
+        "per_class",
+        "slices"
+      ]
+    },
+    "confusion_matrix": {
+      "type": "object"
+    },
+    "failures": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/case_result"
+      }
+    },
+    "case_results": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/case_result"
+      }
+    },
+    "suite_cases": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/suite_case"
+      }
+    }
+  },
+  "$defs": {
+    "label": {
+      "enum": [
+        "direct_negation",
+        "property_mismatch",
+        "definitional_violation",
+        "universal_counterexample",
+        "temporal_conflict",
+        "none"
+      ]
+    },
+    "case_result": {
+      "type": "object",
+      "required": [
+        "case_id",
+        "domain",
+        "difficulty",
+        "capability",
+        "tags",
+        "expected",
+        "predicted",
+        "type_correct",
+        "detection_correct",
+        "detector_score",
+        "detector_note"
+      ],
+      "properties": {
+        "case_id": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "difficulty": {
+          "type": "string"
+        },
+        "capability": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "expected": {
+          "$ref": "#/$defs/label"
+        },
+        "predicted": {
+          "$ref": "#/$defs/label"
+        },
+        "type_correct": {
+          "type": "boolean"
+        },
+        "detection_correct": {
+          "type": "boolean"
+        },
+        "detector_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "detector_note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "suite_case": {
+      "type": "object",
+      "required": [
+        "id",
+        "premise",
+        "query",
+        "expected",
+        "domain",
+        "difficulty",
+        "capability",
+        "tags",
+        "note"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "premise": {
+          "type": "string"
+        },
+        "query": {
+          "type": "string"
+        },
+        "expected": {
+          "$ref": "#/$defs/label"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "difficulty": {
+          "type": "string"
+        },
+        "capability": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

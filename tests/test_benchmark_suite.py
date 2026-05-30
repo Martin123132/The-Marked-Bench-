@@ -1,0 +1,724 @@
+﻿import json
+from pathlib import Path
+import shutil
+from contextlib import redirect_stdout
+from io import StringIO
+import unittest
+
+from marked_bench.benchmark_leaderboard import LEADERBOARD_SCHEMA, build_leaderboard, report_sha256
+from marked_bench.benchmark_release import RELEASE_MANIFEST_SCHEMA, build_release_manifest, file_sha256
+from marked_bench.benchmark_registry import REGISTRY_SCHEMA, build_benchmark_registry
+from marked_bench.benchmark_submission import (
+    SUBMISSION_SCHEMA,
+    build_leaderboard_submission,
+    validate_leaderboard_submission,
+    write_leaderboard_submission,
+)
+from marked_bench.benchmark_technical_note import build_technical_note
+from marked_bench.contradiction.benchmark_suite import (
+    ADVERSARIAL_SUITE_ID,
+    PREDICTION_SCHEMA,
+    REPORT_SCHEMA,
+    SUITE_ID,
+    build_adversarial_suite,
+    build_prediction_template,
+    build_suite_hash,
+    build_suite_manifest,
+    build_suite_profile,
+    build_standard_suite,
+    evaluate_prediction_file,
+    evaluate_prediction_records,
+    evaluate_standard_suite,
+    load_prediction_records,
+    suite_case_hash,
+    validate_benchmark_report,
+    write_benchmark_report,
+)
+from marked_bench.contradiction.engine import Claim, ContradictionType
+from marked_bench.benchmark_cli import main as benchmark_main
+
+
+class BenchmarkSuiteTests(unittest.TestCase):
+    def test_standard_suite_has_stable_public_shape(self) -> None:
+        cases = build_standard_suite()
+        ids = [case.id for case in cases]
+
+        self.assertGreaterEqual(len(cases), 15)
+        self.assertEqual(len(ids), len(set(ids)))
+        self.assertTrue(all(case.id.startswith("marked-") for case in cases))
+        self.assertTrue(any(case.expected == ContradictionType.NONE for case in cases))
+        self.assertEqual(
+            {
+                ContradictionType.DIRECT_NEGATION,
+                ContradictionType.PROPERTY_MISMATCH,
+                ContradictionType.DEFINITIONAL_VIOLATION,
+                ContradictionType.UNIVERSAL_COUNTEREXAMPLE,
+                ContradictionType.TEMPORAL_CONFLICT,
+            },
+            {case.expected for case in cases if case.expected != ContradictionType.NONE},
+        )
+
+    def test_adversarial_suite_has_stable_public_shape(self) -> None:
+        cases = build_adversarial_suite()
+        ids = [case.id for case in cases]
+
+        self.assertGreaterEqual(len(cases), 15)
+        self.assertEqual(len(ids), len(set(ids)))
+        self.assertTrue(all(case.id.startswith("marked-adv-") for case in cases))
+        self.assertTrue(any(case.expected == ContradictionType.NONE for case in cases))
+        self.assertEqual(
+            {
+                ContradictionType.DIRECT_NEGATION,
+                ContradictionType.PROPERTY_MISMATCH,
+                ContradictionType.DEFINITIONAL_VIOLATION,
+                ContradictionType.UNIVERSAL_COUNTEREXAMPLE,
+                ContradictionType.TEMPORAL_CONFLICT,
+            },
+            {case.expected for case in cases if case.expected != ContradictionType.NONE},
+        )
+
+    def test_checked_in_suite_manifest_matches_code(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        path = root / "suites" / "marked_bench_contradiction_standard_v0_1_0.json"
+
+        manifest = json.loads(path.read_text(encoding="utf-8"))
+
+        self.assertEqual(manifest, build_suite_manifest())
+        self.assertEqual(manifest["suite_hash"], build_suite_hash())
+        self.assertEqual(manifest["profile"], build_suite_profile())
+        self.assertEqual(manifest["profile"]["case_count"], len(build_standard_suite()))
+        self.assertEqual(manifest["profile"]["label_counts"]["none"], 6)
+        self.assertTrue(manifest["profile"]["quality_gates"]["requires_all_contradiction_labels"])
+
+    def test_checked_in_adversarial_suite_manifest_matches_code(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        path = root / "suites" / "marked_bench_contradiction_adversarial_v0_2_0.json"
+
+        manifest = json.loads(path.read_text(encoding="utf-8"))
+
+        self.assertEqual(manifest, build_suite_manifest(suite="contradiction-adversarial"))
+        self.assertEqual(manifest["suite_id"], ADVERSARIAL_SUITE_ID)
+        self.assertEqual(manifest["suite_hash"], build_suite_hash(suite="contradiction-adversarial"))
+        self.assertEqual(manifest["profile"], build_suite_profile(suite="contradiction-adversarial"))
+
+    def test_checked_in_benchmark_registry_matches_code(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        path = root / "benchmark_registry.json"
+
+        registry = json.loads(path.read_text(encoding="utf-8"))
+
+        self.assertEqual(registry, build_benchmark_registry())
+        self.assertEqual(registry["schema"], REGISTRY_SCHEMA)
+        self.assertEqual([track["name"] for track in registry["tracks"]], ["contradiction", "contradiction-adversarial"])
+        self.assertIn("profile", registry["tracks"][0])
+        self.assertEqual(registry["tracks"][0]["profile"], build_suite_profile())
+
+    def test_checked_in_release_manifest_matches_current_artifacts(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        path = root / "releases" / "marked_bench_release_v0_2_0.json"
+
+        manifest = json.loads(path.read_text(encoding="utf-8"))
+
+        self.assertEqual(manifest, build_release_manifest(root))
+        self.assertEqual(manifest["schema"], RELEASE_MANIFEST_SCHEMA)
+        self.assertEqual(manifest["registry_sha256"], file_sha256(root / "benchmark_registry.json"))
+        self.assertGreater(manifest["artifact_count"], 20)
+
+    def test_checked_in_technical_note_matches_generated_evidence(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        path = root / "docs" / "TECHNICAL_NOTE.md"
+
+        note = path.read_text(encoding="utf-8")
+
+        self.assertEqual(note, build_technical_note(root))
+        self.assertIn("## Public Tracks", note)
+        self.assertIn("marked-bench-contradiction-adversarial", note)
+        self.assertIn("## Baseline Evidence", note)
+
+    def test_default_engine_report_is_json_serializable(self) -> None:
+        report = evaluate_standard_suite()
+
+        self.assertEqual(report["schema"], REPORT_SCHEMA)
+        self.assertEqual(report["suite_id"], SUITE_ID)
+        self.assertEqual(report["suite_hash"], suite_case_hash(build_standard_suite()))
+        self.assertEqual(report["case_count"], len(build_standard_suite()))
+        self.assertGreaterEqual(report["overall_score"], 85.0)
+        self.assertIn("confusion_matrix", report)
+        self.assertIn("per_class", report["metrics"])
+        self.assertIn("calibration", report["metrics"])
+        self.assertIn("brier_score", report["metrics"]["calibration"])
+        self.assertEqual(report["metrics"]["calibration"]["bin_count"], 10)
+        self.assertEqual(len(report["metrics"]["calibration"]["bins"]), 10)
+        self.assertIn("slices", report["metrics"])
+        self.assertIn("difficulty", report["metrics"]["slices"])
+        self.assertIn("easy", report["metrics"]["slices"]["difficulty"])
+        self.assertIn("tag", report["metrics"]["slices"])
+        self.assertIn("negation", report["metrics"]["slices"]["tag"])
+        json.dumps(report)
+
+    def test_default_engine_does_not_solve_adversarial_suite(self) -> None:
+        report = evaluate_standard_suite(suite="contradiction-adversarial")
+
+        self.assertEqual(report["suite_id"], ADVERSARIAL_SUITE_ID)
+        self.assertLess(report["overall_score"], 80.0)
+        self.assertGreater(report["overall_score"], 25.0)
+        self.assertGreater(len(report["failures"]), 0)
+        self.assertTrue(validate_benchmark_report(report)["valid"])
+
+    def test_report_validator_rejects_tampered_scores(self) -> None:
+        report = evaluate_standard_suite()
+        validation = validate_benchmark_report(report)
+        tampered = dict(report)
+        tampered["overall_score"] = 1000
+
+        tampered_validation = validate_benchmark_report(tampered)
+
+        self.assertTrue(validation["valid"])
+        self.assertFalse(tampered_validation["valid"])
+        self.assertTrue(any("overall_score mismatch" in error for error in tampered_validation["errors"]))
+
+    def test_report_validator_rejects_tampered_suite_hash(self) -> None:
+        report = evaluate_standard_suite()
+        tampered = dict(report)
+        tampered["suite_hash"] = "0" * 64
+
+        validation = validate_benchmark_report(tampered)
+
+        self.assertFalse(validation["valid"])
+        self.assertTrue(any("suite_hash mismatch" in error for error in validation["errors"]))
+
+    def test_report_validator_rejects_modified_suite_case(self) -> None:
+        report = evaluate_standard_suite()
+        tampered = dict(report)
+        tampered_cases = [dict(case) for case in report["suite_cases"]]
+        tampered_cases[0]["expected"] = "none"
+        tampered["suite_cases"] = tampered_cases
+
+        validation = validate_benchmark_report(tampered)
+
+        self.assertFalse(validation["valid"])
+        self.assertTrue(any("suite case was modified" in error for error in validation["errors"]))
+
+    def test_report_validator_rejects_tampered_slice_metrics(self) -> None:
+        report = evaluate_standard_suite()
+        tampered = dict(report)
+        tampered_metrics = json.loads(json.dumps(report["metrics"]))
+        tampered_metrics["slices"]["difficulty"]["easy"]["type_accuracy"] = 0.0
+        tampered["metrics"] = tampered_metrics
+
+        validation = validate_benchmark_report(tampered)
+
+        self.assertFalse(validation["valid"])
+        self.assertTrue(any("metrics mismatch" in error for error in validation["errors"]))
+
+    def test_report_validator_rejects_tampered_calibration_metrics(self) -> None:
+        report = evaluate_standard_suite()
+        tampered = dict(report)
+        tampered_metrics = json.loads(json.dumps(report["metrics"]))
+        tampered_metrics["calibration"]["brier_score"] = 1.0
+        tampered["metrics"] = tampered_metrics
+
+        validation = validate_benchmark_report(tampered)
+
+        self.assertFalse(validation["valid"])
+        self.assertTrue(any("metrics mismatch" in error for error in validation["errors"]))
+
+    def test_report_validator_rejects_invalid_detector_score(self) -> None:
+        report = evaluate_standard_suite()
+        tampered = dict(report)
+        tampered_results = [dict(item) for item in report["case_results"]]
+        tampered_results[0]["detector_score"] = 1.5
+        tampered["case_results"] = tampered_results
+
+        validation = validate_benchmark_report(tampered)
+
+        self.assertFalse(validation["valid"])
+        self.assertTrue(any("detector_score must be between 0 and 1" in error for error in validation["errors"]))
+
+    def test_report_validator_rejects_tampered_case_tags(self) -> None:
+        report = evaluate_standard_suite()
+        tampered = dict(report)
+        tampered_results = [dict(item) for item in report["case_results"]]
+        tampered_results[0]["tags"] = ["changed"]
+        tampered["case_results"] = tampered_results
+
+        validation = validate_benchmark_report(tampered)
+
+        self.assertFalse(validation["valid"])
+        self.assertTrue(any("tags do not match canonical suite" in error for error in validation["errors"]))
+
+    def test_custom_detector_can_be_scored(self) -> None:
+        def empty_detector(_claim: Claim):
+            return None
+
+        report = evaluate_standard_suite(empty_detector, system_name="empty")
+
+        self.assertEqual(report["system_name"], "empty")
+        self.assertLess(report["overall_score"], 50.0)
+        self.assertGreater(len(report["failures"]), 0)
+
+    def test_external_prediction_records_score_into_valid_report(self) -> None:
+        cases = build_adversarial_suite()
+        predictions = [
+            {
+                "case_id": case.id,
+                "predicted": case.expected.value,
+                "detector_score": 1.0,
+                "detector_note": "exact label",
+            }
+            for case in cases
+        ]
+
+        report = evaluate_prediction_records(
+            predictions,
+            system_name="ExternalPerfect",
+            suite="contradiction-adversarial",
+        )
+
+        self.assertEqual(report["system_name"], "ExternalPerfect")
+        self.assertEqual(report["overall_score"], 100.0)
+        self.assertEqual(report["failures"], [])
+        self.assertTrue(validate_benchmark_report(report)["valid"])
+
+    def test_external_prediction_records_require_full_canonical_coverage(self) -> None:
+        cases = build_standard_suite()
+        incomplete = [{"case_id": cases[0].id, "predicted": cases[0].expected.value}]
+        invalid_label = [{"case_id": case.id, "predicted": case.expected.value} for case in cases]
+        invalid_label[0]["predicted"] = "almost_correct"
+
+        with self.assertRaisesRegex(ValueError, "missing predictions"):
+            evaluate_prediction_records(incomplete, system_name="Incomplete")
+        with self.assertRaisesRegex(ValueError, "invalid predicted label"):
+            evaluate_prediction_records(invalid_label, system_name="InvalidLabel")
+
+    def test_external_prediction_records_reject_invalid_detector_score(self) -> None:
+        cases = build_standard_suite()
+        predictions = [{"case_id": case.id, "predicted": case.expected.value} for case in cases]
+        predictions[0]["detector_score"] = -0.1
+
+        with self.assertRaisesRegex(ValueError, "detector_score must be between 0 and 1"):
+            evaluate_prediction_records(predictions, system_name="InvalidScore")
+
+    def test_prediction_template_and_json_submission_round_trip(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        path = output_root / "predictions.json"
+        cases = build_adversarial_suite()
+        predictions = [{"case_id": case.id, "predicted": case.expected.value} for case in cases]
+
+        try:
+            template = build_prediction_template(suite="contradiction-adversarial")
+            template["predictions"] = predictions
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(json.dumps(template), encoding="utf-8")
+
+            loaded = load_prediction_records(path)
+            report = evaluate_prediction_file(path, system_name="JsonSubmitter", suite="contradiction-adversarial")
+
+            self.assertEqual(template["schema"], PREDICTION_SCHEMA)
+            self.assertEqual(len(loaded), len(cases))
+            self.assertEqual(report["overall_score"], 100.0)
+            self.assertTrue(validate_benchmark_report(report)["valid"])
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_leaderboard_submission_validates_report_hash_and_metadata(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        report_path = output_root / "report.json"
+
+        try:
+            write_benchmark_report(evaluate_standard_suite(system_name="SubmissionSystem"), report_path)
+            submission = build_leaderboard_submission(
+                report_path,
+                system_version="1.0.0",
+                submitter="Marked Bench Test",
+                notes="submission validation test",
+                disclosures={
+                    "system_description": "symbolic baseline",
+                    "model": "none",
+                    "prompting": "none",
+                    "preprocessing": "none",
+                    "retrieval": "none",
+                    "postprocessing": "none",
+                    "training_data": "none",
+                    "runtime": "python unittest",
+                },
+            )
+            validation = validate_leaderboard_submission(submission)
+
+            self.assertEqual(submission["schema"], SUBMISSION_SCHEMA)
+            self.assertEqual(submission["report_sha256"], report_sha256(report_path))
+            self.assertEqual(submission["suite_hash"], build_suite_hash())
+            self.assertEqual(submission["system_name"], "SubmissionSystem")
+            self.assertTrue(validation["valid"], validation["errors"])
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_leaderboard_submission_rejects_hash_mismatch(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        report_path = output_root / "report.json"
+
+        try:
+            write_benchmark_report(evaluate_standard_suite(system_name="SubmissionSystem"), report_path)
+            submission = build_leaderboard_submission(
+                report_path,
+                system_version="1.0.0",
+                submitter="Marked Bench Test",
+            )
+            submission["report_sha256"] = "0" * 64
+
+            validation = validate_leaderboard_submission(submission)
+
+            self.assertFalse(validation["valid"])
+            self.assertTrue(any("report_sha256 mismatch" in error for error in validation["errors"]))
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_report_writer_creates_parent_directories(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        path = output_root / "nested" / "report.json"
+        report = evaluate_standard_suite()
+
+        try:
+            write_benchmark_report(report, path)
+
+            loaded = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(loaded["suite_id"], SUITE_ID)
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_cli_writes_requested_report_inside_repo(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        path = output_root / "cli-report.json"
+
+        try:
+            with redirect_stdout(StringIO()):
+                benchmark_main(["--report", str(path)])
+
+            loaded = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(loaded["suite_id"], SUITE_ID)
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_cli_validates_report_inside_repo(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        path = output_root / "cli-report.json"
+
+        try:
+            with redirect_stdout(StringIO()):
+                benchmark_main(["--report", str(path)])
+            with redirect_stdout(StringIO()) as captured:
+                benchmark_main(["--validate-report", str(path)])
+
+            self.assertIn("Validation: pass", captured.getvalue())
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_cli_creates_and_validates_submission_inside_repo(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        report_path = output_root / "cli-report.json"
+        submission_path = output_root / "submission.json"
+
+        try:
+            with redirect_stdout(StringIO()):
+                benchmark_main(["--system-name", "CliSubmissionSystem", "--report", str(report_path)])
+            with redirect_stdout(StringIO()) as create_output:
+                benchmark_main(
+                    [
+                        "--create-submission",
+                        str(submission_path),
+                        "--submission-report",
+                        str(report_path),
+                        "--system-version",
+                        "2026.05",
+                        "--submitter",
+                        "Marked Bench Test",
+                        "--submission-notes",
+                        "created by CLI test",
+                        "--disclosure",
+                        "system_description=symbolic baseline",
+                    ]
+                )
+            with redirect_stdout(StringIO()) as validate_output:
+                benchmark_main(["--validate-submission", str(submission_path)])
+
+            submission = json.loads(submission_path.read_text(encoding="utf-8"))
+            self.assertEqual(submission["system_name"], "CliSubmissionSystem")
+            self.assertEqual(submission["schema"], SUBMISSION_SCHEMA)
+            self.assertIn("Submission:", create_output.getvalue())
+            self.assertIn("Submission validation: pass", validate_output.getvalue())
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_cli_writes_always_none_baseline_report(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        path = output_root / "always-none.json"
+
+        try:
+            with redirect_stdout(StringIO()):
+                benchmark_main(
+                    [
+                        "--detector",
+                        "always-none",
+                        "--system-name",
+                        "AlwaysNoneDetector",
+                        "--report",
+                        str(path),
+                    ]
+                )
+
+            report = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(report["system_name"], "AlwaysNoneDetector")
+            self.assertLess(report["overall_score"], 50.0)
+            self.assertTrue(validate_benchmark_report(report)["valid"])
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_cli_exports_suite_manifest_inside_repo(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        path = output_root / "suite.json"
+
+        try:
+            with redirect_stdout(StringIO()):
+                benchmark_main(["--export-suite", str(path)])
+
+            manifest = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(manifest, build_suite_manifest())
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_cli_exports_adversarial_suite_manifest_inside_repo(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        path = output_root / "adversarial-suite.json"
+
+        try:
+            with redirect_stdout(StringIO()):
+                benchmark_main(["--suite", "contradiction-adversarial", "--export-suite", str(path)])
+
+            manifest = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(manifest, build_suite_manifest(suite="contradiction-adversarial"))
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_cli_exports_benchmark_registry_inside_repo(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        path = output_root / "benchmark-registry.json"
+
+        try:
+            with redirect_stdout(StringIO()):
+                benchmark_main(["--export-registry", str(path)])
+
+            registry = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(registry, build_benchmark_registry())
+            self.assertEqual(registry["schema"], REGISTRY_SCHEMA)
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_cli_exports_release_manifest_inside_repo(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        path = output_root / "release-manifest.json"
+
+        try:
+            with redirect_stdout(StringIO()):
+                benchmark_main(["--export-release-manifest", str(path)])
+
+            manifest = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(manifest, build_release_manifest(Path(__file__).resolve().parent.parent))
+            self.assertEqual(manifest["schema"], RELEASE_MANIFEST_SCHEMA)
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_cli_exports_technical_note_inside_repo(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        path = output_root / "technical-note.md"
+
+        try:
+            with redirect_stdout(StringIO()):
+                benchmark_main(["--export-technical-note", str(path)])
+
+            self.assertEqual(path.read_text(encoding="utf-8"), build_technical_note(Path(__file__).resolve().parent.parent))
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_cli_exports_prediction_template_inside_repo(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        path = output_root / "predictions.jsonl"
+
+        try:
+            with redirect_stdout(StringIO()):
+                benchmark_main(
+                    [
+                        "--suite",
+                        "contradiction-adversarial",
+                        "--export-prediction-template",
+                        str(path),
+                    ]
+                )
+
+            records = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
+            self.assertEqual(len(records), len(build_adversarial_suite()))
+            self.assertIn("case_id", records[0])
+            self.assertIn("predicted", records[0])
+            self.assertNotIn("expected", records[0])
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_cli_scores_prediction_jsonl_inside_repo(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        prediction_path = output_root / "predictions.jsonl"
+        report_path = output_root / "prediction-report.json"
+        cases = build_adversarial_suite()
+        records = [{"case_id": case.id, "predicted": case.expected.value} for case in cases]
+
+        try:
+            prediction_path.parent.mkdir(parents=True, exist_ok=True)
+            prediction_path.write_text(
+                "\n".join(json.dumps(record, sort_keys=True) for record in records) + "\n",
+                encoding="utf-8",
+            )
+            with redirect_stdout(StringIO()) as captured:
+                benchmark_main(
+                    [
+                        "--suite",
+                        "contradiction-adversarial",
+                        "--score-predictions",
+                        str(prediction_path),
+                        "--system-name",
+                        "ExternalJsonl",
+                        "--report",
+                        str(report_path),
+                    ]
+                )
+
+            report = json.loads(report_path.read_text(encoding="utf-8"))
+            self.assertEqual(report["system_name"], "ExternalJsonl")
+            self.assertEqual(report["overall_score"], 100.0)
+            self.assertIn("Overall score: 100.00", captured.getvalue())
+            self.assertTrue(validate_benchmark_report(report)["valid"])
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_leaderboard_ranks_valid_reports_and_rejects_invalid(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        strong_path = output_root / "strong.json"
+        weak_path = output_root / "weak.json"
+        invalid_path = output_root / "invalid.json"
+
+        try:
+            write_benchmark_report(evaluate_standard_suite(system_name="Strong"), strong_path)
+            write_benchmark_report(evaluate_standard_suite(lambda _claim: None, system_name="Weak"), weak_path)
+            invalid = evaluate_standard_suite(system_name="Invalid")
+            invalid["overall_score"] = 1_000
+            write_benchmark_report(invalid, invalid_path)
+
+            leaderboard = build_leaderboard([weak_path, strong_path, invalid_path])
+
+            self.assertEqual(leaderboard["schema"], LEADERBOARD_SCHEMA)
+            self.assertEqual(leaderboard["entry_count"], 2)
+            self.assertEqual(leaderboard["rejected_count"], 1)
+            self.assertEqual(leaderboard["entries"][0]["system_name"], "Strong")
+            self.assertEqual(leaderboard["entries"][0]["rank"], 1)
+            self.assertEqual(leaderboard["entries"][1]["system_name"], "Weak")
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_cli_builds_leaderboard_inside_repo(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        strong_path = output_root / "strong.json"
+        weak_path = output_root / "weak.json"
+        leaderboard_path = output_root / "leaderboard.json"
+
+        try:
+            write_benchmark_report(evaluate_standard_suite(system_name="Strong"), strong_path)
+            write_benchmark_report(evaluate_standard_suite(lambda _claim: None, system_name="Weak"), weak_path)
+            with redirect_stdout(StringIO()) as captured:
+                benchmark_main(
+                    [
+                        "--build-leaderboard",
+                        str(weak_path),
+                        str(strong_path),
+                        "--leaderboard-output",
+                        str(leaderboard_path),
+                    ]
+                )
+
+            leaderboard = json.loads(leaderboard_path.read_text(encoding="utf-8"))
+            self.assertEqual(leaderboard["entries"][0]["system_name"], "Strong")
+            self.assertIn("Leaderboard entries: 2", captured.getvalue())
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_checked_in_baseline_report_validates(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        path = root / "baselines" / "contradiction_engine_v0_1_0.json"
+
+        report = json.loads(path.read_text(encoding="utf-8"))
+        validation = validate_benchmark_report(report)
+
+        self.assertTrue(validation["valid"], validation["errors"])
+        self.assertEqual(report["overall_score"], 100.0)
+
+    def test_checked_in_weak_baseline_report_validates(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        path = root / "baselines" / "always_none_v0_1_0.json"
+
+        report = json.loads(path.read_text(encoding="utf-8"))
+        validation = validate_benchmark_report(report)
+
+        self.assertTrue(validation["valid"], validation["errors"])
+        self.assertEqual(report["system_name"], "AlwaysNoneDetector")
+        self.assertEqual(report["overall_score"], 8.82)
+
+    def test_checked_in_adversarial_baseline_reports_validate(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        strong_path = root / "baselines" / "contradiction_engine_adversarial_v0_2_0.json"
+        weak_path = root / "baselines" / "always_none_adversarial_v0_2_0.json"
+
+        strong = json.loads(strong_path.read_text(encoding="utf-8"))
+        weak = json.loads(weak_path.read_text(encoding="utf-8"))
+
+        self.assertTrue(validate_benchmark_report(strong)["valid"])
+        self.assertTrue(validate_benchmark_report(weak)["valid"])
+        self.assertEqual(strong["suite_id"], ADVERSARIAL_SUITE_ID)
+        self.assertEqual(strong["overall_score"], 52.37)
+        self.assertEqual(weak["overall_score"], 8.82)
+
+    def test_checked_in_leaderboard_matches_baseline_reports(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        weak_path = root / "baselines" / "always_none_v0_1_0.json"
+        strong_path = root / "baselines" / "contradiction_engine_v0_1_0.json"
+        leaderboard_path = root / "leaderboard" / "leaderboard_v0_1_0.json"
+
+        leaderboard = json.loads(leaderboard_path.read_text(encoding="utf-8"))
+
+        self.assertEqual(leaderboard["schema"], LEADERBOARD_SCHEMA)
+        self.assertEqual(leaderboard["entry_count"], 2)
+        self.assertEqual(leaderboard["rejected_count"], 0)
+        self.assertEqual(leaderboard["entries"][0]["system_name"], "ContradictionEngine")
+        self.assertEqual(leaderboard["entries"][0]["rank"], 1)
+        self.assertEqual(leaderboard["entries"][0]["report_sha256"], report_sha256(strong_path))
+        self.assertEqual(leaderboard["entries"][1]["system_name"], "AlwaysNoneDetector")
+        self.assertEqual(leaderboard["entries"][1]["rank"], 2)
+        self.assertEqual(leaderboard["entries"][1]["report_sha256"], report_sha256(weak_path))
+
+    def test_checked_in_adversarial_leaderboard_matches_baseline_reports(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        weak_path = root / "baselines" / "always_none_adversarial_v0_2_0.json"
+        strong_path = root / "baselines" / "contradiction_engine_adversarial_v0_2_0.json"
+        leaderboard_path = root / "leaderboard" / "leaderboard_adversarial_v0_2_0.json"
+
+        leaderboard = json.loads(leaderboard_path.read_text(encoding="utf-8"))
+
+        self.assertEqual(leaderboard["schema"], LEADERBOARD_SCHEMA)
+        self.assertEqual(leaderboard["entry_count"], 2)
+        self.assertEqual(leaderboard["rejected_count"], 0)
+        self.assertEqual(leaderboard["entries"][0]["system_name"], "ContradictionEngine")
+        self.assertEqual(leaderboard["entries"][0]["rank"], 1)
+        self.assertEqual(leaderboard["entries"][0]["overall_score"], 52.37)
+        self.assertEqual(leaderboard["entries"][0]["report_sha256"], report_sha256(strong_path))
+        self.assertEqual(leaderboard["entries"][1]["system_name"], "AlwaysNoneDetector")
+        self.assertEqual(leaderboard["entries"][1]["rank"], 2)
+        self.assertEqual(leaderboard["entries"][1]["report_sha256"], report_sha256(weak_path))
+
+
+if __name__ == "__main__":
+    unittest.main()

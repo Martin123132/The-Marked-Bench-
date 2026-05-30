@@ -1,0 +1,116 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marked-ai-tools.local/schemas/release_manifest.schema.json",
+  "title": "The Marked Bench Release Manifest",
+  "type": "object",
+  "required": [
+    "schema",
+    "release_id",
+    "project",
+    "benchmark_family",
+    "registry_schema",
+    "registry_path",
+    "registry_sha256",
+    "default_track",
+    "tracks",
+    "artifact_count",
+    "artifacts"
+  ],
+  "properties": {
+    "schema": {
+      "const": "marked_bench.benchmark-release-manifest.v1"
+    },
+    "release_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "project": {
+      "type": "string"
+    },
+    "benchmark_family": {
+      "type": "string"
+    },
+    "registry_schema": {
+      "const": "marked_bench.benchmark-registry.v1"
+    },
+    "registry_path": {
+      "type": "string"
+    },
+    "registry_sha256": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "default_track": {
+      "type": "string"
+    },
+    "tracks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/track"
+      }
+    },
+    "artifact_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/artifact"
+      }
+    }
+  },
+  "$defs": {
+    "track": {
+      "type": "object",
+      "required": [
+        "name",
+        "suite_id",
+        "suite_version",
+        "suite_hash"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "suite_id": {
+          "type": "string"
+        },
+        "suite_version": {
+          "type": "string"
+        },
+        "suite_hash": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "required": [
+        "path",
+        "category",
+        "sha256",
+        "bytes"
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    }
+  }
+}

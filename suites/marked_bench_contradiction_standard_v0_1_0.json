@@ -1,0 +1,338 @@
+{
+  "case_count": 17,
+  "cases": [
+    {
+      "capability": "negation_scope",
+      "difficulty": "easy",
+      "domain": "safety",
+      "expected": "direct_negation",
+      "id": "marked-direct-001",
+      "note": "Query affirms a premise-level negation.",
+      "premise": "Not all safety checks passed",
+      "query": "All safety checks passed",
+      "tags": [
+        "negation",
+        "surface"
+      ]
+    },
+    {
+      "capability": "predicate_negation",
+      "difficulty": "easy",
+      "domain": "safety",
+      "expected": "direct_negation",
+      "id": "marked-direct-002",
+      "note": "Query inserts a direct predicate negation.",
+      "premise": "The reactor is stable",
+      "query": "The reactor is not stable",
+      "tags": [
+        "negation",
+        "predicate"
+      ]
+    },
+    {
+      "capability": "lexical_antonym",
+      "difficulty": "medium",
+      "domain": "governance",
+      "expected": "direct_negation",
+      "id": "marked-direct-003",
+      "note": "Lexical antonym contradiction without an explicit 'not'.",
+      "premise": "The audit log is complete",
+      "query": "The audit log is incomplete",
+      "tags": [
+        "negation",
+        "adversarial"
+      ]
+    },
+    {
+      "capability": "numeric_property",
+      "difficulty": "easy",
+      "domain": "science",
+      "expected": "property_mismatch",
+      "id": "marked-property-001",
+      "note": "Same property, different numeric value.",
+      "premise": "Water boils at 100C",
+      "query": "Water boils at 95C",
+      "tags": [
+        "numeric",
+        "property"
+      ]
+    },
+    {
+      "capability": "unit_consistency",
+      "difficulty": "medium",
+      "domain": "measurement",
+      "expected": "property_mismatch",
+      "id": "marked-property-002",
+      "note": "Same raw number under incompatible unit systems.",
+      "premise": "The package mass is 5 kilograms",
+      "query": "The package mass is 5 pounds",
+      "tags": [
+        "unit",
+        "property"
+      ]
+    },
+    {
+      "capability": "numeric_control",
+      "difficulty": "easy",
+      "domain": "measurement",
+      "expected": "none",
+      "id": "marked-property-003",
+      "note": "Same numeric property with added context, not a contradiction.",
+      "premise": "The threshold is 0.80",
+      "query": "The threshold is 0.80 after calibration",
+      "tags": [
+        "control",
+        "numeric"
+      ]
+    },
+    {
+      "capability": "definition_check",
+      "difficulty": "easy",
+      "domain": "geometry",
+      "expected": "definitional_violation",
+      "id": "marked-definition-001",
+      "note": "Query denies a definitional triangle property.",
+      "premise": "Triangles have three sides",
+      "query": "Triangle false three sides",
+      "tags": [
+        "definition",
+        "geometry"
+      ]
+    },
+    {
+      "capability": "exception_sensitive_definition",
+      "difficulty": "medium",
+      "domain": "math",
+      "expected": "definitional_violation",
+      "id": "marked-definition-002",
+      "note": "Tests prime-definition handling around the even-number exception.",
+      "premise": "A prime number has exactly two positive divisors",
+      "query": "Prime number even false for 2",
+      "tags": [
+        "definition",
+        "math"
+      ]
+    },
+    {
+      "capability": "definition_control",
+      "difficulty": "easy",
+      "domain": "geometry",
+      "expected": "none",
+      "id": "marked-definition-003",
+      "note": "Definition is affirmed rather than denied.",
+      "premise": "Squares have four equal sides",
+      "query": "This square has four equal sides",
+      "tags": [
+        "control",
+        "definition"
+      ]
+    },
+    {
+      "capability": "counterexample_detection",
+      "difficulty": "medium",
+      "domain": "biology",
+      "expected": "universal_counterexample",
+      "id": "marked-universal-001",
+      "note": "Known counterexample challenges a universal claim.",
+      "premise": "All mammals give live birth",
+      "query": "Platypus is a mammal that lays eggs",
+      "tags": [
+        "universal",
+        "counterexample"
+      ]
+    },
+    {
+      "capability": "explicit_counterexample",
+      "difficulty": "easy",
+      "domain": "governance",
+      "expected": "universal_counterexample",
+      "id": "marked-universal-002",
+      "note": "Explicit counterexample language challenges a universal rule.",
+      "premise": "All deployed agents require approval",
+      "query": "A counterexample exists: test agents are deployed automatically",
+      "tags": [
+        "universal",
+        "policy"
+      ]
+    },
+    {
+      "capability": "quantifier_control",
+      "difficulty": "medium",
+      "domain": "governance",
+      "expected": "none",
+      "id": "marked-universal-003",
+      "note": "Non-universal quantifier allows exceptions.",
+      "premise": "Most deployed agents require approval",
+      "query": "Some test agents are deployed automatically",
+      "tags": [
+        "control",
+        "quantifier"
+      ]
+    },
+    {
+      "capability": "temporal_scope",
+      "difficulty": "easy",
+      "domain": "operations",
+      "expected": "temporal_conflict",
+      "id": "marked-temporal-001",
+      "note": "Time-dependent claim conflicts with an 'always' quantifier.",
+      "premise": "Always in 1950 the system used manual routing",
+      "query": "In 2020 the system used automated routing",
+      "tags": [
+        "temporal",
+        "scope"
+      ]
+    },
+    {
+      "capability": "policy_drift",
+      "difficulty": "medium",
+      "domain": "governance",
+      "expected": "temporal_conflict",
+      "id": "marked-temporal-002",
+      "note": "Policy statement changed across dated contexts.",
+      "premise": "Always in 2019 the policy required review",
+      "query": "In 2024 the policy no longer required review",
+      "tags": [
+        "temporal",
+        "policy"
+      ]
+    },
+    {
+      "capability": "temporal_control",
+      "difficulty": "medium",
+      "domain": "operations",
+      "expected": "none",
+      "id": "marked-temporal-003",
+      "note": "Different dates without universal scope can both be true.",
+      "premise": "In 1950 the system used manual routing",
+      "query": "In 2020 the system used automated routing",
+      "tags": [
+        "control",
+        "temporal"
+      ]
+    },
+    {
+      "capability": "non_contradiction",
+      "difficulty": "easy",
+      "domain": "language",
+      "expected": "none",
+      "id": "marked-control-001",
+      "note": "Added detail should not be treated as a contradiction.",
+      "premise": "The model answered in English",
+      "query": "The model answered in English with citations",
+      "tags": [
+        "control",
+        "language"
+      ]
+    },
+    {
+      "capability": "semantic_paraphrase",
+      "difficulty": "medium",
+      "domain": "safety",
+      "expected": "none",
+      "id": "marked-control-002",
+      "note": "Near-paraphrase control case.",
+      "premise": "The safety review is pending",
+      "query": "The safety review is waiting for approval",
+      "tags": [
+        "control",
+        "paraphrase"
+      ]
+    }
+  ],
+  "labels": [
+    "direct_negation",
+    "property_mismatch",
+    "definitional_violation",
+    "universal_counterexample",
+    "temporal_conflict",
+    "none"
+  ],
+  "profile": {
+    "capability_counts": {
+      "counterexample_detection": 1,
+      "definition_check": 1,
+      "definition_control": 1,
+      "exception_sensitive_definition": 1,
+      "explicit_counterexample": 1,
+      "lexical_antonym": 1,
+      "negation_scope": 1,
+      "non_contradiction": 1,
+      "numeric_control": 1,
+      "numeric_property": 1,
+      "policy_drift": 1,
+      "predicate_negation": 1,
+      "quantifier_control": 1,
+      "semantic_paraphrase": 1,
+      "temporal_control": 1,
+      "temporal_scope": 1,
+      "unit_consistency": 1
+    },
+    "case_count": 17,
+    "contradiction_case_count": 11,
+    "control_case_count": 6,
+    "difficulty_counts": {
+      "easy": 9,
+      "medium": 8
+    },
+    "domain_counts": {
+      "biology": 1,
+      "geometry": 2,
+      "governance": 4,
+      "language": 1,
+      "math": 1,
+      "measurement": 2,
+      "operations": 2,
+      "safety": 3,
+      "science": 1
+    },
+    "label_counts": {
+      "definitional_violation": 2,
+      "direct_negation": 3,
+      "none": 6,
+      "property_mismatch": 2,
+      "temporal_conflict": 2,
+      "universal_counterexample": 2
+    },
+    "quality_gates": {
+      "min_cases": 15,
+      "requires_all_contradiction_labels": true,
+      "requires_control_cases": true,
+      "requires_multiple_difficulties": true,
+      "requires_multiple_domains": true
+    },
+    "tag_counts": {
+      "adversarial": 1,
+      "control": 6,
+      "counterexample": 1,
+      "definition": 3,
+      "geometry": 1,
+      "language": 1,
+      "math": 1,
+      "negation": 3,
+      "numeric": 2,
+      "paraphrase": 1,
+      "policy": 2,
+      "predicate": 1,
+      "property": 2,
+      "quantifier": 1,
+      "scope": 1,
+      "surface": 1,
+      "temporal": 3,
+      "unit": 1,
+      "universal": 2
+    }
+  },
+  "schema": "marked_bench.contradiction-suite-manifest.v1",
+  "scoring": {
+    "overall_score_weights": {
+      "binary_detection_f1": 0.2,
+      "contradiction_macro_f1": 0.45,
+      "coverage_index": 0.1,
+      "type_accuracy": 0.25
+    }
+  },
+  "suite_hash": "8c1f80ff67874af54869bab2e361b3cc7416ce1d86f80ff583636a55e3462765",
+  "suite_id": "marked-bench-contradiction-standard",
+  "suite_version": "0.1.0"
+}

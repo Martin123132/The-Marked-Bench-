@@ -1,0 +1,49 @@
+{
+  "created_at": 1780183475.65,
+  "entries": [
+    {
+      "calibration_brier_score": 0.436729,
+      "calibration_ece": 0.483529,
+      "case_count": 17,
+      "contradiction_macro_f1": 0.466667,
+      "coverage_index": 0.6,
+      "detection_f1": 0.533333,
+      "failure_count": 7,
+      "overall_score": 52.37,
+      "rank": 1,
+      "report_path": "baselines/contradiction_engine_adversarial_v0_2_0.json",
+      "report_schema": "marked_bench.contradiction-benchmark-report.v1",
+      "report_sha256": "01b51e7d76812e2021bead353fcd056e9a845b80242c0aa3446e052d2d85cd8c",
+      "suite_hash": "454c1aff69d5028224549dfc14fd8e6c10818251d0abf8becf36f0856b2dbd67",
+      "suite_id": "marked-bench-contradiction-adversarial",
+      "suite_version": "0.2.0",
+      "system_name": "ContradictionEngine",
+      "type_accuracy": 0.588235,
+      "validation_warnings": []
+    },
+    {
+      "calibration_brier_score": 0.647059,
+      "calibration_ece": 0.647059,
+      "case_count": 17,
+      "contradiction_macro_f1": 0.0,
+      "coverage_index": 0.0,
+      "detection_f1": 0.0,
+      "failure_count": 11,
+      "overall_score": 8.82,
+      "rank": 2,
+      "report_path": "baselines/always_none_adversarial_v0_2_0.json",
+      "report_schema": "marked_bench.contradiction-benchmark-report.v1",
+      "report_sha256": "ff61e29615709991666bea156872b46f4bb63c96997f061ba365861ecc2da6d6",
+      "suite_hash": "454c1aff69d5028224549dfc14fd8e6c10818251d0abf8becf36f0856b2dbd67",
+      "suite_id": "marked-bench-contradiction-adversarial",
+      "suite_version": "0.2.0",
+      "system_name": "AlwaysNoneDetector",
+      "type_accuracy": 0.352941,
+      "validation_warnings": []
+    }
+  ],
+  "entry_count": 2,
+  "rejected": [],
+  "rejected_count": 0,
+  "schema": "marked_bench.benchmark-leaderboard.v1"
+}

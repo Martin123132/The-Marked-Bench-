@@ -1,0 +1,50 @@
+﻿name: Benchmark case proposal
+description: Propose a new benchmark case or dispute an existing case.
+title: "Benchmark case: "
+labels:
+  - benchmark-case
+body:
+  - type: input
+    id: track
+    attributes:
+      label: Track
+      description: Existing or proposed benchmark track.
+      placeholder: contradiction-adversarial
+    validations:
+      required: true
+  - type: input
+    id: case_id
+    attributes:
+      label: Case ID
+      description: Existing case ID for disputes, or proposed new ID.
+      placeholder: marked-adv-direct-004
+  - type: textarea
+    id: premise
+    attributes:
+      label: Premise
+      description: The premise text.
+  - type: textarea
+    id: query
+    attributes:
+      label: Query
+      description: The query text.
+  - type: dropdown
+    id: label
+    attributes:
+      label: Expected label
+      options:
+        - direct_negation
+        - property_mismatch
+        - definitional_violation
+        - universal_counterexample
+        - temporal_conflict
+        - none
+    validations:
+      required: true
+  - type: textarea
+    id: reasoning
+    attributes:
+      label: Reasoning
+      description: Explain why this label is correct and what capability it tests.
+    validations:
+      required: true

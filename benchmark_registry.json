@@ -1,0 +1,257 @@
+{
+  "benchmark_family": "contradiction-detection",
+  "default_track": "contradiction-adversarial",
+  "governance_docs": [
+    "docs/BENCHMARK_STANDARD.md",
+    "docs/BENCHMARK_CARD.md",
+    "docs/TECHNICAL_NOTE.md",
+    "docs/GOVERNANCE.md",
+    "docs/SUBMISSION_GUIDE.md",
+    "docs/RELEASE_CHECKLIST.md"
+  ],
+  "project": "The Marked Bench",
+  "schema": "marked_bench.benchmark-registry.v1",
+  "schema_ids": {
+    "benchmark_report": "marked_bench.contradiction-benchmark-report.v1",
+    "leaderboard": "marked_bench.benchmark-leaderboard.v1",
+    "leaderboard_submission": "marked_bench.leaderboard-submission.v1",
+    "predictions": "marked_bench.contradiction-predictions.v1",
+    "suite_manifest": "marked_bench.contradiction-suite-manifest.v1"
+  },
+  "schemas": {
+    "benchmark_registry": "schemas/benchmark_registry.schema.json",
+    "benchmark_report": "schemas/contradiction_benchmark_report.schema.json",
+    "leaderboard": "schemas/leaderboard.schema.json",
+    "leaderboard_submission": "schemas/leaderboard_submission.schema.json",
+    "predictions": "schemas/contradiction_predictions.schema.json",
+    "release_manifest": "schemas/release_manifest.schema.json",
+    "suite_manifest": "schemas/contradiction_suite_manifest.schema.json"
+  },
+  "tracks": [
+    {
+      "baseline_reports": [
+        "baselines/contradiction_engine_v0_1_0.json",
+        "baselines/always_none_v0_1_0.json"
+      ],
+      "case_count": 17,
+      "commands": {
+        "build_leaderboard": "marked-bench --build-leaderboard REPORT... --leaderboard-output leaderboard/leaderboard_v0_1_0.json",
+        "create_submission": "marked-bench --create-submission submissions/foundation-system.json --submission-report artifacts/foundation-system-report.json --system-version VERSION --submitter SUBMITTER",
+        "export_prediction_template": "marked-bench --suite contradiction --export-prediction-template artifacts/foundation-predictions.jsonl",
+        "run_baseline": "marked-bench --suite contradiction --report artifacts/foundation-report.json",
+        "score_predictions": "marked-bench --suite contradiction --score-predictions artifacts/foundation-predictions.jsonl --system-name SYSTEM --report artifacts/foundation-system-report.json",
+        "validate_report": "marked-bench --validate-report REPORT",
+        "validate_submission": "marked-bench --validate-submission SUBMISSION"
+      },
+      "labels": [
+        "direct_negation",
+        "property_mismatch",
+        "definitional_violation",
+        "universal_counterexample",
+        "temporal_conflict",
+        "none"
+      ],
+      "leaderboard": "leaderboard/leaderboard_v0_1_0.json",
+      "name": "contradiction",
+      "prediction_schema": "marked_bench.contradiction-predictions.v1",
+      "profile": {
+        "capability_counts": {
+          "counterexample_detection": 1,
+          "definition_check": 1,
+          "definition_control": 1,
+          "exception_sensitive_definition": 1,
+          "explicit_counterexample": 1,
+          "lexical_antonym": 1,
+          "negation_scope": 1,
+          "non_contradiction": 1,
+          "numeric_control": 1,
+          "numeric_property": 1,
+          "policy_drift": 1,
+          "predicate_negation": 1,
+          "quantifier_control": 1,
+          "semantic_paraphrase": 1,
+          "temporal_control": 1,
+          "temporal_scope": 1,
+          "unit_consistency": 1
+        },
+        "case_count": 17,
+        "contradiction_case_count": 11,
+        "control_case_count": 6,
+        "difficulty_counts": {
+          "easy": 9,
+          "medium": 8
+        },
+        "domain_counts": {
+          "biology": 1,
+          "geometry": 2,
+          "governance": 4,
+          "language": 1,
+          "math": 1,
+          "measurement": 2,
+          "operations": 2,
+          "safety": 3,
+          "science": 1
+        },
+        "label_counts": {
+          "definitional_violation": 2,
+          "direct_negation": 3,
+          "none": 6,
+          "property_mismatch": 2,
+          "temporal_conflict": 2,
+          "universal_counterexample": 2
+        },
+        "quality_gates": {
+          "min_cases": 15,
+          "requires_all_contradiction_labels": true,
+          "requires_control_cases": true,
+          "requires_multiple_difficulties": true,
+          "requires_multiple_domains": true
+        },
+        "tag_counts": {
+          "adversarial": 1,
+          "control": 6,
+          "counterexample": 1,
+          "definition": 3,
+          "geometry": 1,
+          "language": 1,
+          "math": 1,
+          "negation": 3,
+          "numeric": 2,
+          "paraphrase": 1,
+          "policy": 2,
+          "predicate": 1,
+          "property": 2,
+          "quantifier": 1,
+          "scope": 1,
+          "surface": 1,
+          "temporal": 3,
+          "unit": 1,
+          "universal": 2
+        }
+      },
+      "report_schema": "marked_bench.contradiction-benchmark-report.v1",
+      "status": "foundation",
+      "suite_hash": "8c1f80ff67874af54869bab2e361b3cc7416ce1d86f80ff583636a55e3462765",
+      "suite_id": "marked-bench-contradiction-standard",
+      "suite_manifest": "suites/marked_bench_contradiction_standard_v0_1_0.json",
+      "suite_version": "0.1.0",
+      "title": "Foundation contradiction detection"
+    },
+    {
+      "baseline_reports": [
+        "baselines/contradiction_engine_adversarial_v0_2_0.json",
+        "baselines/always_none_adversarial_v0_2_0.json"
+      ],
+      "case_count": 17,
+      "commands": {
+        "build_leaderboard": "marked-bench --build-leaderboard REPORT... --leaderboard-output leaderboard/leaderboard_adversarial_v0_2_0.json",
+        "create_submission": "marked-bench --create-submission submissions/adversarial-system.json --submission-report artifacts/adversarial-system-report.json --system-version VERSION --submitter SUBMITTER",
+        "export_prediction_template": "marked-bench --suite contradiction-adversarial --export-prediction-template artifacts/adversarial-predictions.jsonl",
+        "run_baseline": "marked-bench --suite contradiction-adversarial --report artifacts/adversarial-report.json",
+        "score_predictions": "marked-bench --suite contradiction-adversarial --score-predictions artifacts/adversarial-predictions.jsonl --system-name SYSTEM --report artifacts/adversarial-system-report.json",
+        "validate_report": "marked-bench --validate-report REPORT",
+        "validate_submission": "marked-bench --validate-submission SUBMISSION"
+      },
+      "labels": [
+        "direct_negation",
+        "property_mismatch",
+        "definitional_violation",
+        "universal_counterexample",
+        "temporal_conflict",
+        "none"
+      ],
+      "leaderboard": "leaderboard/leaderboard_adversarial_v0_2_0.json",
+      "name": "contradiction-adversarial",
+      "prediction_schema": "marked_bench.contradiction-predictions.v1",
+      "profile": {
+        "capability_counts": {
+          "condition_shift_control": 1,
+          "definition_application": 1,
+          "definition_elaboration_control": 1,
+          "definition_paraphrase": 1,
+          "implicit_counterexample": 1,
+          "implicit_polarity": 1,
+          "instance_counterexample": 1,
+          "modal_antonym": 1,
+          "negation_scope_control": 1,
+          "non_universal_control": 1,
+          "numeric_same_condition": 1,
+          "paraphrase_control": 1,
+          "policy_antonym": 1,
+          "temporal_always_since": 1,
+          "temporal_change_control": 1,
+          "temporal_scope_drift": 1,
+          "unit_conflict_with_context": 1
+        },
+        "case_count": 17,
+        "contradiction_case_count": 11,
+        "control_case_count": 6,
+        "difficulty_counts": {
+          "hard": 10,
+          "medium": 7
+        },
+        "domain_counts": {
+          "ai_safety": 2,
+          "benchmarking": 1,
+          "data_governance": 2,
+          "geometry": 2,
+          "governance": 1,
+          "math": 1,
+          "measurement": 2,
+          "operations": 3,
+          "security": 3
+        },
+        "label_counts": {
+          "definitional_violation": 2,
+          "direct_negation": 3,
+          "none": 6,
+          "property_mismatch": 2,
+          "temporal_conflict": 2,
+          "universal_counterexample": 2
+        },
+        "quality_gates": {
+          "min_cases": 15,
+          "requires_all_contradiction_labels": true,
+          "requires_control_cases": true,
+          "requires_multiple_difficulties": true,
+          "requires_multiple_domains": true
+        },
+        "tag_counts": {
+          "adversarial": 11,
+          "approval": 1,
+          "context_shift": 1,
+          "control": 6,
+          "data": 1,
+          "definition": 3,
+          "elaboration": 1,
+          "geometry": 1,
+          "long_context": 1,
+          "math": 1,
+          "modal": 1,
+          "negation": 4,
+          "numeric": 1,
+          "operations": 1,
+          "paraphrase": 1,
+          "policy": 1,
+          "property": 2,
+          "quantifier": 1,
+          "safety": 1,
+          "same_entity": 1,
+          "scope": 1,
+          "security": 1,
+          "state_change": 1,
+          "temporal": 3,
+          "unit": 1,
+          "universal": 3
+        }
+      },
+      "report_schema": "marked_bench.contradiction-benchmark-report.v1",
+      "status": "active",
+      "suite_hash": "454c1aff69d5028224549dfc14fd8e6c10818251d0abf8becf36f0856b2dbd67",
+      "suite_id": "marked-bench-contradiction-adversarial",
+      "suite_manifest": "suites/marked_bench_contradiction_adversarial_v0_2_0.json",
+      "suite_version": "0.2.0",
+      "title": "Adversarial contradiction detection"
+    }
+  ]
+}

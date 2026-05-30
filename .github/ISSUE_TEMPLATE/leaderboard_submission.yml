@@ -1,0 +1,62 @@
+﻿name: Leaderboard submission
+description: Submit a benchmark report for leaderboard consideration.
+title: "Leaderboard submission: "
+labels:
+  - leaderboard
+body:
+  - type: input
+    id: system_name
+    attributes:
+      label: System name
+      placeholder: MyContradictionDetector
+    validations:
+      required: true
+  - type: input
+    id: system_version
+    attributes:
+      label: System version
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: input
+    id: track
+    attributes:
+      label: Track
+      placeholder: contradiction-adversarial
+    validations:
+      required: true
+  - type: input
+    id: submission_path
+    attributes:
+      label: Submission metadata path
+      placeholder: submissions/my_system_adversarial.json
+    validations:
+      required: true
+  - type: input
+    id: report_path
+    attributes:
+      label: Report path
+      placeholder: baselines/my_system_adversarial.json
+    validations:
+      required: true
+  - type: input
+    id: report_sha256
+    attributes:
+      label: Report SHA-256
+      placeholder: 64 hex characters
+    validations:
+      required: true
+  - type: textarea
+    id: configuration
+    attributes:
+      label: Configuration
+      description: Detector, model, prompt, rules, preprocessing, retrieval, and postprocessing.
+    validations:
+      required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validation output
+      description: Paste output from marked-bench --validate-report REPORT and marked-bench --validate-submission SUBMISSION.
+    validations:
+      required: true

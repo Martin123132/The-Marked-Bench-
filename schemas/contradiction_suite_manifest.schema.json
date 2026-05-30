@@ -1,0 +1,120 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marked-ai-tools.local/schemas/contradiction_suite_manifest.schema.json",
+  "title": "The Marked Bench Contradiction Suite Manifest",
+  "type": "object",
+  "required": [
+    "schema",
+    "suite_id",
+    "suite_version",
+    "suite_hash",
+    "case_count",
+    "labels",
+    "profile",
+    "cases",
+    "scoring"
+  ],
+  "properties": {
+    "schema": {
+      "const": "marked_bench.contradiction-suite-manifest.v1"
+    },
+    "suite_id": {
+      "enum": [
+        "marked-bench-contradiction-standard",
+        "marked-bench-contradiction-adversarial"
+      ]
+    },
+    "suite_version": {
+      "enum": [
+        "0.1.0",
+        "0.2.0"
+      ]
+    },
+    "suite_hash": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "case_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "direct_negation",
+          "property_mismatch",
+          "definitional_violation",
+          "universal_counterexample",
+          "temporal_conflict",
+          "none"
+        ]
+      }
+    },
+    "profile": {
+      "type": "object",
+      "required": [
+        "case_count",
+        "contradiction_case_count",
+        "control_case_count",
+        "label_counts",
+        "domain_counts",
+        "difficulty_counts",
+        "capability_counts",
+        "tag_counts",
+        "quality_gates"
+      ],
+      "properties": {
+        "case_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "contradiction_case_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "control_case_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "label_counts": {
+          "type": "object"
+        },
+        "domain_counts": {
+          "type": "object"
+        },
+        "difficulty_counts": {
+          "type": "object"
+        },
+        "capability_counts": {
+          "type": "object"
+        },
+        "tag_counts": {
+          "type": "object"
+        },
+        "quality_gates": {
+          "type": "object",
+          "required": [
+            "min_cases",
+            "requires_all_contradiction_labels",
+            "requires_control_cases",
+            "requires_multiple_domains",
+            "requires_multiple_difficulties"
+          ]
+        }
+      }
+    },
+    "cases": {
+      "type": "array",
+      "items": {
+        "$ref": "contradiction_benchmark_report.schema.json#/$defs/suite_case"
+      }
+    },
+    "scoring": {
+      "type": "object",
+      "required": [
+        "overall_score_weights"
+      ]
+    }
+  }
+}

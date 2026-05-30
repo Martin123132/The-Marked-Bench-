@@ -1,0 +1,362 @@
+{
+  "case_count": 17,
+  "cases": [
+    {
+      "capability": "implicit_polarity",
+      "difficulty": "hard",
+      "domain": "security",
+      "expected": "direct_negation",
+      "id": "marked-adv-direct-001",
+      "note": "Contradiction is expressed through valid/invalid paraphrase in longer context.",
+      "premise": "The incident report says the access token remained valid through the review window.",
+      "query": "The same review summary later states the access token was invalid during the review window.",
+      "tags": [
+        "adversarial",
+        "negation",
+        "long_context"
+      ]
+    },
+    {
+      "capability": "policy_antonym",
+      "difficulty": "hard",
+      "domain": "governance",
+      "expected": "direct_negation",
+      "id": "marked-adv-direct-002",
+      "note": "Permitted/forbidden conflict without an explicit negation marker.",
+      "premise": "A policy note records the export as permitted for research users.",
+      "query": "The compliance memo describes the same export as forbidden for research users.",
+      "tags": [
+        "adversarial",
+        "negation",
+        "policy"
+      ]
+    },
+    {
+      "capability": "modal_antonym",
+      "difficulty": "hard",
+      "domain": "operations",
+      "expected": "direct_negation",
+      "id": "marked-adv-direct-003",
+      "note": "Possible/impossible modal contradiction.",
+      "premise": "The deployment checklist marks rollback as possible after the migration.",
+      "query": "The final release note says rollback is impossible after the migration.",
+      "tags": [
+        "adversarial",
+        "negation",
+        "modal"
+      ]
+    },
+    {
+      "capability": "numeric_same_condition",
+      "difficulty": "hard",
+      "domain": "benchmarking",
+      "expected": "property_mismatch",
+      "id": "marked-adv-property-001",
+      "note": "Same metric and condition, different numeric values.",
+      "premise": "The benchmark card reports median latency of 240 ms for model A under load.",
+      "query": "The comparison paragraph reports median latency of 410 ms for model A under the same load.",
+      "tags": [
+        "adversarial",
+        "numeric",
+        "same_entity"
+      ]
+    },
+    {
+      "capability": "unit_conflict_with_context",
+      "difficulty": "medium",
+      "domain": "measurement",
+      "expected": "property_mismatch",
+      "id": "marked-adv-property-002",
+      "note": "Same quantity and raw value under incompatible units.",
+      "premise": "The shipping manifest lists the crate mass as 12 kg after calibration.",
+      "query": "The audit copy lists the crate mass as 12 lb after calibration.",
+      "tags": [
+        "adversarial",
+        "unit",
+        "property"
+      ]
+    },
+    {
+      "capability": "condition_shift_control",
+      "difficulty": "medium",
+      "domain": "measurement",
+      "expected": "none",
+      "id": "marked-adv-property-003",
+      "note": "Context changed; the value and unit agree, so this is not a contradiction.",
+      "premise": "The shipping manifest lists the crate mass as 12 kg before calibration.",
+      "query": "The audit copy lists the crate mass as 12 kg after calibration.",
+      "tags": [
+        "control",
+        "property",
+        "context_shift"
+      ]
+    },
+    {
+      "capability": "definition_paraphrase",
+      "difficulty": "hard",
+      "domain": "geometry",
+      "expected": "definitional_violation",
+      "id": "marked-adv-definition-001",
+      "note": "Query violates a definitional property without using the word false.",
+      "premise": "The glossary defines a triangle as a polygon with exactly three sides.",
+      "query": "The generated explanation says a triangle can have four sides while remaining a triangle.",
+      "tags": [
+        "adversarial",
+        "definition",
+        "geometry"
+      ]
+    },
+    {
+      "capability": "definition_application",
+      "difficulty": "hard",
+      "domain": "math",
+      "expected": "definitional_violation",
+      "id": "marked-adv-definition-002",
+      "note": "The query's own divisor list violates the prime definition.",
+      "premise": "The math note says a prime number has exactly two positive divisors.",
+      "query": "The answer claims 9 is prime because it has divisors 1, 3, and 9.",
+      "tags": [
+        "adversarial",
+        "definition",
+        "math"
+      ]
+    },
+    {
+      "capability": "definition_elaboration_control",
+      "difficulty": "medium",
+      "domain": "geometry",
+      "expected": "none",
+      "id": "marked-adv-definition-003",
+      "note": "Additional visual detail does not violate the definition.",
+      "premise": "The glossary defines a square as a figure with four equal sides.",
+      "query": "The caption describes the tile as a square with four equal sides and a blue border.",
+      "tags": [
+        "control",
+        "definition",
+        "elaboration"
+      ]
+    },
+    {
+      "capability": "implicit_counterexample",
+      "difficulty": "hard",
+      "domain": "ai_safety",
+      "expected": "universal_counterexample",
+      "id": "marked-adv-universal-001",
+      "note": "A bypassing subclass counters the universal approval claim.",
+      "premise": "All production agents must pass human approval before release.",
+      "query": "The exception log says emergency production agents bypass human approval before release.",
+      "tags": [
+        "adversarial",
+        "universal",
+        "approval"
+      ]
+    },
+    {
+      "capability": "instance_counterexample",
+      "difficulty": "hard",
+      "domain": "data_governance",
+      "expected": "universal_counterexample",
+      "id": "marked-adv-universal-002",
+      "note": "Specific edited instance counters an every/immutable universal.",
+      "premise": "Every archived dataset is immutable after publication.",
+      "query": "A correction entry says archived dataset A17 was edited after publication.",
+      "tags": [
+        "adversarial",
+        "universal",
+        "data"
+      ]
+    },
+    {
+      "capability": "non_universal_control",
+      "difficulty": "medium",
+      "domain": "data_governance",
+      "expected": "none",
+      "id": "marked-adv-universal-003",
+      "note": "Most allows exceptions; this should not be scored as a contradiction.",
+      "premise": "Most archived datasets are immutable after publication.",
+      "query": "A correction entry says archived dataset A17 was edited after publication.",
+      "tags": [
+        "control",
+        "universal",
+        "quantifier"
+      ]
+    },
+    {
+      "capability": "temporal_always_since",
+      "difficulty": "hard",
+      "domain": "security",
+      "expected": "temporal_conflict",
+      "id": "marked-adv-temporal-001",
+      "note": "Always-since claim conflicts with a later introduction date.",
+      "premise": "The vendor page says the API has always required token signing since 2018.",
+      "query": "The migration note says token signing was introduced in 2022.",
+      "tags": [
+        "adversarial",
+        "temporal",
+        "security"
+      ]
+    },
+    {
+      "capability": "temporal_scope_drift",
+      "difficulty": "medium",
+      "domain": "operations",
+      "expected": "temporal_conflict",
+      "id": "marked-adv-temporal-002",
+      "note": "A broad always claim conflicts with a later dated state.",
+      "premise": "The runbook says the service always used manual review in 2019.",
+      "query": "The audit says the same service used automated review in 2021.",
+      "tags": [
+        "adversarial",
+        "temporal",
+        "operations"
+      ]
+    },
+    {
+      "capability": "temporal_change_control",
+      "difficulty": "medium",
+      "domain": "operations",
+      "expected": "none",
+      "id": "marked-adv-temporal-003",
+      "note": "A system can change across time without contradiction.",
+      "premise": "The service used manual review in 2019.",
+      "query": "The service used automated review in 2021.",
+      "tags": [
+        "control",
+        "temporal",
+        "state_change"
+      ]
+    },
+    {
+      "capability": "paraphrase_control",
+      "difficulty": "medium",
+      "domain": "ai_safety",
+      "expected": "none",
+      "id": "marked-adv-control-001",
+      "note": "Near-paraphrase should remain non-contradictory.",
+      "premise": "The model declined the unsafe request and offered a safe alternative.",
+      "query": "The model refused the unsafe request while suggesting a safe alternative.",
+      "tags": [
+        "control",
+        "paraphrase",
+        "safety"
+      ]
+    },
+    {
+      "capability": "negation_scope_control",
+      "difficulty": "hard",
+      "domain": "security",
+      "expected": "none",
+      "id": "marked-adv-control-002",
+      "note": "Two cautious negative claims are compatible.",
+      "premise": "The audit found no evidence that private keys left the vault.",
+      "query": "The audit did not prove that private keys left the vault.",
+      "tags": [
+        "control",
+        "negation",
+        "scope"
+      ]
+    }
+  ],
+  "labels": [
+    "direct_negation",
+    "property_mismatch",
+    "definitional_violation",
+    "universal_counterexample",
+    "temporal_conflict",
+    "none"
+  ],
+  "profile": {
+    "capability_counts": {
+      "condition_shift_control": 1,
+      "definition_application": 1,
+      "definition_elaboration_control": 1,
+      "definition_paraphrase": 1,
+      "implicit_counterexample": 1,
+      "implicit_polarity": 1,
+      "instance_counterexample": 1,
+      "modal_antonym": 1,
+      "negation_scope_control": 1,
+      "non_universal_control": 1,
+      "numeric_same_condition": 1,
+      "paraphrase_control": 1,
+      "policy_antonym": 1,
+      "temporal_always_since": 1,
+      "temporal_change_control": 1,
+      "temporal_scope_drift": 1,
+      "unit_conflict_with_context": 1
+    },
+    "case_count": 17,
+    "contradiction_case_count": 11,
+    "control_case_count": 6,
+    "difficulty_counts": {
+      "hard": 10,
+      "medium": 7
+    },
+    "domain_counts": {
+      "ai_safety": 2,
+      "benchmarking": 1,
+      "data_governance": 2,
+      "geometry": 2,
+      "governance": 1,
+      "math": 1,
+      "measurement": 2,
+      "operations": 3,
+      "security": 3
+    },
+    "label_counts": {
+      "definitional_violation": 2,
+      "direct_negation": 3,
+      "none": 6,
+      "property_mismatch": 2,
+      "temporal_conflict": 2,
+      "universal_counterexample": 2
+    },
+    "quality_gates": {
+      "min_cases": 15,
+      "requires_all_contradiction_labels": true,
+      "requires_control_cases": true,
+      "requires_multiple_difficulties": true,
+      "requires_multiple_domains": true
+    },
+    "tag_counts": {
+      "adversarial": 11,
+      "approval": 1,
+      "context_shift": 1,
+      "control": 6,
+      "data": 1,
+      "definition": 3,
+      "elaboration": 1,
+      "geometry": 1,
+      "long_context": 1,
+      "math": 1,
+      "modal": 1,
+      "negation": 4,
+      "numeric": 1,
+      "operations": 1,
+      "paraphrase": 1,
+      "policy": 1,
+      "property": 2,
+      "quantifier": 1,
+      "safety": 1,
+      "same_entity": 1,
+      "scope": 1,
+      "security": 1,
+      "state_change": 1,
+      "temporal": 3,
+      "unit": 1,
+      "universal": 3
+    }
+  },
+  "schema": "marked_bench.contradiction-suite-manifest.v1",
+  "scoring": {
+    "overall_score_weights": {
+      "binary_detection_f1": 0.2,
+      "contradiction_macro_f1": 0.45,
+      "coverage_index": 0.1,
+      "type_accuracy": 0.25
+    }
+  },
+  "suite_hash": "454c1aff69d5028224549dfc14fd8e6c10818251d0abf8becf36f0856b2dbd67",
+  "suite_id": "marked-bench-contradiction-adversarial",
+  "suite_version": "0.2.0"
+}
