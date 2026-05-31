@@ -9,8 +9,8 @@ packets are internally consistent.
 Generate and validate the current report with:
 
 ```bash
-marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_3_9.json
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_9.json
+marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_3_10.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_10.json
 ```
 
 Do not edit conformance reports by hand; regenerate them after changing any

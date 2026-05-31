@@ -153,7 +153,8 @@
         "release_conformance_required",
         "leaderboard_review_required",
         "not_safety_certification",
-        "third_party_evidence_required_for_adoption_claims"
+        "third_party_evidence_required_for_adoption_claims",
+        "third_party_evidence_ledger_required"
       ],
       "properties": {
         "same_suite_hash_required": {
@@ -172,6 +173,9 @@
           "type": "boolean"
         },
         "third_party_evidence_required_for_adoption_claims": {
+          "type": "boolean"
+        },
+        "third_party_evidence_ledger_required": {
           "type": "boolean"
         }
       }

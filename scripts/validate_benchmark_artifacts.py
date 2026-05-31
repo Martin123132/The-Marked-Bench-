@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT))
 
 from marked_bench.benchmark_adoption import load_adoption_packet, validate_adoption_packet  # noqa: E402
 from marked_bench.benchmark_conformance import load_conformance_report, validate_conformance_report  # noqa: E402
+from marked_bench.benchmark_evidence import load_evidence_ledger, validate_evidence_ledger  # noqa: E402
 from marked_bench.benchmark_leaderboard import build_leaderboard  # noqa: E402
 from marked_bench.benchmark_release import build_release_manifest  # noqa: E402
 from marked_bench.benchmark_registry import build_benchmark_registry  # noqa: E402
@@ -73,13 +74,15 @@ CHECKED_SUBMISSION_PACKETS = [
 ]
 
 BENCHMARK_REGISTRY = Path("benchmark_registry.json")
-RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_9.json")
-CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_3_9.json")
-ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_3_9.json")
+RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_10.json")
+CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_3_10.json")
+ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_3_10.json")
+EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_3_10.json")
 
 REQUIRED_PUBLIC_FILES = [
     Path("adoption/README.md"),
     ADOPTION_PACKET,
+    EVIDENCE_LEDGER,
     Path("README.md"),
     BENCHMARK_REGISTRY,
     RELEASE_MANIFEST,
@@ -104,8 +107,10 @@ REQUIRED_PUBLIC_FILES = [
     Path("docs/RELEASE_NOTES_v0_3_7.md"),
     Path("docs/RELEASE_NOTES_v0_3_8.md"),
     Path("docs/RELEASE_NOTES_v0_3_9.md"),
+    Path("docs/RELEASE_NOTES_v0_3_10.md"),
     Path("docs/ROADMAP.md"),
     Path("docs/SUBMISSION_GUIDE.md"),
+    Path("docs/THIRD_PARTY_EVIDENCE.md"),
     Path("schemas/benchmark_registry.schema.json"),
     Path("schemas/contradiction_benchmark_report.schema.json"),
     Path("schemas/contradiction_predictions.schema.json"),
@@ -118,6 +123,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("schemas/conformance_report.schema.json"),
     Path("schemas/result_card.schema.json"),
     Path("schemas/adoption_packet.schema.json"),
+    Path("schemas/third_party_evidence_ledger.schema.json"),
     Path("conformance/README.md"),
     Path("releases/README.md"),
     Path("submissions/README.md"),
@@ -129,6 +135,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("submissions/example_external_jsonl/example_external_result_card.json"),
     Path(".github/PULL_REQUEST_TEMPLATE.md"),
     Path(".github/workflows/benchmark-ci.yml"),
+    Path(".github/ISSUE_TEMPLATE/third_party_evidence.yml"),
 ]
 
 SCHEMA_CONFORMANCE_FILES = {
@@ -146,6 +153,7 @@ SCHEMA_CONFORMANCE_FILES = {
     Path("submissions/example_external_jsonl/example_external_submission_review.json"): Path("schemas/submission_review.schema.json"),
     Path("submissions/example_external_jsonl/example_external_result_card.json"): Path("schemas/result_card.schema.json"),
     ADOPTION_PACKET: Path("schemas/adoption_packet.schema.json"),
+    EVIDENCE_LEDGER: Path("schemas/third_party_evidence_ledger.schema.json"),
 }
 
 
@@ -160,6 +168,7 @@ def main() -> int:
         _validate_release_manifest(errors)
         _validate_conformance_report(errors)
         _validate_adoption_packet(errors)
+        _validate_evidence_ledger(errors)
         _validate_suite_manifests(errors)
         _validate_baseline_reports(errors)
         _validate_leaderboards(errors)
@@ -329,6 +338,17 @@ def _validate_adoption_packet(errors: list[str]) -> None:
     validation = validate_adoption_packet(packet, root=ROOT)
     if not validation["valid"]:
         errors.append(f"{ADOPTION_PACKET}: adoption packet validation failed: {validation['errors']}")
+
+
+def _validate_evidence_ledger(errors: list[str]) -> None:
+    try:
+        ledger = load_evidence_ledger(EVIDENCE_LEDGER)
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        errors.append(f"{EVIDENCE_LEDGER}: could not load evidence ledger: {exc}")
+        return
+    validation = validate_evidence_ledger(ledger, root=ROOT)
+    if not validation["valid"]:
+        errors.append(f"{EVIDENCE_LEDGER}: evidence ledger validation failed: {validation['errors']}")
 
 
 def _validate_baseline_reports(errors: list[str]) -> None:

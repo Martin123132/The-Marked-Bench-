@@ -44,7 +44,8 @@
         "submission_review",
         "conformance_report",
         "result_card",
-        "adoption_packet"
+        "adoption_packet",
+        "third_party_evidence_ledger"
       ],
       "additionalProperties": {
         "type": "string"

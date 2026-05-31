@@ -68,8 +68,9 @@ Before adopting or mirroring a release package, validate the checked
 conformance report:
 
 ```bash
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_9.json
-marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_3_9.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_10.json
+marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_3_10.json
+marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_3_10.json
 ```
 
 The conformance report is the single machine-readable pass/fail artifact for
@@ -78,6 +79,9 @@ checked-submission consistency.
 The adoption packet is the machine-readable handoff file for external users:
 it names the release, default track, public artifacts, validation commands,
 submission channels, and citation requirements.
+The third-party evidence ledger is the public record for verified external
+adoption evidence. It can be valid while empty; that means no external evidence
+has been accepted yet.
 
 ## Cite The Benchmark
 

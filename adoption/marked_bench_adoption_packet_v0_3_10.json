@@ -1,0 +1,228 @@
+{
+  "adopter_workflow": [
+    {
+      "command": "marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_10.json",
+      "name": "pin_release",
+      "output": "Release conformance validation passes.",
+      "step": 1
+    },
+    {
+      "command": "marked-bench --suite contradiction-multihop --export-prediction-template artifacts/multihop-predictions.jsonl",
+      "name": "export_predictions",
+      "output": "A JSONL prediction template with stable public case IDs.",
+      "step": 2
+    },
+    {
+      "command": "marked-bench --suite contradiction-multihop --score-predictions artifacts/multihop-predictions.jsonl --system-name \"SYSTEM\" --report artifacts/system-report.json",
+      "name": "score_system",
+      "output": "A validated benchmark report tied to the pinned suite hash.",
+      "step": 3
+    },
+    {
+      "command": "marked-bench --create-submission artifacts/system-submission.json --submission-report artifacts/system-report.json --system-version \"VERSION\" --submitter \"SUBMITTER\"",
+      "name": "create_submission",
+      "output": "Submission metadata with method disclosures and report hash evidence.",
+      "step": 4
+    },
+    {
+      "command": "marked-bench --create-submission-bundle artifacts/system-bundle.json --bundle-submission artifacts/system-submission.json",
+      "name": "bundle_submission",
+      "output": "A portable submission bundle for review.",
+      "step": 5
+    },
+    {
+      "command": "marked-bench --create-result-card artifacts/system-result-card.json --result-report artifacts/system-report.json --result-bundle artifacts/system-bundle.json",
+      "name": "publish_result_card",
+      "output": "A standard result card suitable for citation or leaderboard review.",
+      "step": 6
+    }
+  ],
+  "announcement_assets": [
+    {
+      "audience": "researchers",
+      "path": "docs/ANNOUNCEMENT_PACKAGE.md",
+      "purpose": "Release summary, citation wording, and reproducibility checklist."
+    },
+    {
+      "audience": "implementers",
+      "path": "docs/ADOPTION_GUIDE.md",
+      "purpose": "Commands for scoring external systems and creating result cards."
+    },
+    {
+      "audience": "reviewers",
+      "path": "docs/SUBMISSION_REVIEW_RUBRIC.md",
+      "purpose": "Review criteria before leaderboard acceptance."
+    },
+    {
+      "audience": "maintainers",
+      "path": "docs/THIRD_PARTY_EVIDENCE.md",
+      "purpose": "Rules for verifying external adoption evidence without overstating claims."
+    }
+  ],
+  "benchmark_family": "contradiction-detection",
+  "citation": {
+    "path": "CITATION.cff",
+    "preferred_name": "The Marked Bench",
+    "required_fields": [
+      "release_tag",
+      "suite_id",
+      "suite_version",
+      "suite_hash",
+      "result_card_path"
+    ]
+  },
+  "conformance_report_path": "conformance/marked_bench_conformance_v0_3_10.json",
+  "default_track": "contradiction-multihop",
+  "project": "The Marked Bench",
+  "release_id": "marked-bench-contradiction-standard-release-0.3.10",
+  "release_manifest_path": "releases/marked_bench_release_v0_3_10.json",
+  "release_url": "https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.3.10",
+  "repository_url": "https://github.com/Martin123132/The-Marked-Bench-",
+  "required_public_artifacts": [
+    {
+      "name": "registry",
+      "path": "benchmark_registry.json",
+      "purpose": "Machine-readable index of tracks, schemas, and commands."
+    },
+    {
+      "name": "release_manifest",
+      "path": "releases/marked_bench_release_v0_3_10.json",
+      "purpose": "SHA-256 pinning for public release files."
+    },
+    {
+      "name": "conformance_report",
+      "path": "conformance/marked_bench_conformance_v0_3_10.json",
+      "purpose": "Machine-readable pass/fail evidence for the release package."
+    },
+    {
+      "name": "adoption_packet",
+      "path": "adoption/marked_bench_adoption_packet_v0_3_10.json",
+      "purpose": "Machine-readable packet for external users, mirrors, and announcements."
+    },
+    {
+      "name": "third_party_evidence_ledger",
+      "path": "adoption/third_party_evidence_ledger_v0_3_10.json",
+      "purpose": "Checked ledger for external adoption evidence and verification status."
+    },
+    {
+      "name": "technical_note",
+      "path": "docs/TECHNICAL_NOTE.md",
+      "purpose": "Generated suite hashes, baselines, and limitations."
+    },
+    {
+      "name": "adoption_guide",
+      "path": "docs/ADOPTION_GUIDE.md",
+      "purpose": "External user workflow for scoring and submitting systems."
+    },
+    {
+      "name": "announcement_package",
+      "path": "docs/ANNOUNCEMENT_PACKAGE.md",
+      "purpose": "Copy-ready public launch and citation material."
+    },
+    {
+      "name": "third_party_evidence",
+      "path": "docs/THIRD_PARTY_EVIDENCE.md",
+      "purpose": "Evidence rules for adoption claims."
+    },
+    {
+      "name": "result_card_schema",
+      "path": "schemas/result_card.schema.json",
+      "purpose": "Schema for publishable benchmark result cards."
+    },
+    {
+      "name": "adoption_packet_schema",
+      "path": "schemas/adoption_packet.schema.json",
+      "purpose": "Schema for this adoption packet."
+    },
+    {
+      "name": "third_party_evidence_schema",
+      "path": "schemas/third_party_evidence_ledger.schema.json",
+      "purpose": "Schema for external adoption evidence ledgers."
+    },
+    {
+      "name": "checked_result_card",
+      "path": "submissions/example_external_jsonl/example_external_result_card.json",
+      "purpose": "Example result card with report, bundle, review, and hash evidence."
+    }
+  ],
+  "schema": "marked_bench.adoption-packet.v1",
+  "standard_claims": {
+    "leaderboard_review_required": true,
+    "not_safety_certification": true,
+    "public_result_card_required": true,
+    "release_conformance_required": true,
+    "same_suite_hash_required": true,
+    "third_party_evidence_ledger_required": true,
+    "third_party_evidence_required_for_adoption_claims": true
+  },
+  "submission_channels": [
+    {
+      "name": "leaderboard_submission_issue",
+      "path": ".github/ISSUE_TEMPLATE/leaderboard_submission.yml",
+      "purpose": "Structured public intake for third-party result cards and submission bundles."
+    },
+    {
+      "name": "benchmark_case_issue",
+      "path": ".github/ISSUE_TEMPLATE/benchmark_case.yml",
+      "purpose": "Structured proposal path for new benchmark cases without mutating released cases."
+    },
+    {
+      "name": "pull_request_template",
+      "path": ".github/PULL_REQUEST_TEMPLATE.md",
+      "purpose": "Contributor checklist for artifact validation and release hygiene."
+    },
+    {
+      "name": "third_party_evidence_issue",
+      "path": ".github/ISSUE_TEMPLATE/third_party_evidence.yml",
+      "purpose": "Structured intake for public third-party adoption evidence."
+    }
+  ],
+  "tracks": [
+    {
+      "case_count": 17,
+      "name": "contradiction",
+      "status": "foundation",
+      "suite_hash": "8c1f80ff67874af54869bab2e361b3cc7416ce1d86f80ff583636a55e3462765",
+      "suite_id": "marked-bench-contradiction-standard",
+      "suite_version": "0.1.0"
+    },
+    {
+      "case_count": 17,
+      "name": "contradiction-adversarial",
+      "status": "active",
+      "suite_hash": "454c1aff69d5028224549dfc14fd8e6c10818251d0abf8becf36f0856b2dbd67",
+      "suite_id": "marked-bench-contradiction-adversarial",
+      "suite_version": "0.2.0"
+    },
+    {
+      "case_count": 18,
+      "name": "contradiction-multihop",
+      "status": "active",
+      "suite_hash": "07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f",
+      "suite_id": "marked-bench-contradiction-multihop",
+      "suite_version": "0.3.0"
+    }
+  ],
+  "validation_commands": [
+    {
+      "command": "python scripts/validate_benchmark_artifacts.py",
+      "name": "artifact_gate",
+      "proves": "Checked public artifacts match generated benchmark evidence."
+    },
+    {
+      "command": "python -m unittest discover -s tests",
+      "name": "unit_tests",
+      "proves": "Benchmark builders, validators, and CLI workflows behave as tested."
+    },
+    {
+      "command": "marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_3_10.json",
+      "name": "adoption_packet",
+      "proves": "The external adoption packet matches the current release evidence."
+    },
+    {
+      "command": "marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_3_10.json",
+      "name": "third_party_evidence_ledger",
+      "proves": "External adoption evidence claims are explicitly recorded and validated."
+    }
+  ]
+}

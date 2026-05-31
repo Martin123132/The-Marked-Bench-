@@ -1,0 +1,79 @@
+name: Third-party evidence
+description: Submit public evidence that an external system or team used The Marked Bench.
+title: "Third-party evidence: "
+labels:
+  - adoption
+  - evidence
+body:
+  - type: input
+    id: submitter
+    attributes:
+      label: Submitter
+      placeholder: Name, handle, lab, or organization
+    validations:
+      required: true
+  - type: input
+    id: system_name
+    attributes:
+      label: System name
+      placeholder: MyContradictionDetector
+    validations:
+      required: true
+  - type: input
+    id: system_version
+    attributes:
+      label: System version
+      placeholder: 1.0.0
+    validations:
+      required: true
+  - type: input
+    id: suite_identity
+    attributes:
+      label: Suite identity
+      description: Include suite ID, suite version, and suite hash.
+      placeholder: marked-bench-contradiction-multihop / 0.3.0 / 64 hex characters
+    validations:
+      required: true
+  - type: input
+    id: result_card
+    attributes:
+      label: Result card path or URL
+      placeholder: submissions/team/system_result_card.json
+    validations:
+      required: true
+  - type: input
+    id: result_card_sha256
+    attributes:
+      label: Result card SHA-256
+      placeholder: 64 hex characters
+    validations:
+      required: true
+  - type: input
+    id: bundle
+    attributes:
+      label: Submission bundle path or URL
+      placeholder: submissions/team/system_bundle.json
+    validations:
+      required: true
+  - type: input
+    id: public_evidence_url
+    attributes:
+      label: Public evidence URL
+      description: Link to a repo, release, paper, model card, report, or benchmark page.
+      placeholder: https://...
+    validations:
+      required: true
+  - type: textarea
+    id: validation_output
+    attributes:
+      label: Validation output
+      description: Paste result-card, bundle, conformance, or artifact validation output.
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Any review status, limitations, or caveats.
+    validations:
+      required: false

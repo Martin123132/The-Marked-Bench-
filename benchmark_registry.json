@@ -9,6 +9,7 @@
     "docs/TECHNICAL_NOTE.md",
     "docs/GOVERNANCE.md",
     "docs/SUBMISSION_REVIEW_RUBRIC.md",
+    "docs/THIRD_PARTY_EVIDENCE.md",
     "docs/RELEASE_NOTES_v0_2_0.md",
     "docs/RELEASE_NOTES_v0_3_0.md",
     "docs/RELEASE_NOTES_v0_3_1.md",
@@ -20,6 +21,7 @@
     "docs/RELEASE_NOTES_v0_3_7.md",
     "docs/RELEASE_NOTES_v0_3_8.md",
     "docs/RELEASE_NOTES_v0_3_9.md",
+    "docs/RELEASE_NOTES_v0_3_10.md",
     "docs/SUBMISSION_GUIDE.md",
     "docs/RELEASE_CHECKLIST.md"
   ],
@@ -35,7 +37,8 @@
     "result_card": "marked_bench.result-card.v1",
     "submission_bundle": "marked_bench.leaderboard-submission-bundle.v1",
     "submission_review": "marked_bench.submission-review.v1",
-    "suite_manifest": "marked_bench.contradiction-suite-manifest.v1"
+    "suite_manifest": "marked_bench.contradiction-suite-manifest.v1",
+    "third_party_evidence_ledger": "marked_bench.third-party-evidence-ledger.v1"
   },
   "schemas": {
     "adoption_packet": "schemas/adoption_packet.schema.json",
@@ -49,7 +52,8 @@
     "result_card": "schemas/result_card.schema.json",
     "submission_bundle": "schemas/submission_bundle.schema.json",
     "submission_review": "schemas/submission_review.schema.json",
-    "suite_manifest": "schemas/contradiction_suite_manifest.schema.json"
+    "suite_manifest": "schemas/contradiction_suite_manifest.schema.json",
+    "third_party_evidence_ledger": "schemas/third_party_evidence_ledger.schema.json"
   },
   "tracks": [
     {

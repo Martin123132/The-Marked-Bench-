@@ -12,11 +12,12 @@ from marked_bench.schema_validation import load_json_schema, validate_json_schem
 
 
 ADOPTION_PACKET_SCHEMA = "marked_bench.adoption-packet.v1"
-DEFAULT_ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_3_9.json")
-DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_9.json")
-DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_3_9.json")
+DEFAULT_ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_3_10.json")
+DEFAULT_EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_3_10.json")
+DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_10.json")
+DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_3_10.json")
 REPOSITORY_URL = "https://github.com/Martin123132/The-Marked-Bench-"
-RELEASE_URL = "https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.3.9"
+RELEASE_URL = "https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.3.10"
 
 
 def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
@@ -52,6 +53,7 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
             "leaderboard_review_required": True,
             "not_safety_certification": True,
             "third_party_evidence_required_for_adoption_claims": True,
+            "third_party_evidence_ledger_required": True,
         },
         "required_public_artifacts": [
             _artifact("registry", "benchmark_registry.json", "Machine-readable index of tracks, schemas, and commands."),
@@ -66,11 +68,22 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
                 DEFAULT_ADOPTION_PACKET.as_posix(),
                 "Machine-readable packet for external users, mirrors, and announcements.",
             ),
+            _artifact(
+                "third_party_evidence_ledger",
+                DEFAULT_EVIDENCE_LEDGER.as_posix(),
+                "Checked ledger for external adoption evidence and verification status.",
+            ),
             _artifact("technical_note", "docs/TECHNICAL_NOTE.md", "Generated suite hashes, baselines, and limitations."),
             _artifact("adoption_guide", "docs/ADOPTION_GUIDE.md", "External user workflow for scoring and submitting systems."),
             _artifact("announcement_package", "docs/ANNOUNCEMENT_PACKAGE.md", "Copy-ready public launch and citation material."),
+            _artifact("third_party_evidence", "docs/THIRD_PARTY_EVIDENCE.md", "Evidence rules for adoption claims."),
             _artifact("result_card_schema", "schemas/result_card.schema.json", "Schema for publishable benchmark result cards."),
             _artifact("adoption_packet_schema", "schemas/adoption_packet.schema.json", "Schema for this adoption packet."),
+            _artifact(
+                "third_party_evidence_schema",
+                "schemas/third_party_evidence_ledger.schema.json",
+                "Schema for external adoption evidence ledgers.",
+            ),
             _artifact(
                 "checked_result_card",
                 "submissions/example_external_jsonl/example_external_result_card.json",
@@ -81,7 +94,7 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
             {
                 "step": 1,
                 "name": "pin_release",
-                "command": "marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_9.json",
+                "command": "marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_10.json",
                 "output": "Release conformance validation passes.",
             },
             {
@@ -148,9 +161,17 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
                 "name": "adoption_packet",
                 "command": (
                     "marked-bench --validate-adoption-packet "
-                    "adoption/marked_bench_adoption_packet_v0_3_9.json"
+                    "adoption/marked_bench_adoption_packet_v0_3_10.json"
                 ),
                 "proves": "The external adoption packet matches the current release evidence.",
+            },
+            {
+                "name": "third_party_evidence_ledger",
+                "command": (
+                    "marked-bench --validate-evidence-ledger "
+                    "adoption/third_party_evidence_ledger_v0_3_10.json"
+                ),
+                "proves": "External adoption evidence claims are explicitly recorded and validated.",
             },
         ],
         "submission_channels": [
@@ -169,6 +190,11 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
                 "path": ".github/PULL_REQUEST_TEMPLATE.md",
                 "purpose": "Contributor checklist for artifact validation and release hygiene.",
             },
+            {
+                "name": "third_party_evidence_issue",
+                "path": ".github/ISSUE_TEMPLATE/third_party_evidence.yml",
+                "purpose": "Structured intake for public third-party adoption evidence.",
+            },
         ],
         "announcement_assets": [
             {
@@ -185,6 +211,11 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
                 "audience": "reviewers",
                 "path": "docs/SUBMISSION_REVIEW_RUBRIC.md",
                 "purpose": "Review criteria before leaderboard acceptance.",
+            },
+            {
+                "audience": "maintainers",
+                "path": "docs/THIRD_PARTY_EVIDENCE.md",
+                "purpose": "Rules for verifying external adoption evidence without overstating claims.",
             },
         ],
         "citation": {

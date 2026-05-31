@@ -11,8 +11,9 @@ requirements, and validation commands.
 Generate and validate the current packet with:
 
 ```bash
-marked-bench --export-adoption-packet adoption/marked_bench_adoption_packet_v0_3_9.json
-marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_3_9.json
+marked-bench --export-adoption-packet adoption/marked_bench_adoption_packet_v0_3_10.json
+marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_3_10.json
+marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_3_10.json
 ```
 
 Do not edit adoption packets by hand; regenerate them after changing public

@@ -16,6 +16,11 @@ from marked_bench.benchmark_conformance import (
     validate_conformance_report,
     write_conformance_report,
 )
+from marked_bench.benchmark_evidence import (
+    load_evidence_ledger,
+    validate_evidence_ledger,
+    write_evidence_ledger,
+)
 from marked_bench.benchmark_leaderboard import build_leaderboard, write_leaderboard
 from marked_bench.benchmark_release import write_release_manifest
 from marked_bench.benchmark_registry import write_benchmark_registry
@@ -168,6 +173,18 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         metavar="PATH",
         help="Validate an external adoption packet against the current release evidence.",
+    )
+    parser.add_argument(
+        "--export-evidence-ledger",
+        default=None,
+        metavar="PATH",
+        help="Write a third-party adoption evidence ledger and exit.",
+    )
+    parser.add_argument(
+        "--validate-evidence-ledger",
+        default=None,
+        metavar="PATH",
+        help="Validate a third-party adoption evidence ledger.",
     )
     parser.add_argument(
         "--bundle-submission",
@@ -432,6 +449,22 @@ def main(argv: list[str] | None = None) -> None:
             raise SystemExit(1)
         return
 
+    if args.validate_evidence_ledger:
+        validation = validate_evidence_ledger(load_evidence_ledger(args.validate_evidence_ledger))
+        if args.json:
+            print(json.dumps(validation, indent=2, sort_keys=True))
+        else:
+            print(f"Evidence ledger validation: {'pass' if validation['valid'] else 'fail'}")
+            print(f"Release: {validation['summary']['release_id']}")
+            print(f"Status: {validation['summary']['status']}")
+            print(f"Entries: {validation['summary']['entry_count']}")
+            print(f"Verified entries: {validation['summary']['verified_entry_count']}")
+            print(f"Errors: {len(validation['errors'])}")
+            print(f"Warnings: {len(validation['warnings'])}")
+        if not validation["valid"]:
+            raise SystemExit(1)
+        return
+
     if args.create_submission:
         if not args.submission_report:
             parser.error("--create-submission requires --submission-report")
@@ -543,6 +576,11 @@ def main(argv: list[str] | None = None) -> None:
     if args.export_adoption_packet:
         write_adoption_packet(args.export_adoption_packet)
         print(f"Adoption packet: {args.export_adoption_packet}")
+        return
+
+    if args.export_evidence_ledger:
+        write_evidence_ledger(args.export_evidence_ledger)
+        print(f"Evidence ledger: {args.export_evidence_ledger}")
         return
 
     if args.export_prediction_template:

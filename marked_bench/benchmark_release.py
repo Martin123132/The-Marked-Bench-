@@ -11,7 +11,7 @@ from marked_bench.benchmark_registry import REGISTRY_SCHEMA, build_benchmark_reg
 
 
 RELEASE_MANIFEST_SCHEMA = "marked_bench.benchmark-release-manifest.v1"
-RELEASE_ID = "marked-bench-contradiction-standard-release-0.3.9"
+RELEASE_ID = "marked-bench-contradiction-standard-release-0.3.10"
 
 ROOT_PUBLIC_ARTIFACTS = (
     "README.md",
@@ -25,6 +25,7 @@ BENCHMARK_SOURCE_ARTIFACTS = (
     "setup.py",
     "marked_bench/benchmark_adoption.py",
     "marked_bench/benchmark_conformance.py",
+    "marked_bench/benchmark_evidence.py",
     "marked_bench/benchmark_cli.py",
     "marked_bench/benchmark_leaderboard.py",
     "marked_bench/benchmark_registry.py",
@@ -55,6 +56,7 @@ SUPPORT_ARTIFACTS = (
     ".github/ISSUE_TEMPLATE/benchmark_case.yml",
     ".github/ISSUE_TEMPLATE/config.yml",
     ".github/ISSUE_TEMPLATE/leaderboard_submission.yml",
+    ".github/ISSUE_TEMPLATE/third_party_evidence.yml",
 )
 
 SUBMISSION_EXAMPLE_ARTIFACTS = (
@@ -67,11 +69,12 @@ SUBMISSION_EXAMPLE_ARTIFACTS = (
 )
 
 CONFORMANCE_ARTIFACTS = (
-    "conformance/marked_bench_conformance_v0_3_9.json",
+    "conformance/marked_bench_conformance_v0_3_10.json",
 )
 
 ADOPTION_ARTIFACTS = (
-    "adoption/marked_bench_adoption_packet_v0_3_9.json",
+    "adoption/marked_bench_adoption_packet_v0_3_10.json",
+    "adoption/third_party_evidence_ledger_v0_3_10.json",
 )
 
 

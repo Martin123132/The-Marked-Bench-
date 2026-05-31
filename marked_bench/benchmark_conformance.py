@@ -12,6 +12,11 @@ from marked_bench.benchmark_adoption import (
     load_adoption_packet,
     validate_adoption_packet,
 )
+from marked_bench.benchmark_evidence import (
+    DEFAULT_EVIDENCE_LEDGER,
+    load_evidence_ledger,
+    validate_evidence_ledger,
+)
 from marked_bench.benchmark_leaderboard import build_leaderboard
 from marked_bench.benchmark_registry import build_benchmark_registry
 from marked_bench.benchmark_release import build_release_manifest
@@ -28,8 +33,8 @@ from marked_bench.schema_validation import load_json_schema, validate_json_file,
 
 
 CONFORMANCE_REPORT_SCHEMA = "marked_bench.conformance-report.v1"
-DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_3_9.json")
-DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_9.json")
+DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_3_10.json")
+DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_10.json")
 
 SUITE_MANIFESTS = {
     Path("suites/marked_bench_contradiction_standard_v0_1_0.json"): "contradiction",
@@ -100,6 +105,7 @@ SCHEMA_CONFORMANCE_FILES = {
         "schemas/result_card.schema.json"
     ),
     DEFAULT_ADOPTION_PACKET: Path("schemas/adoption_packet.schema.json"),
+    DEFAULT_EVIDENCE_LEDGER: Path("schemas/third_party_evidence_ledger.schema.json"),
 }
 
 
@@ -125,6 +131,7 @@ def build_conformance_report(
         _check_submission_packets(root_path),
         _check_result_cards(root_path),
         _check_adoption_packet(root_path),
+        _check_evidence_ledger(root_path),
     ]
     failures = [f"{check['name']}: {error}" for check in checks for error in check["errors"]]
     track_count = len(registry.get("tracks", [])) if isinstance(registry, dict) else 0
@@ -397,6 +404,19 @@ def _check_adoption_packet(root: Path) -> dict[str, Any]:
         if not validation["valid"]:
             errors.append(f"{DEFAULT_ADOPTION_PACKET}: adoption packet validation failed: {validation['errors']}")
     return _check("adoption_packet_valid", errors, {"path": DEFAULT_ADOPTION_PACKET.as_posix()})
+
+
+def _check_evidence_ledger(root: Path) -> dict[str, Any]:
+    errors: list[str] = []
+    try:
+        ledger = load_evidence_ledger(root / DEFAULT_EVIDENCE_LEDGER)
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        errors.append(f"{DEFAULT_EVIDENCE_LEDGER}: could not load evidence ledger: {exc}")
+    else:
+        validation = validate_evidence_ledger(ledger, root=root)
+        if not validation["valid"]:
+            errors.append(f"{DEFAULT_EVIDENCE_LEDGER}: evidence ledger validation failed: {validation['errors']}")
+    return _check("third_party_evidence_ledger_valid", errors, {"path": DEFAULT_EVIDENCE_LEDGER.as_posix()})
 
 
 def _schema_file_errors(root: Path, path: Path, schema_path: Path) -> list[str]:

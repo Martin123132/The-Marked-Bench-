@@ -137,6 +137,7 @@ def build_benchmark_registry() -> dict[str, Any]:
             "conformance_report": "schemas/conformance_report.schema.json",
             "result_card": "schemas/result_card.schema.json",
             "adoption_packet": "schemas/adoption_packet.schema.json",
+            "third_party_evidence_ledger": "schemas/third_party_evidence_ledger.schema.json",
         },
         "schema_ids": {
             "suite_manifest": SUITE_MANIFEST_SCHEMA,
@@ -149,6 +150,7 @@ def build_benchmark_registry() -> dict[str, Any]:
             "conformance_report": "marked_bench.conformance-report.v1",
             "result_card": "marked_bench.result-card.v1",
             "adoption_packet": "marked_bench.adoption-packet.v1",
+            "third_party_evidence_ledger": "marked_bench.third-party-evidence-ledger.v1",
         },
         "governance_docs": [
             "docs/ADOPTION_GUIDE.md",
@@ -158,6 +160,7 @@ def build_benchmark_registry() -> dict[str, Any]:
             "docs/TECHNICAL_NOTE.md",
             "docs/GOVERNANCE.md",
             "docs/SUBMISSION_REVIEW_RUBRIC.md",
+            "docs/THIRD_PARTY_EVIDENCE.md",
             "docs/RELEASE_NOTES_v0_2_0.md",
             "docs/RELEASE_NOTES_v0_3_0.md",
             "docs/RELEASE_NOTES_v0_3_1.md",
@@ -169,6 +172,7 @@ def build_benchmark_registry() -> dict[str, Any]:
             "docs/RELEASE_NOTES_v0_3_7.md",
             "docs/RELEASE_NOTES_v0_3_8.md",
             "docs/RELEASE_NOTES_v0_3_9.md",
+            "docs/RELEASE_NOTES_v0_3_10.md",
             "docs/SUBMISSION_GUIDE.md",
             "docs/RELEASE_CHECKLIST.md",
         ],

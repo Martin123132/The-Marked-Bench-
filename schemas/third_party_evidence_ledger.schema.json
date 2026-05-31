@@ -1,0 +1,212 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marked-bench.local/schemas/third_party_evidence_ledger.schema.json",
+  "title": "The Marked Bench Third-Party Evidence Ledger",
+  "type": "object",
+  "required": [
+    "schema",
+    "project",
+    "benchmark_family",
+    "release_id",
+    "release_manifest_path",
+    "conformance_report_path",
+    "adoption_packet_path",
+    "status",
+    "entry_count",
+    "evidence_requirements",
+    "entries"
+  ],
+  "properties": {
+    "schema": {
+      "const": "marked_bench.third-party-evidence-ledger.v1"
+    },
+    "project": {
+      "type": "string",
+      "minLength": 1
+    },
+    "benchmark_family": {
+      "type": "string",
+      "minLength": 1
+    },
+    "release_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "release_manifest_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "conformance_report_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "adoption_packet_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "awaiting-third-party-evidence",
+        "third-party-evidence-recorded"
+      ]
+    },
+    "entry_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "evidence_requirements": {
+      "$ref": "#/$defs/evidence_requirements"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entry"
+      }
+    }
+  },
+  "$defs": {
+    "evidence_requirements": {
+      "type": "object",
+      "required": [
+        "result_card_required",
+        "submission_bundle_required",
+        "review_required_for_verified_status",
+        "same_suite_hash_required",
+        "public_url_or_committed_path_required",
+        "no_unverified_adoption_claims"
+      ],
+      "properties": {
+        "result_card_required": {
+          "type": "boolean"
+        },
+        "submission_bundle_required": {
+          "type": "boolean"
+        },
+        "review_required_for_verified_status": {
+          "type": "boolean"
+        },
+        "same_suite_hash_required": {
+          "type": "boolean"
+        },
+        "public_url_or_committed_path_required": {
+          "type": "boolean"
+        },
+        "no_unverified_adoption_claims": {
+          "type": "boolean"
+        }
+      }
+    },
+    "entry": {
+      "type": "object",
+      "required": [
+        "evidence_id",
+        "submitted_at",
+        "submitter",
+        "system_name",
+        "system_version",
+        "suite_id",
+        "suite_version",
+        "suite_hash",
+        "result_card_path",
+        "result_card_sha256",
+        "verification_status",
+        "adoption_claim",
+        "evidence_url",
+        "notes"
+      ],
+      "properties": {
+        "evidence_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "submitted_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "submitter": {
+          "type": "string",
+          "minLength": 1
+        },
+        "system_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "system_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "suite_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "suite_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "suite_hash": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "result_card_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "result_card_sha256": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "submission_bundle_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "submission_bundle_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "review_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "review_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "review_decision": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "verification_status": {
+          "enum": [
+            "pending",
+            "verified",
+            "rejected"
+          ]
+        },
+        "adoption_claim": {
+          "type": "boolean"
+        },
+        "evidence_url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

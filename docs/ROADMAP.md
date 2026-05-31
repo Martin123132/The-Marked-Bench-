@@ -31,6 +31,7 @@ This roadmap keeps the benchmark moving toward a credible public standard.
 - Machine-readable release conformance report.
 - Standard result cards for publishable benchmark results.
 - Checked adoption packet and announcement package for external public uptake.
+- Checked third-party evidence ledger for public adoption claims.
 
 ## Next
 
