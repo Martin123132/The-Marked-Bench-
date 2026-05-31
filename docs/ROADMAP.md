@@ -21,10 +21,10 @@ This roadmap keeps the benchmark moving toward a credible public standard.
 - Generated technical note for release evidence.
 - Adoption guide for external users.
 - Versioned release notes.
+- Versioned multi-hop contradiction track.
 
 ## Next
 
-- Add a multi-hop contradiction track.
 - Add model-explanation scoring fields.
 - Add more non-contradiction distractor controls.
 - Add optional JSON Schema validation in CI when a schema validator dependency

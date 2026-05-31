@@ -2,7 +2,7 @@
 
 setup(
     name="marked_bench",
-    version="0.2.0",
+    version="0.3.0",
     description="The Marked Bench contradiction benchmark and AI tooling",
     author="Martin Ollett",
     packages=find_packages(),

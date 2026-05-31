@@ -13,6 +13,8 @@ schema, confusion matrix, and per-class metrics.
 - Foundation suite version: `0.1.0`
 - Adversarial suite ID: `marked-bench-contradiction-adversarial`
 - Adversarial suite version: `0.2.0`
+- Multi-hop suite ID: `marked-bench-contradiction-multihop`
+- Multi-hop suite version: `0.3.0`
 - Report schema: `marked_bench.contradiction-benchmark-report.v1`
 - Canonical builder: `marked_bench.contradiction.benchmark_suite.build_standard_suite`
 
@@ -134,13 +136,19 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public benchmark artifacts by SHA-256:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_2_0.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_3_0.json
 ```
 
 Run the harder adversarial track:
 
 ```bash
 marked-bench --suite contradiction-adversarial --report artifacts/marked_bench_contradiction_adversarial_report.json
+```
+
+Run the multi-hop track:
+
+```bash
+marked-bench --suite contradiction-multihop --report artifacts/marked_bench_contradiction_multihop_report.json
 ```
 
 The checked-in symbolic baseline lives at:
@@ -159,6 +167,12 @@ The checked-in adversarial suite manifest lives at:
 
 ```text
 suites/marked_bench_contradiction_adversarial_v0_2_0.json
+```
+
+The checked-in multi-hop suite manifest lives at:
+
+```text
+suites/marked_bench_contradiction_multihop_v0_3_0.json
 ```
 
 ## Score A Custom Detector
@@ -211,5 +225,6 @@ marked-bench --validate-submission artifacts/my-detector-submission.json
 
 Version `0.1.0` is a foundation suite. Version `0.2.0` adds an adversarial
 track with longer context, implicit contradictions, paraphrase traps, and
-distractor controls. The next step toward a larger public standard is adding
-multi-hop contradictions and model-generated explanations.
+distractor controls. Version `0.3.0` adds a multi-hop track for linked-evidence
+contradictions. The next step toward a larger public standard is adding
+model-generated explanation review and third-party submissions.

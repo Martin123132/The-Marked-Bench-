@@ -1,6 +1,6 @@
 {
   "benchmark_family": "contradiction-detection",
-  "default_track": "contradiction-adversarial",
+  "default_track": "contradiction-multihop",
   "governance_docs": [
     "docs/ADOPTION_GUIDE.md",
     "docs/BENCHMARK_STANDARD.md",
@@ -8,6 +8,7 @@
     "docs/TECHNICAL_NOTE.md",
     "docs/GOVERNANCE.md",
     "docs/RELEASE_NOTES_v0_2_0.md",
+    "docs/RELEASE_NOTES_v0_3_0.md",
     "docs/SUBMISSION_GUIDE.md",
     "docs/RELEASE_CHECKLIST.md"
   ],
@@ -254,6 +255,121 @@
       "suite_manifest": "suites/marked_bench_contradiction_adversarial_v0_2_0.json",
       "suite_version": "0.2.0",
       "title": "Adversarial contradiction detection"
+    },
+    {
+      "baseline_reports": [
+        "baselines/contradiction_engine_multihop_v0_3_0.json",
+        "baselines/always_none_multihop_v0_3_0.json"
+      ],
+      "case_count": 18,
+      "commands": {
+        "build_leaderboard": "marked-bench --build-leaderboard REPORT... --leaderboard-output leaderboard/leaderboard_multihop_v0_3_0.json",
+        "create_submission": "marked-bench --create-submission submissions/multihop-system.json --submission-report artifacts/multihop-system-report.json --system-version VERSION --submitter SUBMITTER",
+        "export_prediction_template": "marked-bench --suite contradiction-multihop --export-prediction-template artifacts/multihop-predictions.jsonl",
+        "run_baseline": "marked-bench --suite contradiction-multihop --report artifacts/multihop-report.json",
+        "score_predictions": "marked-bench --suite contradiction-multihop --score-predictions artifacts/multihop-predictions.jsonl --system-name SYSTEM --report artifacts/multihop-system-report.json",
+        "validate_report": "marked-bench --validate-report REPORT",
+        "validate_submission": "marked-bench --validate-submission SUBMISSION"
+      },
+      "labels": [
+        "direct_negation",
+        "property_mismatch",
+        "definitional_violation",
+        "universal_counterexample",
+        "temporal_conflict",
+        "none"
+      ],
+      "leaderboard": "leaderboard/leaderboard_multihop_v0_3_0.json",
+      "name": "contradiction-multihop",
+      "prediction_schema": "marked_bench.contradiction-predictions.v1",
+      "profile": {
+        "capability_counts": {
+          "benchmark_metadata_control": 1,
+          "classification_definition": 1,
+          "collection_counterexample": 1,
+          "definition_boundary_control": 1,
+          "inherited_property_control": 1,
+          "inherited_unit_conflict": 1,
+          "membership_polarity": 1,
+          "non_universal_membership_control": 1,
+          "permission_chain_control": 1,
+          "policy_chain_negation": 1,
+          "privacy_chain_control": 1,
+          "profile_numeric_link": 1,
+          "replacement_date_conflict": 1,
+          "state_inheritance_control": 1,
+          "temporal_membership_scope": 1,
+          "temporal_transition_control": 1,
+          "threshold_definition": 1,
+          "universal_membership_counterexample": 1
+        },
+        "case_count": 18,
+        "contradiction_case_count": 10,
+        "control_case_count": 8,
+        "difficulty_counts": {
+          "expert": 4,
+          "hard": 7,
+          "medium": 7
+        },
+        "domain_counts": {
+          "ai_safety": 2,
+          "benchmarking": 2,
+          "compliance": 1,
+          "data_governance": 2,
+          "governance": 1,
+          "infrastructure": 1,
+          "measurement": 2,
+          "operations": 3,
+          "privacy": 1,
+          "records": 1,
+          "research": 1,
+          "security": 1
+        },
+        "label_counts": {
+          "definitional_violation": 2,
+          "direct_negation": 2,
+          "none": 8,
+          "property_mismatch": 2,
+          "temporal_conflict": 2,
+          "universal_counterexample": 2
+        },
+        "quality_gates": {
+          "min_cases": 15,
+          "requires_all_contradiction_labels": true,
+          "requires_control_cases": true,
+          "requires_multiple_difficulties": true,
+          "requires_multiple_domains": true
+        },
+        "tag_counts": {
+          "api": 1,
+          "benchmarking": 2,
+          "control": 8,
+          "data": 2,
+          "definition": 3,
+          "entity_linking": 7,
+          "multihop": 18,
+          "negation": 2,
+          "numeric": 2,
+          "operations": 1,
+          "policy": 2,
+          "privacy": 1,
+          "property": 2,
+          "quantifier": 1,
+          "safety": 1,
+          "security": 1,
+          "state": 1,
+          "temporal": 3,
+          "unit": 1,
+          "universal": 3
+        }
+      },
+      "report_schema": "marked_bench.contradiction-benchmark-report.v1",
+      "status": "active",
+      "suite_hash": "07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f",
+      "suite_id": "marked-bench-contradiction-multihop",
+      "suite_manifest": "suites/marked_bench_contradiction_multihop_v0_3_0.json",
+      "suite_version": "0.3.0",
+      "title": "Multi-hop contradiction detection"
     }
   ]
 }

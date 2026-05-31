@@ -17,10 +17,12 @@ from marked_bench.benchmark_submission import (
 from marked_bench.benchmark_technical_note import build_technical_note
 from marked_bench.contradiction.benchmark_suite import (
     ADVERSARIAL_SUITE_ID,
+    MULTIHOP_SUITE_ID,
     PREDICTION_SCHEMA,
     REPORT_SCHEMA,
     SUITE_ID,
     build_adversarial_suite,
+    build_multihop_suite,
     build_prediction_template,
     build_suite_hash,
     build_suite_manifest,
@@ -77,6 +79,26 @@ class BenchmarkSuiteTests(unittest.TestCase):
             {case.expected for case in cases if case.expected != ContradictionType.NONE},
         )
 
+    def test_multihop_suite_has_stable_public_shape(self) -> None:
+        cases = build_multihop_suite()
+        ids = [case.id for case in cases]
+
+        self.assertGreaterEqual(len(cases), 15)
+        self.assertEqual(len(ids), len(set(ids)))
+        self.assertTrue(all(case.id.startswith("marked-hop-") for case in cases))
+        self.assertTrue(any(case.expected == ContradictionType.NONE for case in cases))
+        self.assertTrue(all("multihop" in case.tags for case in cases))
+        self.assertEqual(
+            {
+                ContradictionType.DIRECT_NEGATION,
+                ContradictionType.PROPERTY_MISMATCH,
+                ContradictionType.DEFINITIONAL_VIOLATION,
+                ContradictionType.UNIVERSAL_COUNTEREXAMPLE,
+                ContradictionType.TEMPORAL_CONFLICT,
+            },
+            {case.expected for case in cases if case.expected != ContradictionType.NONE},
+        )
+
     def test_checked_in_suite_manifest_matches_code(self) -> None:
         root = Path(__file__).resolve().parent.parent
         path = root / "suites" / "marked_bench_contradiction_standard_v0_1_0.json"
@@ -101,6 +123,17 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertEqual(manifest["suite_hash"], build_suite_hash(suite="contradiction-adversarial"))
         self.assertEqual(manifest["profile"], build_suite_profile(suite="contradiction-adversarial"))
 
+    def test_checked_in_multihop_suite_manifest_matches_code(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        path = root / "suites" / "marked_bench_contradiction_multihop_v0_3_0.json"
+
+        manifest = json.loads(path.read_text(encoding="utf-8"))
+
+        self.assertEqual(manifest, build_suite_manifest(suite="contradiction-multihop"))
+        self.assertEqual(manifest["suite_id"], MULTIHOP_SUITE_ID)
+        self.assertEqual(manifest["suite_hash"], build_suite_hash(suite="contradiction-multihop"))
+        self.assertEqual(manifest["profile"], build_suite_profile(suite="contradiction-multihop"))
+
     def test_checked_in_benchmark_registry_matches_code(self) -> None:
         root = Path(__file__).resolve().parent.parent
         path = root / "benchmark_registry.json"
@@ -109,13 +142,17 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
         self.assertEqual(registry, build_benchmark_registry())
         self.assertEqual(registry["schema"], REGISTRY_SCHEMA)
-        self.assertEqual([track["name"] for track in registry["tracks"]], ["contradiction", "contradiction-adversarial"])
+        self.assertEqual(
+            [track["name"] for track in registry["tracks"]],
+            ["contradiction", "contradiction-adversarial", "contradiction-multihop"],
+        )
+        self.assertEqual(registry["default_track"], "contradiction-multihop")
         self.assertIn("profile", registry["tracks"][0])
         self.assertEqual(registry["tracks"][0]["profile"], build_suite_profile())
 
     def test_checked_in_release_manifest_matches_current_artifacts(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "releases" / "marked_bench_release_v0_2_0.json"
+        path = root / "releases" / "marked_bench_release_v0_3_0.json"
 
         manifest = json.loads(path.read_text(encoding="utf-8"))
 
@@ -133,6 +170,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertEqual(note, build_technical_note(root))
         self.assertIn("## Public Tracks", note)
         self.assertIn("marked-bench-contradiction-adversarial", note)
+        self.assertIn("marked-bench-contradiction-multihop", note)
         self.assertIn("## Baseline Evidence", note)
 
     def test_default_engine_report_is_json_serializable(self) -> None:
@@ -162,6 +200,14 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertEqual(report["suite_id"], ADVERSARIAL_SUITE_ID)
         self.assertLess(report["overall_score"], 80.0)
         self.assertGreater(report["overall_score"], 25.0)
+        self.assertGreater(len(report["failures"]), 0)
+        self.assertTrue(validate_benchmark_report(report)["valid"])
+
+    def test_default_engine_does_not_solve_multihop_suite(self) -> None:
+        report = evaluate_standard_suite(suite="contradiction-multihop")
+
+        self.assertEqual(report["suite_id"], MULTIHOP_SUITE_ID)
+        self.assertLess(report["overall_score"], 70.0)
         self.assertGreater(len(report["failures"]), 0)
         self.assertTrue(validate_benchmark_report(report)["valid"])
 
@@ -499,6 +545,19 @@ class BenchmarkSuiteTests(unittest.TestCase):
         finally:
             shutil.rmtree(output_root, ignore_errors=True)
 
+    def test_cli_exports_multihop_suite_manifest_inside_repo(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        path = output_root / "multihop-suite.json"
+
+        try:
+            with redirect_stdout(StringIO()):
+                benchmark_main(["--suite", "contradiction-multihop", "--export-suite", str(path)])
+
+            manifest = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(manifest, build_suite_manifest(suite="contradiction-multihop"))
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
     def test_cli_exports_benchmark_registry_inside_repo(self) -> None:
         output_root = Path(__file__).resolve().parent.parent / ".test-output"
         path = output_root / "benchmark-registry.json"
@@ -558,6 +617,28 @@ class BenchmarkSuiteTests(unittest.TestCase):
             self.assertEqual(len(records), len(build_adversarial_suite()))
             self.assertIn("case_id", records[0])
             self.assertIn("predicted", records[0])
+            self.assertNotIn("expected", records[0])
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_cli_exports_multihop_prediction_template_inside_repo(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        path = output_root / "multihop-predictions.jsonl"
+
+        try:
+            with redirect_stdout(StringIO()):
+                benchmark_main(
+                    [
+                        "--suite",
+                        "contradiction-multihop",
+                        "--export-prediction-template",
+                        str(path),
+                    ]
+                )
+
+            records = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
+            self.assertEqual(len(records), len(build_multihop_suite()))
+            self.assertTrue(records[0]["case_id"].startswith("marked-hop-"))
             self.assertNotIn("expected", records[0])
         finally:
             shutil.rmtree(output_root, ignore_errors=True)
@@ -682,6 +763,20 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertEqual(strong["overall_score"], 52.37)
         self.assertEqual(weak["overall_score"], 8.82)
 
+    def test_checked_in_multihop_baseline_reports_validate(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        strong_path = root / "baselines" / "contradiction_engine_multihop_v0_3_0.json"
+        weak_path = root / "baselines" / "always_none_multihop_v0_3_0.json"
+
+        strong = json.loads(strong_path.read_text(encoding="utf-8"))
+        weak = json.loads(weak_path.read_text(encoding="utf-8"))
+
+        self.assertTrue(validate_benchmark_report(strong)["valid"])
+        self.assertTrue(validate_benchmark_report(weak)["valid"])
+        self.assertEqual(strong["suite_id"], MULTIHOP_SUITE_ID)
+        self.assertLess(strong["overall_score"], 70.0)
+        self.assertEqual(weak["system_name"], "AlwaysNoneDetector")
+
     def test_checked_in_leaderboard_matches_baseline_reports(self) -> None:
         root = Path(__file__).resolve().parent.parent
         weak_path = root / "baselines" / "always_none_v0_1_0.json"
@@ -714,6 +809,25 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertEqual(leaderboard["entries"][0]["system_name"], "ContradictionEngine")
         self.assertEqual(leaderboard["entries"][0]["rank"], 1)
         self.assertEqual(leaderboard["entries"][0]["overall_score"], 52.37)
+        self.assertEqual(leaderboard["entries"][0]["report_sha256"], report_sha256(strong_path))
+        self.assertEqual(leaderboard["entries"][1]["system_name"], "AlwaysNoneDetector")
+        self.assertEqual(leaderboard["entries"][1]["rank"], 2)
+        self.assertEqual(leaderboard["entries"][1]["report_sha256"], report_sha256(weak_path))
+
+    def test_checked_in_multihop_leaderboard_matches_baseline_reports(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        weak_path = root / "baselines" / "always_none_multihop_v0_3_0.json"
+        strong_path = root / "baselines" / "contradiction_engine_multihop_v0_3_0.json"
+        leaderboard_path = root / "leaderboard" / "leaderboard_multihop_v0_3_0.json"
+
+        leaderboard = json.loads(leaderboard_path.read_text(encoding="utf-8"))
+
+        self.assertEqual(leaderboard["schema"], LEADERBOARD_SCHEMA)
+        self.assertEqual(leaderboard["entry_count"], 2)
+        self.assertEqual(leaderboard["rejected_count"], 0)
+        self.assertEqual(leaderboard["entries"][0]["system_name"], "ContradictionEngine")
+        self.assertEqual(leaderboard["entries"][0]["rank"], 1)
+        self.assertEqual(leaderboard["entries"][0]["suite_id"], MULTIHOP_SUITE_ID)
         self.assertEqual(leaderboard["entries"][0]["report_sha256"], report_sha256(strong_path))
         self.assertEqual(leaderboard["entries"][1]["system_name"], "AlwaysNoneDetector")
         self.assertEqual(leaderboard["entries"][1]["rank"], 2)

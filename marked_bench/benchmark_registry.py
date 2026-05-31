@@ -80,6 +80,38 @@ _TRACKS: tuple[Mapping[str, Any], ...] = (
             ),
         },
     },
+    {
+        "name": "contradiction-multihop",
+        "title": "Multi-hop contradiction detection",
+        "status": "active",
+        "suite": "contradiction-multihop",
+        "suite_manifest": "suites/marked_bench_contradiction_multihop_v0_3_0.json",
+        "leaderboard": "leaderboard/leaderboard_multihop_v0_3_0.json",
+        "baseline_reports": [
+            "baselines/contradiction_engine_multihop_v0_3_0.json",
+            "baselines/always_none_multihop_v0_3_0.json",
+        ],
+        "commands": {
+            "run_baseline": (
+                "marked-bench --suite contradiction-multihop "
+                "--report artifacts/multihop-report.json"
+            ),
+            "export_prediction_template": (
+                "marked-bench --suite contradiction-multihop "
+                "--export-prediction-template artifacts/multihop-predictions.jsonl"
+            ),
+            "score_predictions": (
+                "marked-bench --suite contradiction-multihop "
+                "--score-predictions artifacts/multihop-predictions.jsonl "
+                "--system-name SYSTEM --report artifacts/multihop-system-report.json"
+            ),
+            "create_submission": (
+                "marked-bench --create-submission submissions/multihop-system.json "
+                "--submission-report artifacts/multihop-system-report.json "
+                "--system-version VERSION --submitter SUBMITTER"
+            ),
+        },
+    },
 )
 
 
@@ -90,7 +122,7 @@ def build_benchmark_registry() -> dict[str, Any]:
         "schema": REGISTRY_SCHEMA,
         "project": "The Marked Bench",
         "benchmark_family": "contradiction-detection",
-        "default_track": "contradiction-adversarial",
+        "default_track": "contradiction-multihop",
         "schemas": {
             "benchmark_registry": "schemas/benchmark_registry.schema.json",
             "suite_manifest": "schemas/contradiction_suite_manifest.schema.json",
@@ -114,6 +146,7 @@ def build_benchmark_registry() -> dict[str, Any]:
             "docs/TECHNICAL_NOTE.md",
             "docs/GOVERNANCE.md",
             "docs/RELEASE_NOTES_v0_2_0.md",
+            "docs/RELEASE_NOTES_v0_3_0.md",
             "docs/SUBMISSION_GUIDE.md",
             "docs/RELEASE_CHECKLIST.md",
         ],

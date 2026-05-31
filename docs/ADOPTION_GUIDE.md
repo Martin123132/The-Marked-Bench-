@@ -13,11 +13,11 @@ Every published result should pin:
 - report schema
 - exact report JSON
 
-The current default public track is `contradiction-adversarial`:
+The current default public track is `contradiction-multihop`:
 
 ```bash
-marked-bench --suite contradiction-adversarial --export-prediction-template predictions.jsonl
-marked-bench --suite contradiction-adversarial --score-predictions predictions.jsonl --system-name "your-system" --report your-system-report.json
+marked-bench --suite contradiction-multihop --export-prediction-template predictions.jsonl
+marked-bench --suite contradiction-multihop --score-predictions predictions.jsonl --system-name "your-system" --report your-system-report.json
 marked-bench --validate-report your-system-report.json
 ```
 

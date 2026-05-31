@@ -25,6 +25,7 @@ from marked_bench.contradiction.benchmark_suite import (  # noqa: E402
 SUITE_MANIFESTS = {
     Path("suites/marked_bench_contradiction_standard_v0_1_0.json"): "contradiction",
     Path("suites/marked_bench_contradiction_adversarial_v0_2_0.json"): "contradiction-adversarial",
+    Path("suites/marked_bench_contradiction_multihop_v0_3_0.json"): "contradiction-multihop",
 }
 
 BASELINE_REPORTS = [
@@ -32,6 +33,8 @@ BASELINE_REPORTS = [
     Path("baselines/always_none_v0_1_0.json"),
     Path("baselines/contradiction_engine_adversarial_v0_2_0.json"),
     Path("baselines/always_none_adversarial_v0_2_0.json"),
+    Path("baselines/contradiction_engine_multihop_v0_3_0.json"),
+    Path("baselines/always_none_multihop_v0_3_0.json"),
 ]
 
 LEADERBOARDS = {
@@ -43,10 +46,14 @@ LEADERBOARDS = {
         Path("baselines/always_none_adversarial_v0_2_0.json"),
         Path("baselines/contradiction_engine_adversarial_v0_2_0.json"),
     ],
+    Path("leaderboard/leaderboard_multihop_v0_3_0.json"): [
+        Path("baselines/always_none_multihop_v0_3_0.json"),
+        Path("baselines/contradiction_engine_multihop_v0_3_0.json"),
+    ],
 }
 
 BENCHMARK_REGISTRY = Path("benchmark_registry.json")
-RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_2_0.json")
+RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_0.json")
 
 REQUIRED_PUBLIC_FILES = [
     Path("README.md"),
@@ -60,6 +67,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("docs/GOVERNANCE.md"),
     Path("docs/RELEASE_CHECKLIST.md"),
     Path("docs/RELEASE_NOTES_v0_2_0.md"),
+    Path("docs/RELEASE_NOTES_v0_3_0.md"),
     Path("docs/ROADMAP.md"),
     Path("docs/SUBMISSION_GUIDE.md"),
     Path("schemas/benchmark_registry.schema.json"),

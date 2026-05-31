@@ -1,0 +1,384 @@
+{
+  "case_count": 18,
+  "cases": [
+    {
+      "capability": "policy_chain_negation",
+      "difficulty": "expert",
+      "domain": "governance",
+      "expected": "direct_negation",
+      "id": "marked-hop-direct-001",
+      "note": "The policy must be linked through Atlas before permitted/forbidden conflict is visible.",
+      "premise": "Service Orion inherits export policy P7 from platform Atlas. Policy P7 says research-user exports are permitted.",
+      "query": "The Orion release note says research-user exports are forbidden.",
+      "tags": [
+        "multihop",
+        "negation",
+        "policy",
+        "entity_linking"
+      ]
+    },
+    {
+      "capability": "membership_polarity",
+      "difficulty": "hard",
+      "domain": "security",
+      "expected": "direct_negation",
+      "id": "marked-hop-direct-002",
+      "note": "The key inherits vault validity before the valid/invalid conflict appears.",
+      "premise": "Key K-42 belongs to vault Alpha. Vault Alpha records say resident keys remained valid during the audit window.",
+      "query": "The audit summary says K-42 was invalid during the audit window.",
+      "tags": [
+        "multihop",
+        "negation",
+        "security",
+        "entity_linking"
+      ]
+    },
+    {
+      "capability": "permission_chain_control",
+      "difficulty": "medium",
+      "domain": "research",
+      "expected": "none",
+      "id": "marked-hop-direct-003",
+      "note": "The query is licensed by the inherited approval profile.",
+      "premise": "Experiment E5 used approval profile Gold. Approval profile Gold allows offline review for internal replication studies.",
+      "query": "Experiment E5 used offline review for an internal replication study.",
+      "tags": [
+        "multihop",
+        "control",
+        "policy"
+      ]
+    },
+    {
+      "capability": "profile_numeric_link",
+      "difficulty": "hard",
+      "domain": "benchmarking",
+      "expected": "property_mismatch",
+      "id": "marked-hop-property-001",
+      "note": "The numeric mismatch depends on linking Delta to profile C8.",
+      "premise": "Model Delta was evaluated under context profile C8. Context profile C8 has a maximum context window of 8,192 tokens.",
+      "query": "The Delta evaluation used a 32,768 token maximum context window under profile C8.",
+      "tags": [
+        "multihop",
+        "numeric",
+        "benchmarking",
+        "entity_linking"
+      ]
+    },
+    {
+      "capability": "inherited_unit_conflict",
+      "difficulty": "hard",
+      "domain": "measurement",
+      "expected": "property_mismatch",
+      "id": "marked-hop-property-002",
+      "note": "The unit mismatch is inherited through the shipment assignment.",
+      "premise": "Crate C17 is assigned to shipment Route-9. The Route-9 manifest lists assigned crate mass as 12 kg after calibration.",
+      "query": "Crate C17 has calibrated mass 12 lb on Route-9.",
+      "tags": [
+        "multihop",
+        "unit",
+        "property",
+        "entity_linking"
+      ]
+    },
+    {
+      "capability": "inherited_property_control",
+      "difficulty": "medium",
+      "domain": "measurement",
+      "expected": "none",
+      "id": "marked-hop-property-003",
+      "note": "The inherited quantity and unit match.",
+      "premise": "Crate C17 is assigned to shipment Route-9. The Route-9 manifest lists assigned crate mass as 12 kg after calibration.",
+      "query": "Crate C17 has calibrated mass 12 kg on Route-9.",
+      "tags": [
+        "multihop",
+        "control",
+        "property"
+      ]
+    },
+    {
+      "capability": "classification_definition",
+      "difficulty": "expert",
+      "domain": "data_governance",
+      "expected": "definitional_violation",
+      "id": "marked-hop-definition-001",
+      "note": "The definition must be applied to the classified dataset.",
+      "premise": "A sealed record is defined as a record that cannot be modified after publication. Dataset Ledger-4 is classified as a sealed record.",
+      "query": "Ledger-4 was modified after publication while remaining a sealed record.",
+      "tags": [
+        "multihop",
+        "definition",
+        "data"
+      ]
+    },
+    {
+      "capability": "threshold_definition",
+      "difficulty": "hard",
+      "domain": "compliance",
+      "expected": "definitional_violation",
+      "id": "marked-hop-definition-002",
+      "note": "The release fails the quorum definition through the reviewer count.",
+      "premise": "Quorum approval requires at least three independent reviewers. Release R19 had exactly two independent reviewers.",
+      "query": "Release R19 satisfied quorum approval.",
+      "tags": [
+        "multihop",
+        "definition",
+        "numeric"
+      ]
+    },
+    {
+      "capability": "definition_boundary_control",
+      "difficulty": "medium",
+      "domain": "data_governance",
+      "expected": "none",
+      "id": "marked-hop-definition-003",
+      "note": "A metadata note does not necessarily modify sealed content.",
+      "premise": "A sealed record is defined as a record whose content cannot be modified after publication. Dataset Ledger-4 received an external citation note.",
+      "query": "Ledger-4 received a citation note without changing its sealed content.",
+      "tags": [
+        "multihop",
+        "control",
+        "definition"
+      ]
+    },
+    {
+      "capability": "universal_membership_counterexample",
+      "difficulty": "expert",
+      "domain": "ai_safety",
+      "expected": "universal_counterexample",
+      "id": "marked-hop-universal-001",
+      "note": "The universal rule applies through Nova's high-risk membership.",
+      "premise": "Every high-risk deployment must pass red-team review before production. System Nova is a high-risk deployment.",
+      "query": "System Nova entered production without red-team review.",
+      "tags": [
+        "multihop",
+        "universal",
+        "safety",
+        "entity_linking"
+      ]
+    },
+    {
+      "capability": "collection_counterexample",
+      "difficulty": "hard",
+      "domain": "records",
+      "expected": "universal_counterexample",
+      "id": "marked-hop-universal-002",
+      "note": "A specific collection member counters the universal immutability claim.",
+      "premise": "All records in collection Beta are immutable after publication. Record B7 belongs to collection Beta.",
+      "query": "Record B7 was edited after publication.",
+      "tags": [
+        "multihop",
+        "universal",
+        "data",
+        "entity_linking"
+      ]
+    },
+    {
+      "capability": "non_universal_membership_control",
+      "difficulty": "hard",
+      "domain": "ai_safety",
+      "expected": "none",
+      "id": "marked-hop-universal-003",
+      "note": "Most allows exceptions, so the Nova fact is not a contradiction.",
+      "premise": "Most high-risk deployments pass red-team review before production. System Nova is a high-risk deployment.",
+      "query": "System Nova entered production without red-team review.",
+      "tags": [
+        "multihop",
+        "control",
+        "universal",
+        "quantifier"
+      ]
+    },
+    {
+      "capability": "temporal_membership_scope",
+      "difficulty": "expert",
+      "domain": "operations",
+      "expected": "temporal_conflict",
+      "id": "marked-hop-temporal-001",
+      "note": "The launch date and fleet membership put Sable inside the manual-approval interval.",
+      "premise": "Fleet Delta used manual approval for all launches from 2019 through 2022. System Sable launched under Fleet Delta in 2020.",
+      "query": "System Sable used automated approval at launch.",
+      "tags": [
+        "multihop",
+        "temporal",
+        "operations",
+        "entity_linking"
+      ]
+    },
+    {
+      "capability": "replacement_date_conflict",
+      "difficulty": "hard",
+      "domain": "infrastructure",
+      "expected": "temporal_conflict",
+      "id": "marked-hop-temporal-002",
+      "note": "The request date falls after the replacement date.",
+      "premise": "API v2 replaced API v1 as the current endpoint on 2021-06-01. Request Q was processed on 2022-02-10.",
+      "query": "Request Q used API v1 as the current endpoint.",
+      "tags": [
+        "multihop",
+        "temporal",
+        "api"
+      ]
+    },
+    {
+      "capability": "temporal_transition_control",
+      "difficulty": "medium",
+      "domain": "operations",
+      "expected": "none",
+      "id": "marked-hop-temporal-003",
+      "note": "The query falls after the documented transition.",
+      "premise": "Fleet Delta used manual approval for launches from 2019 through 2022. Fleet Delta adopted automated approval for launches in 2023.",
+      "query": "A Fleet Delta launch used automated approval in 2023.",
+      "tags": [
+        "multihop",
+        "control",
+        "temporal"
+      ]
+    },
+    {
+      "capability": "benchmark_metadata_control",
+      "difficulty": "medium",
+      "domain": "benchmarking",
+      "expected": "none",
+      "id": "marked-hop-control-001",
+      "note": "The query summarizes the linked registry and adoption-guide facts.",
+      "premise": "The benchmark registry points the default track to contradiction-multihop. The adoption guide tells users to pin suite ID, version, and hash.",
+      "query": "The adoption guide asks users to pin reproducibility metadata for the default track.",
+      "tags": [
+        "multihop",
+        "control",
+        "benchmarking"
+      ]
+    },
+    {
+      "capability": "state_inheritance_control",
+      "difficulty": "medium",
+      "domain": "operations",
+      "expected": "none",
+      "id": "marked-hop-control-002",
+      "note": "The query follows from the unresolved-ticket rule.",
+      "premise": "The incident board says ticket T11 is unresolved. The handoff note says unresolved tickets remain open until an owner closes them.",
+      "query": "Ticket T11 remains open until an owner closes it.",
+      "tags": [
+        "multihop",
+        "control",
+        "state"
+      ]
+    },
+    {
+      "capability": "privacy_chain_control",
+      "difficulty": "medium",
+      "domain": "privacy",
+      "expected": "none",
+      "id": "marked-hop-control-003",
+      "note": "The query follows from the dataset classification and privacy policy.",
+      "premise": "Dataset Echo is a public synthetic dataset. The privacy policy says public synthetic datasets contain no private user records.",
+      "query": "Dataset Echo contains no private user records.",
+      "tags": [
+        "multihop",
+        "control",
+        "privacy"
+      ]
+    }
+  ],
+  "labels": [
+    "direct_negation",
+    "property_mismatch",
+    "definitional_violation",
+    "universal_counterexample",
+    "temporal_conflict",
+    "none"
+  ],
+  "profile": {
+    "capability_counts": {
+      "benchmark_metadata_control": 1,
+      "classification_definition": 1,
+      "collection_counterexample": 1,
+      "definition_boundary_control": 1,
+      "inherited_property_control": 1,
+      "inherited_unit_conflict": 1,
+      "membership_polarity": 1,
+      "non_universal_membership_control": 1,
+      "permission_chain_control": 1,
+      "policy_chain_negation": 1,
+      "privacy_chain_control": 1,
+      "profile_numeric_link": 1,
+      "replacement_date_conflict": 1,
+      "state_inheritance_control": 1,
+      "temporal_membership_scope": 1,
+      "temporal_transition_control": 1,
+      "threshold_definition": 1,
+      "universal_membership_counterexample": 1
+    },
+    "case_count": 18,
+    "contradiction_case_count": 10,
+    "control_case_count": 8,
+    "difficulty_counts": {
+      "expert": 4,
+      "hard": 7,
+      "medium": 7
+    },
+    "domain_counts": {
+      "ai_safety": 2,
+      "benchmarking": 2,
+      "compliance": 1,
+      "data_governance": 2,
+      "governance": 1,
+      "infrastructure": 1,
+      "measurement": 2,
+      "operations": 3,
+      "privacy": 1,
+      "records": 1,
+      "research": 1,
+      "security": 1
+    },
+    "label_counts": {
+      "definitional_violation": 2,
+      "direct_negation": 2,
+      "none": 8,
+      "property_mismatch": 2,
+      "temporal_conflict": 2,
+      "universal_counterexample": 2
+    },
+    "quality_gates": {
+      "min_cases": 15,
+      "requires_all_contradiction_labels": true,
+      "requires_control_cases": true,
+      "requires_multiple_difficulties": true,
+      "requires_multiple_domains": true
+    },
+    "tag_counts": {
+      "api": 1,
+      "benchmarking": 2,
+      "control": 8,
+      "data": 2,
+      "definition": 3,
+      "entity_linking": 7,
+      "multihop": 18,
+      "negation": 2,
+      "numeric": 2,
+      "operations": 1,
+      "policy": 2,
+      "privacy": 1,
+      "property": 2,
+      "quantifier": 1,
+      "safety": 1,
+      "security": 1,
+      "state": 1,
+      "temporal": 3,
+      "unit": 1,
+      "universal": 3
+    }
+  },
+  "schema": "marked_bench.contradiction-suite-manifest.v1",
+  "scoring": {
+    "overall_score_weights": {
+      "binary_detection_f1": 0.2,
+      "contradiction_macro_f1": 0.45,
+      "coverage_index": 0.1,
+      "type_accuracy": 0.25
+    }
+  },
+  "suite_hash": "07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f",
+  "suite_id": "marked-bench-contradiction-multihop",
+  "suite_version": "0.3.0"
+}

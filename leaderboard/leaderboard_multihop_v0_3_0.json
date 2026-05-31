@@ -1,0 +1,49 @@
+{
+  "created_at": 1780224899.948,
+  "entries": [
+    {
+      "calibration_brier_score": 0.505,
+      "calibration_ece": 0.516667,
+      "case_count": 18,
+      "contradiction_macro_f1": 0.133333,
+      "coverage_index": 0.2,
+      "detection_f1": 0.181818,
+      "failure_count": 9,
+      "overall_score": 24.14,
+      "rank": 1,
+      "report_path": "baselines/contradiction_engine_multihop_v0_3_0.json",
+      "report_schema": "marked_bench.contradiction-benchmark-report.v1",
+      "report_sha256": "60b8456da86efcf678c3b19453e8f1069c93dedbc4a40e185efdfca030010301",
+      "suite_hash": "07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f",
+      "suite_id": "marked-bench-contradiction-multihop",
+      "suite_version": "0.3.0",
+      "system_name": "ContradictionEngine",
+      "type_accuracy": 0.5,
+      "validation_warnings": []
+    },
+    {
+      "calibration_brier_score": 0.555556,
+      "calibration_ece": 0.555556,
+      "case_count": 18,
+      "contradiction_macro_f1": 0.0,
+      "coverage_index": 0.0,
+      "detection_f1": 0.0,
+      "failure_count": 10,
+      "overall_score": 11.11,
+      "rank": 2,
+      "report_path": "baselines/always_none_multihop_v0_3_0.json",
+      "report_schema": "marked_bench.contradiction-benchmark-report.v1",
+      "report_sha256": "78384c7a6bcc52dbee2d23b9b90e43b0273305228faaf8aeeba239d6dd955008",
+      "suite_hash": "07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f",
+      "suite_id": "marked-bench-contradiction-multihop",
+      "suite_version": "0.3.0",
+      "system_name": "AlwaysNoneDetector",
+      "type_accuracy": 0.444444,
+      "validation_warnings": []
+    }
+  ],
+  "entry_count": 2,
+  "rejected": [],
+  "rejected_count": 0,
+  "schema": "marked_bench.benchmark-leaderboard.v1"
+}

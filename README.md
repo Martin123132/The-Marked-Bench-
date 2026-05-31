@@ -15,9 +15,11 @@ leaderboard entry.
 | --- | --- | ---: | --- | ---: |
 | Foundation | `marked-bench-contradiction-standard` | `0.1.0` | Compact canonical contradiction suite | `100.00` |
 | Adversarial | `marked-bench-contradiction-adversarial` | `0.2.0` | Longer-context, implicit, and trap cases | `52.37` |
+| Multi-hop | `marked-bench-contradiction-multihop` | `0.3.0` | Linked-evidence contradiction cases | `24.14` |
 
 The adversarial track is intentionally not solved by the packaged symbolic
-baseline. It gives future symbolic, neural, and hybrid systems room to improve.
+baseline. The multi-hop track is the default target for future symbolic,
+neural, retrieval-augmented, and hybrid systems.
 
 ## Install
 
@@ -41,6 +43,12 @@ Adversarial track:
 marked-bench --suite contradiction-adversarial --report artifacts/adversarial-report.json
 ```
 
+Multi-hop track:
+
+```bash
+marked-bench --suite contradiction-multihop --report artifacts/multihop-report.json
+```
+
 Validate a report before publication:
 
 ```bash
@@ -56,7 +64,7 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public artifact SHA-256 digests:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_2_0.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_3_0.json
 ```
 
 Export the generated technical note:
@@ -102,6 +110,12 @@ Adversarial leaderboard:
 marked-bench --build-leaderboard baselines/always_none_adversarial_v0_2_0.json baselines/contradiction_engine_adversarial_v0_2_0.json --leaderboard-output leaderboard/leaderboard_adversarial_v0_2_0.json
 ```
 
+Multi-hop leaderboard:
+
+```bash
+marked-bench --build-leaderboard baselines/always_none_multihop_v0_3_0.json baselines/contradiction_engine_multihop_v0_3_0.json --leaderboard-output leaderboard/leaderboard_multihop_v0_3_0.json
+```
+
 ## Checked-In Evidence
 
 - Benchmark registry: `benchmark_registry.json`
@@ -116,6 +130,7 @@ marked-bench --build-leaderboard baselines/always_none_adversarial_v0_2_0.json b
 - Submission guide: `docs/SUBMISSION_GUIDE.md`
 - Adoption guide: `docs/ADOPTION_GUIDE.md`
 - Release notes: `docs/RELEASE_NOTES_v0_2_0.md`
+- Current release notes: `docs/RELEASE_NOTES_v0_3_0.md`
 
 ## Quality Gates
 

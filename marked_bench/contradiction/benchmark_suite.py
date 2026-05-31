@@ -21,6 +21,8 @@ SUITE_ID = "marked-bench-contradiction-standard"
 SUITE_VERSION = "0.1.0"
 ADVERSARIAL_SUITE_ID = "marked-bench-contradiction-adversarial"
 ADVERSARIAL_SUITE_VERSION = "0.2.0"
+MULTIHOP_SUITE_ID = "marked-bench-contradiction-multihop"
+MULTIHOP_SUITE_VERSION = "0.3.0"
 REPORT_SCHEMA = "marked_bench.contradiction-benchmark-report.v1"
 VALIDATION_SCHEMA = "marked_bench.contradiction-benchmark-validation.v1"
 SUITE_MANIFEST_SCHEMA = "marked_bench.contradiction-suite-manifest.v1"
@@ -457,10 +459,276 @@ def build_adversarial_suite() -> list[BenchmarkCase]:
     ]
 
 
+def build_multihop_suite() -> list[BenchmarkCase]:
+    """Return the multi-hop contradiction track for The Marked Bench.
+
+    Cases in this track require linking two or more facts before the expected
+    contradiction label is visible. This makes the track a better target for
+    retrieval-augmented, graph, and long-context reasoning systems.
+    """
+
+    return [
+        BenchmarkCase(
+            "marked-hop-direct-001",
+            (
+                "Service Orion inherits export policy P7 from platform Atlas. "
+                "Policy P7 says research-user exports are permitted."
+            ),
+            "The Orion release note says research-user exports are forbidden.",
+            ContradictionType.DIRECT_NEGATION,
+            "governance",
+            "expert",
+            "policy_chain_negation",
+            ("multihop", "negation", "policy", "entity_linking"),
+            "The policy must be linked through Atlas before permitted/forbidden conflict is visible.",
+        ),
+        BenchmarkCase(
+            "marked-hop-direct-002",
+            (
+                "Key K-42 belongs to vault Alpha. Vault Alpha records say resident keys "
+                "remained valid during the audit window."
+            ),
+            "The audit summary says K-42 was invalid during the audit window.",
+            ContradictionType.DIRECT_NEGATION,
+            "security",
+            "hard",
+            "membership_polarity",
+            ("multihop", "negation", "security", "entity_linking"),
+            "The key inherits vault validity before the valid/invalid conflict appears.",
+        ),
+        BenchmarkCase(
+            "marked-hop-direct-003",
+            (
+                "Experiment E5 used approval profile Gold. Approval profile Gold allows "
+                "offline review for internal replication studies."
+            ),
+            "Experiment E5 used offline review for an internal replication study.",
+            ContradictionType.NONE,
+            "research",
+            "medium",
+            "permission_chain_control",
+            ("multihop", "control", "policy"),
+            "The query is licensed by the inherited approval profile.",
+        ),
+        BenchmarkCase(
+            "marked-hop-property-001",
+            (
+                "Model Delta was evaluated under context profile C8. Context profile C8 "
+                "has a maximum context window of 8,192 tokens."
+            ),
+            "The Delta evaluation used a 32,768 token maximum context window under profile C8.",
+            ContradictionType.PROPERTY_MISMATCH,
+            "benchmarking",
+            "hard",
+            "profile_numeric_link",
+            ("multihop", "numeric", "benchmarking", "entity_linking"),
+            "The numeric mismatch depends on linking Delta to profile C8.",
+        ),
+        BenchmarkCase(
+            "marked-hop-property-002",
+            (
+                "Crate C17 is assigned to shipment Route-9. The Route-9 manifest lists "
+                "assigned crate mass as 12 kg after calibration."
+            ),
+            "Crate C17 has calibrated mass 12 lb on Route-9.",
+            ContradictionType.PROPERTY_MISMATCH,
+            "measurement",
+            "hard",
+            "inherited_unit_conflict",
+            ("multihop", "unit", "property", "entity_linking"),
+            "The unit mismatch is inherited through the shipment assignment.",
+        ),
+        BenchmarkCase(
+            "marked-hop-property-003",
+            (
+                "Crate C17 is assigned to shipment Route-9. The Route-9 manifest lists "
+                "assigned crate mass as 12 kg after calibration."
+            ),
+            "Crate C17 has calibrated mass 12 kg on Route-9.",
+            ContradictionType.NONE,
+            "measurement",
+            "medium",
+            "inherited_property_control",
+            ("multihop", "control", "property"),
+            "The inherited quantity and unit match.",
+        ),
+        BenchmarkCase(
+            "marked-hop-definition-001",
+            (
+                "A sealed record is defined as a record that cannot be modified after "
+                "publication. Dataset Ledger-4 is classified as a sealed record."
+            ),
+            "Ledger-4 was modified after publication while remaining a sealed record.",
+            ContradictionType.DEFINITIONAL_VIOLATION,
+            "data_governance",
+            "expert",
+            "classification_definition",
+            ("multihop", "definition", "data"),
+            "The definition must be applied to the classified dataset.",
+        ),
+        BenchmarkCase(
+            "marked-hop-definition-002",
+            (
+                "Quorum approval requires at least three independent reviewers. Release R19 "
+                "had exactly two independent reviewers."
+            ),
+            "Release R19 satisfied quorum approval.",
+            ContradictionType.DEFINITIONAL_VIOLATION,
+            "compliance",
+            "hard",
+            "threshold_definition",
+            ("multihop", "definition", "numeric"),
+            "The release fails the quorum definition through the reviewer count.",
+        ),
+        BenchmarkCase(
+            "marked-hop-definition-003",
+            (
+                "A sealed record is defined as a record whose content cannot be modified "
+                "after publication. Dataset Ledger-4 received an external citation note."
+            ),
+            "Ledger-4 received a citation note without changing its sealed content.",
+            ContradictionType.NONE,
+            "data_governance",
+            "medium",
+            "definition_boundary_control",
+            ("multihop", "control", "definition"),
+            "A metadata note does not necessarily modify sealed content.",
+        ),
+        BenchmarkCase(
+            "marked-hop-universal-001",
+            (
+                "Every high-risk deployment must pass red-team review before production. "
+                "System Nova is a high-risk deployment."
+            ),
+            "System Nova entered production without red-team review.",
+            ContradictionType.UNIVERSAL_COUNTEREXAMPLE,
+            "ai_safety",
+            "expert",
+            "universal_membership_counterexample",
+            ("multihop", "universal", "safety", "entity_linking"),
+            "The universal rule applies through Nova's high-risk membership.",
+        ),
+        BenchmarkCase(
+            "marked-hop-universal-002",
+            (
+                "All records in collection Beta are immutable after publication. Record B7 "
+                "belongs to collection Beta."
+            ),
+            "Record B7 was edited after publication.",
+            ContradictionType.UNIVERSAL_COUNTEREXAMPLE,
+            "records",
+            "hard",
+            "collection_counterexample",
+            ("multihop", "universal", "data", "entity_linking"),
+            "A specific collection member counters the universal immutability claim.",
+        ),
+        BenchmarkCase(
+            "marked-hop-universal-003",
+            (
+                "Most high-risk deployments pass red-team review before production. "
+                "System Nova is a high-risk deployment."
+            ),
+            "System Nova entered production without red-team review.",
+            ContradictionType.NONE,
+            "ai_safety",
+            "hard",
+            "non_universal_membership_control",
+            ("multihop", "control", "universal", "quantifier"),
+            "Most allows exceptions, so the Nova fact is not a contradiction.",
+        ),
+        BenchmarkCase(
+            "marked-hop-temporal-001",
+            (
+                "Fleet Delta used manual approval for all launches from 2019 through 2022. "
+                "System Sable launched under Fleet Delta in 2020."
+            ),
+            "System Sable used automated approval at launch.",
+            ContradictionType.TEMPORAL_CONFLICT,
+            "operations",
+            "expert",
+            "temporal_membership_scope",
+            ("multihop", "temporal", "operations", "entity_linking"),
+            "The launch date and fleet membership put Sable inside the manual-approval interval.",
+        ),
+        BenchmarkCase(
+            "marked-hop-temporal-002",
+            (
+                "API v2 replaced API v1 as the current endpoint on 2021-06-01. Request Q "
+                "was processed on 2022-02-10."
+            ),
+            "Request Q used API v1 as the current endpoint.",
+            ContradictionType.TEMPORAL_CONFLICT,
+            "infrastructure",
+            "hard",
+            "replacement_date_conflict",
+            ("multihop", "temporal", "api"),
+            "The request date falls after the replacement date.",
+        ),
+        BenchmarkCase(
+            "marked-hop-temporal-003",
+            (
+                "Fleet Delta used manual approval for launches from 2019 through 2022. "
+                "Fleet Delta adopted automated approval for launches in 2023."
+            ),
+            "A Fleet Delta launch used automated approval in 2023.",
+            ContradictionType.NONE,
+            "operations",
+            "medium",
+            "temporal_transition_control",
+            ("multihop", "control", "temporal"),
+            "The query falls after the documented transition.",
+        ),
+        BenchmarkCase(
+            "marked-hop-control-001",
+            (
+                "The benchmark registry points the default track to contradiction-multihop. "
+                "The adoption guide tells users to pin suite ID, version, and hash."
+            ),
+            "The adoption guide asks users to pin reproducibility metadata for the default track.",
+            ContradictionType.NONE,
+            "benchmarking",
+            "medium",
+            "benchmark_metadata_control",
+            ("multihop", "control", "benchmarking"),
+            "The query summarizes the linked registry and adoption-guide facts.",
+        ),
+        BenchmarkCase(
+            "marked-hop-control-002",
+            (
+                "The incident board says ticket T11 is unresolved. The handoff note says "
+                "unresolved tickets remain open until an owner closes them."
+            ),
+            "Ticket T11 remains open until an owner closes it.",
+            ContradictionType.NONE,
+            "operations",
+            "medium",
+            "state_inheritance_control",
+            ("multihop", "control", "state"),
+            "The query follows from the unresolved-ticket rule.",
+        ),
+        BenchmarkCase(
+            "marked-hop-control-003",
+            (
+                "Dataset Echo is a public synthetic dataset. The privacy policy says public "
+                "synthetic datasets contain no private user records."
+            ),
+            "Dataset Echo contains no private user records.",
+            ContradictionType.NONE,
+            "privacy",
+            "medium",
+            "privacy_chain_control",
+            ("multihop", "control", "privacy"),
+            "The query follows from the dataset classification and privacy policy.",
+        ),
+    ]
+
+
 def build_suite(suite: str = DEFAULT_SUITE) -> list[BenchmarkCase]:
     """Return cases for a named public suite."""
 
     key = _suite_key(suite)
+    if key == "multihop":
+        return build_multihop_suite()
     if key == "adversarial":
         return build_adversarial_suite()
     return build_standard_suite()
@@ -1036,6 +1304,8 @@ def _case_hash_record(case: BenchmarkCase | Mapping[str, Any]) -> dict[str, Any]
 
 def _suite_identity(suite: str) -> tuple[str, str]:
     key = _suite_key(suite)
+    if key == "multihop":
+        return MULTIHOP_SUITE_ID, MULTIHOP_SUITE_VERSION
     if key == "adversarial":
         return ADVERSARIAL_SUITE_ID, ADVERSARIAL_SUITE_VERSION
     return SUITE_ID, SUITE_VERSION
@@ -1052,6 +1322,11 @@ def _suite_key(suite: str) -> str:
         "adversarial": "adversarial",
         ADVERSARIAL_SUITE_ID: "adversarial",
         f"{ADVERSARIAL_SUITE_ID}:{ADVERSARIAL_SUITE_VERSION}": "adversarial",
+        "contradiction-multihop": "multihop",
+        "multi-hop": "multihop",
+        "multihop": "multihop",
+        MULTIHOP_SUITE_ID: "multihop",
+        f"{MULTIHOP_SUITE_ID}:{MULTIHOP_SUITE_VERSION}": "multihop",
     }
     if normalized not in aliases:
         raise ValueError(f"Unknown benchmark suite: {suite!r}")
@@ -1298,6 +1573,8 @@ __all__ = [
     "ADVERSARIAL_SUITE_ID",
     "ADVERSARIAL_SUITE_VERSION",
     "DEFAULT_SUITE",
+    "MULTIHOP_SUITE_ID",
+    "MULTIHOP_SUITE_VERSION",
     "PREDICTION_SCHEMA",
     "REPORT_SCHEMA",
     "SUITE_ID",
@@ -1305,6 +1582,7 @@ __all__ = [
     "SUITE_VERSION",
     "VALIDATION_SCHEMA",
     "build_adversarial_suite",
+    "build_multihop_suite",
     "build_prediction_template",
     "build_suite",
     "build_suite_hash",

@@ -7,7 +7,7 @@ published release can be audited or reproduced from the repository contents.
 Generate the current manifest with:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_2_0.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_3_0.json
 ```
 
 Do not edit release manifests by hand; regenerate them after changing public

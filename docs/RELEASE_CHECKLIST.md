@@ -16,7 +16,7 @@ git diff --check
 - Baseline reports are updated under `baselines/`.
 - Leaderboard snapshots are updated under `leaderboard/`.
 - `benchmark_registry.json` matches the code-generated registry.
-- `releases/marked_bench_release_v0_2_0.json` matches the current public
+- `releases/marked_bench_release_v0_3_0.json` matches the current public
   artifact hashes.
 - `docs/TECHNICAL_NOTE.md` matches generated benchmark evidence.
 - JSON schemas still match the public report shapes.
@@ -26,6 +26,7 @@ git diff --check
 - Documentation mentions every public track and suite version.
 - `docs/BENCHMARK_CARD.md` reflects current scope and limitations.
 - `docs/RELEASE_NOTES_v0_2_0.md` summarizes the public release.
+- `docs/RELEASE_NOTES_v0_3_0.md` summarizes the public release.
 - `docs/ADOPTION_GUIDE.md` explains how external systems should submit results.
 
 ## Release Notes
