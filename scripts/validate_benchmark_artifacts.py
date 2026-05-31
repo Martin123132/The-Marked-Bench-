@@ -12,6 +12,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+from marked_bench.benchmark_adoption import load_adoption_packet, validate_adoption_packet  # noqa: E402
 from marked_bench.benchmark_conformance import load_conformance_report, validate_conformance_report  # noqa: E402
 from marked_bench.benchmark_leaderboard import build_leaderboard  # noqa: E402
 from marked_bench.benchmark_release import build_release_manifest  # noqa: E402
@@ -72,10 +73,13 @@ CHECKED_SUBMISSION_PACKETS = [
 ]
 
 BENCHMARK_REGISTRY = Path("benchmark_registry.json")
-RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_8.json")
-CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_3_8.json")
+RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_9.json")
+CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_3_9.json")
+ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_3_9.json")
 
 REQUIRED_PUBLIC_FILES = [
+    Path("adoption/README.md"),
+    ADOPTION_PACKET,
     Path("README.md"),
     BENCHMARK_REGISTRY,
     RELEASE_MANIFEST,
@@ -84,6 +88,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("CITATION.cff"),
     Path("docs/BENCHMARK_CARD.md"),
     Path("docs/ADOPTION_GUIDE.md"),
+    Path("docs/ANNOUNCEMENT_PACKAGE.md"),
     Path("docs/BENCHMARK_STANDARD.md"),
     Path("docs/GOVERNANCE.md"),
     Path("docs/SUBMISSION_REVIEW_RUBRIC.md"),
@@ -98,6 +103,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("docs/RELEASE_NOTES_v0_3_6.md"),
     Path("docs/RELEASE_NOTES_v0_3_7.md"),
     Path("docs/RELEASE_NOTES_v0_3_8.md"),
+    Path("docs/RELEASE_NOTES_v0_3_9.md"),
     Path("docs/ROADMAP.md"),
     Path("docs/SUBMISSION_GUIDE.md"),
     Path("schemas/benchmark_registry.schema.json"),
@@ -111,6 +117,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("schemas/release_manifest.schema.json"),
     Path("schemas/conformance_report.schema.json"),
     Path("schemas/result_card.schema.json"),
+    Path("schemas/adoption_packet.schema.json"),
     Path("conformance/README.md"),
     Path("releases/README.md"),
     Path("submissions/README.md"),
@@ -138,6 +145,7 @@ SCHEMA_CONFORMANCE_FILES = {
     Path("submissions/example_external_jsonl/example_external_submission_bundle.json"): Path("schemas/submission_bundle.schema.json"),
     Path("submissions/example_external_jsonl/example_external_submission_review.json"): Path("schemas/submission_review.schema.json"),
     Path("submissions/example_external_jsonl/example_external_result_card.json"): Path("schemas/result_card.schema.json"),
+    ADOPTION_PACKET: Path("schemas/adoption_packet.schema.json"),
 }
 
 
@@ -151,6 +159,7 @@ def main() -> int:
         _validate_technical_note(errors)
         _validate_release_manifest(errors)
         _validate_conformance_report(errors)
+        _validate_adoption_packet(errors)
         _validate_suite_manifests(errors)
         _validate_baseline_reports(errors)
         _validate_leaderboards(errors)
@@ -309,6 +318,17 @@ def _validate_conformance_report(errors: list[str]) -> None:
     validation = validate_conformance_report(report, root=ROOT)
     if not validation["valid"]:
         errors.append(f"{CONFORMANCE_REPORT}: conformance validation failed: {validation['errors']}")
+
+
+def _validate_adoption_packet(errors: list[str]) -> None:
+    try:
+        packet = load_adoption_packet(ADOPTION_PACKET)
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        errors.append(f"{ADOPTION_PACKET}: could not load adoption packet: {exc}")
+        return
+    validation = validate_adoption_packet(packet, root=ROOT)
+    if not validation["valid"]:
+        errors.append(f"{ADOPTION_PACKET}: adoption packet validation failed: {validation['errors']}")
 
 
 def _validate_baseline_reports(errors: list[str]) -> None:

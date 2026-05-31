@@ -64,7 +64,7 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public artifact SHA-256 digests:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_3_8.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_3_9.json
 ```
 
 Export the generated technical note:
@@ -76,8 +76,15 @@ marked-bench --export-technical-note docs/TECHNICAL_NOTE.md
 Export and validate the machine-readable conformance report:
 
 ```bash
-marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_3_8.json
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_8.json
+marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_3_9.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_9.json
+```
+
+Export and validate the machine-readable adoption packet for external users:
+
+```bash
+marked-bench --export-adoption-packet adoption/marked_bench_adoption_packet_v0_3_9.json
+marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_3_9.json
 ```
 
 ## Score External Systems
@@ -156,7 +163,8 @@ marked-bench --build-leaderboard baselines/always_none_multihop_v0_3_0.json base
 
 - Benchmark registry: `benchmark_registry.json`
 - Release manifest: `releases/`
-- Conformance report: `conformance/marked_bench_conformance_v0_3_8.json`
+- Conformance report: `conformance/marked_bench_conformance_v0_3_9.json`
+- Adoption packet: `adoption/marked_bench_adoption_packet_v0_3_9.json`
 - Suite manifests and coverage profiles: `suites/`
 - Baseline reports: `baselines/`
 - Leaderboard snapshots: `leaderboard/`
@@ -168,11 +176,13 @@ marked-bench --build-leaderboard baselines/always_none_multihop_v0_3_0.json base
 - Submission bundle schema: `schemas/submission_bundle.schema.json`
 - Submission review schema: `schemas/submission_review.schema.json`
 - Result card schema: `schemas/result_card.schema.json`
+- Adoption packet schema: `schemas/adoption_packet.schema.json`
 - Checked external submission packet: `submissions/example_external_jsonl/`
 - Adoption guide: `docs/ADOPTION_GUIDE.md`
+- Announcement package: `docs/ANNOUNCEMENT_PACKAGE.md`
 - Submission review rubric: `docs/SUBMISSION_REVIEW_RUBRIC.md`
 - Release notes: `docs/RELEASE_NOTES_v0_2_0.md`
-- Current release notes: `docs/RELEASE_NOTES_v0_3_8.md`
+- Current release notes: `docs/RELEASE_NOTES_v0_3_9.md`
 
 ## Quality Gates
 
@@ -195,11 +205,14 @@ Checked result cards are validated against their referenced reports, bundles,
 reviews, hashes, and standard publication claims.
 The conformance report provides one machine-readable pass/fail artifact for
 the full release package.
+The adoption packet is validated so external handoff, announcement, and
+citation material stays pinned to the same release evidence.
 
 ## Package Layout
 
 ```text
 marked_bench/
+    benchmark_adoption.py         # Adoption packet export/validation
     benchmark_cli.py              # CLI runner
     benchmark_leaderboard.py      # Validated leaderboard builder
     examples/

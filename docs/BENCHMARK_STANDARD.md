@@ -75,6 +75,7 @@ The source tree also includes JSON schemas for public infrastructure:
 - `schemas/release_manifest.schema.json`
 - `schemas/result_card.schema.json`
 - `schemas/conformance_report.schema.json`
+- `schemas/adoption_packet.schema.json`
 
 For a high-level summary of intended use, non-use, limitations, and
 reproducibility expectations, see `docs/BENCHMARK_CARD.md`.
@@ -144,14 +145,21 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public benchmark artifacts by SHA-256:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_3_8.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_3_9.json
 ```
 
 Export and validate the release conformance report:
 
 ```bash
-marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_3_8.json
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_8.json
+marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_3_9.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_9.json
+```
+
+Export and validate the external adoption packet:
+
+```bash
+marked-bench --export-adoption-packet adoption/marked_bench_adoption_packet_v0_3_9.json
+marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_3_9.json
 ```
 
 Run the harder adversarial track:
@@ -280,5 +288,7 @@ conformance checks for checked public artifacts. Release `0.3.6` adds a
 checked external-style submission packet and validates it as part of the normal
 artifact gate. Release `0.3.7` adds a machine-readable conformance report for
 the full release package. Release `0.3.8` adds standardized result cards for
-publishable benchmark results. The next step toward a larger public standard is
-real third-party submissions and human review evidence.
+publishable benchmark results. Release `0.3.9` adds a checked adoption packet
+and announcement package so external users have a validated public handoff. The
+next step toward a larger public standard is real third-party submissions and
+human review evidence.

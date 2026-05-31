@@ -6,6 +6,11 @@ import argparse
 import json
 from pathlib import Path
 
+from marked_bench.benchmark_adoption import (
+    load_adoption_packet,
+    validate_adoption_packet,
+    write_adoption_packet,
+)
 from marked_bench.benchmark_conformance import (
     load_conformance_report,
     validate_conformance_report,
@@ -151,6 +156,18 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         metavar="PATH",
         help="Release manifest path to use when exporting a conformance report.",
+    )
+    parser.add_argument(
+        "--export-adoption-packet",
+        default=None,
+        metavar="PATH",
+        help="Write a machine-readable external adoption packet and exit.",
+    )
+    parser.add_argument(
+        "--validate-adoption-packet",
+        default=None,
+        metavar="PATH",
+        help="Validate an external adoption packet against the current release evidence.",
     )
     parser.add_argument(
         "--bundle-submission",
@@ -399,6 +416,22 @@ def main(argv: list[str] | None = None) -> None:
             raise SystemExit(1)
         return
 
+    if args.validate_adoption_packet:
+        validation = validate_adoption_packet(load_adoption_packet(args.validate_adoption_packet))
+        if args.json:
+            print(json.dumps(validation, indent=2, sort_keys=True))
+        else:
+            print(f"Adoption packet validation: {'pass' if validation['valid'] else 'fail'}")
+            print(f"Release: {validation['summary']['release_id']}")
+            print(f"Default track: {validation['summary']['default_track']}")
+            print(f"Tracks: {validation['summary']['track_count']}")
+            print(f"Required artifacts: {validation['summary']['required_artifact_count']}")
+            print(f"Errors: {len(validation['errors'])}")
+            print(f"Warnings: {len(validation['warnings'])}")
+        if not validation["valid"]:
+            raise SystemExit(1)
+        return
+
     if args.create_submission:
         if not args.submission_report:
             parser.error("--create-submission requires --submission-report")
@@ -505,6 +538,11 @@ def main(argv: list[str] | None = None) -> None:
             kwargs["release_manifest_path"] = args.conformance_release_manifest
         write_conformance_report(args.export_conformance_report, **kwargs)
         print(f"Conformance report: {args.export_conformance_report}")
+        return
+
+    if args.export_adoption_packet:
+        write_adoption_packet(args.export_adoption_packet)
+        print(f"Adoption packet: {args.export_adoption_packet}")
         return
 
     if args.export_prediction_template:

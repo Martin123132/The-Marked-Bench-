@@ -136,6 +136,7 @@ def build_benchmark_registry() -> dict[str, Any]:
             "release_manifest": "schemas/release_manifest.schema.json",
             "conformance_report": "schemas/conformance_report.schema.json",
             "result_card": "schemas/result_card.schema.json",
+            "adoption_packet": "schemas/adoption_packet.schema.json",
         },
         "schema_ids": {
             "suite_manifest": SUITE_MANIFEST_SCHEMA,
@@ -147,9 +148,11 @@ def build_benchmark_registry() -> dict[str, Any]:
             "submission_review": REVIEW_SCHEMA,
             "conformance_report": "marked_bench.conformance-report.v1",
             "result_card": "marked_bench.result-card.v1",
+            "adoption_packet": "marked_bench.adoption-packet.v1",
         },
         "governance_docs": [
             "docs/ADOPTION_GUIDE.md",
+            "docs/ANNOUNCEMENT_PACKAGE.md",
             "docs/BENCHMARK_STANDARD.md",
             "docs/BENCHMARK_CARD.md",
             "docs/TECHNICAL_NOTE.md",
@@ -165,6 +168,7 @@ def build_benchmark_registry() -> dict[str, Any]:
             "docs/RELEASE_NOTES_v0_3_6.md",
             "docs/RELEASE_NOTES_v0_3_7.md",
             "docs/RELEASE_NOTES_v0_3_8.md",
+            "docs/RELEASE_NOTES_v0_3_9.md",
             "docs/SUBMISSION_GUIDE.md",
             "docs/RELEASE_CHECKLIST.md",
         ],
@@ -209,6 +213,11 @@ def _build_track(track: Mapping[str, Any]) -> dict[str, Any]:
                 "--bundle-submission SUBMISSION"
             ),
             "validate_submission_bundle": "marked-bench --validate-submission-bundle BUNDLE",
+            "create_result_card": (
+                "marked-bench --create-result-card CARD "
+                "--result-report REPORT --result-bundle BUNDLE"
+            ),
+            "validate_result_card": "marked-bench --validate-result-card CARD",
             "build_leaderboard": (
                 "marked-bench --build-leaderboard REPORT... "
                 f"--leaderboard-output {track['leaderboard']}"

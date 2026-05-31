@@ -62,8 +62,9 @@ This note summarizes the checked benchmark release artifacts for `contradiction-
 - Leaderboard submissions must pass `marked-bench --validate-submission SUBMISSION`.
 - Published results should include `marked-bench --validate-result-card CARD`.
 - Accepted entries should pass `marked-bench --validate-submission-review REVIEW`.
-- Public release artifacts are pinned by `releases/marked_bench_release_v0_3_8.json`.
-- Release conformance is captured by `conformance/marked_bench_conformance_v0_3_8.json`.
+- Public release artifacts are pinned by `releases/marked_bench_release_v0_3_9.json`.
+- Release conformance is captured by `conformance/marked_bench_conformance_v0_3_9.json`.
+- External adoption metadata is captured by `adoption/marked_bench_adoption_packet_v0_3_9.json`.
 - Repository artifact drift is checked by `python scripts/validate_benchmark_artifacts.py`.
 
 ## Current Limitations

@@ -7,6 +7,11 @@ import os
 from pathlib import Path
 from typing import Any, Mapping
 
+from marked_bench.benchmark_adoption import (
+    DEFAULT_ADOPTION_PACKET,
+    load_adoption_packet,
+    validate_adoption_packet,
+)
 from marked_bench.benchmark_leaderboard import build_leaderboard
 from marked_bench.benchmark_registry import build_benchmark_registry
 from marked_bench.benchmark_release import build_release_manifest
@@ -23,8 +28,8 @@ from marked_bench.schema_validation import load_json_schema, validate_json_file,
 
 
 CONFORMANCE_REPORT_SCHEMA = "marked_bench.conformance-report.v1"
-DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_3_8.json")
-DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_8.json")
+DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_3_9.json")
+DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_9.json")
 
 SUITE_MANIFESTS = {
     Path("suites/marked_bench_contradiction_standard_v0_1_0.json"): "contradiction",
@@ -94,6 +99,7 @@ SCHEMA_CONFORMANCE_FILES = {
     Path("submissions/example_external_jsonl/example_external_result_card.json"): Path(
         "schemas/result_card.schema.json"
     ),
+    DEFAULT_ADOPTION_PACKET: Path("schemas/adoption_packet.schema.json"),
 }
 
 
@@ -118,6 +124,7 @@ def build_conformance_report(
         _check_prediction_templates(root_path),
         _check_submission_packets(root_path),
         _check_result_cards(root_path),
+        _check_adoption_packet(root_path),
     ]
     failures = [f"{check['name']}: {error}" for check in checks for error in check["errors"]]
     track_count = len(registry.get("tracks", [])) if isinstance(registry, dict) else 0
@@ -377,6 +384,19 @@ def _check_result_cards(root: Path) -> dict[str, Any]:
         if not validation["valid"]:
             errors.append(f"{path}: result card validation failed: {validation['errors']}")
     return _check("checked_result_cards_valid", errors, {"card_count": len(CHECKED_RESULT_CARDS)})
+
+
+def _check_adoption_packet(root: Path) -> dict[str, Any]:
+    errors: list[str] = []
+    try:
+        packet = load_adoption_packet(root / DEFAULT_ADOPTION_PACKET)
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        errors.append(f"{DEFAULT_ADOPTION_PACKET}: could not load adoption packet: {exc}")
+    else:
+        validation = validate_adoption_packet(packet, root=root)
+        if not validation["valid"]:
+            errors.append(f"{DEFAULT_ADOPTION_PACKET}: adoption packet validation failed: {validation['errors']}")
+    return _check("adoption_packet_valid", errors, {"path": DEFAULT_ADOPTION_PACKET.as_posix()})
 
 
 def _schema_file_errors(root: Path, path: Path, schema_path: Path) -> list[str]:

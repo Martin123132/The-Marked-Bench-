@@ -16,9 +16,11 @@ git diff --check
 - Baseline reports are updated under `baselines/`.
 - Leaderboard snapshots are updated under `leaderboard/`.
 - `benchmark_registry.json` matches the code-generated registry.
-- `releases/marked_bench_release_v0_3_8.json` matches the current public
+- `releases/marked_bench_release_v0_3_9.json` matches the current public
   artifact hashes.
-- `conformance/marked_bench_conformance_v0_3_8.json` validates against the
+- `conformance/marked_bench_conformance_v0_3_9.json` validates against the
+  current release evidence.
+- `adoption/marked_bench_adoption_packet_v0_3_9.json` validates against the
   current release evidence.
 - `docs/TECHNICAL_NOTE.md` matches generated benchmark evidence.
 - JSON schemas still match the public report shapes.
@@ -32,6 +34,7 @@ git diff --check
   bundle.
 - Result card create and validate commands run against at least one valid
   report/bundle/review packet.
+- Adoption packet export and validate commands run against the current release.
 - Checked submission packets under `submissions/` validate end-to-end.
 - Documentation mentions every public track and suite version.
 - `docs/BENCHMARK_CARD.md` reflects current scope and limitations.
@@ -45,7 +48,10 @@ git diff --check
 - `docs/RELEASE_NOTES_v0_3_6.md` summarizes the public release.
 - `docs/RELEASE_NOTES_v0_3_7.md` summarizes the public release.
 - `docs/RELEASE_NOTES_v0_3_8.md` summarizes the public release.
+- `docs/RELEASE_NOTES_v0_3_9.md` summarizes the public release.
 - `docs/ADOPTION_GUIDE.md` explains how external systems should submit results.
+- `docs/ANNOUNCEMENT_PACKAGE.md` explains how external users should cite,
+  mirror, announce, and validate the release.
 - `docs/SUBMISSION_REVIEW_RUBRIC.md` explains how reviewers should score
   submissions before leaderboard acceptance.
 
@@ -68,4 +74,4 @@ Record:
 - Confirm GitHub Actions pass.
 - Create a version tag.
 - Attach or link suite manifests, baseline reports, leaderboard snapshots,
-  conformance report, and checked result-card examples.
+  conformance report, adoption packet, and checked result-card examples.

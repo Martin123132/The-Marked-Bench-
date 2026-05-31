@@ -30,13 +30,14 @@ This roadmap keeps the benchmark moving toward a credible public standard.
   prediction evidence.
 - Machine-readable release conformance report.
 - Standard result cards for publishable benchmark results.
+- Checked adoption packet and announcement package for external public uptake.
 
 ## Next
 
 - Add more non-contradiction distractor controls.
 - Add real third-party report submissions and review evidence.
-- Draft an external announcement package around the release notes and generated
-  technical note.
+- Add signed or independently mirrored release evidence once external adopters
+  exist.
 
 ## Later
 

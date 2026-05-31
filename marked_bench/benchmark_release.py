@@ -11,7 +11,7 @@ from marked_bench.benchmark_registry import REGISTRY_SCHEMA, build_benchmark_reg
 
 
 RELEASE_MANIFEST_SCHEMA = "marked_bench.benchmark-release-manifest.v1"
-RELEASE_ID = "marked-bench-contradiction-standard-release-0.3.8"
+RELEASE_ID = "marked-bench-contradiction-standard-release-0.3.9"
 
 ROOT_PUBLIC_ARTIFACTS = (
     "README.md",
@@ -23,6 +23,7 @@ ROOT_PUBLIC_ARTIFACTS = (
 
 BENCHMARK_SOURCE_ARTIFACTS = (
     "setup.py",
+    "marked_bench/benchmark_adoption.py",
     "marked_bench/benchmark_conformance.py",
     "marked_bench/benchmark_cli.py",
     "marked_bench/benchmark_leaderboard.py",
@@ -43,6 +44,7 @@ BENCHMARK_SOURCE_ARTIFACTS = (
 )
 
 SUPPORT_ARTIFACTS = (
+    "adoption/README.md",
     "baselines/README.md",
     "conformance/README.md",
     "leaderboard/README.md",
@@ -65,7 +67,11 @@ SUBMISSION_EXAMPLE_ARTIFACTS = (
 )
 
 CONFORMANCE_ARTIFACTS = (
-    "conformance/marked_bench_conformance_v0_3_8.json",
+    "conformance/marked_bench_conformance_v0_3_9.json",
+)
+
+ADOPTION_ARTIFACTS = (
+    "adoption/marked_bench_adoption_packet_v0_3_9.json",
 )
 
 
@@ -134,6 +140,7 @@ def _collect_artifacts(registry: dict[str, Any]) -> list[tuple[str, str]]:
     artifacts.extend((path, "source") for path in BENCHMARK_SOURCE_ARTIFACTS)
     artifacts.extend((path, "support") for path in SUPPORT_ARTIFACTS)
     artifacts.extend((path, "conformance") for path in CONFORMANCE_ARTIFACTS)
+    artifacts.extend((path, "adoption") for path in ADOPTION_ARTIFACTS)
     artifacts.extend((path, "submission-example") for path in SUBMISSION_EXAMPLE_ARTIFACTS)
     artifacts.extend((path, "schema") for path in registry["schemas"].values())
     artifacts.extend((path, "governance") for path in registry["governance_docs"])

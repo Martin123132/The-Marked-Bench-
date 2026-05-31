@@ -43,7 +43,8 @@
         "submission_bundle",
         "submission_review",
         "conformance_report",
-        "result_card"
+        "result_card",
+        "adoption_packet"
       ],
       "additionalProperties": {
         "type": "string"
@@ -155,6 +156,8 @@
             "validate_submission",
             "create_submission_bundle",
             "validate_submission_bundle",
+            "create_result_card",
+            "validate_result_card",
             "build_leaderboard"
           ],
           "additionalProperties": {

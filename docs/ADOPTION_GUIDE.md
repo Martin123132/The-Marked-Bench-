@@ -68,12 +68,16 @@ Before adopting or mirroring a release package, validate the checked
 conformance report:
 
 ```bash
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_8.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_9.json
+marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_3_9.json
 ```
 
 The conformance report is the single machine-readable pass/fail artifact for
 registry, manifest, schema, leaderboard, baseline, prediction-template, and
 checked-submission consistency.
+The adoption packet is the machine-readable handoff file for external users:
+it names the release, default track, public artifacts, validation commands,
+submission channels, and citation requirements.
 
 ## Cite The Benchmark
 
