@@ -9,7 +9,7 @@ and how it is recorded.
 The checked ledger is:
 
 ```text
-adoption/third_party_evidence_ledger_v0_4_5.json
+adoption/third_party_evidence_ledger_v0_4_6.json
 ```
 
 The current ledger may be empty. An empty ledger is valid and means no external
@@ -18,7 +18,7 @@ adoption evidence has been accepted for the release yet.
 Validate it with:
 
 ```bash
-marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_5.json
+marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_6.json
 ```
 
 ## What Counts

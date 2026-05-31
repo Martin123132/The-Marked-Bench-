@@ -11,7 +11,7 @@ from marked_bench.benchmark_registry import REGISTRY_SCHEMA, build_benchmark_reg
 
 
 RELEASE_MANIFEST_SCHEMA = "marked_bench.benchmark-release-manifest.v1"
-RELEASE_ID = "marked-bench-contradiction-standard-release-0.4.5"
+RELEASE_ID = "marked-bench-contradiction-standard-release-0.4.6"
 
 ROOT_PUBLIC_ARTIFACTS = (
     "README.md",
@@ -36,6 +36,7 @@ BENCHMARK_SOURCE_ARTIFACTS = (
     "marked_bench/benchmark_review.py",
     "marked_bench/benchmark_result_card.py",
     "marked_bench/benchmark_scoring_compatibility.py",
+    "marked_bench/benchmark_scoring_spec.py",
     "marked_bench/benchmark_standard_profile.py",
     "marked_bench/benchmark_submission.py",
     "marked_bench/benchmark_technical_note.py",
@@ -56,6 +57,7 @@ SUPPORT_ARTIFACTS = (
     "adoption/implementation_kit/result_claim_badge.md",
     "baselines/README.md",
     "conformance/README.md",
+    "docs/SCORING_SPEC.md",
     "leaderboard/README.md",
     "releases/README.md",
     "standard/README.md",
@@ -86,18 +88,19 @@ SUBMISSION_EXAMPLE_ARTIFACTS = (
 )
 
 CONFORMANCE_ARTIFACTS = (
-    "conformance/marked_bench_conformance_v0_4_5.json",
+    "conformance/marked_bench_conformance_v0_4_6.json",
 )
 
 ADOPTION_ARTIFACTS = (
-    "adoption/marked_bench_adoption_packet_v0_4_5.json",
-    "adoption/third_party_evidence_ledger_v0_4_5.json",
-    "adoption/marked_bench_implementation_kit_v0_4_5.json",
+    "adoption/marked_bench_adoption_packet_v0_4_6.json",
+    "adoption/third_party_evidence_ledger_v0_4_6.json",
+    "adoption/marked_bench_implementation_kit_v0_4_6.json",
 )
 
 STANDARD_ARTIFACTS = (
-    "standard/marked_bench_standard_profile_v0_4_5.json",
-    "standard/marked_bench_scoring_compatibility_v0_4_5.json",
+    "standard/marked_bench_standard_profile_v0_4_6.json",
+    "standard/marked_bench_scoring_compatibility_v0_4_6.json",
+    "standard/marked_bench_scoring_spec_v0_4_6.json",
 )
 
 

@@ -40,6 +40,13 @@ from marked_bench.benchmark_scoring_compatibility import (
     load_scoring_compatibility_profile,
     validate_scoring_compatibility_profile,
 )
+from marked_bench.benchmark_scoring_spec import (
+    DEFAULT_SCORING_SPEC,
+    DEFAULT_SCORING_SPEC_DOC,
+    build_scoring_spec_markdown,
+    load_scoring_spec,
+    validate_scoring_spec,
+)
 from marked_bench.contradiction.benchmark_suite import (
     build_prediction_template,
     build_suite_manifest,
@@ -50,8 +57,8 @@ from marked_bench.schema_validation import load_json_schema, validate_json_file,
 
 
 CONFORMANCE_REPORT_SCHEMA = "marked_bench.conformance-report.v1"
-DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_5.json")
-DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_5.json")
+DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_6.json")
+DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_6.json")
 
 SUITE_MANIFESTS = {
     Path("suites/marked_bench_contradiction_standard_v0_1_0.json"): "contradiction",
@@ -146,6 +153,7 @@ SCHEMA_CONFORMANCE_FILES = {
     DEFAULT_IMPLEMENTATION_KIT: Path("schemas/implementation_kit.schema.json"),
     DEFAULT_STANDARD_PROFILE: Path("schemas/standard_profile.schema.json"),
     DEFAULT_SCORING_COMPATIBILITY_PROFILE: Path("schemas/scoring_compatibility.schema.json"),
+    DEFAULT_SCORING_SPEC: Path("schemas/scoring_spec.schema.json"),
 }
 
 
@@ -177,6 +185,7 @@ def build_conformance_report(
         _check_implementation_kit(root_path),
         _check_standard_profile(root_path),
         _check_scoring_compatibility_profile(root_path),
+        _check_scoring_spec(root_path),
     ]
     failures = [f"{check['name']}: {error}" for check in checks for error in check["errors"]]
     track_count = len(registry.get("tracks", [])) if isinstance(registry, dict) else 0
@@ -535,6 +544,33 @@ def _check_scoring_compatibility_profile(root: Path) -> dict[str, Any]:
         "scoring_compatibility_valid",
         errors,
         {"path": DEFAULT_SCORING_COMPATIBILITY_PROFILE.as_posix()},
+    )
+
+
+def _check_scoring_spec(root: Path) -> dict[str, Any]:
+    errors: list[str] = []
+    try:
+        spec = load_scoring_spec(root / DEFAULT_SCORING_SPEC)
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        errors.append(f"{DEFAULT_SCORING_SPEC}: could not load scoring spec: {exc}")
+    else:
+        validation = validate_scoring_spec(spec, root=root)
+        if not validation["valid"]:
+            errors.append(f"{DEFAULT_SCORING_SPEC}: scoring spec validation failed: {validation['errors']}")
+
+    try:
+        actual_doc = (root / DEFAULT_SCORING_SPEC_DOC).read_text(encoding="utf-8")
+    except OSError as exc:
+        errors.append(f"{DEFAULT_SCORING_SPEC_DOC}: could not read scoring spec document: {exc}")
+    else:
+        expected_doc = build_scoring_spec_markdown(root)
+        if actual_doc != expected_doc:
+            errors.append(f"{DEFAULT_SCORING_SPEC_DOC}: scoring spec document does not match generated spec")
+
+    return _check(
+        "scoring_spec_valid",
+        errors,
+        {"path": DEFAULT_SCORING_SPEC.as_posix(), "document": DEFAULT_SCORING_SPEC_DOC.as_posix()},
     )
 
 

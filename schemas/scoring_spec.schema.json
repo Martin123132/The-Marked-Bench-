@@ -1,0 +1,302 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marked-bench.local/schemas/scoring_spec.schema.json",
+  "title": "The Marked Bench Scoring Specification",
+  "type": "object",
+  "required": [
+    "schema",
+    "project",
+    "benchmark_family",
+    "release_id",
+    "repository_url",
+    "release_url",
+    "purpose",
+    "default_track",
+    "labels",
+    "contradiction_labels",
+    "input_contract",
+    "scoring_pipeline",
+    "metric_definitions",
+    "rounding_contract",
+    "calibration_contract",
+    "report_contract",
+    "compatibility_artifacts",
+    "tracks"
+  ],
+  "properties": {
+    "schema": {
+      "const": "marked_bench.scoring-spec.v1"
+    },
+    "project": {
+      "type": "string",
+      "minLength": 1
+    },
+    "benchmark_family": {
+      "type": "string",
+      "minLength": 1
+    },
+    "release_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "repository_url": {
+      "type": "string",
+      "minLength": 1
+    },
+    "release_url": {
+      "type": "string",
+      "minLength": 1
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 1
+    },
+    "default_track": {
+      "type": "string",
+      "minLength": 1
+    },
+    "labels": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "contradiction_labels": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "input_contract": {
+      "$ref": "#/$defs/input_contract"
+    },
+    "scoring_pipeline": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "metric_definitions": {
+      "$ref": "#/$defs/string_map"
+    },
+    "rounding_contract": {
+      "$ref": "#/$defs/rounding_contract"
+    },
+    "calibration_contract": {
+      "$ref": "#/$defs/calibration_contract"
+    },
+    "report_contract": {
+      "$ref": "#/$defs/report_contract"
+    },
+    "compatibility_artifacts": {
+      "$ref": "#/$defs/compatibility_artifacts"
+    },
+    "tracks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/track"
+      }
+    }
+  },
+  "$defs": {
+    "string_map": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "input_contract": {
+      "type": "object",
+      "required": [
+        "prediction_order_is_ignored",
+        "all_case_ids_required_once",
+        "unknown_case_ids_are_invalid",
+        "missing_case_ids_are_invalid",
+        "duplicate_case_ids_are_invalid",
+        "detector_score_range",
+        "detector_score_default",
+        "detector_score_semantics",
+        "label_aliases"
+      ],
+      "properties": {
+        "prediction_order_is_ignored": {
+          "const": true
+        },
+        "all_case_ids_required_once": {
+          "const": true
+        },
+        "unknown_case_ids_are_invalid": {
+          "const": true
+        },
+        "missing_case_ids_are_invalid": {
+          "const": true
+        },
+        "duplicate_case_ids_are_invalid": {
+          "const": true
+        },
+        "detector_score_range": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "const": 0.0
+            },
+            {
+              "const": 1.0
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "detector_score_default": {
+          "const": 0.0
+        },
+        "detector_score_semantics": {
+          "type": "string",
+          "minLength": 1
+        },
+        "label_aliases": {
+          "$ref": "#/$defs/string_map"
+        }
+      }
+    },
+    "rounding_contract": {
+      "type": "object",
+      "required": [
+        "overall_score_decimals",
+        "metric_decimals",
+        "calibration_bin_decimals",
+        "rounding_function"
+      ],
+      "properties": {
+        "overall_score_decimals": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "metric_decimals": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "calibration_bin_decimals": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rounding_function": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "calibration_contract": {
+      "type": "object",
+      "required": [
+        "bin_count",
+        "bin_interval",
+        "positive_target"
+      ],
+      "properties": {
+        "bin_count": {
+          "const": 10
+        },
+        "bin_interval": {
+          "type": "string",
+          "minLength": 1
+        },
+        "positive_target": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "report_contract": {
+      "type": "object",
+      "required": [
+        "required_summary_fields",
+        "comparability_key",
+        "compare_only_same_suite_hash"
+      ],
+      "properties": {
+        "required_summary_fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "comparability_key": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "compare_only_same_suite_hash": {
+          "const": true
+        }
+      }
+    },
+    "compatibility_artifacts": {
+      "type": "object",
+      "required": [
+        "scoring_compatibility_profile",
+        "scoring_compatibility_schema",
+        "validation_command"
+      ],
+      "properties": {
+        "scoring_compatibility_profile": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scoring_compatibility_schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "validation_command": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "track": {
+      "type": "object",
+      "required": [
+        "name",
+        "suite_id",
+        "suite_version",
+        "suite_hash",
+        "case_count"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "suite_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "suite_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "suite_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "case_count": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    }
+  }
+}

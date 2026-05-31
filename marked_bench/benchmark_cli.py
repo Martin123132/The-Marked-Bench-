@@ -75,6 +75,12 @@ from marked_bench.benchmark_scoring_compatibility import (
     validate_scoring_compatibility_profile,
     write_scoring_compatibility_profile,
 )
+from marked_bench.benchmark_scoring_spec import (
+    load_scoring_spec,
+    validate_scoring_spec,
+    write_scoring_spec,
+    write_scoring_spec_markdown,
+)
 from marked_bench.benchmark_technical_note import write_technical_note
 from marked_bench.contradiction.benchmark_suite import (
     evaluate_prediction_file,
@@ -277,6 +283,24 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         metavar="PATH",
         help="Validate deterministic scoring compatibility vectors.",
+    )
+    parser.add_argument(
+        "--export-scoring-spec",
+        default=None,
+        metavar="PATH",
+        help="Write the machine-readable language-neutral scoring spec and exit.",
+    )
+    parser.add_argument(
+        "--validate-scoring-spec",
+        default=None,
+        metavar="PATH",
+        help="Validate a machine-readable scoring spec.",
+    )
+    parser.add_argument(
+        "--export-scoring-spec-doc",
+        default=None,
+        metavar="PATH",
+        help="Write the generated human-readable scoring spec document and exit.",
     )
     parser.add_argument(
         "--bundle-submission",
@@ -684,6 +708,21 @@ def main(argv: list[str] | None = None) -> None:
             raise SystemExit(1)
         return
 
+    if args.validate_scoring_spec:
+        validation = validate_scoring_spec(load_scoring_spec(args.validate_scoring_spec))
+        if args.json:
+            print(json.dumps(validation, indent=2, sort_keys=True))
+        else:
+            print(f"Scoring spec validation: {'pass' if validation['valid'] else 'fail'}")
+            print(f"Release: {validation['summary']['release_id']}")
+            print(f"Tracks: {validation['summary']['track_count']}")
+            print(f"Labels: {validation['summary']['label_count']}")
+            print(f"Errors: {len(validation['errors'])}")
+            print(f"Warnings: {len(validation['warnings'])}")
+        if not validation["valid"]:
+            raise SystemExit(1)
+        return
+
     if args.create_submission:
         if not args.submission_report:
             parser.error("--create-submission requires --submission-report")
@@ -866,6 +905,16 @@ def main(argv: list[str] | None = None) -> None:
     if args.export_scoring_compatibility:
         write_scoring_compatibility_profile(args.export_scoring_compatibility)
         print(f"Scoring compatibility: {args.export_scoring_compatibility}")
+        return
+
+    if args.export_scoring_spec:
+        write_scoring_spec(args.export_scoring_spec)
+        print(f"Scoring spec: {args.export_scoring_spec}")
+        return
+
+    if args.export_scoring_spec_doc:
+        write_scoring_spec_markdown(args.export_scoring_spec_doc)
+        print(f"Scoring spec document: {args.export_scoring_spec_doc}")
         return
 
     if args.export_prediction_template:

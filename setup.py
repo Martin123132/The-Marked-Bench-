@@ -1,8 +1,8 @@
-﻿from setuptools import setup, find_packages
+from setuptools import setup, find_packages
 
 setup(
     name="marked_bench",
-    version="0.4.5",
+    version="0.4.6",
     description="The Marked Bench contradiction-detection evaluation benchmark",
     author="Martin Ollett",
     packages=find_packages(),

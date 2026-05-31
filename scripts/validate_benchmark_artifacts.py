@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 """Validate checked-in benchmark manifests, reports, and leaderboards."""
 
@@ -26,6 +26,11 @@ from marked_bench.benchmark_review import load_submission_review, validate_submi
 from marked_bench.benchmark_scoring_compatibility import (  # noqa: E402
     load_scoring_compatibility_profile,
     validate_scoring_compatibility_profile,
+)
+from marked_bench.benchmark_scoring_spec import (  # noqa: E402
+    build_scoring_spec_markdown,
+    load_scoring_spec,
+    validate_scoring_spec,
 )
 from marked_bench.benchmark_standard_profile import load_standard_profile, validate_standard_profile  # noqa: E402
 from marked_bench.benchmark_submission import load_submission_bundle, validate_submission_bundle  # noqa: E402
@@ -89,13 +94,14 @@ CHECKED_SUBMISSION_PACKETS = [
 ]
 
 BENCHMARK_REGISTRY = Path("benchmark_registry.json")
-RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_5.json")
-CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_5.json")
-ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_5.json")
-EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_5.json")
-IMPLEMENTATION_KIT = Path("adoption/marked_bench_implementation_kit_v0_4_5.json")
-STANDARD_PROFILE = Path("standard/marked_bench_standard_profile_v0_4_5.json")
-SCORING_COMPATIBILITY_PROFILE = Path("standard/marked_bench_scoring_compatibility_v0_4_5.json")
+RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_6.json")
+CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_6.json")
+ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_6.json")
+EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_6.json")
+IMPLEMENTATION_KIT = Path("adoption/marked_bench_implementation_kit_v0_4_6.json")
+STANDARD_PROFILE = Path("standard/marked_bench_standard_profile_v0_4_6.json")
+SCORING_COMPATIBILITY_PROFILE = Path("standard/marked_bench_scoring_compatibility_v0_4_6.json")
+SCORING_SPEC = Path("standard/marked_bench_scoring_spec_v0_4_6.json")
 
 REQUIRED_PUBLIC_FILES = [
     Path("adoption/README.md"),
@@ -104,6 +110,7 @@ REQUIRED_PUBLIC_FILES = [
     IMPLEMENTATION_KIT,
     STANDARD_PROFILE,
     SCORING_COMPATIBILITY_PROFILE,
+    SCORING_SPEC,
     Path("adoption/implementation_kit/README.md"),
     Path("adoption/implementation_kit/github_actions_validate_result.yml"),
     Path("adoption/implementation_kit/result_claim_badge.md"),
@@ -138,7 +145,9 @@ REQUIRED_PUBLIC_FILES = [
     Path("docs/RELEASE_NOTES_v0_4_3.md"),
     Path("docs/RELEASE_NOTES_v0_4_4.md"),
     Path("docs/RELEASE_NOTES_v0_4_5.md"),
+    Path("docs/RELEASE_NOTES_v0_4_6.md"),
     Path("docs/ROADMAP.md"),
+    Path("docs/SCORING_SPEC.md"),
     Path("docs/SUBMISSION_GUIDE.md"),
     Path("docs/THIRD_PARTY_EVIDENCE.md"),
     Path("schemas/benchmark_registry.schema.json"),
@@ -154,6 +163,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("schemas/implementation_kit.schema.json"),
     Path("schemas/standard_profile.schema.json"),
     Path("schemas/scoring_compatibility.schema.json"),
+    Path("schemas/scoring_spec.schema.json"),
     Path("schemas/release_manifest.schema.json"),
     Path("schemas/conformance_report.schema.json"),
     Path("schemas/result_card.schema.json"),
@@ -204,6 +214,7 @@ SCHEMA_CONFORMANCE_FILES = {
     IMPLEMENTATION_KIT: Path("schemas/implementation_kit.schema.json"),
     STANDARD_PROFILE: Path("schemas/standard_profile.schema.json"),
     SCORING_COMPATIBILITY_PROFILE: Path("schemas/scoring_compatibility.schema.json"),
+    SCORING_SPEC: Path("schemas/scoring_spec.schema.json"),
 }
 
 
@@ -222,6 +233,7 @@ def main() -> int:
         _validate_implementation_kit(errors)
         _validate_standard_profile(errors)
         _validate_scoring_compatibility_profile(errors)
+        _validate_scoring_spec(errors)
         _validate_suite_manifests(errors)
         _validate_baseline_reports(errors)
         _validate_leaderboards(errors)
@@ -439,6 +451,27 @@ def _validate_scoring_compatibility_profile(errors: list[str]) -> None:
         errors.append(
             f"{SCORING_COMPATIBILITY_PROFILE}: scoring compatibility validation failed: {validation['errors']}"
         )
+
+
+def _validate_scoring_spec(errors: list[str]) -> None:
+    try:
+        spec = load_scoring_spec(SCORING_SPEC)
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        errors.append(f"{SCORING_SPEC}: could not load scoring spec: {exc}")
+        return
+    validation = validate_scoring_spec(spec, root=ROOT)
+    if not validation["valid"]:
+        errors.append(f"{SCORING_SPEC}: scoring spec validation failed: {validation['errors']}")
+
+    doc_path = Path("docs/SCORING_SPEC.md")
+    try:
+        actual = doc_path.read_text(encoding="utf-8")
+    except OSError as exc:
+        errors.append(f"{doc_path}: could not read scoring spec document: {exc}")
+        return
+    expected = build_scoring_spec_markdown(ROOT)
+    if actual != expected:
+        errors.append(f"{doc_path}: scoring spec document does not match generated scoring spec")
 
 
 def _validate_baseline_reports(errors: list[str]) -> None:

@@ -1,4 +1,4 @@
-﻿# Governance
+# Governance
 
 The benchmark should remain reproducible, versioned, and evidence-first.
 
@@ -34,6 +34,8 @@ requirements stay tied to inspectable evidence, not informal promises.
 Release maintainers should also keep scoring compatibility vectors current so
 independent implementations can verify score calculations against the public
 reference release.
+Release maintainers should keep the scoring specification current whenever
+labels, metric formulas, rounding, calibration, or report semantics change.
 
 ## Review Priorities
 

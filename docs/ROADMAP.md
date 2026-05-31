@@ -1,4 +1,4 @@
-﻿# Roadmap
+# Roadmap
 
 This roadmap keeps the benchmark moving toward a credible public standard.
 
@@ -38,6 +38,7 @@ This roadmap keeps the benchmark moving toward a credible public standard.
 - Third-party implementation kit for external CI validation.
 - Machine-readable standard profile for release requirement evidence.
 - Deterministic scoring compatibility vectors for independent implementations.
+- Language-neutral scoring specification for independent implementations.
 
 ## Next
 

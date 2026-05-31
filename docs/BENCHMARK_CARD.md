@@ -1,4 +1,4 @@
-﻿# Benchmark Card
+# Benchmark Card
 
 ## Name
 
@@ -96,6 +96,7 @@ All public reports must include:
 - standard profile for benchmark-standard requirements
 - implementation kit for external CI validation
 - scoring compatibility profile for independent scorer validation
+- scoring specification for independent scorer implementation
 
 Reports are validated with:
 
@@ -129,3 +130,6 @@ to checked evidence files and validation commands.
 The scoring compatibility profile is validated with
 `marked-bench --validate-scoring-compatibility PATH` and pins prediction
 vectors to expected score summaries for every public track.
+The scoring specification is validated with
+`marked-bench --validate-scoring-spec PATH` and defines the label, metric,
+rounding, and calibration contract for independent scorers.
