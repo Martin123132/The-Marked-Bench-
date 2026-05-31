@@ -27,6 +27,7 @@
     "docs/RELEASE_NOTES_v0_4_2.md",
     "docs/RELEASE_NOTES_v0_4_3.md",
     "docs/RELEASE_NOTES_v0_4_4.md",
+    "docs/RELEASE_NOTES_v0_4_5.md",
     "docs/SUBMISSION_GUIDE.md",
     "docs/RELEASE_CHECKLIST.md"
   ],
@@ -43,6 +44,7 @@
     "publication_packet": "marked_bench.publication-packet.v1",
     "result_card": "marked_bench.result-card.v1",
     "result_claim": "marked_bench.result-claim.v1",
+    "scoring_compatibility": "marked_bench.scoring-compatibility.v1",
     "standard_profile": "marked_bench.standard-profile.v1",
     "submission_bundle": "marked_bench.leaderboard-submission-bundle.v1",
     "submission_review": "marked_bench.submission-review.v1",
@@ -62,6 +64,7 @@
     "release_manifest": "schemas/release_manifest.schema.json",
     "result_card": "schemas/result_card.schema.json",
     "result_claim": "schemas/result_claim.schema.json",
+    "scoring_compatibility": "schemas/scoring_compatibility.schema.json",
     "standard_profile": "schemas/standard_profile.schema.json",
     "submission_bundle": "schemas/submission_bundle.schema.json",
     "submission_review": "schemas/submission_review.schema.json",

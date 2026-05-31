@@ -95,6 +95,7 @@ All public reports must include:
 - result claim for short public score statements
 - standard profile for benchmark-standard requirements
 - implementation kit for external CI validation
+- scoring compatibility profile for independent scorer validation
 
 Reports are validated with:
 
@@ -125,3 +126,6 @@ templates to the current release evidence.
 The standard profile is validated with
 `marked-bench --validate-standard-profile PATH` and maps release requirements
 to checked evidence files and validation commands.
+The scoring compatibility profile is validated with
+`marked-bench --validate-scoring-compatibility PATH` and pins prediction
+vectors to expected score summaries for every public track.

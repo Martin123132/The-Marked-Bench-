@@ -70,6 +70,11 @@ from marked_bench.benchmark_standard_profile import (
     validate_standard_profile,
     write_standard_profile,
 )
+from marked_bench.benchmark_scoring_compatibility import (
+    load_scoring_compatibility_profile,
+    validate_scoring_compatibility_profile,
+    write_scoring_compatibility_profile,
+)
 from marked_bench.benchmark_technical_note import write_technical_note
 from marked_bench.contradiction.benchmark_suite import (
     evaluate_prediction_file,
@@ -260,6 +265,18 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         metavar="PATH",
         help="Validate a benchmark standard profile.",
+    )
+    parser.add_argument(
+        "--export-scoring-compatibility",
+        default=None,
+        metavar="PATH",
+        help="Write deterministic scoring compatibility vectors and exit.",
+    )
+    parser.add_argument(
+        "--validate-scoring-compatibility",
+        default=None,
+        metavar="PATH",
+        help="Validate deterministic scoring compatibility vectors.",
     )
     parser.add_argument(
         "--bundle-submission",
@@ -650,6 +667,23 @@ def main(argv: list[str] | None = None) -> None:
             raise SystemExit(1)
         return
 
+    if args.validate_scoring_compatibility:
+        validation = validate_scoring_compatibility_profile(
+            load_scoring_compatibility_profile(args.validate_scoring_compatibility)
+        )
+        if args.json:
+            print(json.dumps(validation, indent=2, sort_keys=True))
+        else:
+            print(f"Scoring compatibility validation: {'pass' if validation['valid'] else 'fail'}")
+            print(f"Release: {validation['summary']['release_id']}")
+            print(f"Vectors: {validation['summary']['vector_count']}")
+            print(f"Tracks: {validation['summary']['track_count']}")
+            print(f"Errors: {len(validation['errors'])}")
+            print(f"Warnings: {len(validation['warnings'])}")
+        if not validation["valid"]:
+            raise SystemExit(1)
+        return
+
     if args.create_submission:
         if not args.submission_report:
             parser.error("--create-submission requires --submission-report")
@@ -827,6 +861,11 @@ def main(argv: list[str] | None = None) -> None:
     if args.export_standard_profile:
         write_standard_profile(args.export_standard_profile)
         print(f"Standard profile: {args.export_standard_profile}")
+        return
+
+    if args.export_scoring_compatibility:
+        write_scoring_compatibility_profile(args.export_scoring_compatibility)
+        print(f"Scoring compatibility: {args.export_scoring_compatibility}")
         return
 
     if args.export_prediction_template:

@@ -1,0 +1,137 @@
+{
+  "benchmark_family": "contradiction-detection",
+  "default_track": "contradiction-multihop",
+  "external_ci_commands": [
+    {
+      "command": "python -m pip install git+https://github.com/Martin123132/The-Marked-Bench-.git@v0.4.5",
+      "name": "install"
+    },
+    {
+      "command": "marked-bench --validate-publication-packet marked-bench-result/publication_packet.json",
+      "name": "validate_publication_packet"
+    },
+    {
+      "command": "marked-bench --validate-result-claim marked-bench-result/result_claim.json",
+      "name": "validate_result_claim"
+    }
+  ],
+  "kit_files": [
+    {
+      "name": "guide",
+      "path": "adoption/implementation_kit/README.md",
+      "purpose": "Human workflow for using the external implementation kit."
+    },
+    {
+      "name": "github_actions_template",
+      "path": "adoption/implementation_kit/github_actions_validate_result.yml",
+      "purpose": "Copyable CI workflow for validating publication packets and result claims."
+    },
+    {
+      "name": "result_claim_badge_template",
+      "path": "adoption/implementation_kit/result_claim_badge.md",
+      "purpose": "Markdown badge and citation snippet template for public result claims."
+    }
+  ],
+  "project": "The Marked Bench",
+  "public_schemas": {
+    "implementation_kit": "schemas/implementation_kit.schema.json",
+    "publication_packet": "schemas/publication_packet.schema.json",
+    "result_claim": "schemas/result_claim.schema.json",
+    "scoring_compatibility": "schemas/scoring_compatibility.schema.json",
+    "standard_profile": "schemas/standard_profile.schema.json"
+  },
+  "purpose": "Help external teams run, validate, cite, and submit Marked Bench results in their own repositories.",
+  "release_artifacts": {
+    "adoption_packet": "adoption/marked_bench_adoption_packet_v0_4_5.json",
+    "conformance_report": "conformance/marked_bench_conformance_v0_4_5.json",
+    "implementation_kit": "adoption/marked_bench_implementation_kit_v0_4_5.json",
+    "registry": "benchmark_registry.json",
+    "release_manifest": "releases/marked_bench_release_v0_4_5.json",
+    "scoring_compatibility": "standard/marked_bench_scoring_compatibility_v0_4_5.json",
+    "standard_profile": "standard/marked_bench_standard_profile_v0_4_5.json",
+    "third_party_evidence_ledger": "adoption/third_party_evidence_ledger_v0_4_5.json"
+  },
+  "release_id": "marked-bench-contradiction-standard-release-0.4.5",
+  "release_url": "https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.4.5",
+  "release_validation_commands": [
+    {
+      "command": "marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_5.json",
+      "name": "release_conformance"
+    },
+    {
+      "command": "marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_5.json",
+      "name": "adoption_packet"
+    },
+    {
+      "command": "marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_5.json",
+      "name": "evidence_ledger"
+    },
+    {
+      "command": "marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_5.json",
+      "name": "implementation_kit"
+    },
+    {
+      "command": "marked-bench --validate-standard-profile standard/marked_bench_standard_profile_v0_4_5.json",
+      "name": "standard_profile"
+    },
+    {
+      "command": "marked-bench --validate-scoring-compatibility standard/marked_bench_scoring_compatibility_v0_4_5.json",
+      "name": "scoring_compatibility"
+    }
+  ],
+  "repository_url": "https://github.com/Martin123132/The-Marked-Bench-",
+  "required_local_artifacts": [
+    {
+      "name": "publication_packet",
+      "path": "marked-bench-result/publication_packet.json"
+    },
+    {
+      "name": "result_claim",
+      "path": "marked-bench-result/result_claim.json"
+    }
+  ],
+  "schema": "marked_bench.implementation-kit.v1",
+  "submission_requirements": {
+    "not_safety_certification": true,
+    "public_url_or_committed_path_required": true,
+    "publication_packet_required": true,
+    "result_claim_required": true,
+    "same_suite_hash_required": true,
+    "third_party_evidence_requires_review": true
+  },
+  "tracks": [
+    {
+      "case_count": 17,
+      "name": "contradiction",
+      "suite_hash": "8c1f80ff67874af54869bab2e361b3cc7416ce1d86f80ff583636a55e3462765",
+      "suite_id": "marked-bench-contradiction-standard",
+      "suite_version": "0.1.0"
+    },
+    {
+      "case_count": 17,
+      "name": "contradiction-adversarial",
+      "suite_hash": "454c1aff69d5028224549dfc14fd8e6c10818251d0abf8becf36f0856b2dbd67",
+      "suite_id": "marked-bench-contradiction-adversarial",
+      "suite_version": "0.2.0"
+    },
+    {
+      "case_count": 18,
+      "name": "contradiction-multihop",
+      "suite_hash": "07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f",
+      "suite_id": "marked-bench-contradiction-multihop",
+      "suite_version": "0.3.0"
+    },
+    {
+      "case_count": 18,
+      "name": "contradiction-controls",
+      "suite_hash": "33a0777f6f93504bde517d922f46c24c1d93992256bfe95b32287695babfb08a",
+      "suite_id": "marked-bench-contradiction-controls",
+      "suite_version": "0.4.0"
+    }
+  ],
+  "version_pinning": {
+    "compare_only_same_suite_hash": true,
+    "install_reference": "git+https://github.com/Martin123132/The-Marked-Bench-.git@v0.4.5",
+    "release_tag": "v0.4.5"
+  }
+}

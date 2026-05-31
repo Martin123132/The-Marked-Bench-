@@ -104,7 +104,7 @@ marked-bench-result/
 The machine-readable kit descriptor is:
 
 ```bash
-marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_4.json
+marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_5.json
 ```
 
 ## Check Release Conformance
@@ -113,11 +113,12 @@ Before adopting or mirroring a release package, validate the checked
 conformance report:
 
 ```bash
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_4.json
-marked-bench --validate-standard-profile standard/marked_bench_standard_profile_v0_4_4.json
-marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_4.json
-marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_4.json
-marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_4.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_5.json
+marked-bench --validate-standard-profile standard/marked_bench_standard_profile_v0_4_5.json
+marked-bench --validate-scoring-compatibility standard/marked_bench_scoring_compatibility_v0_4_5.json
+marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_5.json
+marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_5.json
+marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_5.json
 ```
 
 The conformance report is the single machine-readable pass/fail artifact for
@@ -127,6 +128,9 @@ The standard profile is the machine-readable requirement matrix for the
 benchmark standard itself: it names the evidence files and validation commands
 that make a release reproducible, comparable, externally adoptable, and
 bounded.
+The scoring compatibility profile provides deterministic prediction vectors
+and expected score summaries for every public track so independent
+implementations can check their scoring math.
 The adoption packet is the machine-readable handoff file for external users:
 it names the release, default track, public artifacts, validation commands,
 submission channels, and citation requirements.

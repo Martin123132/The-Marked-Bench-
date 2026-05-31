@@ -37,6 +37,7 @@ This roadmap keeps the benchmark moving toward a credible public standard.
 - Hash-pinned result claims for citeable benchmark score statements.
 - Third-party implementation kit for external CI validation.
 - Machine-readable standard profile for release requirement evidence.
+- Deterministic scoring compatibility vectors for independent implementations.
 
 ## Next
 

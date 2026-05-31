@@ -31,6 +31,9 @@ External repositories should use the implementation kit workflow before making
 public result claims.
 Release maintainers should keep the standard profile current so benchmark
 requirements stay tied to inspectable evidence, not informal promises.
+Release maintainers should also keep scoring compatibility vectors current so
+independent implementations can verify score calculations against the public
+reference release.
 
 ## Review Priorities
 

@@ -96,6 +96,12 @@ from marked_bench.benchmark_standard_profile import (
     load_standard_profile,
     validate_standard_profile,
 )
+from marked_bench.benchmark_scoring_compatibility import (
+    SCORING_COMPATIBILITY_SCHEMA,
+    build_scoring_compatibility_profile,
+    load_scoring_compatibility_profile,
+    validate_scoring_compatibility_profile,
+)
 from marked_bench.benchmark_publication import (
     PUBLICATION_PACKET_SCHEMA,
     build_publication_packet,
@@ -294,12 +300,13 @@ class BenchmarkSuiteTests(unittest.TestCase):
         root = Path(__file__).resolve().parent.parent
         checked_pairs = [
             ("benchmark_registry.json", "schemas/benchmark_registry.schema.json"),
-            ("releases/marked_bench_release_v0_4_4.json", "schemas/release_manifest.schema.json"),
-            ("conformance/marked_bench_conformance_v0_4_4.json", "schemas/conformance_report.schema.json"),
-            ("adoption/marked_bench_adoption_packet_v0_4_4.json", "schemas/adoption_packet.schema.json"),
-            ("adoption/third_party_evidence_ledger_v0_4_4.json", "schemas/third_party_evidence_ledger.schema.json"),
-            ("adoption/marked_bench_implementation_kit_v0_4_4.json", "schemas/implementation_kit.schema.json"),
-            ("standard/marked_bench_standard_profile_v0_4_4.json", "schemas/standard_profile.schema.json"),
+            ("releases/marked_bench_release_v0_4_5.json", "schemas/release_manifest.schema.json"),
+            ("conformance/marked_bench_conformance_v0_4_5.json", "schemas/conformance_report.schema.json"),
+            ("adoption/marked_bench_adoption_packet_v0_4_5.json", "schemas/adoption_packet.schema.json"),
+            ("adoption/third_party_evidence_ledger_v0_4_5.json", "schemas/third_party_evidence_ledger.schema.json"),
+            ("adoption/marked_bench_implementation_kit_v0_4_5.json", "schemas/implementation_kit.schema.json"),
+            ("standard/marked_bench_standard_profile_v0_4_5.json", "schemas/standard_profile.schema.json"),
+            ("standard/marked_bench_scoring_compatibility_v0_4_5.json", "schemas/scoring_compatibility.schema.json"),
             ("suites/marked_bench_contradiction_standard_v0_1_0.json", "schemas/contradiction_suite_manifest.schema.json"),
             ("suites/marked_bench_contradiction_adversarial_v0_2_0.json", "schemas/contradiction_suite_manifest.schema.json"),
             ("suites/marked_bench_contradiction_multihop_v0_3_0.json", "schemas/contradiction_suite_manifest.schema.json"),
@@ -360,6 +367,8 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertEqual(registry["schemas"]["implementation_kit"], "schemas/implementation_kit.schema.json")
         self.assertEqual(registry["schema_ids"]["standard_profile"], STANDARD_PROFILE_SCHEMA)
         self.assertEqual(registry["schemas"]["standard_profile"], "schemas/standard_profile.schema.json")
+        self.assertEqual(registry["schema_ids"]["scoring_compatibility"], SCORING_COMPATIBILITY_SCHEMA)
+        self.assertEqual(registry["schemas"]["scoring_compatibility"], "schemas/scoring_compatibility.schema.json")
         self.assertEqual(registry["schema_ids"]["result_card"], RESULT_CARD_SCHEMA)
         self.assertEqual(registry["schemas"]["result_card"], "schemas/result_card.schema.json")
         self.assertEqual(registry["schema_ids"]["adoption_packet"], ADOPTION_PACKET_SCHEMA)
@@ -372,7 +381,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_release_manifest_matches_current_artifacts(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "releases" / "marked_bench_release_v0_4_4.json"
+        path = root / "releases" / "marked_bench_release_v0_4_5.json"
 
         manifest = json.loads(path.read_text(encoding="utf-8"))
         artifact_paths = {entry["path"] for entry in manifest["artifacts"]}
@@ -383,11 +392,12 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertGreater(manifest["artifact_count"], 20)
         self.assertIn("submissions/example_external_jsonl/predictions.jsonl", artifact_paths)
         self.assertIn("submissions/example_external_jsonl/example_external_submission_review.json", artifact_paths)
-        self.assertIn("conformance/marked_bench_conformance_v0_4_4.json", artifact_paths)
-        self.assertIn("standard/marked_bench_standard_profile_v0_4_4.json", artifact_paths)
-        self.assertIn("adoption/marked_bench_adoption_packet_v0_4_4.json", artifact_paths)
-        self.assertIn("adoption/third_party_evidence_ledger_v0_4_4.json", artifact_paths)
-        self.assertIn("adoption/marked_bench_implementation_kit_v0_4_4.json", artifact_paths)
+        self.assertIn("conformance/marked_bench_conformance_v0_4_5.json", artifact_paths)
+        self.assertIn("standard/marked_bench_standard_profile_v0_4_5.json", artifact_paths)
+        self.assertIn("standard/marked_bench_scoring_compatibility_v0_4_5.json", artifact_paths)
+        self.assertIn("adoption/marked_bench_adoption_packet_v0_4_5.json", artifact_paths)
+        self.assertIn("adoption/third_party_evidence_ledger_v0_4_5.json", artifact_paths)
+        self.assertIn("adoption/marked_bench_implementation_kit_v0_4_5.json", artifact_paths)
         self.assertIn("adoption/implementation_kit/github_actions_validate_result.yml", artifact_paths)
         self.assertIn("suites/marked_bench_contradiction_controls_v0_4_0.json", artifact_paths)
         self.assertIn("leaderboard/leaderboard_controls_v0_4_0.json", artifact_paths)
@@ -397,6 +407,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertIn("schemas/result_claim.schema.json", artifact_paths)
         self.assertIn("schemas/implementation_kit.schema.json", artifact_paths)
         self.assertIn("schemas/standard_profile.schema.json", artifact_paths)
+        self.assertIn("schemas/scoring_compatibility.schema.json", artifact_paths)
         self.assertIn("schemas/adoption_packet.schema.json", artifact_paths)
         self.assertIn("schemas/third_party_evidence_ledger.schema.json", artifact_paths)
         self.assertIn("submissions/example_external_jsonl/example_external_result_card.json", artifact_paths)
@@ -405,7 +416,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_conformance_report_matches_current_evidence(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "conformance" / "marked_bench_conformance_v0_4_4.json"
+        path = root / "conformance" / "marked_bench_conformance_v0_4_5.json"
 
         report = load_conformance_report(path)
         validation = validate_conformance_report(report, root=root)
@@ -419,11 +430,12 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertIn("third_party_evidence_ledger_valid", [check["name"] for check in report["checks"]])
         self.assertIn("implementation_kit_valid", [check["name"] for check in report["checks"]])
         self.assertIn("standard_profile_valid", [check["name"] for check in report["checks"]])
+        self.assertIn("scoring_compatibility_valid", [check["name"] for check in report["checks"]])
         self.assertTrue(validation["valid"], validation["errors"])
 
     def test_checked_in_adoption_packet_matches_current_evidence(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "adoption" / "marked_bench_adoption_packet_v0_4_4.json"
+        path = root / "adoption" / "marked_bench_adoption_packet_v0_4_5.json"
 
         packet = load_adoption_packet(path)
         validation = validate_adoption_packet(packet, root=root)
@@ -435,16 +447,18 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertTrue(packet["standard_claims"]["public_result_claim_required"])
         self.assertTrue(packet["standard_claims"]["implementation_kit_required"])
         self.assertTrue(packet["standard_claims"]["standard_profile_required"])
+        self.assertTrue(packet["standard_claims"]["scoring_compatibility_required"])
         self.assertTrue(packet["standard_claims"]["third_party_evidence_ledger_required"])
         self.assertIn("checked_publication_packet", [item["name"] for item in packet["required_public_artifacts"]])
         self.assertIn("checked_result_claim", [item["name"] for item in packet["required_public_artifacts"]])
         self.assertIn("implementation_kit", [item["name"] for item in packet["required_public_artifacts"]])
         self.assertIn("standard_profile", [item["name"] for item in packet["required_public_artifacts"]])
+        self.assertIn("scoring_compatibility", [item["name"] for item in packet["required_public_artifacts"]])
         self.assertTrue(validation["valid"], validation["errors"])
 
     def test_checked_in_evidence_ledger_matches_current_evidence(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "adoption" / "third_party_evidence_ledger_v0_4_4.json"
+        path = root / "adoption" / "third_party_evidence_ledger_v0_4_5.json"
 
         ledger = load_evidence_ledger(path)
         validation = validate_evidence_ledger(ledger, root=root)
@@ -457,7 +471,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_implementation_kit_matches_current_release(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "adoption" / "marked_bench_implementation_kit_v0_4_4.json"
+        path = root / "adoption" / "marked_bench_implementation_kit_v0_4_5.json"
 
         kit = load_implementation_kit(path)
         validation = validate_implementation_kit(kit, root=root)
@@ -471,7 +485,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_standard_profile_matches_current_release(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "standard" / "marked_bench_standard_profile_v0_4_4.json"
+        path = root / "standard" / "marked_bench_standard_profile_v0_4_5.json"
 
         profile = load_standard_profile(path)
         validation = validate_standard_profile(profile, root=root)
@@ -480,6 +494,23 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertEqual(profile["schema"], STANDARD_PROFILE_SCHEMA)
         self.assertEqual(profile["requirement_summary"]["unsatisfied"], 0)
         self.assertIn("release_conformance", [item["id"] for item in profile["standard_requirements"]])
+        self.assertIn("scoring_compatibility_vectors", [item["id"] for item in profile["standard_requirements"]])
+        self.assertTrue(validation["valid"], validation["errors"])
+
+    def test_checked_in_scoring_compatibility_profile_matches_current_release(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        path = root / "standard" / "marked_bench_scoring_compatibility_v0_4_5.json"
+
+        profile = load_scoring_compatibility_profile(path)
+        validation = validate_scoring_compatibility_profile(profile, root=root)
+        vector_names = {vector["name"] for vector in profile["vectors"]}
+        perfect_vectors = [vector for vector in profile["vectors"] if vector["name"] == "perfect"]
+
+        self.assertEqual(profile, build_scoring_compatibility_profile(root))
+        self.assertEqual(profile["schema"], SCORING_COMPATIBILITY_SCHEMA)
+        self.assertEqual(profile["vector_count"], 12)
+        self.assertEqual(vector_names, {"perfect", "always_none", "rotated_labels"})
+        self.assertTrue(all(vector["expected_summary"]["overall_score"] == 100.0 for vector in perfect_vectors))
         self.assertTrue(validation["valid"], validation["errors"])
 
     def test_checked_external_submission_packet_validates(self) -> None:
@@ -1482,6 +1513,23 @@ class BenchmarkSuiteTests(unittest.TestCase):
             self.assertEqual(profile, build_standard_profile(Path(__file__).resolve().parent.parent))
             self.assertEqual(profile["schema"], STANDARD_PROFILE_SCHEMA)
             self.assertIn("Standard profile validation: pass", captured.getvalue())
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_cli_exports_and_validates_scoring_compatibility_inside_repo(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        path = output_root / "scoring-compatibility.json"
+
+        try:
+            with redirect_stdout(StringIO()):
+                benchmark_main(["--export-scoring-compatibility", str(path)])
+            with redirect_stdout(StringIO()) as captured:
+                benchmark_main(["--validate-scoring-compatibility", str(path)])
+
+            profile = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(profile, build_scoring_compatibility_profile(Path(__file__).resolve().parent.parent))
+            self.assertEqual(profile["schema"], SCORING_COMPATIBILITY_SCHEMA)
+            self.assertIn("Scoring compatibility validation: pass", captured.getvalue())
         finally:
             shutil.rmtree(output_root, ignore_errors=True)
 

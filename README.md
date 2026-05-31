@@ -8,7 +8,7 @@ is tied to a suite ID, suite version, deterministic suite hash, immutable case
 list, JSON report schema, confusion matrix, per-class metrics, confidence
 calibration metrics, explanation-audit coverage, validation result, diagnostic
 slice metrics, result card, result claim, standard profile, implementation
-kit, and leaderboard entry.
+kit, scoring compatibility vectors, and leaderboard entry.
 
 ## Current Tracks
 
@@ -75,7 +75,7 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public artifact SHA-256 digests:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_4_4.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_4_5.json
 ```
 
 Export the generated technical note:
@@ -87,30 +87,37 @@ marked-bench --export-technical-note docs/TECHNICAL_NOTE.md
 Export and validate the machine-readable conformance report:
 
 ```bash
-marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_4_4.json
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_4.json
+marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_4_5.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_5.json
 ```
 
 Export and validate the machine-readable benchmark standard profile:
 
 ```bash
-marked-bench --export-standard-profile standard/marked_bench_standard_profile_v0_4_4.json
-marked-bench --validate-standard-profile standard/marked_bench_standard_profile_v0_4_4.json
+marked-bench --export-standard-profile standard/marked_bench_standard_profile_v0_4_5.json
+marked-bench --validate-standard-profile standard/marked_bench_standard_profile_v0_4_5.json
+```
+
+Export and validate deterministic scoring compatibility vectors:
+
+```bash
+marked-bench --export-scoring-compatibility standard/marked_bench_scoring_compatibility_v0_4_5.json
+marked-bench --validate-scoring-compatibility standard/marked_bench_scoring_compatibility_v0_4_5.json
 ```
 
 Export and validate the machine-readable adoption packet for external users:
 
 ```bash
-marked-bench --export-adoption-packet adoption/marked_bench_adoption_packet_v0_4_4.json
-marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_4.json
-marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_4.json
+marked-bench --export-adoption-packet adoption/marked_bench_adoption_packet_v0_4_5.json
+marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_5.json
+marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_5.json
 ```
 
 Export and validate the external implementation kit:
 
 ```bash
-marked-bench --export-implementation-kit adoption/marked_bench_implementation_kit_v0_4_4.json
-marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_4.json
+marked-bench --export-implementation-kit adoption/marked_bench_implementation_kit_v0_4_5.json
+marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_5.json
 ```
 
 ## Score External Systems
@@ -211,11 +218,12 @@ marked-bench --build-leaderboard baselines/always_none_controls_v0_4_0.json base
 
 - Benchmark registry: `benchmark_registry.json`
 - Release manifest: `releases/`
-- Conformance report: `conformance/marked_bench_conformance_v0_4_4.json`
-- Standard profile: `standard/marked_bench_standard_profile_v0_4_4.json`
-- Adoption packet: `adoption/marked_bench_adoption_packet_v0_4_4.json`
-- Third-party evidence ledger: `adoption/third_party_evidence_ledger_v0_4_4.json`
-- Implementation kit: `adoption/marked_bench_implementation_kit_v0_4_4.json`
+- Conformance report: `conformance/marked_bench_conformance_v0_4_5.json`
+- Standard profile: `standard/marked_bench_standard_profile_v0_4_5.json`
+- Scoring compatibility profile: `standard/marked_bench_scoring_compatibility_v0_4_5.json`
+- Adoption packet: `adoption/marked_bench_adoption_packet_v0_4_5.json`
+- Third-party evidence ledger: `adoption/third_party_evidence_ledger_v0_4_5.json`
+- Implementation kit: `adoption/marked_bench_implementation_kit_v0_4_5.json`
 - Implementation kit templates: `adoption/implementation_kit/`
 - Suite manifests and coverage profiles: `suites/`
 - Baseline reports: `baselines/`
@@ -232,6 +240,7 @@ marked-bench --build-leaderboard baselines/always_none_controls_v0_4_0.json base
 - Result claim schema: `schemas/result_claim.schema.json`
 - Implementation kit schema: `schemas/implementation_kit.schema.json`
 - Standard profile schema: `schemas/standard_profile.schema.json`
+- Scoring compatibility schema: `schemas/scoring_compatibility.schema.json`
 - Adoption packet schema: `schemas/adoption_packet.schema.json`
 - Third-party evidence ledger schema: `schemas/third_party_evidence_ledger.schema.json`
 - Checked external submission packet: `submissions/example_external_jsonl/`
@@ -241,7 +250,7 @@ marked-bench --build-leaderboard baselines/always_none_controls_v0_4_0.json base
 - Third-party evidence protocol: `docs/THIRD_PARTY_EVIDENCE.md`
 - Submission review rubric: `docs/SUBMISSION_REVIEW_RUBRIC.md`
 - Release notes: `docs/RELEASE_NOTES_v0_2_0.md`
-- Current release notes: `docs/RELEASE_NOTES_v0_4_4.md`
+- Current release notes: `docs/RELEASE_NOTES_v0_4_5.md`
 
 ## Quality Gates
 
@@ -270,6 +279,8 @@ The conformance report provides one machine-readable pass/fail artifact for
 the full release package.
 The standard profile is validated so the benchmark's own standardization
 requirements stay explicit, evidence-backed, and current.
+The scoring compatibility profile is validated so independent implementations
+can prove they produce the same scores from the same prediction vectors.
 The adoption packet is validated so external handoff, announcement, and
 citation material stays pinned to the same release evidence.
 The third-party evidence ledger is validated so adoption claims stay separate
@@ -285,6 +296,7 @@ marked_bench/
     benchmark_cli.py              # CLI runner
     benchmark_evidence.py         # Third-party evidence ledger validation
     benchmark_implementation.py   # External implementation kit validation
+    benchmark_scoring_compatibility.py # Scoring compatibility vectors
     benchmark_standard_profile.py # Benchmark standard profile validation
     benchmark_leaderboard.py      # Validated leaderboard builder
     benchmark_publication.py      # One-command public result packets

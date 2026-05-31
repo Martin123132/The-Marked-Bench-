@@ -43,7 +43,7 @@
   "notes": "Checked example publication packet for the external JSONL workflow.",
   "overall_score": 11.11,
   "ready_for_publication": true,
-  "release_id": "marked-bench-contradiction-standard-release-0.4.4",
+  "release_id": "marked-bench-contradiction-standard-release-0.4.5",
   "report_sha256": "9028699a80c286fb644d9a7212209d452c5e5e0cbc8303c06599fb4950017c83",
   "result_card_sha256": "0414aebb7e9ef854cb6ba33f9b58f43a7e802e7f42d5750e9d91107a9bce3b1a",
   "schema": "marked_bench.publication-packet.v1",

@@ -28,6 +28,26 @@
     },
     "schemas": {
       "type": "object",
+      "required": [
+        "benchmark_registry",
+        "suite_manifest",
+        "benchmark_report",
+        "predictions",
+        "leaderboard",
+        "leaderboard_submission",
+        "submission_bundle",
+        "submission_review",
+        "publication_packet",
+        "result_claim",
+        "implementation_kit",
+        "standard_profile",
+        "scoring_compatibility",
+        "release_manifest",
+        "conformance_report",
+        "result_card",
+        "adoption_packet",
+        "third_party_evidence_ledger"
+      ],
       "additionalProperties": {
         "type": "string"
       }
@@ -46,6 +66,7 @@
         "result_claim",
         "implementation_kit",
         "standard_profile",
+        "scoring_compatibility",
         "conformance_report",
         "result_card",
         "adoption_packet",

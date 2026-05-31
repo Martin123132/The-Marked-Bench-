@@ -23,6 +23,10 @@ from marked_bench.benchmark_release import build_release_manifest  # noqa: E402
 from marked_bench.benchmark_registry import build_benchmark_registry  # noqa: E402
 from marked_bench.benchmark_result_card import load_result_card, validate_result_card  # noqa: E402
 from marked_bench.benchmark_review import load_submission_review, validate_submission_review  # noqa: E402
+from marked_bench.benchmark_scoring_compatibility import (  # noqa: E402
+    load_scoring_compatibility_profile,
+    validate_scoring_compatibility_profile,
+)
 from marked_bench.benchmark_standard_profile import load_standard_profile, validate_standard_profile  # noqa: E402
 from marked_bench.benchmark_submission import load_submission_bundle, validate_submission_bundle  # noqa: E402
 from marked_bench.benchmark_technical_note import build_technical_note  # noqa: E402
@@ -85,12 +89,13 @@ CHECKED_SUBMISSION_PACKETS = [
 ]
 
 BENCHMARK_REGISTRY = Path("benchmark_registry.json")
-RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_4.json")
-CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_4.json")
-ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_4.json")
-EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_4.json")
-IMPLEMENTATION_KIT = Path("adoption/marked_bench_implementation_kit_v0_4_4.json")
-STANDARD_PROFILE = Path("standard/marked_bench_standard_profile_v0_4_4.json")
+RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_5.json")
+CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_5.json")
+ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_5.json")
+EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_5.json")
+IMPLEMENTATION_KIT = Path("adoption/marked_bench_implementation_kit_v0_4_5.json")
+STANDARD_PROFILE = Path("standard/marked_bench_standard_profile_v0_4_5.json")
+SCORING_COMPATIBILITY_PROFILE = Path("standard/marked_bench_scoring_compatibility_v0_4_5.json")
 
 REQUIRED_PUBLIC_FILES = [
     Path("adoption/README.md"),
@@ -98,6 +103,7 @@ REQUIRED_PUBLIC_FILES = [
     EVIDENCE_LEDGER,
     IMPLEMENTATION_KIT,
     STANDARD_PROFILE,
+    SCORING_COMPATIBILITY_PROFILE,
     Path("adoption/implementation_kit/README.md"),
     Path("adoption/implementation_kit/github_actions_validate_result.yml"),
     Path("adoption/implementation_kit/result_claim_badge.md"),
@@ -131,6 +137,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("docs/RELEASE_NOTES_v0_4_2.md"),
     Path("docs/RELEASE_NOTES_v0_4_3.md"),
     Path("docs/RELEASE_NOTES_v0_4_4.md"),
+    Path("docs/RELEASE_NOTES_v0_4_5.md"),
     Path("docs/ROADMAP.md"),
     Path("docs/SUBMISSION_GUIDE.md"),
     Path("docs/THIRD_PARTY_EVIDENCE.md"),
@@ -146,6 +153,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("schemas/result_claim.schema.json"),
     Path("schemas/implementation_kit.schema.json"),
     Path("schemas/standard_profile.schema.json"),
+    Path("schemas/scoring_compatibility.schema.json"),
     Path("schemas/release_manifest.schema.json"),
     Path("schemas/conformance_report.schema.json"),
     Path("schemas/result_card.schema.json"),
@@ -195,6 +203,7 @@ SCHEMA_CONFORMANCE_FILES = {
     EVIDENCE_LEDGER: Path("schemas/third_party_evidence_ledger.schema.json"),
     IMPLEMENTATION_KIT: Path("schemas/implementation_kit.schema.json"),
     STANDARD_PROFILE: Path("schemas/standard_profile.schema.json"),
+    SCORING_COMPATIBILITY_PROFILE: Path("schemas/scoring_compatibility.schema.json"),
 }
 
 
@@ -212,6 +221,7 @@ def main() -> int:
         _validate_evidence_ledger(errors)
         _validate_implementation_kit(errors)
         _validate_standard_profile(errors)
+        _validate_scoring_compatibility_profile(errors)
         _validate_suite_manifests(errors)
         _validate_baseline_reports(errors)
         _validate_leaderboards(errors)
@@ -416,6 +426,19 @@ def _validate_standard_profile(errors: list[str]) -> None:
     validation = validate_standard_profile(profile, root=ROOT)
     if not validation["valid"]:
         errors.append(f"{STANDARD_PROFILE}: standard profile validation failed: {validation['errors']}")
+
+
+def _validate_scoring_compatibility_profile(errors: list[str]) -> None:
+    try:
+        profile = load_scoring_compatibility_profile(SCORING_COMPATIBILITY_PROFILE)
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        errors.append(f"{SCORING_COMPATIBILITY_PROFILE}: could not load scoring compatibility profile: {exc}")
+        return
+    validation = validate_scoring_compatibility_profile(profile, root=ROOT)
+    if not validation["valid"]:
+        errors.append(
+            f"{SCORING_COMPATIBILITY_PROFILE}: scoring compatibility validation failed: {validation['errors']}"
+        )
 
 
 def _validate_baseline_reports(errors: list[str]) -> None:

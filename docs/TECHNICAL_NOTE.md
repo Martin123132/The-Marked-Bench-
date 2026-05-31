@@ -77,12 +77,13 @@ This note summarizes the checked benchmark release artifacts for `contradiction-
 - Public result packets should pass `marked-bench --validate-publication-packet PACKET`.
 - Citeable score claims should pass `marked-bench --validate-result-claim CLAIM`.
 - Accepted entries should pass `marked-bench --validate-submission-review REVIEW`.
-- Public release artifacts are pinned by `releases/marked_bench_release_v0_4_4.json`.
-- Release conformance is captured by `conformance/marked_bench_conformance_v0_4_4.json`.
-- Benchmark standard requirements are captured by `standard/marked_bench_standard_profile_v0_4_4.json`.
-- External adoption metadata is captured by `adoption/marked_bench_adoption_packet_v0_4_4.json`.
-- External implementation guidance is captured by `adoption/marked_bench_implementation_kit_v0_4_4.json`.
-- Third-party evidence is recorded by `adoption/third_party_evidence_ledger_v0_4_4.json`.
+- Public release artifacts are pinned by `releases/marked_bench_release_v0_4_5.json`.
+- Release conformance is captured by `conformance/marked_bench_conformance_v0_4_5.json`.
+- Benchmark standard requirements are captured by `standard/marked_bench_standard_profile_v0_4_5.json`.
+- Scoring compatibility is captured by `standard/marked_bench_scoring_compatibility_v0_4_5.json`.
+- External adoption metadata is captured by `adoption/marked_bench_adoption_packet_v0_4_5.json`.
+- External implementation guidance is captured by `adoption/marked_bench_implementation_kit_v0_4_5.json`.
+- Third-party evidence is recorded by `adoption/third_party_evidence_ledger_v0_4_5.json`.
 - Repository artifact drift is checked by `python scripts/validate_benchmark_artifacts.py`.
 
 ## Current Limitations
