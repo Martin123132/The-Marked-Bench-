@@ -35,7 +35,7 @@
       "bytes": 584,
       "category": "root",
       "path": "CITATION.cff",
-      "sha256": "bf22e961734f3552c946433f85c39ea612bb70d7f9d38a8851339749b6b07d24"
+      "sha256": "7bd1b1068d5b42c44a4a62e7c4f56d200dd2585352530f02a4c09af9569b1dc6"
     },
     {
       "bytes": 1745,
@@ -44,16 +44,16 @@
       "sha256": "0a94df35bba34cf88e9601740682d63d4b281094e719741480fad5518d5056e9"
     },
     {
-      "bytes": 2421,
+      "bytes": 2350,
       "category": "root",
       "path": "LICENSE",
-      "sha256": "65f336e791f3f5dfc5d7da84e6d9bc197c1ab322de0ea5cf917610513265d313"
+      "sha256": "fe70234e152ad5faadd9d3e8dad33988186edba5ac618f3ce2b69be893fdf205"
     },
     {
-      "bytes": 6171,
+      "bytes": 6167,
       "category": "root",
       "path": "README.md",
-      "sha256": "451ccfbaae7e8068ee573045370f3b66b90edf56e36d19646658ca010b38e1aa"
+      "sha256": "c47246c29a0b1a023203f1f042b2ab9351a7aa305d943fef2453ab8080dee633"
     },
     {
       "bytes": 723,
@@ -152,10 +152,10 @@
       "sha256": "89766854b39a9c90f42986e797d4677a93cf4ca4acc90005edb992424a8ed935"
     },
     {
-      "bytes": 1050,
+      "bytes": 1154,
       "category": "governance",
       "path": "docs/RELEASE_NOTES_v0_3_2.md",
-      "sha256": "b3630a1e7bb28bfe91d67538a522520d0db6616990b61acfe74b2f68d74ef6ca"
+      "sha256": "f46eefc40376a9dad2fe6835caf7cf1b908f0c1262a27ee9159a44f733b12351"
     },
     {
       "bytes": 5291,

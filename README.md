@@ -178,5 +178,5 @@ edited after publication; add new coverage through a new suite version or track.
 
 ## License
 
-This repository currently uses the Motion-TimeSpace Non-Commercial License.
+This repository currently uses The Marked Bench Non-Commercial License.
 Commercial use requires a separate written license from the copyright holder.

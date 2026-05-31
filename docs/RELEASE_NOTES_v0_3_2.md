@@ -9,6 +9,8 @@ The Marked Bench v0.3.2 adds an end-to-end external submission demo.
   creates leaderboard submission metadata, builds a submission bundle, and
   validates the bundle.
 - Updated README, adoption guide, and submission guide with the demo command.
+- Replaced legacy project license branding with benchmark-specific The Marked
+  Bench license metadata.
 
 ## Why It Matters
 
