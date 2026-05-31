@@ -52,12 +52,16 @@ marked-bench --suite contradiction-adversarial --score-predictions predictions.j
 Each JSONL line should contain at least:
 
 ```json
-{"case_id":"marked-adv-direct-001","predicted":"direct_negation","detector_score":0.91,"detector_note":"optional rationale"}
+{"case_id":"marked-adv-direct-001","predicted":"direct_negation","detector_score":0.91,"rationale":"valid conflicts with invalid for the same token and review window","evidence":["access token remained valid through the review window","access token was invalid during the review window"]}
 ```
 
 `detector_score` is optional, but when supplied it must be a finite number from
 0 to 1. It is treated as confidence that the case contains a contradiction and
 is used for Brier score and expected calibration error.
+
+`rationale` and `evidence` are optional but recommended. They are carried into
+the benchmark report and summarized under `explanation_audit` so reviewers can
+see whether a result has inspectable reasoning evidence.
 
 Valid `predicted` labels are:
 

@@ -9,8 +9,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "security",
+      "evidence": [],
       "expected": "direct_negation",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "adversarial",
         "negation",
@@ -26,8 +28,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "governance",
+      "evidence": [],
       "expected": "direct_negation",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "adversarial",
         "negation",
@@ -43,8 +47,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "operations",
+      "evidence": [],
       "expected": "direct_negation",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "adversarial",
         "negation",
@@ -60,8 +66,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "benchmarking",
+      "evidence": [],
       "expected": "property_mismatch",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "adversarial",
         "numeric",
@@ -77,8 +85,10 @@
       "detector_score": 0.0,
       "difficulty": "medium",
       "domain": "measurement",
+      "evidence": [],
       "expected": "property_mismatch",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "adversarial",
         "unit",
@@ -94,8 +104,10 @@
       "detector_score": 0.0,
       "difficulty": "medium",
       "domain": "measurement",
+      "evidence": [],
       "expected": "none",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "control",
         "property",
@@ -111,8 +123,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "geometry",
+      "evidence": [],
       "expected": "definitional_violation",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "adversarial",
         "definition",
@@ -128,8 +142,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "math",
+      "evidence": [],
       "expected": "definitional_violation",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "adversarial",
         "definition",
@@ -145,8 +161,10 @@
       "detector_score": 0.0,
       "difficulty": "medium",
       "domain": "geometry",
+      "evidence": [],
       "expected": "none",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "control",
         "definition",
@@ -162,8 +180,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "ai_safety",
+      "evidence": [],
       "expected": "universal_counterexample",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "adversarial",
         "universal",
@@ -179,8 +199,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "data_governance",
+      "evidence": [],
       "expected": "universal_counterexample",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "adversarial",
         "universal",
@@ -196,8 +218,10 @@
       "detector_score": 0.0,
       "difficulty": "medium",
       "domain": "data_governance",
+      "evidence": [],
       "expected": "none",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "control",
         "universal",
@@ -213,8 +237,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "security",
+      "evidence": [],
       "expected": "temporal_conflict",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "adversarial",
         "temporal",
@@ -230,8 +256,10 @@
       "detector_score": 0.0,
       "difficulty": "medium",
       "domain": "operations",
+      "evidence": [],
       "expected": "temporal_conflict",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "adversarial",
         "temporal",
@@ -247,8 +275,10 @@
       "detector_score": 0.0,
       "difficulty": "medium",
       "domain": "operations",
+      "evidence": [],
       "expected": "none",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "control",
         "temporal",
@@ -264,8 +294,10 @@
       "detector_score": 0.0,
       "difficulty": "medium",
       "domain": "ai_safety",
+      "evidence": [],
       "expected": "none",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "control",
         "paraphrase",
@@ -281,8 +313,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "security",
+      "evidence": [],
       "expected": "none",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "control",
         "negation",
@@ -341,8 +375,18 @@
       "universal_counterexample": 0
     }
   },
-  "created_at": 1780183475.584,
-  "duration_seconds": 0.001712,
+  "created_at": 1780228158.913,
+  "duration_seconds": 0.000571,
+  "explanation_audit": {
+    "case_count": 17,
+    "correct_explanation_ready_rate": 0.0,
+    "evidence_count": 0,
+    "evidence_coverage": 0.0,
+    "explanation_ready_count": 0,
+    "explanation_ready_rate": 0.0,
+    "rationale_count": 0,
+    "rationale_coverage": 0.0
+  },
   "failures": [
     {
       "capability": "implicit_polarity",
@@ -352,8 +396,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "security",
+      "evidence": [],
       "expected": "direct_negation",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "adversarial",
         "negation",
@@ -369,8 +415,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "governance",
+      "evidence": [],
       "expected": "direct_negation",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "adversarial",
         "negation",
@@ -386,8 +434,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "operations",
+      "evidence": [],
       "expected": "direct_negation",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "adversarial",
         "negation",
@@ -403,8 +453,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "benchmarking",
+      "evidence": [],
       "expected": "property_mismatch",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "adversarial",
         "numeric",
@@ -420,8 +472,10 @@
       "detector_score": 0.0,
       "difficulty": "medium",
       "domain": "measurement",
+      "evidence": [],
       "expected": "property_mismatch",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "adversarial",
         "unit",
@@ -437,8 +491,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "geometry",
+      "evidence": [],
       "expected": "definitional_violation",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "adversarial",
         "definition",
@@ -454,8 +510,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "math",
+      "evidence": [],
       "expected": "definitional_violation",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "adversarial",
         "definition",
@@ -471,8 +529,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "ai_safety",
+      "evidence": [],
       "expected": "universal_counterexample",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "adversarial",
         "universal",
@@ -488,8 +548,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "data_governance",
+      "evidence": [],
       "expected": "universal_counterexample",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "adversarial",
         "universal",
@@ -505,8 +567,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "security",
+      "evidence": [],
       "expected": "temporal_conflict",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "adversarial",
         "temporal",
@@ -522,8 +586,10 @@
       "detector_score": 0.0,
       "difficulty": "medium",
       "domain": "operations",
+      "evidence": [],
       "expected": "temporal_conflict",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "adversarial",
         "temporal",
@@ -1108,7 +1174,7 @@
     "type_accuracy": 0.352941
   },
   "overall_score": 8.82,
-  "schema": "marked_bench.contradiction-benchmark-report.v1",
+  "schema": "marked_bench.contradiction-benchmark-report.v2",
   "suite_cases": [
     {
       "capability": "implicit_polarity",

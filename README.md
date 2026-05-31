@@ -6,8 +6,8 @@ systems can detect and classify contradictions between a premise and a query.
 The project is designed to become a reproducible public standard: every score
 is tied to a suite ID, suite version, deterministic suite hash, immutable case
 list, JSON report schema, confusion matrix, per-class metrics, confidence
-calibration metrics, validation result, diagnostic slice metrics, and
-leaderboard entry.
+calibration metrics, explanation-audit coverage, validation result, diagnostic
+slice metrics, and leaderboard entry.
 
 ## Current Tracks
 
@@ -64,7 +64,7 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public artifact SHA-256 digests:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_3_2.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_3_3.json
 ```
 
 Export the generated technical note:
@@ -85,9 +85,11 @@ marked-bench --suite contradiction-adversarial --score-predictions artifacts/pre
 ```
 
 Prediction files may be JSONL or JSON. Each record needs `case_id` and
-`predicted`; optional `detector_score` and `detector_note` fields are preserved
-in the final report. `detector_score` is interpreted as binary contradiction
-confidence on `[0, 1]` for calibration metrics.
+`predicted`; optional `detector_score`, `detector_note`, `rationale`, and
+`evidence` fields are preserved in the final report. `detector_score` is
+interpreted as binary contradiction confidence on `[0, 1]` for calibration
+metrics. `rationale` and `evidence` feed the report's explanation audit so
+reviewers can see whether a score is backed by inspectable reasoning evidence.
 
 Create and validate leaderboard submission metadata:
 
@@ -138,7 +140,7 @@ marked-bench --build-leaderboard baselines/always_none_multihop_v0_3_0.json base
 - Submission bundle schema: `schemas/submission_bundle.schema.json`
 - Adoption guide: `docs/ADOPTION_GUIDE.md`
 - Release notes: `docs/RELEASE_NOTES_v0_2_0.md`
-- Current release notes: `docs/RELEASE_NOTES_v0_3_2.md`
+- Current release notes: `docs/RELEASE_NOTES_v0_3_3.md`
 
 ## Quality Gates
 

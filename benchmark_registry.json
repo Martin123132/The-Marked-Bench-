@@ -11,16 +11,17 @@
     "docs/RELEASE_NOTES_v0_3_0.md",
     "docs/RELEASE_NOTES_v0_3_1.md",
     "docs/RELEASE_NOTES_v0_3_2.md",
+    "docs/RELEASE_NOTES_v0_3_3.md",
     "docs/SUBMISSION_GUIDE.md",
     "docs/RELEASE_CHECKLIST.md"
   ],
   "project": "The Marked Bench",
   "schema": "marked_bench.benchmark-registry.v1",
   "schema_ids": {
-    "benchmark_report": "marked_bench.contradiction-benchmark-report.v1",
+    "benchmark_report": "marked_bench.contradiction-benchmark-report.v2",
     "leaderboard": "marked_bench.benchmark-leaderboard.v1",
     "leaderboard_submission": "marked_bench.leaderboard-submission.v1",
-    "predictions": "marked_bench.contradiction-predictions.v1",
+    "predictions": "marked_bench.contradiction-predictions.v2",
     "submission_bundle": "marked_bench.leaderboard-submission-bundle.v1",
     "suite_manifest": "marked_bench.contradiction-suite-manifest.v1"
   },
@@ -62,7 +63,7 @@
       ],
       "leaderboard": "leaderboard/leaderboard_v0_1_0.json",
       "name": "contradiction",
-      "prediction_schema": "marked_bench.contradiction-predictions.v1",
+      "prediction_schema": "marked_bench.contradiction-predictions.v2",
       "profile": {
         "capability_counts": {
           "counterexample_detection": 1,
@@ -138,7 +139,7 @@
           "universal": 2
         }
       },
-      "report_schema": "marked_bench.contradiction-benchmark-report.v1",
+      "report_schema": "marked_bench.contradiction-benchmark-report.v2",
       "status": "foundation",
       "suite_hash": "8c1f80ff67874af54869bab2e361b3cc7416ce1d86f80ff583636a55e3462765",
       "suite_id": "marked-bench-contradiction-standard",
@@ -173,7 +174,7 @@
       ],
       "leaderboard": "leaderboard/leaderboard_adversarial_v0_2_0.json",
       "name": "contradiction-adversarial",
-      "prediction_schema": "marked_bench.contradiction-predictions.v1",
+      "prediction_schema": "marked_bench.contradiction-predictions.v2",
       "profile": {
         "capability_counts": {
           "condition_shift_control": 1,
@@ -256,7 +257,7 @@
           "universal": 3
         }
       },
-      "report_schema": "marked_bench.contradiction-benchmark-report.v1",
+      "report_schema": "marked_bench.contradiction-benchmark-report.v2",
       "status": "active",
       "suite_hash": "454c1aff69d5028224549dfc14fd8e6c10818251d0abf8becf36f0856b2dbd67",
       "suite_id": "marked-bench-contradiction-adversarial",
@@ -291,7 +292,7 @@
       ],
       "leaderboard": "leaderboard/leaderboard_multihop_v0_3_0.json",
       "name": "contradiction-multihop",
-      "prediction_schema": "marked_bench.contradiction-predictions.v1",
+      "prediction_schema": "marked_bench.contradiction-predictions.v2",
       "profile": {
         "capability_counts": {
           "benchmark_metadata_control": 1,
@@ -373,7 +374,7 @@
           "universal": 3
         }
       },
-      "report_schema": "marked_bench.contradiction-benchmark-report.v1",
+      "report_schema": "marked_bench.contradiction-benchmark-report.v2",
       "status": "active",
       "suite_hash": "07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f",
       "suite_id": "marked-bench-contradiction-multihop",

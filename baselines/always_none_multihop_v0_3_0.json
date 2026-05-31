@@ -9,8 +9,10 @@
       "detector_score": 0.0,
       "difficulty": "expert",
       "domain": "governance",
+      "evidence": [],
       "expected": "direct_negation",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "negation",
@@ -27,8 +29,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "security",
+      "evidence": [],
       "expected": "direct_negation",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "negation",
@@ -45,8 +49,10 @@
       "detector_score": 0.0,
       "difficulty": "medium",
       "domain": "research",
+      "evidence": [],
       "expected": "none",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "control",
@@ -62,8 +68,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "benchmarking",
+      "evidence": [],
       "expected": "property_mismatch",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "numeric",
@@ -80,8 +88,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "measurement",
+      "evidence": [],
       "expected": "property_mismatch",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "unit",
@@ -98,8 +108,10 @@
       "detector_score": 0.0,
       "difficulty": "medium",
       "domain": "measurement",
+      "evidence": [],
       "expected": "none",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "control",
@@ -115,8 +127,10 @@
       "detector_score": 0.0,
       "difficulty": "expert",
       "domain": "data_governance",
+      "evidence": [],
       "expected": "definitional_violation",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "definition",
@@ -132,8 +146,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "compliance",
+      "evidence": [],
       "expected": "definitional_violation",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "definition",
@@ -149,8 +165,10 @@
       "detector_score": 0.0,
       "difficulty": "medium",
       "domain": "data_governance",
+      "evidence": [],
       "expected": "none",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "control",
@@ -166,8 +184,10 @@
       "detector_score": 0.0,
       "difficulty": "expert",
       "domain": "ai_safety",
+      "evidence": [],
       "expected": "universal_counterexample",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "universal",
@@ -184,8 +204,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "records",
+      "evidence": [],
       "expected": "universal_counterexample",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "universal",
@@ -202,8 +224,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "ai_safety",
+      "evidence": [],
       "expected": "none",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "control",
@@ -220,8 +244,10 @@
       "detector_score": 0.0,
       "difficulty": "expert",
       "domain": "operations",
+      "evidence": [],
       "expected": "temporal_conflict",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "temporal",
@@ -238,8 +264,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "infrastructure",
+      "evidence": [],
       "expected": "temporal_conflict",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "temporal",
@@ -255,8 +283,10 @@
       "detector_score": 0.0,
       "difficulty": "medium",
       "domain": "operations",
+      "evidence": [],
       "expected": "none",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "control",
@@ -272,8 +302,10 @@
       "detector_score": 0.0,
       "difficulty": "medium",
       "domain": "benchmarking",
+      "evidence": [],
       "expected": "none",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "control",
@@ -289,8 +321,10 @@
       "detector_score": 0.0,
       "difficulty": "medium",
       "domain": "operations",
+      "evidence": [],
       "expected": "none",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "control",
@@ -306,8 +340,10 @@
       "detector_score": 0.0,
       "difficulty": "medium",
       "domain": "privacy",
+      "evidence": [],
       "expected": "none",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "control",
@@ -366,8 +402,18 @@
       "universal_counterexample": 0
     }
   },
-  "created_at": 1780224899.876,
-  "duration_seconds": 0.000592,
+  "created_at": 1780228158.919,
+  "duration_seconds": 0.000594,
+  "explanation_audit": {
+    "case_count": 18,
+    "correct_explanation_ready_rate": 0.0,
+    "evidence_count": 0,
+    "evidence_coverage": 0.0,
+    "explanation_ready_count": 0,
+    "explanation_ready_rate": 0.0,
+    "rationale_count": 0,
+    "rationale_coverage": 0.0
+  },
   "failures": [
     {
       "capability": "policy_chain_negation",
@@ -377,8 +423,10 @@
       "detector_score": 0.0,
       "difficulty": "expert",
       "domain": "governance",
+      "evidence": [],
       "expected": "direct_negation",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "negation",
@@ -395,8 +443,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "security",
+      "evidence": [],
       "expected": "direct_negation",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "negation",
@@ -413,8 +463,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "benchmarking",
+      "evidence": [],
       "expected": "property_mismatch",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "numeric",
@@ -431,8 +483,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "measurement",
+      "evidence": [],
       "expected": "property_mismatch",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "unit",
@@ -449,8 +503,10 @@
       "detector_score": 0.0,
       "difficulty": "expert",
       "domain": "data_governance",
+      "evidence": [],
       "expected": "definitional_violation",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "definition",
@@ -466,8 +522,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "compliance",
+      "evidence": [],
       "expected": "definitional_violation",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "definition",
@@ -483,8 +541,10 @@
       "detector_score": 0.0,
       "difficulty": "expert",
       "domain": "ai_safety",
+      "evidence": [],
       "expected": "universal_counterexample",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "universal",
@@ -501,8 +561,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "records",
+      "evidence": [],
       "expected": "universal_counterexample",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "universal",
@@ -519,8 +581,10 @@
       "detector_score": 0.0,
       "difficulty": "expert",
       "domain": "operations",
+      "evidence": [],
       "expected": "temporal_conflict",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "temporal",
@@ -537,8 +601,10 @@
       "detector_score": 0.0,
       "difficulty": "hard",
       "domain": "infrastructure",
+      "evidence": [],
       "expected": "temporal_conflict",
       "predicted": "none",
+      "rationale": null,
       "tags": [
         "multihop",
         "temporal",
@@ -1115,7 +1181,7 @@
     "type_accuracy": 0.444444
   },
   "overall_score": 11.11,
-  "schema": "marked_bench.contradiction-benchmark-report.v1",
+  "schema": "marked_bench.contradiction-benchmark-report.v2",
   "suite_cases": [
     {
       "capability": "policy_chain_negation",

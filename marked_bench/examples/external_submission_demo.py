@@ -101,6 +101,8 @@ def _write_demo_predictions(path: Path, *, suite: str) -> None:
                 "predicted": "none",
                 "detector_score": 0.0,
                 "detector_note": "Demo external system predicts no contradiction.",
+                "rationale": "Demo external system predicts no contradiction for every case.",
+                "evidence": [record["premise"], record["query"]],
             }
         )
     path.write_text(

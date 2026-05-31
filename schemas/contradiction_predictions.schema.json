@@ -18,18 +18,20 @@
       ],
       "properties": {
         "schema": {
-          "const": "marked_bench.contradiction-predictions.v1"
+          "const": "marked_bench.contradiction-predictions.v2"
         },
         "suite_id": {
           "enum": [
             "marked-bench-contradiction-standard",
-            "marked-bench-contradiction-adversarial"
+            "marked-bench-contradiction-adversarial",
+            "marked-bench-contradiction-multihop"
           ]
         },
         "suite_version": {
           "enum": [
             "0.1.0",
-            "0.2.0"
+            "0.2.0",
+            "0.3.0"
           ]
         },
         "suite_hash": {
@@ -88,8 +90,30 @@
             "string",
             "null"
           ]
+        },
+        "rationale": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
         }
       }
+    },
+    "evidence": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
     },
     "prediction_array": {
       "type": "array",

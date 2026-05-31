@@ -39,6 +39,7 @@ domains, difficulties, capabilities, and tags.
 - Binary contradiction-vs-none F1.
 - Confidence calibration Brier score and expected calibration error.
 - Class coverage index.
+- Explanation-audit coverage for optional rationale/evidence fields.
 - Diagnostic slice metrics by domain, difficulty, capability, and tag.
 - Confusion matrix and failure list.
 
@@ -85,6 +86,7 @@ All public reports must include:
 - full canonical case list
 - one case result per canonical case
 - aggregate metrics
+- explanation-audit coverage
 - confusion matrix
 - failures
 

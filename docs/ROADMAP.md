@@ -22,10 +22,12 @@ This roadmap keeps the benchmark moving toward a credible public standard.
 - Adoption guide for external users.
 - Versioned release notes.
 - Versioned multi-hop contradiction track.
+- Structured rationale/evidence fields with explanation-audit coverage in
+  scored reports.
 
 ## Next
 
-- Add model-explanation scoring fields.
+- Add human review rubrics for explanation quality beyond coverage.
 - Add more non-contradiction distractor controls.
 - Add optional JSON Schema validation in CI when a schema validator dependency
   is available.

@@ -1,5 +1,5 @@
 {
-  "created_at": 1780183475.65,
+  "created_at": 1780228158.968,
   "entries": [
     {
       "calibration_brier_score": 0.436729,
@@ -12,8 +12,8 @@
       "overall_score": 52.37,
       "rank": 1,
       "report_path": "baselines/contradiction_engine_adversarial_v0_2_0.json",
-      "report_schema": "marked_bench.contradiction-benchmark-report.v1",
-      "report_sha256": "01b51e7d76812e2021bead353fcd056e9a845b80242c0aa3446e052d2d85cd8c",
+      "report_schema": "marked_bench.contradiction-benchmark-report.v2",
+      "report_sha256": "6c37a8ca3ee43252dfafeb053b09433bab36afeaa051c80795fb7a95012a9d73",
       "suite_hash": "454c1aff69d5028224549dfc14fd8e6c10818251d0abf8becf36f0856b2dbd67",
       "suite_id": "marked-bench-contradiction-adversarial",
       "suite_version": "0.2.0",
@@ -32,8 +32,8 @@
       "overall_score": 8.82,
       "rank": 2,
       "report_path": "baselines/always_none_adversarial_v0_2_0.json",
-      "report_schema": "marked_bench.contradiction-benchmark-report.v1",
-      "report_sha256": "ff61e29615709991666bea156872b46f4bb63c96997f061ba365861ecc2da6d6",
+      "report_schema": "marked_bench.contradiction-benchmark-report.v2",
+      "report_sha256": "c965975dba10ba54b4546cdecd3b41665b9f1a8b230a1ea8b1884d1d95a62960",
       "suite_hash": "454c1aff69d5028224549dfc14fd8e6c10818251d0abf8becf36f0856b2dbd67",
       "suite_id": "marked-bench-contradiction-adversarial",
       "suite_version": "0.2.0",

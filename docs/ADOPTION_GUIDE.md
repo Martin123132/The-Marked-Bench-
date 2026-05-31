@@ -12,6 +12,7 @@ Every published result should pin:
 - suite hash
 - report schema
 - exact report JSON
+- explanation-audit coverage, when rationale/evidence fields are submitted
 
 The current default public track is `contradiction-multihop`:
 
@@ -31,6 +32,8 @@ Do not compare systems across different suite hashes.
 4. Build and validate a submission bundle.
 5. Disclose model, prompting, preprocessing, retrieval, postprocessing,
    training data, and runtime details.
+6. Include `rationale` and `evidence` in prediction records when the system can
+   expose its decision basis.
 
 ```bash
 marked-bench --create-submission your-submission.json --submission-report your-system-report.json --system-version "1.0.0" --submitter "name-or-org"

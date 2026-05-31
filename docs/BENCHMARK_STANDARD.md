@@ -15,7 +15,7 @@ schema, confusion matrix, and per-class metrics.
 - Adversarial suite version: `0.2.0`
 - Multi-hop suite ID: `marked-bench-contradiction-multihop`
 - Multi-hop suite version: `0.3.0`
-- Report schema: `marked_bench.contradiction-benchmark-report.v1`
+- Report schema: `marked_bench.contradiction-benchmark-report.v2`
 - Canonical builder: `marked_bench.contradiction.benchmark_suite.build_standard_suite`
 
 Every manifest, report, leaderboard entry, registry track, and leaderboard
@@ -53,6 +53,8 @@ The report includes:
 - `coverage_index`: share of contradiction classes with non-zero recall.
 - `detection`: binary contradiction-vs-none metrics.
 - `calibration`: binary confidence calibration from `detector_score`.
+- `explanation_audit`: rationale and evidence coverage for reviewer-facing
+  explanation evidence.
 - `per_class`: precision, recall, F1, and support for every label.
 - `slices`: diagnostic performance by domain, difficulty, capability, and tag.
 - `confusion_matrix`: expected label by predicted label.
@@ -137,7 +139,7 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public benchmark artifacts by SHA-256:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_3_2.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_3_3.json
 ```
 
 Run the harder adversarial track:
@@ -208,6 +210,13 @@ marked-bench --create-submission artifacts/my-detector-submission.json --submiss
 marked-bench --validate-submission artifacts/my-detector-submission.json
 ```
 
+External prediction records may include `rationale` and `evidence`. `rationale`
+is the system's short explanation for the predicted label. `evidence` is a list
+of quoted or named premise/query spans that support the decision. These fields
+do not change the primary score in v0.3.3, but the report includes
+`explanation_audit` coverage so reviewers can separate bare labels from
+inspectable submissions.
+
 ## Standardization Rules
 
 - Do not edit the meaning of existing case IDs after publication.
@@ -227,5 +236,7 @@ marked-bench --validate-submission artifacts/my-detector-submission.json
 Version `0.1.0` is a foundation suite. Version `0.2.0` adds an adversarial
 track with longer context, implicit contradictions, paraphrase traps, and
 distractor controls. Version `0.3.0` adds a multi-hop track for linked-evidence
-contradictions. The next step toward a larger public standard is adding
-model-generated explanation review and third-party submissions.
+contradictions. Release `0.3.3` upgrades public report and prediction schemas
+for rationale/evidence audit fields and aligns schemas with the default
+multi-hop track. The next step toward a larger public standard is human review
+of explanation quality and third-party submissions.

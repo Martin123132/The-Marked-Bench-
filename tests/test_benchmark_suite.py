@@ -155,9 +155,33 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertIn("profile", registry["tracks"][0])
         self.assertEqual(registry["tracks"][0]["profile"], build_suite_profile())
 
+    def test_public_json_schemas_cover_current_default_track(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        prediction_schema = json.loads(
+            (root / "schemas" / "contradiction_predictions.schema.json").read_text(encoding="utf-8-sig")
+        )
+        report_schema = json.loads(
+            (root / "schemas" / "contradiction_benchmark_report.schema.json").read_text(encoding="utf-8-sig")
+        )
+
+        self.assertEqual(
+            prediction_schema["oneOf"][1]["properties"]["schema"]["const"],
+            PREDICTION_SCHEMA,
+        )
+        self.assertIn(MULTIHOP_SUITE_ID, prediction_schema["oneOf"][1]["properties"]["suite_id"]["enum"])
+        self.assertIn("0.3.0", prediction_schema["oneOf"][1]["properties"]["suite_version"]["enum"])
+        self.assertIn("rationale", prediction_schema["$defs"]["prediction"]["properties"])
+        self.assertIn("evidence", prediction_schema["$defs"]["prediction"]["properties"])
+        self.assertEqual(report_schema["properties"]["schema"]["const"], REPORT_SCHEMA)
+        self.assertIn(MULTIHOP_SUITE_ID, report_schema["properties"]["suite_id"]["enum"])
+        self.assertIn("0.3.0", report_schema["properties"]["suite_version"]["enum"])
+        self.assertIn("explanation_audit", report_schema["required"])
+        self.assertIn("rationale", report_schema["$defs"]["case_result"]["required"])
+        self.assertIn("evidence", report_schema["$defs"]["case_result"]["required"])
+
     def test_checked_in_release_manifest_matches_current_artifacts(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "releases" / "marked_bench_release_v0_3_2.json"
+        path = root / "releases" / "marked_bench_release_v0_3_3.json"
 
         manifest = json.loads(path.read_text(encoding="utf-8"))
 
@@ -329,6 +353,33 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertEqual(report["system_name"], "ExternalPerfect")
         self.assertEqual(report["overall_score"], 100.0)
         self.assertEqual(report["failures"], [])
+        self.assertTrue(validate_benchmark_report(report)["valid"])
+
+    def test_external_prediction_records_preserve_explanation_evidence(self) -> None:
+        cases = build_adversarial_suite()
+        predictions = [
+            {
+                "case_id": case.id,
+                "predicted": case.expected.value,
+                "detector_score": 1.0,
+                "rationale": f"Matches expected label for {case.id}.",
+                "evidence": [case.premise, case.query],
+            }
+            for case in cases
+        ]
+
+        report = evaluate_prediction_records(
+            predictions,
+            system_name="ExternalExplained",
+            suite="contradiction-adversarial",
+        )
+
+        self.assertEqual(report["overall_score"], 100.0)
+        self.assertEqual(report["case_results"][0]["rationale"], f"Matches expected label for {cases[0].id}.")
+        self.assertEqual(report["case_results"][0]["evidence"], [cases[0].premise, cases[0].query])
+        self.assertEqual(report["explanation_audit"]["rationale_count"], len(cases))
+        self.assertEqual(report["explanation_audit"]["evidence_count"], len(cases))
+        self.assertEqual(report["explanation_audit"]["explanation_ready_rate"], 1.0)
         self.assertTrue(validate_benchmark_report(report)["valid"])
 
     def test_external_prediction_records_require_full_canonical_coverage(self) -> None:

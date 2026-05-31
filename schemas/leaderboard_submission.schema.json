@@ -60,7 +60,7 @@
       "pattern": "^[a-fA-F0-9]{64}$"
     },
     "report_schema": {
-      "const": "marked_bench.contradiction-benchmark-report.v1"
+      "const": "marked_bench.contradiction-benchmark-report.v2"
     },
     "report_path": {
       "type": "string",

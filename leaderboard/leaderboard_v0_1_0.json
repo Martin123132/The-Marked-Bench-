@@ -1,5 +1,5 @@
 {
-  "created_at": 1780183475.619,
+  "created_at": 1780228158.945,
   "entries": [
     {
       "calibration_brier_score": 0.033965,
@@ -12,8 +12,8 @@
       "overall_score": 100.0,
       "rank": 1,
       "report_path": "baselines/contradiction_engine_v0_1_0.json",
-      "report_schema": "marked_bench.contradiction-benchmark-report.v1",
-      "report_sha256": "fedf8e00fa706c166bac9c3fc28a09842fae312e4fd0155a90488b4f66718ce5",
+      "report_schema": "marked_bench.contradiction-benchmark-report.v2",
+      "report_sha256": "63892e8732090bdd27ac95cb63882e10f59b47bed3c03aed4a43d4b488c7b834",
       "suite_hash": "8c1f80ff67874af54869bab2e361b3cc7416ce1d86f80ff583636a55e3462765",
       "suite_id": "marked-bench-contradiction-standard",
       "suite_version": "0.1.0",
@@ -32,8 +32,8 @@
       "overall_score": 8.82,
       "rank": 2,
       "report_path": "baselines/always_none_v0_1_0.json",
-      "report_schema": "marked_bench.contradiction-benchmark-report.v1",
-      "report_sha256": "b02819f80a5373b068ab4bd08a00183263fc13bb90caece9cd55ca2170419623",
+      "report_schema": "marked_bench.contradiction-benchmark-report.v2",
+      "report_sha256": "1556817246fdcd8468896fac2d9109566cc10322d1553e6cd4b27f0be56d37ee",
       "suite_hash": "8c1f80ff67874af54869bab2e361b3cc7416ce1d86f80ff583636a55e3462765",
       "suite_id": "marked-bench-contradiction-standard",
       "suite_version": "0.1.0",

@@ -6,6 +6,7 @@ The suite is intentionally model-agnostic: any detector that accepts a
 ``Claim`` and returns a ``Contradiction`` or ``None`` can be scored.
 """
 
+from collections.abc import Sequence as SequenceABC
 from dataclasses import asdict, dataclass
 import hashlib
 import json
@@ -23,10 +24,11 @@ ADVERSARIAL_SUITE_ID = "marked-bench-contradiction-adversarial"
 ADVERSARIAL_SUITE_VERSION = "0.2.0"
 MULTIHOP_SUITE_ID = "marked-bench-contradiction-multihop"
 MULTIHOP_SUITE_VERSION = "0.3.0"
-REPORT_SCHEMA = "marked_bench.contradiction-benchmark-report.v1"
+REPORT_SCHEMA = "marked_bench.contradiction-benchmark-report.v2"
 VALIDATION_SCHEMA = "marked_bench.contradiction-benchmark-validation.v1"
 SUITE_MANIFEST_SCHEMA = "marked_bench.contradiction-suite-manifest.v1"
-PREDICTION_SCHEMA = "marked_bench.contradiction-predictions.v1"
+PREDICTION_SCHEMA = "marked_bench.contradiction-predictions.v2"
+LEGACY_PREDICTION_SCHEMAS = {"marked_bench.contradiction-predictions.v1"}
 DEFAULT_SUITE = "standard"
 
 Detector = Callable[[Claim], Contradiction | None]
@@ -766,6 +768,8 @@ def evaluate_standard_suite(
                 "detection_correct": _is_contradiction(predicted) == _is_contradiction(case.expected),
                 "detector_score": detected.score if detected else 0.0,
                 "detector_note": detected.note if detected else None,
+                "rationale": detected.note if detected else None,
+                "evidence": [],
             }
         )
 
@@ -782,6 +786,7 @@ def evaluate_standard_suite(
         "case_count": len(case_results),
         "overall_score": scores["overall_score"],
         "metrics": scores["metrics"],
+        "explanation_audit": _explanation_audit(case_results),
         "confusion_matrix": scores["confusion_matrix"],
         "failures": scores["failures"],
         "case_results": case_results,
@@ -800,8 +805,10 @@ def evaluate_prediction_records(
 
     Prediction records must cover every canonical case exactly once. Each
     record needs a ``case_id`` and a ``predicted`` label. Optional
-    ``detector_score`` and ``detector_note`` fields are copied into the final
-    report.
+    ``detector_score``, ``detector_note``, ``rationale``, and ``evidence``
+    fields are copied into the final report. ``detector_note`` is retained for
+    compatibility; ``rationale`` is the preferred reviewer-facing explanation
+    field.
     """
 
     suite_cases = list(cases or build_suite(suite))
@@ -827,6 +834,8 @@ def evaluate_prediction_records(
                 "detection_correct": _is_contradiction(predicted) == _is_contradiction(case.expected),
                 "detector_score": prediction["detector_score"],
                 "detector_note": prediction["detector_note"],
+                "rationale": prediction["rationale"],
+                "evidence": prediction["evidence"],
             }
         )
 
@@ -843,6 +852,7 @@ def evaluate_prediction_records(
         "case_count": len(case_results),
         "overall_score": scores["overall_score"],
         "metrics": scores["metrics"],
+        "explanation_audit": _explanation_audit(case_results),
         "confusion_matrix": scores["confusion_matrix"],
         "failures": scores["failures"],
         "case_results": case_results,
@@ -1079,6 +1089,9 @@ def validate_benchmark_report(
                 errors.append(f"{case_id}: detection_correct is inconsistent with expected/predicted")
             try:
                 detector_score = _normalize_detector_score(item.get("detector_score", 0.0))
+                detector_note = _normalize_optional_text(item.get("detector_note"))
+                rationale = _normalize_optional_text(item.get("rationale", detector_note))
+                evidence = _normalize_evidence(item.get("evidence", []))
             except ValueError as exc:
                 errors.append(f"{case_id}: {exc}")
                 continue
@@ -1094,7 +1107,9 @@ def validate_benchmark_report(
                     "type_correct": type_correct,
                     "detection_correct": detection_correct,
                     "detector_score": detector_score,
-                    "detector_note": item.get("detector_note"),
+                    "detector_note": detector_note,
+                    "rationale": rationale,
+                    "evidence": evidence,
                 }
             )
 
@@ -1102,6 +1117,7 @@ def validate_benchmark_report(
         recomputed = _score_case_results(normalized_results)
         _expect_equal(report, "overall_score", recomputed["overall_score"], errors)
         _expect_equal(report, "metrics", recomputed["metrics"], errors)
+        _expect_equal(report, "explanation_audit", _explanation_audit(normalized_results), errors)
         _expect_equal(report, "confusion_matrix", recomputed["confusion_matrix"], errors)
         _expect_equal(report, "failures", recomputed["failures"], errors)
         if not report.get("system_name"):
@@ -1146,7 +1162,7 @@ def _prediction_records_from_payload(payload: Any, path: str | Path) -> list[dic
     if isinstance(payload, list):
         records = payload
     elif isinstance(payload, Mapping):
-        if payload.get("schema") not in {None, PREDICTION_SCHEMA}:
+        if payload.get("schema") not in {None, PREDICTION_SCHEMA, *LEGACY_PREDICTION_SCHEMAS}:
             raise ValueError(f"{path}: unsupported prediction schema {payload.get('schema')!r}")
         records = payload.get("predictions")
     else:
@@ -1183,7 +1199,7 @@ def _validate_prediction_submission_metadata(payload: Any, suite: str) -> None:
     suite_id, suite_version = _suite_identity(suite)
     suite_hash = build_suite_hash(suite=suite)
     errors = []
-    if payload.get("schema") not in {None, PREDICTION_SCHEMA}:
+    if payload.get("schema") not in {None, PREDICTION_SCHEMA, *LEGACY_PREDICTION_SCHEMAS}:
         errors.append(f"unsupported prediction schema {payload.get('schema')!r}")
     if "suite_id" in payload and payload.get("suite_id") != suite_id:
         errors.append(f"suite_id mismatch: expected {suite_id!r}, got {payload.get('suite_id')!r}")
@@ -1227,11 +1243,19 @@ def _normalize_prediction_records(
         except ValueError as exc:
             errors.append(f"{case_id}: {exc}")
             continue
-        detector_note = prediction.get("detector_note")
+        try:
+            detector_note = _normalize_optional_text(prediction.get("detector_note"))
+            rationale = _normalize_optional_text(prediction.get("rationale", detector_note))
+            evidence = _normalize_evidence(prediction.get("evidence", []))
+        except ValueError as exc:
+            errors.append(f"{case_id}: {exc}")
+            continue
         prediction_by_case[case_id] = {
             "predicted": label,
             "detector_score": detector_score,
-            "detector_note": None if detector_note is None else str(detector_note),
+            "detector_note": detector_note,
+            "rationale": rationale,
+            "evidence": evidence,
         }
 
     missing = [case_id for case_id in canonical_ids if case_id not in prediction_by_case]
@@ -1277,6 +1301,31 @@ def _normalize_detector_score(raw_score: Any) -> float:
     return score
 
 
+def _normalize_optional_text(raw_value: Any) -> str | None:
+    if raw_value is None:
+        return None
+    value = str(raw_value).strip()
+    return value or None
+
+
+def _normalize_evidence(raw_evidence: Any) -> list[str]:
+    if raw_evidence is None:
+        return []
+    if isinstance(raw_evidence, str):
+        value = raw_evidence.strip()
+        return [value] if value else []
+    if not isinstance(raw_evidence, SequenceABC) or isinstance(raw_evidence, (bytes, bytearray)):
+        raise ValueError("evidence must be a string or a list of strings")
+    evidence = []
+    for item in raw_evidence:
+        if item is None:
+            continue
+        value = str(item).strip()
+        if value:
+            evidence.append(value)
+    return evidence
+
+
 def _prediction_template_record(case: BenchmarkCase) -> dict[str, Any]:
     return {
         "case_id": case.id,
@@ -1285,6 +1334,8 @@ def _prediction_template_record(case: BenchmarkCase) -> dict[str, Any]:
         "predicted": ContradictionType.NONE.value,
         "detector_score": 0.0,
         "detector_note": "",
+        "rationale": "",
+        "evidence": [],
     }
 
 
@@ -1381,6 +1432,41 @@ def _score_case_results(case_results: list[dict[str, Any]]) -> dict[str, Any]:
         "confusion_matrix": confusion,
         "failures": [item for item in case_results if not item["type_correct"]],
     }
+
+
+def _explanation_audit(case_results: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    case_count = len(case_results)
+    rationale_count = sum(1 for item in case_results if _has_rationale(item))
+    evidence_count = sum(1 for item in case_results if _has_evidence(item))
+    explanation_ready_count = sum(1 for item in case_results if _has_rationale(item) and _has_evidence(item))
+    correct_items = [item for item in case_results if item.get("type_correct") is True]
+    correct_explanation_ready_count = sum(
+        1 for item in correct_items if _has_rationale(item) and _has_evidence(item)
+    )
+    return {
+        "case_count": case_count,
+        "rationale_count": rationale_count,
+        "evidence_count": evidence_count,
+        "explanation_ready_count": explanation_ready_count,
+        "rationale_coverage": round(rationale_count / max(case_count, 1), 6),
+        "evidence_coverage": round(evidence_count / max(case_count, 1), 6),
+        "explanation_ready_rate": round(explanation_ready_count / max(case_count, 1), 6),
+        "correct_explanation_ready_rate": round(
+            correct_explanation_ready_count / max(len(correct_items), 1),
+            6,
+        ),
+    }
+
+
+def _has_rationale(item: Mapping[str, Any]) -> bool:
+    return bool(_normalize_optional_text(item.get("rationale")))
+
+
+def _has_evidence(item: Mapping[str, Any]) -> bool:
+    try:
+        return bool(_normalize_evidence(item.get("evidence", [])))
+    except ValueError:
+        return False
 
 
 def _label_values() -> list[str]:

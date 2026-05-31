@@ -14,6 +14,7 @@
     "case_count",
     "overall_score",
     "metrics",
+    "explanation_audit",
     "confusion_matrix",
     "failures",
     "case_results",
@@ -21,18 +22,20 @@
   ],
   "properties": {
     "schema": {
-      "const": "marked_bench.contradiction-benchmark-report.v1"
+      "const": "marked_bench.contradiction-benchmark-report.v2"
     },
     "suite_id": {
       "enum": [
         "marked-bench-contradiction-standard",
-        "marked-bench-contradiction-adversarial"
+        "marked-bench-contradiction-adversarial",
+        "marked-bench-contradiction-multihop"
       ]
     },
     "suite_version": {
       "enum": [
         "0.1.0",
-        "0.2.0"
+        "0.2.0",
+        "0.3.0"
       ]
     },
     "suite_hash": {
@@ -74,6 +77,9 @@
     },
     "confusion_matrix": {
       "type": "object"
+    },
+    "explanation_audit": {
+      "$ref": "#/$defs/explanation_audit"
     },
     "failures": {
       "type": "array",
@@ -118,7 +124,9 @@
         "type_correct",
         "detection_correct",
         "detector_score",
-        "detector_note"
+        "detector_note",
+        "rationale",
+        "evidence"
       ],
       "properties": {
         "case_id": {
@@ -161,6 +169,69 @@
             "string",
             "null"
           ]
+        },
+        "rationale": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "explanation_audit": {
+      "type": "object",
+      "required": [
+        "case_count",
+        "rationale_count",
+        "evidence_count",
+        "explanation_ready_count",
+        "rationale_coverage",
+        "evidence_coverage",
+        "explanation_ready_rate",
+        "correct_explanation_ready_rate"
+      ],
+      "properties": {
+        "case_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rationale_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "evidence_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "explanation_ready_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rationale_coverage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "evidence_coverage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "explanation_ready_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "correct_explanation_ready_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
         }
       }
     },
