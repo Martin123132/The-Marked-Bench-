@@ -16,7 +16,9 @@ from marked_bench.benchmark_leaderboard import build_leaderboard  # noqa: E402
 from marked_bench.benchmark_release import build_release_manifest  # noqa: E402
 from marked_bench.benchmark_registry import build_benchmark_registry  # noqa: E402
 from marked_bench.benchmark_technical_note import build_technical_note  # noqa: E402
+from marked_bench.schema_validation import validate_json_file, validate_json_schema  # noqa: E402
 from marked_bench.contradiction.benchmark_suite import (  # noqa: E402
+    build_prediction_template,
     build_suite_manifest,
     validate_benchmark_report,
 )
@@ -53,7 +55,7 @@ LEADERBOARDS = {
 }
 
 BENCHMARK_REGISTRY = Path("benchmark_registry.json")
-RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_4.json")
+RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_5.json")
 
 REQUIRED_PUBLIC_FILES = [
     Path("README.md"),
@@ -73,6 +75,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("docs/RELEASE_NOTES_v0_3_2.md"),
     Path("docs/RELEASE_NOTES_v0_3_3.md"),
     Path("docs/RELEASE_NOTES_v0_3_4.md"),
+    Path("docs/RELEASE_NOTES_v0_3_5.md"),
     Path("docs/ROADMAP.md"),
     Path("docs/SUBMISSION_GUIDE.md"),
     Path("schemas/benchmark_registry.schema.json"),
@@ -90,6 +93,14 @@ REQUIRED_PUBLIC_FILES = [
     Path(".github/workflows/benchmark-ci.yml"),
 ]
 
+SCHEMA_CONFORMANCE_FILES = {
+    BENCHMARK_REGISTRY: Path("schemas/benchmark_registry.schema.json"),
+    RELEASE_MANIFEST: Path("schemas/release_manifest.schema.json"),
+    Path("leaderboard/leaderboard_v0_1_0.json"): Path("schemas/leaderboard.schema.json"),
+    Path("leaderboard/leaderboard_adversarial_v0_2_0.json"): Path("schemas/leaderboard.schema.json"),
+    Path("leaderboard/leaderboard_multihop_v0_3_0.json"): Path("schemas/leaderboard.schema.json"),
+}
+
 
 def main() -> int:
     previous_cwd = Path.cwd()
@@ -103,6 +114,7 @@ def main() -> int:
         _validate_suite_manifests(errors)
         _validate_baseline_reports(errors)
         _validate_leaderboards(errors)
+        _validate_schema_conformance(errors)
     finally:
         os.chdir(previous_cwd)
 
@@ -122,6 +134,33 @@ def _validate_suite_manifests(errors: list[str]) -> None:
         expected = build_suite_manifest(suite=suite)
         if actual != expected:
             errors.append(f"{path}: manifest does not match code-generated suite")
+
+
+def _validate_schema_conformance(errors: list[str]) -> None:
+    for path, schema_path in SCHEMA_CONFORMANCE_FILES.items():
+        _validate_json_file_against_schema(path, schema_path, errors)
+
+    for path in SUITE_MANIFESTS:
+        _validate_json_file_against_schema(path, Path("schemas/contradiction_suite_manifest.schema.json"), errors)
+    for path in BASELINE_REPORTS:
+        _validate_json_file_against_schema(path, Path("schemas/contradiction_benchmark_report.schema.json"), errors)
+
+    prediction_schema = _read_json(Path("schemas/contradiction_predictions.schema.json"), errors)
+    if prediction_schema is not None:
+        for suite in SUITE_MANIFESTS.values():
+            schema_errors = validate_json_schema(
+                build_prediction_template(suite=suite),
+                prediction_schema,
+                schema_path=ROOT / "schemas" / "contradiction_predictions.schema.json",
+            )
+            for error in schema_errors:
+                errors.append(f"generated prediction template ({suite}): {error}")
+
+
+def _validate_json_file_against_schema(path: Path, schema_path: Path, errors: list[str]) -> None:
+    schema_errors = validate_json_file(path, schema_path)
+    for error in schema_errors:
+        errors.append(f"{path}: schema violation against {schema_path}: {error}")
 
 
 def _validate_required_public_files(errors: list[str]) -> None:
@@ -242,7 +281,7 @@ def _validate_leaderboards(errors: list[str]) -> None:
 
 def _read_json(path: Path, errors: list[str]) -> Any | None:
     try:
-        return json.loads(path.read_text(encoding="utf-8"))
+        return json.loads(path.read_text(encoding="utf-8-sig"))
     except OSError as exc:
         errors.append(f"{path}: could not read file: {exc}")
     except json.JSONDecodeError as exc:

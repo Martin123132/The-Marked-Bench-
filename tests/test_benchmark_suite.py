@@ -26,6 +26,7 @@ from marked_bench.benchmark_submission import (
     write_submission_bundle,
 )
 from marked_bench.benchmark_technical_note import build_technical_note
+from marked_bench.schema_validation import validate_json_file, validate_json_schema
 from marked_bench.contradiction.benchmark_suite import (
     ADVERSARIAL_SUITE_ID,
     MULTIHOP_SUITE_ID,
@@ -170,6 +171,9 @@ class BenchmarkSuiteTests(unittest.TestCase):
         report_schema = json.loads(
             (root / "schemas" / "contradiction_benchmark_report.schema.json").read_text(encoding="utf-8-sig")
         )
+        suite_schema = json.loads(
+            (root / "schemas" / "contradiction_suite_manifest.schema.json").read_text(encoding="utf-8-sig")
+        )
 
         self.assertEqual(
             prediction_schema["oneOf"][1]["properties"]["schema"]["const"],
@@ -185,6 +189,54 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertIn("explanation_audit", report_schema["required"])
         self.assertIn("rationale", report_schema["$defs"]["case_result"]["required"])
         self.assertIn("evidence", report_schema["$defs"]["case_result"]["required"])
+        self.assertIn(MULTIHOP_SUITE_ID, suite_schema["properties"]["suite_id"]["enum"])
+        self.assertIn("0.3.0", suite_schema["properties"]["suite_version"]["enum"])
+
+    def test_public_json_artifacts_conform_to_public_schemas(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        checked_pairs = [
+            ("benchmark_registry.json", "schemas/benchmark_registry.schema.json"),
+            ("releases/marked_bench_release_v0_3_5.json", "schemas/release_manifest.schema.json"),
+            ("suites/marked_bench_contradiction_standard_v0_1_0.json", "schemas/contradiction_suite_manifest.schema.json"),
+            ("suites/marked_bench_contradiction_adversarial_v0_2_0.json", "schemas/contradiction_suite_manifest.schema.json"),
+            ("suites/marked_bench_contradiction_multihop_v0_3_0.json", "schemas/contradiction_suite_manifest.schema.json"),
+            ("baselines/contradiction_engine_multihop_v0_3_0.json", "schemas/contradiction_benchmark_report.schema.json"),
+            ("leaderboard/leaderboard_multihop_v0_3_0.json", "schemas/leaderboard.schema.json"),
+        ]
+
+        for artifact_path, schema_path in checked_pairs:
+            with self.subTest(artifact=artifact_path):
+                errors = validate_json_file(root / artifact_path, root / schema_path)
+                self.assertEqual(errors, [])
+
+        prediction_schema = json.loads(
+            (root / "schemas" / "contradiction_predictions.schema.json").read_text(encoding="utf-8-sig")
+        )
+        template = build_prediction_template(suite="contradiction-multihop")
+        self.assertEqual(
+            validate_json_schema(
+                template,
+                prediction_schema,
+                schema_path=root / "schemas" / "contradiction_predictions.schema.json",
+            ),
+            [],
+        )
+
+    def test_schema_validator_rejects_invalid_public_artifact_shape(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        schema = json.loads(
+            (root / "schemas" / "contradiction_benchmark_report.schema.json").read_text(encoding="utf-8-sig")
+        )
+        report = evaluate_standard_suite(system_name="SchemaTamper")
+        report.pop("case_results")
+
+        errors = validate_json_schema(
+            report,
+            schema,
+            schema_path=root / "schemas" / "contradiction_benchmark_report.schema.json",
+        )
+
+        self.assertTrue(any("missing required property 'case_results'" in error for error in errors))
 
     def test_public_registry_advertises_submission_review_schema(self) -> None:
         registry = build_benchmark_registry()
@@ -194,7 +246,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_release_manifest_matches_current_artifacts(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "releases" / "marked_bench_release_v0_3_4.json"
+        path = root / "releases" / "marked_bench_release_v0_3_5.json"
 
         manifest = json.loads(path.read_text(encoding="utf-8"))
 

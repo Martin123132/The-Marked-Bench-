@@ -64,7 +64,7 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public artifact SHA-256 digests:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_3_4.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_3_5.json
 ```
 
 Export the generated technical note:
@@ -150,7 +150,7 @@ marked-bench --build-leaderboard baselines/always_none_multihop_v0_3_0.json base
 - Adoption guide: `docs/ADOPTION_GUIDE.md`
 - Submission review rubric: `docs/SUBMISSION_REVIEW_RUBRIC.md`
 - Release notes: `docs/RELEASE_NOTES_v0_2_0.md`
-- Current release notes: `docs/RELEASE_NOTES_v0_3_4.md`
+- Current release notes: `docs/RELEASE_NOTES_v0_3_5.md`
 
 ## Quality Gates
 
@@ -164,7 +164,8 @@ python scripts/validate_benchmark_artifacts.py
 The artifact validator checks that suite manifests match code, baseline reports
 pass validation, the benchmark registry is current, and leaderboard snapshots
 match their underlying reports. It also checks the release manifest against
-the current public artifact hashes.
+the current public artifact hashes and checks public JSON artifacts against
+their public schemas.
 
 ## Package Layout
 

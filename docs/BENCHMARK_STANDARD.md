@@ -140,7 +140,7 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public benchmark artifacts by SHA-256:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_3_4.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_3_5.json
 ```
 
 Run the harder adversarial track:
@@ -241,6 +241,8 @@ inspectable submissions.
 - Reject leaderboard reports that do not pass the built-in validator.
 - Keep `python scripts/validate_benchmark_artifacts.py` passing after any
   baseline, suite, or leaderboard change.
+- Keep checked public JSON artifacts conformant with the schemas under
+  `schemas/`.
 
 ## Current Status
 
@@ -250,5 +252,6 @@ distractor controls. Version `0.3.0` adds a multi-hop track for linked-evidence
 contradictions. Release `0.3.3` upgrades public report and prediction schemas
 for rationale/evidence audit fields and aligns schemas with the default
 multi-hop track. Release `0.3.4` adds structured submission review rubrics for
-leaderboard governance. The next step toward a larger public standard is
-third-party submissions and human review evidence.
+leaderboard governance. Release `0.3.5` adds dependency-free schema
+conformance checks for checked public artifacts. The next step toward a larger
+public standard is third-party submissions and human review evidence.
