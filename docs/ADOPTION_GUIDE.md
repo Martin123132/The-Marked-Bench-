@@ -12,6 +12,7 @@ Every published result should pin:
 - suite hash
 - report schema
 - exact report JSON
+- result card JSON
 - explanation-audit coverage, when rationale/evidence fields are submitted
 
 The current default public track is `contradiction-multihop`:
@@ -40,6 +41,8 @@ marked-bench --create-submission your-submission.json --submission-report your-s
 marked-bench --validate-submission your-submission.json
 marked-bench --create-submission-bundle your-submission-bundle.json --bundle-submission your-submission.json
 marked-bench --validate-submission-bundle your-submission-bundle.json
+marked-bench --create-result-card your-result-card.json --result-report your-system-report.json --result-bundle your-submission-bundle.json
+marked-bench --validate-result-card your-result-card.json
 ```
 
 Leaderboard entries without a valid report, submission file, and submission
@@ -57,7 +60,7 @@ python -m marked_bench.examples.external_submission_demo
 
 A checked example packet is committed under `submissions/example_external_jsonl/`.
 Use it as the reference shape for external JSONL predictions, scored reports,
-submission metadata, bundle evidence, and review files.
+submission metadata, bundle evidence, review files, and result cards.
 
 ## Check Release Conformance
 
@@ -65,7 +68,7 @@ Before adopting or mirroring a release package, validate the checked
 conformance report:
 
 ```bash
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_7.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_8.json
 ```
 
 The conformance report is the single machine-readable pass/fail artifact for

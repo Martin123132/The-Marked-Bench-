@@ -89,6 +89,7 @@ All public reports must include:
 - explanation-audit coverage
 - confusion matrix
 - failures
+- result card for cited or ranked results
 
 Reports are validated with:
 
@@ -109,3 +110,5 @@ The checked release manifest under `releases/` records SHA-256 digests for
 public benchmark artifacts.
 The checked conformance report under `conformance/` provides a single
 machine-readable pass/fail audit for release-package consistency.
+Result cards are validated with `marked-bench --validate-result-card PATH` and
+pin the score to its report, bundle, review status, and file hashes.

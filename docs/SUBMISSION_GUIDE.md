@@ -148,7 +148,20 @@ marked-bench --validate-submission-bundle submissions/example_external_jsonl/exa
 marked-bench --validate-submission-review submissions/example_external_jsonl/example_external_submission_review.json
 ```
 
-## 6. Update Leaderboard
+## 6. Create A Result Card
+
+Result cards summarize the validated score, suite identity, evidence files,
+review status, and publication claims in one citeable JSON artifact:
+
+```bash
+marked-bench --create-result-card my-result-card.json --result-report my-adversarial-report.json --result-bundle my-submission-bundle.json --result-review my-review.json
+marked-bench --validate-result-card my-result-card.json
+```
+
+Result cards use `schemas/result_card.schema.json`. They do not replace the
+full report, bundle, or review; they point to those files and pin their hashes.
+
+## 7. Update Leaderboard
 
 For foundation entries:
 
@@ -168,7 +181,7 @@ For multi-hop entries:
 marked-bench --build-leaderboard baselines/*multihop*.json --leaderboard-output leaderboard/leaderboard_multihop_v0_3_0.json
 ```
 
-## 7. Run Repository Checks
+## 8. Run Repository Checks
 
 ```bash
 python -m unittest discover -s tests
@@ -177,7 +190,7 @@ python scripts/validate_benchmark_artifacts.py
 
 Both commands must pass before a submission is ready for review.
 
-## 8. Create A Review Rubric
+## 9. Create A Review Rubric
 
 Leaderboard maintainers should create a structured review file before accepting
 an entry:

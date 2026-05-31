@@ -17,9 +17,10 @@ report validate.
 
 `example_external_jsonl/` is a checked external-style submission packet. It
 contains JSONL predictions, the scored report, leaderboard submission metadata,
-the submission bundle, and a review file. Validate it with:
+the submission bundle, a review file, and a result card. Validate it with:
 
 ```bash
 marked-bench --validate-submission-bundle submissions/example_external_jsonl/example_external_submission_bundle.json
 marked-bench --validate-submission-review submissions/example_external_jsonl/example_external_submission_review.json
+marked-bench --validate-result-card submissions/example_external_jsonl/example_external_result_card.json
 ```

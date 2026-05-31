@@ -21,6 +21,12 @@ from marked_bench.benchmark_review import (
     validate_submission_review,
     write_submission_review,
 )
+from marked_bench.benchmark_result_card import (
+    build_result_card,
+    load_result_card,
+    validate_result_card,
+    write_result_card,
+)
 from marked_bench.benchmark_submission import (
     DISCLOSURE_FIELDS,
     build_leaderboard_submission,
@@ -117,6 +123,18 @@ def build_parser() -> argparse.ArgumentParser:
         help="Validate a structured submission review rubric and its referenced bundle.",
     )
     parser.add_argument(
+        "--create-result-card",
+        default=None,
+        metavar="PATH",
+        help="Write a standard result card for a benchmark report and exit.",
+    )
+    parser.add_argument(
+        "--validate-result-card",
+        default=None,
+        metavar="PATH",
+        help="Validate a standard result card and its referenced benchmark evidence.",
+    )
+    parser.add_argument(
         "--export-conformance-report",
         default=None,
         metavar="PATH",
@@ -167,6 +185,29 @@ def build_parser() -> argparse.ArgumentParser:
         "--review-notes",
         default="",
         help="Notes to store in a submission review.",
+    )
+    parser.add_argument(
+        "--result-report",
+        default=None,
+        metavar="PATH",
+        help="Report path referenced when creating a result card.",
+    )
+    parser.add_argument(
+        "--result-bundle",
+        default=None,
+        metavar="PATH",
+        help="Optional submission bundle path referenced when creating a result card.",
+    )
+    parser.add_argument(
+        "--result-review",
+        default=None,
+        metavar="PATH",
+        help="Optional submission review path referenced when creating a result card.",
+    )
+    parser.add_argument(
+        "--result-notes",
+        default="",
+        help="Notes to store in a result card.",
     )
     parser.add_argument(
         "--submission-report",
@@ -340,6 +381,24 @@ def main(argv: list[str] | None = None) -> None:
             raise SystemExit(1)
         return
 
+    if args.validate_result_card:
+        card_path = Path(args.validate_result_card)
+        validation = validate_result_card(load_result_card(card_path), base_dir=card_path.parent)
+        if args.json:
+            print(json.dumps(validation, indent=2, sort_keys=True))
+        else:
+            print(f"Result card validation: {'pass' if validation['valid'] else 'fail'}")
+            print(f"Suite: {validation['summary']['suite_id']} v{validation['summary']['suite_version']}")
+            print(f"System: {validation['summary']['system_name']} {validation['summary']['system_version']}")
+            print(f"Overall score: {validation['summary']['overall_score']}")
+            print(f"Ready for leaderboard review: {validation['summary']['ready_for_leaderboard_review']}")
+            print(f"Review decision: {validation['summary']['review_decision']}")
+            print(f"Errors: {len(validation['errors'])}")
+            print(f"Warnings: {len(validation['warnings'])}")
+        if not validation["valid"]:
+            raise SystemExit(1)
+        return
+
     if args.create_submission:
         if not args.submission_report:
             parser.error("--create-submission requires --submission-report")
@@ -398,6 +457,26 @@ def main(argv: list[str] | None = None) -> None:
         print(f"Submission review: {args.create_submission_review}")
         print(f"Bundle SHA-256: {review['bundle_sha256']}")
         print(f"Recommendation: {review['summary']['recommendation']}")
+        return
+
+    if args.create_result_card:
+        if not args.result_report:
+            parser.error("--create-result-card requires --result-report")
+        result_card_path = Path(args.create_result_card)
+        try:
+            card = build_result_card(
+                args.result_report,
+                bundle_path=args.result_bundle,
+                review_path=args.result_review,
+                base_dir=result_card_path.parent,
+                notes=args.result_notes,
+            )
+        except (OSError, ValueError) as exc:
+            parser.error(str(exc))
+        write_result_card(card, result_card_path)
+        print(f"Result card: {args.create_result_card}")
+        print(f"Overall score: {card['overall_score']}")
+        print(f"Ready for leaderboard review: {card['publication']['ready_for_leaderboard_review']}")
         return
 
     if args.export_suite:

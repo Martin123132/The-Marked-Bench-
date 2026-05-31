@@ -7,7 +7,7 @@ The project is designed to become a reproducible public standard: every score
 is tied to a suite ID, suite version, deterministic suite hash, immutable case
 list, JSON report schema, confusion matrix, per-class metrics, confidence
 calibration metrics, explanation-audit coverage, validation result, diagnostic
-slice metrics, and leaderboard entry.
+slice metrics, result card, and leaderboard entry.
 
 ## Current Tracks
 
@@ -64,7 +64,7 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public artifact SHA-256 digests:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_3_7.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_3_8.json
 ```
 
 Export the generated technical note:
@@ -76,8 +76,8 @@ marked-bench --export-technical-note docs/TECHNICAL_NOTE.md
 Export and validate the machine-readable conformance report:
 
 ```bash
-marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_3_7.json
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_7.json
+marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_3_8.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_8.json
 ```
 
 ## Score External Systems
@@ -112,6 +112,13 @@ marked-bench --create-submission-review artifacts/my-system-review.json --review
 marked-bench --validate-submission-review artifacts/my-system-review.json
 ```
 
+Create and validate a standard result card for publication or citation:
+
+```bash
+marked-bench --create-result-card artifacts/my-system-result-card.json --result-report artifacts/my-system-report.json --result-bundle artifacts/my-system-submission-bundle.json --result-review artifacts/my-system-review.json
+marked-bench --validate-result-card artifacts/my-system-result-card.json
+```
+
 Create a complete external-submission example:
 
 ```bash
@@ -122,7 +129,8 @@ marked-bench --validate-submission-review artifacts/external_submission_demo/exa
 
 A checked copy of that workflow is committed under
 `submissions/example_external_jsonl/` so adopters can inspect a full prediction,
-report, submission, bundle, and review packet without generating one first.
+report, submission, bundle, review, and result-card packet without generating
+one first.
 
 ## Build Leaderboards
 
@@ -148,7 +156,7 @@ marked-bench --build-leaderboard baselines/always_none_multihop_v0_3_0.json base
 
 - Benchmark registry: `benchmark_registry.json`
 - Release manifest: `releases/`
-- Conformance report: `conformance/marked_bench_conformance_v0_3_7.json`
+- Conformance report: `conformance/marked_bench_conformance_v0_3_8.json`
 - Suite manifests and coverage profiles: `suites/`
 - Baseline reports: `baselines/`
 - Leaderboard snapshots: `leaderboard/`
@@ -159,11 +167,12 @@ marked-bench --build-leaderboard baselines/always_none_multihop_v0_3_0.json base
 - Submission guide: `docs/SUBMISSION_GUIDE.md`
 - Submission bundle schema: `schemas/submission_bundle.schema.json`
 - Submission review schema: `schemas/submission_review.schema.json`
+- Result card schema: `schemas/result_card.schema.json`
 - Checked external submission packet: `submissions/example_external_jsonl/`
 - Adoption guide: `docs/ADOPTION_GUIDE.md`
 - Submission review rubric: `docs/SUBMISSION_REVIEW_RUBRIC.md`
 - Release notes: `docs/RELEASE_NOTES_v0_2_0.md`
-- Current release notes: `docs/RELEASE_NOTES_v0_3_7.md`
+- Current release notes: `docs/RELEASE_NOTES_v0_3_8.md`
 
 ## Quality Gates
 
@@ -182,6 +191,8 @@ their public schemas.
 The checked external submission packet is also validated end-to-end so its
 JSONL predictions, report, submission bundle, review file, and file hashes stay
 consistent.
+Checked result cards are validated against their referenced reports, bundles,
+reviews, hashes, and standard publication claims.
 The conformance report provides one machine-readable pass/fail artifact for
 the full release package.
 

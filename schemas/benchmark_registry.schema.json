@@ -42,7 +42,8 @@
         "leaderboard_submission",
         "submission_bundle",
         "submission_review",
-        "conformance_report"
+        "conformance_report",
+        "result_card"
       ],
       "additionalProperties": {
         "type": "string"

@@ -29,6 +29,7 @@ This roadmap keeps the benchmark moving toward a credible public standard.
 - Checked external-style submission packet with report, bundle, review, and
   prediction evidence.
 - Machine-readable release conformance report.
+- Standard result cards for publishable benchmark results.
 
 ## Next
 

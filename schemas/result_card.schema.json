@@ -1,0 +1,238 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marked-bench.local/schemas/result_card.schema.json",
+  "title": "The Marked Bench Result Card",
+  "type": "object",
+  "required": [
+    "schema",
+    "created_at",
+    "system_name",
+    "system_version",
+    "submitter",
+    "suite_id",
+    "suite_version",
+    "suite_hash",
+    "report_schema",
+    "report_path",
+    "report_sha256",
+    "bundle_path",
+    "bundle_sha256",
+    "review_path",
+    "review_sha256",
+    "case_count",
+    "failure_count",
+    "overall_score",
+    "metrics",
+    "publication",
+    "disclosures",
+    "standard_claims",
+    "notes"
+  ],
+  "properties": {
+    "schema": {
+      "const": "marked_bench.result-card.v1"
+    },
+    "created_at": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "system_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "system_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "submitter": {
+      "type": "string",
+      "minLength": 1
+    },
+    "suite_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "suite_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "suite_hash": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "report_schema": {
+      "type": "string",
+      "minLength": 1
+    },
+    "report_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "report_sha256": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "bundle_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "bundle_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "review_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "review_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "case_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "failure_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "overall_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "metrics": {
+      "$ref": "#/$defs/metrics"
+    },
+    "publication": {
+      "$ref": "#/$defs/publication"
+    },
+    "disclosures": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "standard_claims": {
+      "$ref": "#/$defs/standard_claims"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "metrics": {
+      "type": "object",
+      "required": [
+        "type_accuracy",
+        "contradiction_macro_f1",
+        "detection_f1",
+        "calibration_brier_score",
+        "calibration_ece",
+        "coverage_index",
+        "explanation_ready_rate"
+      ],
+      "properties": {
+        "type_accuracy": {
+          "type": "number"
+        },
+        "contradiction_macro_f1": {
+          "type": "number"
+        },
+        "detection_f1": {
+          "type": "number"
+        },
+        "calibration_brier_score": {
+          "type": "number"
+        },
+        "calibration_ece": {
+          "type": "number"
+        },
+        "coverage_index": {
+          "type": "number"
+        },
+        "explanation_ready_rate": {
+          "type": "number"
+        }
+      }
+    },
+    "publication": {
+      "type": "object",
+      "required": [
+        "report_valid",
+        "bundle_valid",
+        "review_valid",
+        "ready_for_leaderboard_review",
+        "review_decision",
+        "review_recommendation",
+        "ready_for_decision",
+        "accepted"
+      ],
+      "properties": {
+        "report_valid": {
+          "type": "boolean"
+        },
+        "bundle_valid": {
+          "type": "boolean"
+        },
+        "review_valid": {
+          "type": "boolean"
+        },
+        "ready_for_leaderboard_review": {
+          "type": "boolean"
+        },
+        "review_decision": {
+          "type": "string"
+        },
+        "review_recommendation": {
+          "type": "string"
+        },
+        "ready_for_decision": {
+          "type": "boolean"
+        },
+        "accepted": {
+          "type": "boolean"
+        }
+      }
+    },
+    "standard_claims": {
+      "type": "object",
+      "required": [
+        "same_suite_hash_required",
+        "public_test_result",
+        "not_safety_certification",
+        "report_validator_required",
+        "bundle_required_for_leaderboard_review"
+      ],
+      "properties": {
+        "same_suite_hash_required": {
+          "type": "boolean"
+        },
+        "public_test_result": {
+          "type": "boolean"
+        },
+        "not_safety_certification": {
+          "type": "boolean"
+        },
+        "report_validator_required": {
+          "type": "boolean"
+        },
+        "bundle_required_for_leaderboard_review": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

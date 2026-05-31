@@ -10,6 +10,7 @@ from typing import Any, Mapping
 from marked_bench.benchmark_leaderboard import build_leaderboard
 from marked_bench.benchmark_registry import build_benchmark_registry
 from marked_bench.benchmark_release import build_release_manifest
+from marked_bench.benchmark_result_card import load_result_card, validate_result_card
 from marked_bench.benchmark_review import load_submission_review, validate_submission_review
 from marked_bench.benchmark_submission import load_submission_bundle, validate_submission_bundle
 from marked_bench.contradiction.benchmark_suite import (
@@ -22,8 +23,8 @@ from marked_bench.schema_validation import load_json_schema, validate_json_file,
 
 
 CONFORMANCE_REPORT_SCHEMA = "marked_bench.conformance-report.v1"
-DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_3_7.json")
-DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_7.json")
+DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_3_8.json")
+DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_8.json")
 
 SUITE_MANIFESTS = {
     Path("suites/marked_bench_contradiction_standard_v0_1_0.json"): "contradiction",
@@ -67,6 +68,10 @@ CHECKED_SUBMISSION_PACKETS = [
     },
 ]
 
+CHECKED_RESULT_CARDS = [
+    Path("submissions/example_external_jsonl/example_external_result_card.json"),
+]
+
 SCHEMA_CONFORMANCE_FILES = {
     Path("benchmark_registry.json"): Path("schemas/benchmark_registry.schema.json"),
     DEFAULT_RELEASE_MANIFEST: Path("schemas/release_manifest.schema.json"),
@@ -85,6 +90,9 @@ SCHEMA_CONFORMANCE_FILES = {
     ),
     Path("submissions/example_external_jsonl/example_external_submission_review.json"): Path(
         "schemas/submission_review.schema.json"
+    ),
+    Path("submissions/example_external_jsonl/example_external_result_card.json"): Path(
+        "schemas/result_card.schema.json"
     ),
 }
 
@@ -109,6 +117,7 @@ def build_conformance_report(
         _check_schema_conformance(root_path),
         _check_prediction_templates(root_path),
         _check_submission_packets(root_path),
+        _check_result_cards(root_path),
     ]
     failures = [f"{check['name']}: {error}" for check in checks for error in check["errors"]]
     track_count = len(registry.get("tracks", [])) if isinstance(registry, dict) else 0
@@ -354,6 +363,20 @@ def _check_submission_packets(root: Path) -> dict[str, Any]:
                 errors.append(f"{review_path}: review validation failed: {validation['errors']}")
 
     return _check("checked_submission_packets_valid", errors, {"packet_count": len(CHECKED_SUBMISSION_PACKETS)})
+
+
+def _check_result_cards(root: Path) -> dict[str, Any]:
+    errors: list[str] = []
+    for path in CHECKED_RESULT_CARDS:
+        try:
+            card = load_result_card(root / path)
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            errors.append(f"{path}: could not load result card: {exc}")
+            continue
+        validation = validate_result_card(card, base_dir=(root / path).parent)
+        if not validation["valid"]:
+            errors.append(f"{path}: result card validation failed: {validation['errors']}")
+    return _check("checked_result_cards_valid", errors, {"card_count": len(CHECKED_RESULT_CARDS)})
 
 
 def _schema_file_errors(root: Path, path: Path, schema_path: Path) -> list[str]:

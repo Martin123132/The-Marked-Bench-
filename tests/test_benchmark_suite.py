@@ -16,6 +16,12 @@ from marked_bench.benchmark_review import (
     validate_submission_review,
     write_submission_review,
 )
+from marked_bench.benchmark_result_card import (
+    RESULT_CARD_SCHEMA,
+    build_result_card,
+    load_result_card,
+    validate_result_card,
+)
 from marked_bench.benchmark_submission import (
     SUBMISSION_BUNDLE_SCHEMA,
     SUBMISSION_SCHEMA,
@@ -204,13 +210,14 @@ class BenchmarkSuiteTests(unittest.TestCase):
         root = Path(__file__).resolve().parent.parent
         checked_pairs = [
             ("benchmark_registry.json", "schemas/benchmark_registry.schema.json"),
-            ("releases/marked_bench_release_v0_3_7.json", "schemas/release_manifest.schema.json"),
-            ("conformance/marked_bench_conformance_v0_3_7.json", "schemas/conformance_report.schema.json"),
+            ("releases/marked_bench_release_v0_3_8.json", "schemas/release_manifest.schema.json"),
+            ("conformance/marked_bench_conformance_v0_3_8.json", "schemas/conformance_report.schema.json"),
             ("suites/marked_bench_contradiction_standard_v0_1_0.json", "schemas/contradiction_suite_manifest.schema.json"),
             ("suites/marked_bench_contradiction_adversarial_v0_2_0.json", "schemas/contradiction_suite_manifest.schema.json"),
             ("suites/marked_bench_contradiction_multihop_v0_3_0.json", "schemas/contradiction_suite_manifest.schema.json"),
             ("baselines/contradiction_engine_multihop_v0_3_0.json", "schemas/contradiction_benchmark_report.schema.json"),
             ("leaderboard/leaderboard_multihop_v0_3_0.json", "schemas/leaderboard.schema.json"),
+            ("submissions/example_external_jsonl/example_external_result_card.json", "schemas/result_card.schema.json"),
         ]
 
         for artifact_path, schema_path in checked_pairs:
@@ -252,10 +259,12 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
         self.assertEqual(registry["schema_ids"]["submission_review"], REVIEW_SCHEMA)
         self.assertEqual(registry["schemas"]["submission_review"], "schemas/submission_review.schema.json")
+        self.assertEqual(registry["schema_ids"]["result_card"], RESULT_CARD_SCHEMA)
+        self.assertEqual(registry["schemas"]["result_card"], "schemas/result_card.schema.json")
 
     def test_checked_in_release_manifest_matches_current_artifacts(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "releases" / "marked_bench_release_v0_3_7.json"
+        path = root / "releases" / "marked_bench_release_v0_3_8.json"
 
         manifest = json.loads(path.read_text(encoding="utf-8"))
         artifact_paths = {entry["path"] for entry in manifest["artifacts"]}
@@ -266,11 +275,12 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertGreater(manifest["artifact_count"], 20)
         self.assertIn("submissions/example_external_jsonl/predictions.jsonl", artifact_paths)
         self.assertIn("submissions/example_external_jsonl/example_external_submission_review.json", artifact_paths)
-        self.assertIn("conformance/marked_bench_conformance_v0_3_7.json", artifact_paths)
+        self.assertIn("conformance/marked_bench_conformance_v0_3_8.json", artifact_paths)
+        self.assertIn("submissions/example_external_jsonl/example_external_result_card.json", artifact_paths)
 
     def test_checked_in_conformance_report_matches_current_evidence(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "conformance" / "marked_bench_conformance_v0_3_7.json"
+        path = root / "conformance" / "marked_bench_conformance_v0_3_8.json"
 
         report = load_conformance_report(path)
         validation = validate_conformance_report(report, root=root)
@@ -299,6 +309,29 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertEqual(report["overall_score"], scored_report["overall_score"])
         self.assertTrue(validate_submission_bundle(bundle, base_dir=packet_dir)["valid"])
         self.assertTrue(validate_submission_review(review, base_dir=packet_dir)["valid"])
+
+    def test_checked_external_result_card_validates(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        packet_dir = root / "submissions" / "example_external_jsonl"
+        path = packet_dir / "example_external_result_card.json"
+
+        card = load_result_card(path)
+        validation = validate_result_card(card, base_dir=packet_dir)
+
+        self.assertEqual(
+            card,
+            build_result_card(
+                "example_external_report.json",
+                bundle_path="example_external_submission_bundle.json",
+                review_path="example_external_submission_review.json",
+                base_dir=packet_dir,
+                notes="Checked example result card for the external JSONL workflow.",
+            ),
+        )
+        self.assertEqual(card["schema"], RESULT_CARD_SCHEMA)
+        self.assertTrue(card["publication"]["ready_for_leaderboard_review"])
+        self.assertFalse(card["publication"]["accepted"])
+        self.assertTrue(validation["valid"], validation["errors"])
 
     def test_checked_in_technical_note_matches_generated_evidence(self) -> None:
         root = Path(__file__).resolve().parent.parent
@@ -1073,6 +1106,74 @@ class BenchmarkSuiteTests(unittest.TestCase):
             self.assertEqual(report, build_conformance_report(Path(__file__).resolve().parent.parent))
             self.assertEqual(report["schema"], CONFORMANCE_REPORT_SCHEMA)
             self.assertIn("Conformance validation: pass", captured.getvalue())
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_cli_creates_and_validates_result_card_inside_repo(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        report_path = output_root / "report.json"
+        submission_path = output_root / "submission.json"
+        bundle_path = output_root / "bundle.json"
+        review_path = output_root / "review.json"
+        card_path = output_root / "result-card.json"
+
+        try:
+            with redirect_stdout(StringIO()):
+                benchmark_main(["--system-name", "CliResultCardSystem", "--report", str(report_path)])
+            with redirect_stdout(StringIO()):
+                benchmark_main(
+                    [
+                        "--create-submission",
+                        str(submission_path),
+                        "--submission-report",
+                        str(report_path),
+                        "--system-version",
+                        "1.0.0",
+                        "--submitter",
+                        "Marked Bench Test",
+                    ]
+                )
+            with redirect_stdout(StringIO()):
+                benchmark_main(
+                    [
+                        "--create-submission-bundle",
+                        str(bundle_path),
+                        "--bundle-submission",
+                        str(submission_path),
+                    ]
+                )
+            with redirect_stdout(StringIO()):
+                benchmark_main(
+                    [
+                        "--create-submission-review",
+                        str(review_path),
+                        "--review-bundle",
+                        str(bundle_path),
+                        "--reviewer",
+                        "reviewer",
+                    ]
+                )
+            with redirect_stdout(StringIO()) as create_output:
+                benchmark_main(
+                    [
+                        "--create-result-card",
+                        str(card_path),
+                        "--result-report",
+                        "report.json",
+                        "--result-bundle",
+                        "bundle.json",
+                        "--result-review",
+                        "review.json",
+                    ]
+                )
+            with redirect_stdout(StringIO()) as validate_output:
+                benchmark_main(["--validate-result-card", str(card_path)])
+
+            card = json.loads(card_path.read_text(encoding="utf-8"))
+            self.assertEqual(card["schema"], RESULT_CARD_SCHEMA)
+            self.assertEqual(card["system_name"], "CliResultCardSystem")
+            self.assertIn("Result card:", create_output.getvalue())
+            self.assertIn("Result card validation: pass", validate_output.getvalue())
         finally:
             shutil.rmtree(output_root, ignore_errors=True)
 

@@ -16,6 +16,7 @@ from marked_bench.benchmark_conformance import load_conformance_report, validate
 from marked_bench.benchmark_leaderboard import build_leaderboard  # noqa: E402
 from marked_bench.benchmark_release import build_release_manifest  # noqa: E402
 from marked_bench.benchmark_registry import build_benchmark_registry  # noqa: E402
+from marked_bench.benchmark_result_card import load_result_card, validate_result_card  # noqa: E402
 from marked_bench.benchmark_review import load_submission_review, validate_submission_review  # noqa: E402
 from marked_bench.benchmark_submission import load_submission_bundle, validate_submission_bundle  # noqa: E402
 from marked_bench.benchmark_technical_note import build_technical_note  # noqa: E402
@@ -71,8 +72,8 @@ CHECKED_SUBMISSION_PACKETS = [
 ]
 
 BENCHMARK_REGISTRY = Path("benchmark_registry.json")
-RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_7.json")
-CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_3_7.json")
+RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_8.json")
+CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_3_8.json")
 
 REQUIRED_PUBLIC_FILES = [
     Path("README.md"),
@@ -96,6 +97,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("docs/RELEASE_NOTES_v0_3_5.md"),
     Path("docs/RELEASE_NOTES_v0_3_6.md"),
     Path("docs/RELEASE_NOTES_v0_3_7.md"),
+    Path("docs/RELEASE_NOTES_v0_3_8.md"),
     Path("docs/ROADMAP.md"),
     Path("docs/SUBMISSION_GUIDE.md"),
     Path("schemas/benchmark_registry.schema.json"),
@@ -108,6 +110,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("schemas/submission_review.schema.json"),
     Path("schemas/release_manifest.schema.json"),
     Path("schemas/conformance_report.schema.json"),
+    Path("schemas/result_card.schema.json"),
     Path("conformance/README.md"),
     Path("releases/README.md"),
     Path("submissions/README.md"),
@@ -116,6 +119,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("submissions/example_external_jsonl/example_external_submission.json"),
     Path("submissions/example_external_jsonl/example_external_submission_bundle.json"),
     Path("submissions/example_external_jsonl/example_external_submission_review.json"),
+    Path("submissions/example_external_jsonl/example_external_result_card.json"),
     Path(".github/PULL_REQUEST_TEMPLATE.md"),
     Path(".github/workflows/benchmark-ci.yml"),
 ]
@@ -133,6 +137,7 @@ SCHEMA_CONFORMANCE_FILES = {
     Path("submissions/example_external_jsonl/example_external_submission.json"): Path("schemas/leaderboard_submission.schema.json"),
     Path("submissions/example_external_jsonl/example_external_submission_bundle.json"): Path("schemas/submission_bundle.schema.json"),
     Path("submissions/example_external_jsonl/example_external_submission_review.json"): Path("schemas/submission_review.schema.json"),
+    Path("submissions/example_external_jsonl/example_external_result_card.json"): Path("schemas/result_card.schema.json"),
 }
 
 
@@ -150,6 +155,7 @@ def main() -> int:
         _validate_baseline_reports(errors)
         _validate_leaderboards(errors)
         _validate_checked_submission_packets(errors)
+        _validate_checked_result_cards(errors)
         _validate_schema_conformance(errors)
     finally:
         os.chdir(previous_cwd)
@@ -372,6 +378,19 @@ def _validate_checked_submission_packets(errors: list[str]) -> None:
             validation = validate_submission_review(review, base_dir=base_dir)
             if not validation["valid"]:
                 errors.append(f"{review_path}: checked submission review validation failed: {validation['errors']}")
+
+
+def _validate_checked_result_cards(errors: list[str]) -> None:
+    paths = [Path("submissions/example_external_jsonl/example_external_result_card.json")]
+    for path in paths:
+        try:
+            card = load_result_card(path)
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            errors.append(f"{path}: could not load checked result card: {exc}")
+            continue
+        validation = validate_result_card(card, base_dir=path.parent)
+        if not validation["valid"]:
+            errors.append(f"{path}: checked result card validation failed: {validation['errors']}")
 
 
 def _validate_leaderboards(errors: list[str]) -> None:

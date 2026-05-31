@@ -6,6 +6,8 @@ suite for systems that classify contradictions between a premise and a query.
 It is meant to be a public standard for this project area: every score is tied
 to a suite ID, suite version, deterministic suite hash, case list, report
 schema, confusion matrix, and per-class metrics.
+Published results should also include a result card that pins the report,
+bundle, review status, standard publication claims, and file hashes.
 
 ## Suite Identity
 
@@ -71,6 +73,8 @@ The source tree also includes JSON schemas for public infrastructure:
 - `schemas/submission_bundle.schema.json`
 - `schemas/submission_review.schema.json`
 - `schemas/release_manifest.schema.json`
+- `schemas/result_card.schema.json`
+- `schemas/conformance_report.schema.json`
 
 For a high-level summary of intended use, non-use, limitations, and
 reproducibility expectations, see `docs/BENCHMARK_CARD.md`.
@@ -140,14 +144,14 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public benchmark artifacts by SHA-256:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_3_7.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_3_8.json
 ```
 
 Export and validate the release conformance report:
 
 ```bash
-marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_3_7.json
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_7.json
+marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_3_8.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_8.json
 ```
 
 Run the harder adversarial track:
@@ -228,9 +232,16 @@ marked-bench --validate-submission-review artifacts/my-detector-review.json
 The standard review rubric is documented in
 `docs/SUBMISSION_REVIEW_RUBRIC.md`.
 
+Published results should include a result card:
+
+```bash
+marked-bench --create-result-card artifacts/my-detector-result-card.json --result-report artifacts/my-detector.json --result-bundle artifacts/my-detector-bundle.json --result-review artifacts/my-detector-review.json
+marked-bench --validate-result-card artifacts/my-detector-result-card.json
+```
+
 The checked example under `submissions/example_external_jsonl/` shows the full
 external packet shape: JSONL predictions, scored report, submission metadata,
-bundle manifest, and structured review file.
+bundle manifest, structured review file, and result card.
 
 External prediction records may include `rationale` and `evidence`. `rationale`
 is the system's short explanation for the predicted label. `evidence` is a list
@@ -250,6 +261,7 @@ inspectable submissions.
   string is the same.
 - Preserve non-contradiction controls so false positives remain visible.
 - Reject leaderboard reports that do not pass the built-in validator.
+- Require result cards for externally cited or ranked results.
 - Keep `python scripts/validate_benchmark_artifacts.py` passing after any
   baseline, suite, or leaderboard change.
 - Keep checked public JSON artifacts conformant with the schemas under
@@ -267,5 +279,6 @@ leaderboard governance. Release `0.3.5` adds dependency-free schema
 conformance checks for checked public artifacts. Release `0.3.6` adds a
 checked external-style submission packet and validates it as part of the normal
 artifact gate. Release `0.3.7` adds a machine-readable conformance report for
-the full release package. The next step toward a larger public standard is real
-third-party submissions and human review evidence.
+the full release package. Release `0.3.8` adds standardized result cards for
+publishable benchmark results. The next step toward a larger public standard is
+real third-party submissions and human review evidence.
