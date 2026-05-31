@@ -182,7 +182,20 @@ marked-bench --validate-publication-packet my-publication-packet/publication_pac
 
 Publication packets use `schemas/publication_packet.schema.json`.
 
-## 8. Update Leaderboard
+## 8. Create A Result Claim
+
+Result claims turn a publication packet into a short, citeable score statement
+with explicit boundaries. Use them for model cards, papers, release notes, and
+third-party evidence entries:
+
+```bash
+marked-bench --create-result-claim my-publication-packet/result_claim.json --claim-publication-packet my-publication-packet/publication_packet.json
+marked-bench --validate-result-claim my-publication-packet/result_claim.json
+```
+
+Result claims use `schemas/result_claim.schema.json`.
+
+## 9. Update Leaderboard
 
 For foundation entries:
 
@@ -208,7 +221,7 @@ For controls entries:
 marked-bench --build-leaderboard baselines/*controls*.json --leaderboard-output leaderboard/leaderboard_controls_v0_4_0.json
 ```
 
-## 9. Run Repository Checks
+## 10. Run Repository Checks
 
 ```bash
 python -m unittest discover -s tests
@@ -217,7 +230,7 @@ python scripts/validate_benchmark_artifacts.py
 
 Both commands must pass before a submission is ready for review.
 
-## 10. Create A Review Rubric
+## 11. Create A Review Rubric
 
 Leaderboard maintainers should create a structured review file before accepting
 an entry:

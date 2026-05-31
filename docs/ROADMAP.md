@@ -33,6 +33,8 @@ This roadmap keeps the benchmark moving toward a credible public standard.
 - Checked adoption packet and announcement package for external public uptake.
 - Checked third-party evidence ledger for public adoption claims.
 - False-positive controls track for distractor and paraphrase robustness.
+- One-command publication packets for self-contained public result evidence.
+- Hash-pinned result claims for citeable benchmark score statements.
 
 ## Next
 

@@ -11,6 +11,12 @@ from marked_bench.benchmark_adoption import (
     validate_adoption_packet,
     write_adoption_packet,
 )
+from marked_bench.benchmark_claim import (
+    build_result_claim,
+    load_result_claim,
+    validate_result_claim,
+    write_result_claim,
+)
 from marked_bench.benchmark_conformance import (
     load_conformance_report,
     validate_conformance_report,
@@ -168,6 +174,18 @@ def build_parser() -> argparse.ArgumentParser:
         help="Validate a public result packet manifest and its referenced files.",
     )
     parser.add_argument(
+        "--create-result-claim",
+        default=None,
+        metavar="PATH",
+        help="Write a citeable result claim from a validated publication packet and exit.",
+    )
+    parser.add_argument(
+        "--validate-result-claim",
+        default=None,
+        metavar="PATH",
+        help="Validate a citeable result claim against its publication packet.",
+    )
+    parser.add_argument(
         "--export-conformance-report",
         default=None,
         metavar="PATH",
@@ -282,6 +300,27 @@ def build_parser() -> argparse.ArgumentParser:
         "--publication-notes",
         default="",
         help="Notes to store in a public result packet manifest.",
+    )
+    parser.add_argument(
+        "--claim-publication-packet",
+        default=None,
+        metavar="PATH",
+        help="Publication packet path referenced when creating a result claim.",
+    )
+    parser.add_argument(
+        "--claim-url",
+        default="",
+        help="Optional public URL where the result claim will be published.",
+    )
+    parser.add_argument(
+        "--claim-evidence-url",
+        default="",
+        help="Optional public URL where the full evidence packet will be published.",
+    )
+    parser.add_argument(
+        "--claim-notes",
+        default="",
+        help="Notes to store in a result claim.",
     )
     parser.add_argument(
         "--submission-report",
@@ -494,6 +533,23 @@ def main(argv: list[str] | None = None) -> None:
             raise SystemExit(1)
         return
 
+    if args.validate_result_claim:
+        claim_path = Path(args.validate_result_claim)
+        validation = validate_result_claim(load_result_claim(claim_path), base_dir=claim_path.parent)
+        if args.json:
+            print(json.dumps(validation, indent=2, sort_keys=True))
+        else:
+            print(f"Result claim validation: {'pass' if validation['valid'] else 'fail'}")
+            print(f"Suite: {validation['summary']['suite_id']} v{validation['summary']['suite_version']}")
+            print(f"System: {validation['summary']['system_name']} {validation['summary']['system_version']}")
+            print(f"Overall score: {validation['summary']['overall_score']}")
+            print(f"Ready for citation: {validation['summary']['ready_for_citation']}")
+            print(f"Errors: {len(validation['errors'])}")
+            print(f"Warnings: {len(validation['warnings'])}")
+        if not validation["valid"]:
+            raise SystemExit(1)
+        return
+
     if args.validate_adoption_packet:
         validation = validate_adoption_packet(load_adoption_packet(args.validate_adoption_packet))
         if args.json:
@@ -635,6 +691,26 @@ def main(argv: list[str] | None = None) -> None:
         print(f"Overall score: {packet['overall_score']}")
         print(f"Ready for publication: {packet['ready_for_publication']}")
         print(f"Files: {len(packet['files'])}")
+        return
+
+    if args.create_result_claim:
+        if not args.claim_publication_packet:
+            parser.error("--create-result-claim requires --claim-publication-packet")
+        claim_path = Path(args.create_result_claim)
+        try:
+            claim = build_result_claim(
+                args.claim_publication_packet,
+                base_dir=claim_path.parent,
+                claim_url=args.claim_url,
+                evidence_url=args.claim_evidence_url,
+                notes=args.claim_notes,
+            )
+        except (OSError, ValueError) as exc:
+            parser.error(str(exc))
+        write_result_claim(claim, claim_path)
+        print(f"Result claim: {claim_path}")
+        print(f"Claim: {claim['claim']['text']}")
+        print(f"Ready for citation: {claim['validation']['valid']}")
         return
 
     if args.export_suite:

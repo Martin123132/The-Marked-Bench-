@@ -25,7 +25,8 @@ New tracks should include:
 Leaderboard entries must come from reports that pass the built-in validator.
 Claims without full JSON reports should not be ranked. Accepted entries should
 also have a validated submission bundle and a completed submission review
-rubric.
+rubric. Short public score statements should use a validated result claim so
+the wording stays tied to the publication packet hash and benchmark boundaries.
 
 ## Review Priorities
 

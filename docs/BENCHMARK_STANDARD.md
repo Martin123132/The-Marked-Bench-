@@ -10,6 +10,8 @@ Published results should also include a result card that pins the report,
 bundle, review status, standard publication claims, and file hashes.
 Publication packets provide a self-contained folder for sharing the full
 evidence chain.
+Result claims provide exact citeable wording tied to the publication packet
+hash, so scores are not detached from their evidence or overstated.
 
 ## Suite Identity
 
@@ -77,6 +79,7 @@ The source tree also includes JSON schemas for public infrastructure:
 - `schemas/submission_bundle.schema.json`
 - `schemas/submission_review.schema.json`
 - `schemas/publication_packet.schema.json`
+- `schemas/result_claim.schema.json`
 - `schemas/release_manifest.schema.json`
 - `schemas/result_card.schema.json`
 - `schemas/conformance_report.schema.json`
@@ -151,22 +154,22 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public benchmark artifacts by SHA-256:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_4_1.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_4_2.json
 ```
 
 Export and validate the release conformance report:
 
 ```bash
-marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_4_1.json
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_1.json
+marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_4_2.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_2.json
 ```
 
 Export and validate the external adoption packet:
 
 ```bash
-marked-bench --export-adoption-packet adoption/marked_bench_adoption_packet_v0_4_1.json
-marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_1.json
-marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_1.json
+marked-bench --export-adoption-packet adoption/marked_bench_adoption_packet_v0_4_2.json
+marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_2.json
+marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_2.json
 ```
 
 Run the harder adversarial track:
@@ -273,11 +276,18 @@ marked-bench --create-publication-packet artifacts/my-detector-publication-packe
 marked-bench --validate-publication-packet artifacts/my-detector-publication-packet/publication_packet.json
 ```
 
+Public result claims can be created from publication packets:
+
+```bash
+marked-bench --create-result-claim artifacts/my-detector-publication-packet/result_claim.json --claim-publication-packet artifacts/my-detector-publication-packet/publication_packet.json
+marked-bench --validate-result-claim artifacts/my-detector-publication-packet/result_claim.json
+```
+
 The checked example under `submissions/example_external_jsonl/` shows the full
 external packet shape: JSONL predictions, scored report, submission metadata,
 bundle manifest, structured review file, and result card.
 The checked example under `submissions/example_publication_packet/` shows the
-one-command publication packet shape.
+one-command publication packet and result claim shape.
 
 External prediction records may include `rationale` and `evidence`. `rationale`
 is the system's short explanation for the predicted label. `evidence` is a list
@@ -300,6 +310,8 @@ inspectable submissions.
 - Require result cards for externally cited or ranked results.
 - Require publication packets when a result is shared as a self-contained
   public evidence folder.
+- Require result claims when a benchmark score is cited as a short public
+  statement or badge.
 - Keep `python scripts/validate_benchmark_artifacts.py` passing after any
   baseline, suite, or leaderboard change.
 - Keep checked public JSON artifacts conformant with the schemas under
@@ -324,5 +336,7 @@ Release `0.3.10` adds a checked third-party evidence ledger so adoption claims
 can be recorded without overstating unverified use. Version `0.4.0` adds a
 false-positive controls track for paraphrases, scoped negatives, time shifts,
 and harmless elaborations. Release `0.4.1` adds one-command publication packets
-for self-contained public result evidence. The next step toward a larger
-public standard is real third-party submissions and human review evidence.
+for self-contained public result evidence. Release `0.4.2` adds result claims
+so public score statements are hash-pinned and bounded. The next step toward a
+larger public standard is real third-party submissions and human review
+evidence.

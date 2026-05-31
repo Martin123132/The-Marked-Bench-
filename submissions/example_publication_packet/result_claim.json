@@ -1,0 +1,49 @@
+{
+  "case_count": 18,
+  "claim": {
+    "badge_label": "Marked Bench 11.11 - marked-bench-contradiction-multihop v0.3.0",
+    "not_claims": [
+      "Not a safety certification.",
+      "Not a general intelligence claim.",
+      "Not comparable across different suite hashes.",
+      "Not evidence of third-party adoption unless separately verified in the evidence ledger."
+    ],
+    "permitted_summary": "Public result on the pinned suite, version, and suite hash only.",
+    "text": "ExampleExternalJsonl demo-1.0 scored 11.11 on The Marked Bench marked-bench-contradiction-multihop v0.3.0 using suite hash 07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f and release marked-bench-contradiction-standard-release-0.4.2. This is a public benchmark result, not a safety certification."
+  },
+  "created_at": 1780242707.0,
+  "evidence": {
+    "claim_url": "",
+    "evidence_url": "",
+    "publication_packet_path": "publication_packet.json",
+    "publication_packet_sha256": "deeea12be9e127995ec6c15ba9e56a5c3bdd92ed2439f6ee9126ec3bd75075e3",
+    "report_sha256": "9028699a80c286fb644d9a7212209d452c5e5e0cbc8303c06599fb4950017c83",
+    "result_card_sha256": "0414aebb7e9ef854cb6ba33f9b58f43a7e802e7f42d5750e9d91107a9bce3b1a"
+  },
+  "failure_count": 10,
+  "notes": "Checked example result claim for the publication packet workflow.",
+  "overall_score": 11.11,
+  "release_id": "marked-bench-contradiction-standard-release-0.4.2",
+  "schema": "marked_bench.result-claim.v1",
+  "standard_claims": {
+    "full_publication_packet_required": true,
+    "not_general_intelligence_claim": true,
+    "not_safety_certification": true,
+    "public_test_result": true,
+    "result_card_required": true,
+    "same_suite_hash_required": true,
+    "third_party_adoption_requires_verified_evidence": true
+  },
+  "submitter": "The Marked Bench Examples",
+  "suite_hash": "07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f",
+  "suite_id": "marked-bench-contradiction-multihop",
+  "suite_version": "0.3.0",
+  "system_name": "ExampleExternalJsonl",
+  "system_version": "demo-1.0",
+  "validation": {
+    "error_count": 0,
+    "schema": "marked_bench.publication-packet-validation.v1",
+    "valid": true,
+    "warning_count": 0
+  }
+}

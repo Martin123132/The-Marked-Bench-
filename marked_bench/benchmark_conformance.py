@@ -12,6 +12,7 @@ from marked_bench.benchmark_adoption import (
     load_adoption_packet,
     validate_adoption_packet,
 )
+from marked_bench.benchmark_claim import load_result_claim, validate_result_claim
 from marked_bench.benchmark_evidence import (
     DEFAULT_EVIDENCE_LEDGER,
     load_evidence_ledger,
@@ -34,8 +35,8 @@ from marked_bench.schema_validation import load_json_schema, validate_json_file,
 
 
 CONFORMANCE_REPORT_SCHEMA = "marked_bench.conformance-report.v1"
-DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_1.json")
-DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_1.json")
+DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_2.json")
+DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_2.json")
 
 SUITE_MANIFESTS = {
     Path("suites/marked_bench_contradiction_standard_v0_1_0.json"): "contradiction",
@@ -94,6 +95,10 @@ CHECKED_PUBLICATION_PACKETS = [
     Path("submissions/example_publication_packet/publication_packet.json"),
 ]
 
+CHECKED_RESULT_CLAIMS = [
+    Path("submissions/example_publication_packet/result_claim.json"),
+]
+
 SCHEMA_CONFORMANCE_FILES = {
     Path("benchmark_registry.json"): Path("schemas/benchmark_registry.schema.json"),
     DEFAULT_RELEASE_MANIFEST: Path("schemas/release_manifest.schema.json"),
@@ -120,6 +125,7 @@ SCHEMA_CONFORMANCE_FILES = {
     Path("submissions/example_publication_packet/publication_packet.json"): Path(
         "schemas/publication_packet.schema.json"
     ),
+    Path("submissions/example_publication_packet/result_claim.json"): Path("schemas/result_claim.schema.json"),
     DEFAULT_ADOPTION_PACKET: Path("schemas/adoption_packet.schema.json"),
     DEFAULT_EVIDENCE_LEDGER: Path("schemas/third_party_evidence_ledger.schema.json"),
 }
@@ -147,6 +153,7 @@ def build_conformance_report(
         _check_submission_packets(root_path),
         _check_result_cards(root_path),
         _check_publication_packets(root_path),
+        _check_result_claims(root_path),
         _check_adoption_packet(root_path),
         _check_evidence_ledger(root_path),
     ]
@@ -422,6 +429,20 @@ def _check_publication_packets(root: Path) -> dict[str, Any]:
         if not validation["valid"]:
             errors.append(f"{path}: publication packet validation failed: {validation['errors']}")
     return _check("checked_publication_packets_valid", errors, {"packet_count": len(CHECKED_PUBLICATION_PACKETS)})
+
+
+def _check_result_claims(root: Path) -> dict[str, Any]:
+    errors: list[str] = []
+    for path in CHECKED_RESULT_CLAIMS:
+        try:
+            claim = load_result_claim(root / path)
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            errors.append(f"{path}: could not load result claim: {exc}")
+            continue
+        validation = validate_result_claim(claim, base_dir=(root / path).parent)
+        if not validation["valid"]:
+            errors.append(f"{path}: result claim validation failed: {validation['errors']}")
+    return _check("checked_result_claims_valid", errors, {"claim_count": len(CHECKED_RESULT_CLAIMS)})
 
 
 def _check_adoption_packet(root: Path) -> dict[str, Any]:

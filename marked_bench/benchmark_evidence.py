@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 from typing import Any, Mapping
 
+from marked_bench.benchmark_claim import load_result_claim, validate_result_claim
 from marked_bench.benchmark_registry import build_benchmark_registry
 from marked_bench.benchmark_release import RELEASE_ID, file_sha256
 from marked_bench.benchmark_result_card import load_result_card, validate_result_card
@@ -13,10 +14,10 @@ from marked_bench.schema_validation import load_json_schema, validate_json_schem
 
 
 EVIDENCE_LEDGER_SCHEMA = "marked_bench.third-party-evidence-ledger.v1"
-DEFAULT_EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_1.json")
-DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_1.json")
-DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_1.json")
-DEFAULT_ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_1.json")
+DEFAULT_EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_2.json")
+DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_2.json")
+DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_2.json")
+DEFAULT_ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_2.json")
 
 
 def build_evidence_ledger(entries: list[Mapping[str, Any]] | None = None) -> dict[str, Any]:
@@ -37,6 +38,7 @@ def build_evidence_ledger(entries: list[Mapping[str, Any]] | None = None) -> dic
         "evidence_requirements": {
             "result_card_required": True,
             "submission_bundle_required": True,
+            "result_claim_required_for_public_score_claims": True,
             "review_required_for_verified_status": True,
             "same_suite_hash_required": True,
             "public_url_or_committed_path_required": True,
@@ -172,6 +174,26 @@ def _entry_errors(
         errors.append(f"entries[{index}]: verified entries require review_path")
     if entry.get("adoption_claim") is True and status != "verified":
         errors.append(f"entries[{index}]: adoption_claim requires verified status")
+    result_claim_path = Path(str(entry.get("result_claim_path", "")))
+    result_claim_sha = str(entry.get("result_claim_sha256", ""))
+    if result_claim_path.as_posix():
+        if not (root / result_claim_path).exists():
+            errors.append(f"entries[{index}]: result claim is missing: {result_claim_path}")
+        else:
+            actual_sha = file_sha256(root / result_claim_path)
+            if result_claim_sha and actual_sha != result_claim_sha:
+                errors.append(f"entries[{index}]: result_claim_sha256 does not match {result_claim_path}")
+            try:
+                claim = load_result_claim(root / result_claim_path)
+            except (OSError, ValueError, json.JSONDecodeError) as exc:
+                errors.append(f"entries[{index}]: could not load result claim: {exc}")
+            else:
+                validation = validate_result_claim(claim, base_dir=(root / result_claim_path).parent)
+                if not validation["valid"]:
+                    errors.append(f"entries[{index}]: result claim validation failed: {validation['errors']}")
+                for key in ["suite_id", "suite_version", "suite_hash", "system_name", "system_version"]:
+                    if entry.get(key) != claim.get(key):
+                        errors.append(f"entries[{index}]: {key} does not match result claim")
     return errors
 
 

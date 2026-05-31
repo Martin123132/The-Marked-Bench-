@@ -1,8 +1,8 @@
 {
   "bundle_path": "submission_bundle.json",
-  "bundle_sha256": "587578a5df865f25649c2e2a005fd67f269b34c0030cb19e56271d9eb1273e01",
+  "bundle_sha256": "ad4e2ff41796e55d2577fd6d056cae589e952c2d023ac1422186af146a72162a",
   "case_count": 18,
-  "created_at": 1780241353.623,
+  "created_at": 1780242707.0,
   "disclosures": {
     "model": "none",
     "postprocessing": "none",
@@ -39,7 +39,7 @@
   "report_schema": "marked_bench.contradiction-benchmark-report.v2",
   "report_sha256": "9028699a80c286fb644d9a7212209d452c5e5e0cbc8303c06599fb4950017c83",
   "review_path": "submission_review.json",
-  "review_sha256": "40293d8748d31901e60dc4729d1c2a32dd7fbf960a19a4d46de13778fa1f5f10",
+  "review_sha256": "3f156c0a95e2455a8673784b4ab800cb70054986c3ab999fb493fffb7a404caf",
   "schema": "marked_bench.result-card.v1",
   "standard_claims": {
     "bundle_required_for_leaderboard_review": true,

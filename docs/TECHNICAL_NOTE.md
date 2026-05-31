@@ -75,11 +75,12 @@ This note summarizes the checked benchmark release artifacts for `contradiction-
 - Leaderboard submissions must pass `marked-bench --validate-submission SUBMISSION`.
 - Published results should include `marked-bench --validate-result-card CARD`.
 - Public result packets should pass `marked-bench --validate-publication-packet PACKET`.
+- Citeable score claims should pass `marked-bench --validate-result-claim CLAIM`.
 - Accepted entries should pass `marked-bench --validate-submission-review REVIEW`.
-- Public release artifacts are pinned by `releases/marked_bench_release_v0_4_1.json`.
-- Release conformance is captured by `conformance/marked_bench_conformance_v0_4_1.json`.
-- External adoption metadata is captured by `adoption/marked_bench_adoption_packet_v0_4_1.json`.
-- Third-party evidence is recorded by `adoption/third_party_evidence_ledger_v0_4_1.json`.
+- Public release artifacts are pinned by `releases/marked_bench_release_v0_4_2.json`.
+- Release conformance is captured by `conformance/marked_bench_conformance_v0_4_2.json`.
+- External adoption metadata is captured by `adoption/marked_bench_adoption_packet_v0_4_2.json`.
+- Third-party evidence is recorded by `adoption/third_party_evidence_ledger_v0_4_2.json`.
 - Repository artifact drift is checked by `python scripts/validate_benchmark_artifacts.py`.
 
 ## Current Limitations

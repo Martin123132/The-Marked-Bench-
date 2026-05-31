@@ -27,8 +27,9 @@ marked-bench --validate-result-card submissions/example_external_jsonl/example_e
 
 `example_publication_packet/` is a checked one-command publication packet. It
 contains a copied report, optional predictions, submission metadata, bundle,
-review file, result card, and packet manifest. Validate it with:
+review file, result card, packet manifest, and result claim. Validate it with:
 
 ```bash
 marked-bench --validate-publication-packet submissions/example_publication_packet/publication_packet.json
+marked-bench --validate-result-claim submissions/example_publication_packet/result_claim.json
 ```

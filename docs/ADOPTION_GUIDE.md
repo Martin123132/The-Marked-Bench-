@@ -54,6 +54,15 @@ marked-bench --create-publication-packet your-publication-packet --publication-r
 marked-bench --validate-publication-packet your-publication-packet/publication_packet.json
 ```
 
+Create a result claim when you need a short, citeable score statement. The
+claim pins the exact wording to the publication packet hash and records what
+the score does not prove:
+
+```bash
+marked-bench --create-result-claim your-publication-packet/result_claim.json --claim-publication-packet your-publication-packet/publication_packet.json
+marked-bench --validate-result-claim your-publication-packet/result_claim.json
+```
+
 Leaderboard entries without a valid report, submission file, and submission
 bundle should not be ranked.
 
@@ -71,7 +80,7 @@ A checked example packet is committed under `submissions/example_external_jsonl/
 Use it as the reference shape for external JSONL predictions, scored reports,
 submission metadata, bundle evidence, review files, and result cards.
 `submissions/example_publication_packet/` shows the one-command publication
-packet shape.
+packet shape and the checked result-claim shape.
 
 ## Check Release Conformance
 
@@ -79,9 +88,9 @@ Before adopting or mirroring a release package, validate the checked
 conformance report:
 
 ```bash
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_1.json
-marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_1.json
-marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_1.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_2.json
+marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_2.json
+marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_2.json
 ```
 
 The conformance report is the single machine-readable pass/fail artifact for

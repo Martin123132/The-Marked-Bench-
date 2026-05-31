@@ -1,0 +1,120 @@
+{
+  "benchmark_family": "contradiction-detection",
+  "checked_artifact_count": 112,
+  "checked_schema_file_count": 28,
+  "checks": [
+    {
+      "details": {
+        "path": "benchmark_registry.json"
+      },
+      "errors": [],
+      "name": "benchmark_registry_current",
+      "status": "pass"
+    },
+    {
+      "details": {
+        "artifact_count": 112,
+        "path": "releases/marked_bench_release_v0_4_2.json"
+      },
+      "errors": [],
+      "name": "release_manifest_current",
+      "status": "pass"
+    },
+    {
+      "details": {
+        "suite_count": 4
+      },
+      "errors": [],
+      "name": "suite_manifests_current",
+      "status": "pass"
+    },
+    {
+      "details": {
+        "report_count": 8
+      },
+      "errors": [],
+      "name": "baseline_reports_valid",
+      "status": "pass"
+    },
+    {
+      "details": {
+        "leaderboard_count": 4
+      },
+      "errors": [],
+      "name": "leaderboards_match_reports",
+      "status": "pass"
+    },
+    {
+      "details": {
+        "file_count": 28
+      },
+      "errors": [],
+      "name": "public_json_schema_conformance",
+      "status": "pass"
+    },
+    {
+      "details": {
+        "suite_count": 4
+      },
+      "errors": [],
+      "name": "prediction_templates_conform",
+      "status": "pass"
+    },
+    {
+      "details": {
+        "packet_count": 1
+      },
+      "errors": [],
+      "name": "checked_submission_packets_valid",
+      "status": "pass"
+    },
+    {
+      "details": {
+        "card_count": 1
+      },
+      "errors": [],
+      "name": "checked_result_cards_valid",
+      "status": "pass"
+    },
+    {
+      "details": {
+        "packet_count": 1
+      },
+      "errors": [],
+      "name": "checked_publication_packets_valid",
+      "status": "pass"
+    },
+    {
+      "details": {
+        "claim_count": 1
+      },
+      "errors": [],
+      "name": "checked_result_claims_valid",
+      "status": "pass"
+    },
+    {
+      "details": {
+        "path": "adoption/marked_bench_adoption_packet_v0_4_2.json"
+      },
+      "errors": [],
+      "name": "adoption_packet_valid",
+      "status": "pass"
+    },
+    {
+      "details": {
+        "path": "adoption/third_party_evidence_ledger_v0_4_2.json"
+      },
+      "errors": [],
+      "name": "third_party_evidence_ledger_valid",
+      "status": "pass"
+    }
+  ],
+  "default_track": "contradiction-multihop",
+  "failures": [],
+  "passed": true,
+  "project": "The Marked Bench",
+  "release_id": "marked-bench-contradiction-standard-release-0.4.2",
+  "release_manifest_path": "releases/marked_bench_release_v0_4_2.json",
+  "schema": "marked_bench.conformance-report.v1",
+  "track_count": 4
+}

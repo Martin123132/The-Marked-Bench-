@@ -74,7 +74,7 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public artifact SHA-256 digests:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_4_1.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_4_2.json
 ```
 
 Export the generated technical note:
@@ -86,16 +86,16 @@ marked-bench --export-technical-note docs/TECHNICAL_NOTE.md
 Export and validate the machine-readable conformance report:
 
 ```bash
-marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_4_1.json
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_1.json
+marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_4_2.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_2.json
 ```
 
 Export and validate the machine-readable adoption packet for external users:
 
 ```bash
-marked-bench --export-adoption-packet adoption/marked_bench_adoption_packet_v0_4_1.json
-marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_1.json
-marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_1.json
+marked-bench --export-adoption-packet adoption/marked_bench_adoption_packet_v0_4_2.json
+marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_2.json
+marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_2.json
 ```
 
 ## Score External Systems
@@ -144,6 +144,13 @@ marked-bench --create-publication-packet artifacts/my-system-publication-packet 
 marked-bench --validate-publication-packet artifacts/my-system-publication-packet/publication_packet.json
 ```
 
+Create a citeable result claim from that packet:
+
+```bash
+marked-bench --create-result-claim artifacts/my-system-publication-packet/result_claim.json --claim-publication-packet artifacts/my-system-publication-packet/publication_packet.json
+marked-bench --validate-result-claim artifacts/my-system-publication-packet/result_claim.json
+```
+
 Create a complete external-submission example:
 
 ```bash
@@ -189,9 +196,9 @@ marked-bench --build-leaderboard baselines/always_none_controls_v0_4_0.json base
 
 - Benchmark registry: `benchmark_registry.json`
 - Release manifest: `releases/`
-- Conformance report: `conformance/marked_bench_conformance_v0_4_1.json`
-- Adoption packet: `adoption/marked_bench_adoption_packet_v0_4_1.json`
-- Third-party evidence ledger: `adoption/third_party_evidence_ledger_v0_4_1.json`
+- Conformance report: `conformance/marked_bench_conformance_v0_4_2.json`
+- Adoption packet: `adoption/marked_bench_adoption_packet_v0_4_2.json`
+- Third-party evidence ledger: `adoption/third_party_evidence_ledger_v0_4_2.json`
 - Suite manifests and coverage profiles: `suites/`
 - Baseline reports: `baselines/`
 - Leaderboard snapshots: `leaderboard/`
@@ -204,6 +211,7 @@ marked-bench --build-leaderboard baselines/always_none_controls_v0_4_0.json base
 - Submission review schema: `schemas/submission_review.schema.json`
 - Result card schema: `schemas/result_card.schema.json`
 - Publication packet schema: `schemas/publication_packet.schema.json`
+- Result claim schema: `schemas/result_claim.schema.json`
 - Adoption packet schema: `schemas/adoption_packet.schema.json`
 - Third-party evidence ledger schema: `schemas/third_party_evidence_ledger.schema.json`
 - Checked external submission packet: `submissions/example_external_jsonl/`
@@ -213,7 +221,7 @@ marked-bench --build-leaderboard baselines/always_none_controls_v0_4_0.json base
 - Third-party evidence protocol: `docs/THIRD_PARTY_EVIDENCE.md`
 - Submission review rubric: `docs/SUBMISSION_REVIEW_RUBRIC.md`
 - Release notes: `docs/RELEASE_NOTES_v0_2_0.md`
-- Current release notes: `docs/RELEASE_NOTES_v0_4_1.md`
+- Current release notes: `docs/RELEASE_NOTES_v0_4_2.md`
 
 ## Quality Gates
 
@@ -236,6 +244,8 @@ Checked result cards are validated against their referenced reports, bundles,
 reviews, hashes, and standard publication claims.
 Checked publication packets are validated against their copied reports,
 submissions, bundles, reviews, result cards, and file hashes.
+Checked result claims are validated against publication packets so public
+score wording stays tied to exact hashes and explicit boundaries.
 The conformance report provides one machine-readable pass/fail artifact for
 the full release package.
 The adoption packet is validated so external handoff, announcement, and
@@ -252,6 +262,7 @@ marked_bench/
     benchmark_evidence.py         # Third-party evidence ledger validation
     benchmark_leaderboard.py      # Validated leaderboard builder
     benchmark_publication.py      # One-command public result packets
+    benchmark_claim.py            # Citeable result claim validation
     examples/
         external_submission_demo.py # End-to-end external JSONL workflow
     contradiction/

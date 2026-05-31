@@ -12,6 +12,12 @@ from marked_bench.benchmark_adoption import (
     load_adoption_packet,
     validate_adoption_packet,
 )
+from marked_bench.benchmark_claim import (
+    RESULT_CLAIM_SCHEMA,
+    build_result_claim,
+    load_result_claim,
+    validate_result_claim,
+)
 from marked_bench.benchmark_release import RELEASE_MANIFEST_SCHEMA, build_release_manifest, file_sha256
 from marked_bench.benchmark_registry import REGISTRY_SCHEMA, build_benchmark_registry
 from marked_bench.benchmark_review import (
@@ -276,10 +282,10 @@ class BenchmarkSuiteTests(unittest.TestCase):
         root = Path(__file__).resolve().parent.parent
         checked_pairs = [
             ("benchmark_registry.json", "schemas/benchmark_registry.schema.json"),
-            ("releases/marked_bench_release_v0_4_1.json", "schemas/release_manifest.schema.json"),
-            ("conformance/marked_bench_conformance_v0_4_1.json", "schemas/conformance_report.schema.json"),
-            ("adoption/marked_bench_adoption_packet_v0_4_1.json", "schemas/adoption_packet.schema.json"),
-            ("adoption/third_party_evidence_ledger_v0_4_1.json", "schemas/third_party_evidence_ledger.schema.json"),
+            ("releases/marked_bench_release_v0_4_2.json", "schemas/release_manifest.schema.json"),
+            ("conformance/marked_bench_conformance_v0_4_2.json", "schemas/conformance_report.schema.json"),
+            ("adoption/marked_bench_adoption_packet_v0_4_2.json", "schemas/adoption_packet.schema.json"),
+            ("adoption/third_party_evidence_ledger_v0_4_2.json", "schemas/third_party_evidence_ledger.schema.json"),
             ("suites/marked_bench_contradiction_standard_v0_1_0.json", "schemas/contradiction_suite_manifest.schema.json"),
             ("suites/marked_bench_contradiction_adversarial_v0_2_0.json", "schemas/contradiction_suite_manifest.schema.json"),
             ("suites/marked_bench_contradiction_multihop_v0_3_0.json", "schemas/contradiction_suite_manifest.schema.json"),
@@ -290,6 +296,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
             ("leaderboard/leaderboard_controls_v0_4_0.json", "schemas/leaderboard.schema.json"),
             ("submissions/example_external_jsonl/example_external_result_card.json", "schemas/result_card.schema.json"),
             ("submissions/example_publication_packet/publication_packet.json", "schemas/publication_packet.schema.json"),
+            ("submissions/example_publication_packet/result_claim.json", "schemas/result_claim.schema.json"),
         ]
 
         for artifact_path, schema_path in checked_pairs:
@@ -333,6 +340,8 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertEqual(registry["schemas"]["submission_review"], "schemas/submission_review.schema.json")
         self.assertEqual(registry["schema_ids"]["publication_packet"], PUBLICATION_PACKET_SCHEMA)
         self.assertEqual(registry["schemas"]["publication_packet"], "schemas/publication_packet.schema.json")
+        self.assertEqual(registry["schema_ids"]["result_claim"], RESULT_CLAIM_SCHEMA)
+        self.assertEqual(registry["schemas"]["result_claim"], "schemas/result_claim.schema.json")
         self.assertEqual(registry["schema_ids"]["result_card"], RESULT_CARD_SCHEMA)
         self.assertEqual(registry["schemas"]["result_card"], "schemas/result_card.schema.json")
         self.assertEqual(registry["schema_ids"]["adoption_packet"], ADOPTION_PACKET_SCHEMA)
@@ -345,7 +354,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_release_manifest_matches_current_artifacts(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "releases" / "marked_bench_release_v0_4_1.json"
+        path = root / "releases" / "marked_bench_release_v0_4_2.json"
 
         manifest = json.loads(path.read_text(encoding="utf-8"))
         artifact_paths = {entry["path"] for entry in manifest["artifacts"]}
@@ -356,22 +365,24 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertGreater(manifest["artifact_count"], 20)
         self.assertIn("submissions/example_external_jsonl/predictions.jsonl", artifact_paths)
         self.assertIn("submissions/example_external_jsonl/example_external_submission_review.json", artifact_paths)
-        self.assertIn("conformance/marked_bench_conformance_v0_4_1.json", artifact_paths)
-        self.assertIn("adoption/marked_bench_adoption_packet_v0_4_1.json", artifact_paths)
-        self.assertIn("adoption/third_party_evidence_ledger_v0_4_1.json", artifact_paths)
+        self.assertIn("conformance/marked_bench_conformance_v0_4_2.json", artifact_paths)
+        self.assertIn("adoption/marked_bench_adoption_packet_v0_4_2.json", artifact_paths)
+        self.assertIn("adoption/third_party_evidence_ledger_v0_4_2.json", artifact_paths)
         self.assertIn("suites/marked_bench_contradiction_controls_v0_4_0.json", artifact_paths)
         self.assertIn("leaderboard/leaderboard_controls_v0_4_0.json", artifact_paths)
         self.assertIn("docs/ANNOUNCEMENT_PACKAGE.md", artifact_paths)
         self.assertIn("docs/THIRD_PARTY_EVIDENCE.md", artifact_paths)
         self.assertIn("schemas/publication_packet.schema.json", artifact_paths)
+        self.assertIn("schemas/result_claim.schema.json", artifact_paths)
         self.assertIn("schemas/adoption_packet.schema.json", artifact_paths)
         self.assertIn("schemas/third_party_evidence_ledger.schema.json", artifact_paths)
         self.assertIn("submissions/example_external_jsonl/example_external_result_card.json", artifact_paths)
         self.assertIn("submissions/example_publication_packet/publication_packet.json", artifact_paths)
+        self.assertIn("submissions/example_publication_packet/result_claim.json", artifact_paths)
 
     def test_checked_in_conformance_report_matches_current_evidence(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "conformance" / "marked_bench_conformance_v0_4_1.json"
+        path = root / "conformance" / "marked_bench_conformance_v0_4_2.json"
 
         report = load_conformance_report(path)
         validation = validate_conformance_report(report, root=root)
@@ -380,13 +391,14 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertEqual(report["schema"], CONFORMANCE_REPORT_SCHEMA)
         self.assertTrue(report["passed"], report["failures"])
         self.assertIn("checked_publication_packets_valid", [check["name"] for check in report["checks"]])
+        self.assertIn("checked_result_claims_valid", [check["name"] for check in report["checks"]])
         self.assertIn("adoption_packet_valid", [check["name"] for check in report["checks"]])
         self.assertIn("third_party_evidence_ledger_valid", [check["name"] for check in report["checks"]])
         self.assertTrue(validation["valid"], validation["errors"])
 
     def test_checked_in_adoption_packet_matches_current_evidence(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "adoption" / "marked_bench_adoption_packet_v0_4_1.json"
+        path = root / "adoption" / "marked_bench_adoption_packet_v0_4_2.json"
 
         packet = load_adoption_packet(path)
         validation = validate_adoption_packet(packet, root=root)
@@ -395,13 +407,15 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertEqual(packet["schema"], ADOPTION_PACKET_SCHEMA)
         self.assertEqual(packet["default_track"], "contradiction-multihop")
         self.assertTrue(packet["standard_claims"]["public_result_card_required"])
+        self.assertTrue(packet["standard_claims"]["public_result_claim_required"])
         self.assertTrue(packet["standard_claims"]["third_party_evidence_ledger_required"])
         self.assertIn("checked_publication_packet", [item["name"] for item in packet["required_public_artifacts"]])
+        self.assertIn("checked_result_claim", [item["name"] for item in packet["required_public_artifacts"]])
         self.assertTrue(validation["valid"], validation["errors"])
 
     def test_checked_in_evidence_ledger_matches_current_evidence(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "adoption" / "third_party_evidence_ledger_v0_4_1.json"
+        path = root / "adoption" / "third_party_evidence_ledger_v0_4_2.json"
 
         ledger = load_evidence_ledger(path)
         validation = validate_evidence_ledger(ledger, root=root)
@@ -469,6 +483,27 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertTrue(packet["ready_for_publication"])
         self.assertTrue(validation["valid"], validation["errors"])
         self.assertIn("result_card", {entry["role"] for entry in packet["files"]})
+
+    def test_checked_result_claim_validates(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        packet_dir = root / "submissions" / "example_publication_packet"
+        path = packet_dir / "result_claim.json"
+
+        claim = load_result_claim(path)
+        validation = validate_result_claim(claim, base_dir=packet_dir)
+
+        self.assertEqual(
+            claim,
+            build_result_claim(
+                "publication_packet.json",
+                base_dir=packet_dir,
+                notes="Checked example result claim for the publication packet workflow.",
+            ),
+        )
+        self.assertEqual(claim["schema"], RESULT_CLAIM_SCHEMA)
+        self.assertEqual(claim["suite_id"], MULTIHOP_SUITE_ID)
+        self.assertIn("not a safety certification", claim["claim"]["text"])
+        self.assertTrue(validation["valid"], validation["errors"])
 
     def test_checked_in_technical_note_matches_generated_evidence(self) -> None:
         root = Path(__file__).resolve().parent.parent
@@ -1185,9 +1220,16 @@ class BenchmarkSuiteTests(unittest.TestCase):
             )
             loaded = load_publication_packet(packet_dir / "publication_packet.json")
             validation = validate_publication_packet(loaded, base_dir=packet_dir)
+            claim = build_result_claim(
+                "publication_packet.json",
+                base_dir=packet_dir,
+                notes="builder result claim",
+            )
 
             self.assertEqual(packet, loaded)
             self.assertEqual(packet, build_publication_packet(packet_dir, notes="builder packet"))
+            self.assertEqual(claim["schema"], RESULT_CLAIM_SCHEMA)
+            self.assertIn("PublicationBuilder builder-1 scored", claim["claim"]["text"])
             self.assertEqual(packet["schema"], PUBLICATION_PACKET_SCHEMA)
             self.assertEqual(packet["system_name"], "PublicationBuilder")
             self.assertTrue(packet["ready_for_publication"])
@@ -1426,6 +1468,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
         report_path = output_root / "publication-report.json"
         packet_dir = output_root / "publication-packet"
         packet_path = packet_dir / "publication_packet.json"
+        claim_path = packet_dir / "result_claim.json"
 
         try:
             with redirect_stdout(StringIO()):
@@ -1447,13 +1490,31 @@ class BenchmarkSuiteTests(unittest.TestCase):
                 )
             with redirect_stdout(StringIO()) as validate_output:
                 benchmark_main(["--validate-publication-packet", str(packet_path)])
+            with redirect_stdout(StringIO()) as create_claim_output:
+                benchmark_main(
+                    [
+                        "--create-result-claim",
+                        str(claim_path),
+                        "--claim-publication-packet",
+                        "publication_packet.json",
+                        "--claim-notes",
+                        "CLI result claim test",
+                    ]
+                )
+            with redirect_stdout(StringIO()) as validate_claim_output:
+                benchmark_main(["--validate-result-claim", str(claim_path)])
 
             packet = json.loads(packet_path.read_text(encoding="utf-8"))
+            claim = json.loads(claim_path.read_text(encoding="utf-8"))
             self.assertEqual(packet["schema"], PUBLICATION_PACKET_SCHEMA)
             self.assertEqual(packet["system_name"], "CliPublicationPacketSystem")
             self.assertTrue(packet["ready_for_publication"])
+            self.assertEqual(claim["schema"], RESULT_CLAIM_SCHEMA)
+            self.assertIn("CliPublicationPacketSystem", claim["claim"]["text"])
             self.assertIn("Publication packet:", create_output.getvalue())
             self.assertIn("Publication packet validation: pass", validate_output.getvalue())
+            self.assertIn("Result claim:", create_claim_output.getvalue())
+            self.assertIn("Result claim validation: pass", validate_claim_output.getvalue())
         finally:
             shutil.rmtree(output_root, ignore_errors=True)
 

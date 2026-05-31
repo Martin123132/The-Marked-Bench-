@@ -12,12 +12,12 @@ from marked_bench.schema_validation import load_json_schema, validate_json_schem
 
 
 ADOPTION_PACKET_SCHEMA = "marked_bench.adoption-packet.v1"
-DEFAULT_ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_1.json")
-DEFAULT_EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_1.json")
-DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_1.json")
-DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_1.json")
+DEFAULT_ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_2.json")
+DEFAULT_EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_2.json")
+DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_2.json")
+DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_2.json")
 REPOSITORY_URL = "https://github.com/Martin123132/The-Marked-Bench-"
-RELEASE_URL = "https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.4.1"
+RELEASE_URL = "https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.4.2"
 
 
 def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
@@ -51,6 +51,7 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
             "public_result_card_required": True,
             "release_conformance_required": True,
             "leaderboard_review_required": True,
+            "public_result_claim_required": True,
             "not_safety_certification": True,
             "third_party_evidence_required_for_adoption_claims": True,
             "third_party_evidence_ledger_required": True,
@@ -83,6 +84,11 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
                 "schemas/publication_packet.schema.json",
                 "Schema for one-command public result packets.",
             ),
+            _artifact(
+                "result_claim_schema",
+                "schemas/result_claim.schema.json",
+                "Schema for citeable result claims tied to publication packet hashes.",
+            ),
             _artifact("adoption_packet_schema", "schemas/adoption_packet.schema.json", "Schema for this adoption packet."),
             _artifact(
                 "third_party_evidence_schema",
@@ -99,12 +105,17 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
                 "submissions/example_publication_packet/publication_packet.json",
                 "Example one-command public result packet with copied report and complete evidence chain.",
             ),
+            _artifact(
+                "checked_result_claim",
+                "submissions/example_publication_packet/result_claim.json",
+                "Example citeable result claim with exact wording, boundaries, and evidence hashes.",
+            ),
         ],
         "adopter_workflow": [
             {
                 "step": 1,
                 "name": "pin_release",
-                "command": "marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_1.json",
+                "command": "marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_2.json",
                 "output": "Release conformance validation passes.",
             },
             {
@@ -166,6 +177,15 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
                 ),
                 "output": "A self-contained public result packet with report, submission, bundle, review, result card, and hashes.",
             },
+            {
+                "step": 8,
+                "name": "create_result_claim",
+                "command": (
+                    "marked-bench --create-result-claim artifacts/system-publication-packet/result_claim.json "
+                    "--claim-publication-packet artifacts/system-publication-packet/publication_packet.json"
+                ),
+                "output": "A citeable result claim with exact score wording and overclaim boundaries.",
+            },
         ],
         "validation_commands": [
             {
@@ -182,7 +202,7 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
                 "name": "adoption_packet",
                 "command": (
                     "marked-bench --validate-adoption-packet "
-                    "adoption/marked_bench_adoption_packet_v0_4_1.json"
+                    "adoption/marked_bench_adoption_packet_v0_4_2.json"
                 ),
                 "proves": "The external adoption packet matches the current release evidence.",
             },
@@ -190,7 +210,7 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
                 "name": "third_party_evidence_ledger",
                 "command": (
                     "marked-bench --validate-evidence-ledger "
-                    "adoption/third_party_evidence_ledger_v0_4_1.json"
+                    "adoption/third_party_evidence_ledger_v0_4_2.json"
                 ),
                 "proves": "External adoption evidence claims are explicitly recorded and validated.",
             },
@@ -201,6 +221,14 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
                     "submissions/example_publication_packet/publication_packet.json"
                 ),
                 "proves": "The one-command public result packet is self-contained and hash-current.",
+            },
+            {
+                "name": "checked_result_claim",
+                "command": (
+                    "marked-bench --validate-result-claim "
+                    "submissions/example_publication_packet/result_claim.json"
+                ),
+                "proves": "The citeable result claim matches its publication packet evidence.",
             },
         ],
         "submission_channels": [
@@ -250,7 +278,14 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
         "citation": {
             "path": "CITATION.cff",
             "preferred_name": "The Marked Bench",
-            "required_fields": ["release_tag", "suite_id", "suite_version", "suite_hash", "result_card_path"],
+            "required_fields": [
+                "release_tag",
+                "suite_id",
+                "suite_version",
+                "suite_hash",
+                "result_card_path",
+                "result_claim_path",
+            ],
         },
     }
 

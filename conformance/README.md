@@ -4,13 +4,13 @@ This directory stores checked conformance reports for The Marked Bench release
 package. A conformance report is a machine-readable audit that the registry,
 release manifest, suite manifests, baseline reports, leaderboards, schemas,
 prediction templates, checked submission packets, result cards, publication
-packets, and adoption packets are internally consistent.
+packets, result claims, and adoption packets are internally consistent.
 
 Generate and validate the current report with:
 
 ```bash
-marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_4_1.json
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_1.json
+marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_4_2.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_2.json
 ```
 
 Do not edit conformance reports by hand; regenerate them after changing any

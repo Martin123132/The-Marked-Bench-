@@ -92,6 +92,7 @@ All public reports must include:
 - confusion matrix
 - failures
 - result card for cited or ranked results
+- result claim for short public score statements
 
 Reports are validated with:
 
@@ -114,3 +115,5 @@ The checked conformance report under `conformance/` provides a single
 machine-readable pass/fail audit for release-package consistency.
 Result cards are validated with `marked-bench --validate-result-card PATH` and
 pin the score to its report, bundle, review status, and file hashes.
+Result claims are validated with `marked-bench --validate-result-claim PATH`
+and pin citeable score wording to a publication packet hash.

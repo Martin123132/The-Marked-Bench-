@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marked-bench.local/schemas/result_claim.schema.json",
+  "title": "The Marked Bench Result Claim",
+  "type": "object",
+  "required": [
+    "schema",
+    "created_at",
+    "release_id",
+    "system_name",
+    "system_version",
+    "submitter",
+    "suite_id",
+    "suite_version",
+    "suite_hash",
+    "overall_score",
+    "case_count",
+    "failure_count",
+    "claim",
+    "evidence",
+    "validation",
+    "standard_claims",
+    "notes"
+  ],
+  "properties": {
+    "schema": {
+      "const": "marked_bench.result-claim.v1"
+    },
+    "created_at": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "release_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "system_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "system_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "submitter": {
+      "type": "string",
+      "minLength": 1
+    },
+    "suite_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "suite_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "suite_hash": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "overall_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "case_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "failure_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "claim": {
+      "$ref": "#/$defs/claim"
+    },
+    "evidence": {
+      "$ref": "#/$defs/evidence"
+    },
+    "validation": {
+      "$ref": "#/$defs/validation"
+    },
+    "standard_claims": {
+      "$ref": "#/$defs/standard_claims"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "claim": {
+      "type": "object",
+      "required": [
+        "text",
+        "badge_label",
+        "permitted_summary",
+        "not_claims"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "badge_label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "permitted_summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "not_claims": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "required": [
+        "publication_packet_path",
+        "publication_packet_sha256",
+        "result_card_sha256",
+        "report_sha256",
+        "claim_url",
+        "evidence_url"
+      ],
+      "properties": {
+        "publication_packet_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publication_packet_sha256": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "result_card_sha256": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "report_sha256": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "claim_url": {
+          "type": "string"
+        },
+        "evidence_url": {
+          "type": "string"
+        }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "required": [
+        "schema",
+        "valid",
+        "error_count",
+        "warning_count"
+      ],
+      "properties": {
+        "schema": {
+          "type": "string"
+        },
+        "valid": {
+          "const": true
+        },
+        "error_count": {
+          "const": 0
+        },
+        "warning_count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "standard_claims": {
+      "type": "object",
+      "required": [
+        "same_suite_hash_required",
+        "full_publication_packet_required",
+        "result_card_required",
+        "public_test_result",
+        "not_safety_certification",
+        "not_general_intelligence_claim",
+        "third_party_adoption_requires_verified_evidence"
+      ],
+      "properties": {
+        "same_suite_hash_required": {
+          "const": true
+        },
+        "full_publication_packet_required": {
+          "const": true
+        },
+        "result_card_required": {
+          "const": true
+        },
+        "public_test_result": {
+          "const": true
+        },
+        "not_safety_certification": {
+          "const": true
+        },
+        "not_general_intelligence_claim": {
+          "const": true
+        },
+        "third_party_adoption_requires_verified_evidence": {
+          "const": true
+        }
+      }
+    }
+  }
+}

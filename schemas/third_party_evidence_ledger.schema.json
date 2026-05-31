@@ -70,6 +70,7 @@
       "required": [
         "result_card_required",
         "submission_bundle_required",
+        "result_claim_required_for_public_score_claims",
         "review_required_for_verified_status",
         "same_suite_hash_required",
         "public_url_or_committed_path_required",
@@ -80,6 +81,9 @@
           "type": "boolean"
         },
         "submission_bundle_required": {
+          "type": "boolean"
+        },
+        "result_claim_required_for_public_score_claims": {
           "type": "boolean"
         },
         "review_required_for_verified_status": {
@@ -173,6 +177,19 @@
             "string",
             "null"
           ]
+        },
+        "result_claim_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "result_claim_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-fA-F0-9]{64}$"
         },
         "review_sha256": {
           "type": [

@@ -166,6 +166,7 @@ def build_benchmark_registry() -> dict[str, Any]:
             "submission_bundle": "schemas/submission_bundle.schema.json",
             "submission_review": "schemas/submission_review.schema.json",
             "publication_packet": "schemas/publication_packet.schema.json",
+            "result_claim": "schemas/result_claim.schema.json",
             "release_manifest": "schemas/release_manifest.schema.json",
             "conformance_report": "schemas/conformance_report.schema.json",
             "result_card": "schemas/result_card.schema.json",
@@ -181,6 +182,7 @@ def build_benchmark_registry() -> dict[str, Any]:
             "submission_bundle": SUBMISSION_BUNDLE_SCHEMA,
             "submission_review": REVIEW_SCHEMA,
             "publication_packet": "marked_bench.publication-packet.v1",
+            "result_claim": "marked_bench.result-claim.v1",
             "conformance_report": "marked_bench.conformance-report.v1",
             "result_card": "marked_bench.result-card.v1",
             "adoption_packet": "marked_bench.adoption-packet.v1",
@@ -209,6 +211,7 @@ def build_benchmark_registry() -> dict[str, Any]:
             "docs/RELEASE_NOTES_v0_3_10.md",
             "docs/RELEASE_NOTES_v0_4_0.md",
             "docs/RELEASE_NOTES_v0_4_1.md",
+            "docs/RELEASE_NOTES_v0_4_2.md",
             "docs/SUBMISSION_GUIDE.md",
             "docs/RELEASE_CHECKLIST.md",
         ],
@@ -265,6 +268,11 @@ def _build_track(track: Mapping[str, Any]) -> dict[str, Any]:
             "validate_publication_packet": (
                 "marked-bench --validate-publication-packet PACKET_DIR/publication_packet.json"
             ),
+            "create_result_claim": (
+                "marked-bench --create-result-claim PACKET_DIR/result_claim.json "
+                "--claim-publication-packet PACKET_DIR/publication_packet.json"
+            ),
+            "validate_result_claim": "marked-bench --validate-result-claim CLAIM",
             "build_leaderboard": (
                 "marked-bench --build-leaderboard REPORT... "
                 f"--leaderboard-output {track['leaderboard']}"
