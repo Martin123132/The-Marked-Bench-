@@ -64,7 +64,7 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public artifact SHA-256 digests:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_3_0.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_3_1.json
 ```
 
 Export the generated technical note:
@@ -128,9 +128,10 @@ marked-bench --build-leaderboard baselines/always_none_multihop_v0_3_0.json base
 - Benchmark card: `docs/BENCHMARK_CARD.md`
 - Technical note: `docs/TECHNICAL_NOTE.md`
 - Submission guide: `docs/SUBMISSION_GUIDE.md`
+- Submission bundle schema: `schemas/submission_bundle.schema.json`
 - Adoption guide: `docs/ADOPTION_GUIDE.md`
 - Release notes: `docs/RELEASE_NOTES_v0_2_0.md`
-- Current release notes: `docs/RELEASE_NOTES_v0_3_0.md`
+- Current release notes: `docs/RELEASE_NOTES_v0_3_1.md`
 
 ## Quality Gates
 

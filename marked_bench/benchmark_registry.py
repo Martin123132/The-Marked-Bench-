@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from marked_bench.benchmark_leaderboard import LEADERBOARD_SCHEMA
-from marked_bench.benchmark_submission import SUBMISSION_SCHEMA
+from marked_bench.benchmark_submission import SUBMISSION_BUNDLE_SCHEMA, SUBMISSION_SCHEMA
 from marked_bench.contradiction.benchmark_suite import (
     PREDICTION_SCHEMA,
     REPORT_SCHEMA,
@@ -130,6 +130,7 @@ def build_benchmark_registry() -> dict[str, Any]:
             "predictions": "schemas/contradiction_predictions.schema.json",
             "leaderboard": "schemas/leaderboard.schema.json",
             "leaderboard_submission": "schemas/leaderboard_submission.schema.json",
+            "submission_bundle": "schemas/submission_bundle.schema.json",
             "release_manifest": "schemas/release_manifest.schema.json",
         },
         "schema_ids": {
@@ -138,6 +139,7 @@ def build_benchmark_registry() -> dict[str, Any]:
             "predictions": PREDICTION_SCHEMA,
             "leaderboard": LEADERBOARD_SCHEMA,
             "leaderboard_submission": SUBMISSION_SCHEMA,
+            "submission_bundle": SUBMISSION_BUNDLE_SCHEMA,
         },
         "governance_docs": [
             "docs/ADOPTION_GUIDE.md",
@@ -147,6 +149,7 @@ def build_benchmark_registry() -> dict[str, Any]:
             "docs/GOVERNANCE.md",
             "docs/RELEASE_NOTES_v0_2_0.md",
             "docs/RELEASE_NOTES_v0_3_0.md",
+            "docs/RELEASE_NOTES_v0_3_1.md",
             "docs/SUBMISSION_GUIDE.md",
             "docs/RELEASE_CHECKLIST.md",
         ],
@@ -186,6 +189,11 @@ def _build_track(track: Mapping[str, Any]) -> dict[str, Any]:
             **dict(track["commands"]),
             "validate_report": "marked-bench --validate-report REPORT",
             "validate_submission": "marked-bench --validate-submission SUBMISSION",
+            "create_submission_bundle": (
+                "marked-bench --create-submission-bundle BUNDLE "
+                "--bundle-submission SUBMISSION"
+            ),
+            "validate_submission_bundle": "marked-bench --validate-submission-bundle BUNDLE",
             "build_leaderboard": (
                 "marked-bench --build-leaderboard REPORT... "
                 f"--leaderboard-output {track['leaderboard']}"

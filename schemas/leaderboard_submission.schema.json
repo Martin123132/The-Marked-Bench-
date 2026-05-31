@@ -44,13 +44,15 @@
     "suite_id": {
       "enum": [
         "marked-bench-contradiction-standard",
-        "marked-bench-contradiction-adversarial"
+        "marked-bench-contradiction-adversarial",
+        "marked-bench-contradiction-multihop"
       ]
     },
     "suite_version": {
       "enum": [
         "0.1.0",
-        "0.2.0"
+        "0.2.0",
+        "0.3.0"
       ]
     },
     "suite_hash": {

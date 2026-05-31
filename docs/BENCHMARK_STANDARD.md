@@ -66,6 +66,7 @@ The source tree also includes JSON schemas for public infrastructure:
 - `schemas/contradiction_suite_manifest.schema.json`
 - `schemas/leaderboard.schema.json`
 - `schemas/leaderboard_submission.schema.json`
+- `schemas/submission_bundle.schema.json`
 - `schemas/release_manifest.schema.json`
 
 For a high-level summary of intended use, non-use, limitations, and
@@ -136,7 +137,7 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public benchmark artifacts by SHA-256:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_3_0.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_3_1.json
 ```
 
 Run the harder adversarial track:

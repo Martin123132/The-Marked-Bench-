@@ -39,7 +39,8 @@
         "benchmark_report",
         "predictions",
         "leaderboard",
-        "leaderboard_submission"
+        "leaderboard_submission",
+        "submission_bundle"
       ],
       "additionalProperties": {
         "type": "string"
@@ -149,6 +150,8 @@
             "create_submission",
             "validate_report",
             "validate_submission",
+            "create_submission_bundle",
+            "validate_submission_bundle",
             "build_leaderboard"
           ],
           "additionalProperties": {

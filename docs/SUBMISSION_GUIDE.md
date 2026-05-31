@@ -108,7 +108,27 @@ arguments. Supported keys are `system_description`, `model`, `prompting`,
 Missing disclosure fields are recorded as `not disclosed` so reviewers can see
 what was and was not provided.
 
-## 5. Update Leaderboard
+## 5. Build A Review Bundle
+
+Before a leaderboard entry is reviewed, package the report and submission
+metadata into a bundle manifest. The bundle pins every referenced file by
+canonical SHA-256 digest and records whether the report, metadata, disclosures,
+relative paths, and file hashes are ready for review.
+
+```bash
+marked-bench --create-submission-bundle my-submission-bundle.json --bundle-submission my-submission.json
+marked-bench --validate-submission-bundle my-submission-bundle.json
+```
+
+If a prediction file is part of the submission evidence, include it too:
+
+```bash
+marked-bench --create-submission-bundle my-submission-bundle.json --bundle-submission my-submission.json --bundle-predictions predictions.jsonl
+```
+
+Bundle manifests use `schemas/submission_bundle.schema.json`.
+
+## 6. Update Leaderboard
 
 For foundation entries:
 
@@ -128,7 +148,7 @@ For multi-hop entries:
 marked-bench --build-leaderboard baselines/*multihop*.json --leaderboard-output leaderboard/leaderboard_multihop_v0_3_0.json
 ```
 
-## 6. Run Repository Checks
+## 7. Run Repository Checks
 
 ```bash
 python -m unittest discover -s tests

@@ -9,10 +9,14 @@ from marked_bench.benchmark_leaderboard import LEADERBOARD_SCHEMA, build_leaderb
 from marked_bench.benchmark_release import RELEASE_MANIFEST_SCHEMA, build_release_manifest, file_sha256
 from marked_bench.benchmark_registry import REGISTRY_SCHEMA, build_benchmark_registry
 from marked_bench.benchmark_submission import (
+    SUBMISSION_BUNDLE_SCHEMA,
     SUBMISSION_SCHEMA,
     build_leaderboard_submission,
+    build_submission_bundle,
+    validate_submission_bundle,
     validate_leaderboard_submission,
     write_leaderboard_submission,
+    write_submission_bundle,
 )
 from marked_bench.benchmark_technical_note import build_technical_note
 from marked_bench.contradiction.benchmark_suite import (
@@ -152,7 +156,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_release_manifest_matches_current_artifacts(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "releases" / "marked_bench_release_v0_3_0.json"
+        path = root / "releases" / "marked_bench_release_v0_3_1.json"
 
         manifest = json.loads(path.read_text(encoding="utf-8"))
 
@@ -419,6 +423,68 @@ class BenchmarkSuiteTests(unittest.TestCase):
         finally:
             shutil.rmtree(output_root, ignore_errors=True)
 
+    def test_submission_bundle_validates_review_packet(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        report_path = output_root / "report.json"
+        submission_path = output_root / "submission.json"
+        bundle_path = output_root / "bundle.json"
+
+        try:
+            write_benchmark_report(evaluate_standard_suite(system_name="BundleSystem"), report_path)
+            submission = build_leaderboard_submission(
+                "report.json",
+                system_version="1.0.0",
+                submitter="Marked Bench Test",
+                base_dir=output_root,
+                disclosures={
+                    "system_description": "symbolic baseline",
+                    "model": "none",
+                    "prompting": "none",
+                    "preprocessing": "none",
+                    "retrieval": "none",
+                    "postprocessing": "none",
+                    "training_data": "none",
+                    "runtime": "python unittest",
+                },
+            )
+            write_leaderboard_submission(submission, submission_path)
+
+            bundle = build_submission_bundle("submission.json", base_dir=output_root)
+            write_submission_bundle(bundle, bundle_path)
+            validation = validate_submission_bundle(bundle, base_dir=output_root)
+
+            self.assertEqual(bundle["schema"], SUBMISSION_BUNDLE_SCHEMA)
+            self.assertEqual(bundle["system_name"], "BundleSystem")
+            self.assertEqual(bundle["report_path"], "report.json")
+            self.assertTrue(validation["valid"], validation["errors"])
+            self.assertTrue(validation["summary"]["ready_for_leaderboard_review"])
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_submission_bundle_rejects_hash_mismatch(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        report_path = output_root / "report.json"
+        submission_path = output_root / "submission.json"
+
+        try:
+            write_benchmark_report(evaluate_standard_suite(system_name="BundleSystem"), report_path)
+            submission = build_leaderboard_submission(
+                "report.json",
+                system_version="1.0.0",
+                submitter="Marked Bench Test",
+                base_dir=output_root,
+            )
+            write_leaderboard_submission(submission, submission_path)
+            bundle = build_submission_bundle("submission.json", base_dir=output_root)
+            bundle["files"][0]["sha256"] = "0" * 64
+
+            validation = validate_submission_bundle(bundle, base_dir=output_root)
+
+            self.assertFalse(validation["valid"])
+            self.assertTrue(any("sha256 mismatch" in error for error in validation["errors"]))
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
     def test_report_writer_creates_parent_directories(self) -> None:
         output_root = Path(__file__).resolve().parent.parent / ".test-output"
         path = output_root / "nested" / "report.json"
@@ -492,6 +558,50 @@ class BenchmarkSuiteTests(unittest.TestCase):
             self.assertEqual(submission["schema"], SUBMISSION_SCHEMA)
             self.assertIn("Submission:", create_output.getvalue())
             self.assertIn("Submission validation: pass", validate_output.getvalue())
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_cli_creates_and_validates_submission_bundle_inside_repo(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        report_path = output_root / "cli-report.json"
+        submission_path = output_root / "submission.json"
+        bundle_path = output_root / "submission-bundle.json"
+
+        try:
+            with redirect_stdout(StringIO()):
+                benchmark_main(["--system-name", "CliBundleSystem", "--report", str(report_path)])
+            with redirect_stdout(StringIO()):
+                benchmark_main(
+                    [
+                        "--create-submission",
+                        str(submission_path),
+                        "--submission-report",
+                        str(report_path),
+                        "--system-version",
+                        "2026.05",
+                        "--submitter",
+                        "Marked Bench Test",
+                        "--disclosure",
+                        "system_description=symbolic baseline",
+                    ]
+                )
+            with redirect_stdout(StringIO()) as create_output:
+                benchmark_main(
+                    [
+                        "--create-submission-bundle",
+                        str(bundle_path),
+                        "--bundle-submission",
+                        str(submission_path),
+                    ]
+                )
+            with redirect_stdout(StringIO()) as validate_output:
+                benchmark_main(["--validate-submission-bundle", str(bundle_path)])
+
+            bundle = json.loads(bundle_path.read_text(encoding="utf-8"))
+            self.assertEqual(bundle["schema"], SUBMISSION_BUNDLE_SCHEMA)
+            self.assertEqual(bundle["system_name"], "CliBundleSystem")
+            self.assertIn("Submission bundle:", create_output.getvalue())
+            self.assertIn("Submission bundle validation: pass", validate_output.getvalue())
         finally:
             shutil.rmtree(output_root, ignore_errors=True)
 

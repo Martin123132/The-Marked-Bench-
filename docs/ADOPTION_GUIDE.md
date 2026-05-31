@@ -28,16 +28,19 @@ Do not compare systems across different suite hashes.
 1. Generate or score a full report.
 2. Validate the report.
 3. Generate submission metadata.
-4. Disclose model, prompting, preprocessing, retrieval, postprocessing,
+4. Build and validate a submission bundle.
+5. Disclose model, prompting, preprocessing, retrieval, postprocessing,
    training data, and runtime details.
 
 ```bash
 marked-bench --create-submission your-submission.json --submission-report your-system-report.json --system-version "1.0.0" --submitter "name-or-org"
 marked-bench --validate-submission your-submission.json
+marked-bench --create-submission-bundle your-submission-bundle.json --bundle-submission your-submission.json
+marked-bench --validate-submission-bundle your-submission-bundle.json
 ```
 
-Leaderboard entries without a valid report and submission file should not be
-ranked.
+Leaderboard entries without a valid report, submission file, and submission
+bundle should not be ranked.
 
 ## Cite The Benchmark
 

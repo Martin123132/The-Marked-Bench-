@@ -12,9 +12,13 @@ from marked_bench.benchmark_registry import write_benchmark_registry
 from marked_bench.benchmark_submission import (
     DISCLOSURE_FIELDS,
     build_leaderboard_submission,
+    build_submission_bundle,
     load_leaderboard_submission,
+    load_submission_bundle,
+    validate_submission_bundle,
     validate_leaderboard_submission,
     write_leaderboard_submission,
+    write_submission_bundle,
 )
 from marked_bench.benchmark_technical_note import write_technical_note
 from marked_bench.contradiction.benchmark_suite import (
@@ -75,6 +79,30 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         metavar="PATH",
         help="Validate leaderboard submission metadata and its referenced report.",
+    )
+    parser.add_argument(
+        "--create-submission-bundle",
+        default=None,
+        metavar="PATH",
+        help="Write a portable review bundle manifest for a leaderboard submission and exit.",
+    )
+    parser.add_argument(
+        "--validate-submission-bundle",
+        default=None,
+        metavar="PATH",
+        help="Validate a leaderboard submission bundle manifest and its referenced files.",
+    )
+    parser.add_argument(
+        "--bundle-submission",
+        default=None,
+        metavar="PATH",
+        help="Submission metadata path referenced when creating a submission bundle.",
+    )
+    parser.add_argument(
+        "--bundle-predictions",
+        default=None,
+        metavar="PATH",
+        help="Optional prediction file path to include in a submission bundle.",
     )
     parser.add_argument(
         "--submission-report",
@@ -187,6 +215,22 @@ def main(argv: list[str] | None = None) -> None:
             raise SystemExit(1)
         return
 
+    if args.validate_submission_bundle:
+        validation = validate_submission_bundle(load_submission_bundle(args.validate_submission_bundle))
+        if args.json:
+            print(json.dumps(validation, indent=2, sort_keys=True))
+        else:
+            print(f"Submission bundle validation: {'pass' if validation['valid'] else 'fail'}")
+            print(f"Suite: {validation['summary']['suite_id']} v{validation['summary']['suite_version']}")
+            print(f"System: {validation['summary']['system_name']} {validation['summary']['system_version']}")
+            print(f"Overall score: {validation['summary']['overall_score']}")
+            print(f"Ready for leaderboard review: {validation['summary']['ready_for_leaderboard_review']}")
+            print(f"Errors: {len(validation['errors'])}")
+            print(f"Warnings: {len(validation['warnings'])}")
+        if not validation["valid"]:
+            raise SystemExit(1)
+        return
+
     if args.create_submission:
         if not args.submission_report:
             parser.error("--create-submission requires --submission-report")
@@ -208,6 +252,21 @@ def main(argv: list[str] | None = None) -> None:
         write_leaderboard_submission(submission, args.create_submission)
         print(f"Submission: {args.create_submission}")
         print(f"Report SHA-256: {submission['report_sha256']}")
+        return
+
+    if args.create_submission_bundle:
+        if not args.bundle_submission:
+            parser.error("--create-submission-bundle requires --bundle-submission")
+        try:
+            bundle = build_submission_bundle(
+                args.bundle_submission,
+                prediction_path=args.bundle_predictions,
+            )
+        except (OSError, ValueError) as exc:
+            parser.error(str(exc))
+        write_submission_bundle(bundle, args.create_submission_bundle)
+        print(f"Submission bundle: {args.create_submission_bundle}")
+        print(f"Report SHA-256: {bundle['report_sha256']}")
         return
 
     if args.export_suite:
