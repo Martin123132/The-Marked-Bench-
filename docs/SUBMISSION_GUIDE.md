@@ -128,6 +128,12 @@ marked-bench --create-submission-bundle my-submission-bundle.json --bundle-submi
 
 Bundle manifests use `schemas/submission_bundle.schema.json`.
 
+A complete local example is available:
+
+```bash
+python -m marked_bench.examples.external_submission_demo
+```
+
 ## 6. Update Leaderboard
 
 For foundation entries:

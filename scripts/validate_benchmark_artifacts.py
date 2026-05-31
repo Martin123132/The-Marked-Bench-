@@ -53,7 +53,7 @@ LEADERBOARDS = {
 }
 
 BENCHMARK_REGISTRY = Path("benchmark_registry.json")
-RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_1.json")
+RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_2.json")
 
 REQUIRED_PUBLIC_FILES = [
     Path("README.md"),
@@ -69,6 +69,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("docs/RELEASE_NOTES_v0_2_0.md"),
     Path("docs/RELEASE_NOTES_v0_3_0.md"),
     Path("docs/RELEASE_NOTES_v0_3_1.md"),
+    Path("docs/RELEASE_NOTES_v0_3_2.md"),
     Path("docs/ROADMAP.md"),
     Path("docs/SUBMISSION_GUIDE.md"),
     Path("schemas/benchmark_registry.schema.json"),

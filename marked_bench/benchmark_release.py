@@ -11,7 +11,7 @@ from marked_bench.benchmark_registry import REGISTRY_SCHEMA, build_benchmark_reg
 
 
 RELEASE_MANIFEST_SCHEMA = "marked_bench.benchmark-release-manifest.v1"
-RELEASE_ID = "marked-bench-contradiction-standard-release-0.3.1"
+RELEASE_ID = "marked-bench-contradiction-standard-release-0.3.2"
 
 ROOT_PUBLIC_ARTIFACTS = (
     "README.md",
@@ -32,6 +32,7 @@ BENCHMARK_SOURCE_ARTIFACTS = (
     "marked_bench/contradiction/__init__.py",
     "marked_bench/contradiction/benchmark_suite.py",
     "marked_bench/contradiction/engine.py",
+    "marked_bench/examples/external_submission_demo.py",
     "marked_bench/examples/benchmark_standard_demo.py",
     "scripts/validate_benchmark_artifacts.py",
     "tests/test_benchmark_suite.py",

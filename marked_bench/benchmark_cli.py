@@ -216,7 +216,11 @@ def main(argv: list[str] | None = None) -> None:
         return
 
     if args.validate_submission_bundle:
-        validation = validate_submission_bundle(load_submission_bundle(args.validate_submission_bundle))
+        bundle_path = Path(args.validate_submission_bundle)
+        validation = validate_submission_bundle(
+            load_submission_bundle(bundle_path),
+            base_dir=bundle_path.parent,
+        )
         if args.json:
             print(json.dumps(validation, indent=2, sort_keys=True))
         else:
@@ -258,9 +262,11 @@ def main(argv: list[str] | None = None) -> None:
         if not args.bundle_submission:
             parser.error("--create-submission-bundle requires --bundle-submission")
         try:
+            bundle_submission_path = Path(args.bundle_submission)
             bundle = build_submission_bundle(
-                args.bundle_submission,
+                bundle_submission_path.name,
                 prediction_path=args.bundle_predictions,
+                base_dir=bundle_submission_path.parent,
             )
         except (OSError, ValueError) as exc:
             parser.error(str(exc))

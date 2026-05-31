@@ -64,7 +64,7 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public artifact SHA-256 digests:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_3_1.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_3_2.json
 ```
 
 Export the generated technical note:
@@ -94,6 +94,13 @@ Create and validate leaderboard submission metadata:
 ```bash
 marked-bench --create-submission artifacts/my-system-submission.json --submission-report artifacts/my-system-report.json --system-version "1.0.0" --submitter "name-or-org"
 marked-bench --validate-submission artifacts/my-system-submission.json
+```
+
+Create a complete external-submission example:
+
+```bash
+python -m marked_bench.examples.external_submission_demo
+marked-bench --validate-submission-bundle artifacts/external_submission_demo/example_external_submission_bundle.json
 ```
 
 ## Build Leaderboards
@@ -131,7 +138,7 @@ marked-bench --build-leaderboard baselines/always_none_multihop_v0_3_0.json base
 - Submission bundle schema: `schemas/submission_bundle.schema.json`
 - Adoption guide: `docs/ADOPTION_GUIDE.md`
 - Release notes: `docs/RELEASE_NOTES_v0_2_0.md`
-- Current release notes: `docs/RELEASE_NOTES_v0_3_1.md`
+- Current release notes: `docs/RELEASE_NOTES_v0_3_2.md`
 
 ## Quality Gates
 
@@ -153,6 +160,8 @@ the current public artifact hashes.
 marked_bench/
     benchmark_cli.py              # CLI runner
     benchmark_leaderboard.py      # Validated leaderboard builder
+    examples/
+        external_submission_demo.py # End-to-end external JSONL workflow
     contradiction/
         benchmark_suite.py        # Versioned benchmark tracks
         engine.py                 # Symbolic baseline detector

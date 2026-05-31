@@ -42,6 +42,13 @@ marked-bench --validate-submission-bundle your-submission-bundle.json
 Leaderboard entries without a valid report, submission file, and submission
 bundle should not be ranked.
 
+For a complete local example that writes predictions, report, submission
+metadata, and bundle evidence, run:
+
+```bash
+python -m marked_bench.examples.external_submission_demo
+```
+
 ## Cite The Benchmark
 
 Use `CITATION.cff` and include the release tag, suite ID, suite version, and

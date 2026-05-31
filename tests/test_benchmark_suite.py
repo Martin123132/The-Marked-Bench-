@@ -42,6 +42,7 @@ from marked_bench.contradiction.benchmark_suite import (
 )
 from marked_bench.contradiction.engine import Claim, ContradictionType
 from marked_bench.benchmark_cli import main as benchmark_main
+from marked_bench.examples.external_submission_demo import run_demo as run_external_submission_demo
 
 
 class BenchmarkSuiteTests(unittest.TestCase):
@@ -156,7 +157,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_release_manifest_matches_current_artifacts(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "releases" / "marked_bench_release_v0_3_1.json"
+        path = root / "releases" / "marked_bench_release_v0_3_2.json"
 
         manifest = json.loads(path.read_text(encoding="utf-8"))
 
@@ -604,6 +605,24 @@ class BenchmarkSuiteTests(unittest.TestCase):
             self.assertIn("Submission bundle validation: pass", validate_output.getvalue())
         finally:
             shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_external_submission_demo_writes_valid_bundle(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output" / "external-demo"
+
+        try:
+            summary = run_external_submission_demo(output_root)
+            bundle_path = Path(summary["bundle_path"])
+            bundle = json.loads(bundle_path.read_text(encoding="utf-8"))
+            validation = validate_submission_bundle(bundle, base_dir=output_root)
+
+            self.assertTrue(summary["bundle_valid"])
+            self.assertEqual(summary["system_name"], "ExampleExternalJsonl")
+            self.assertTrue(Path(summary["prediction_path"]).exists())
+            self.assertTrue(Path(summary["report_path"]).exists())
+            self.assertTrue(Path(summary["submission_path"]).exists())
+            self.assertTrue(validation["valid"], validation["errors"])
+        finally:
+            shutil.rmtree(output_root.parent, ignore_errors=True)
 
     def test_cli_writes_always_none_baseline_report(self) -> None:
         output_root = Path(__file__).resolve().parent.parent / ".test-output"

@@ -137,7 +137,7 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public benchmark artifacts by SHA-256:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_3_1.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_3_2.json
 ```
 
 Run the harder adversarial track:

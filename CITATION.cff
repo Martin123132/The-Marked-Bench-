@@ -5,7 +5,7 @@ type: software
 authors:
   - family-names: "Ollett"
     given-names: "Martin"
-version: "0.3.1"
+version: "0.3.2"
 date-released: "2026-05-31"
 repository-code: "https://github.com/Martin123132/The-Marked-Bench-"
 abstract: "A versioned benchmark suite for evaluating contradiction detection and classification in AI systems."

@@ -60,7 +60,7 @@ This note summarizes the checked benchmark release artifacts for `contradiction-
 - Suite comparisons must pin `suite_id`, `suite_version`, and `suite_hash`.
 - Public reports must pass `marked-bench --validate-report REPORT`.
 - Leaderboard submissions must pass `marked-bench --validate-submission SUBMISSION`.
-- Public release artifacts are pinned by `releases/marked_bench_release_v0_3_1.json`.
+- Public release artifacts are pinned by `releases/marked_bench_release_v0_3_2.json`.
 - Repository artifact drift is checked by `python scripts/validate_benchmark_artifacts.py`.
 
 ## Current Limitations
