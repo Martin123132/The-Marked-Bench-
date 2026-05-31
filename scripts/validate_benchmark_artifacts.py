@@ -53,7 +53,7 @@ LEADERBOARDS = {
 }
 
 BENCHMARK_REGISTRY = Path("benchmark_registry.json")
-RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_3.json")
+RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_4.json")
 
 REQUIRED_PUBLIC_FILES = [
     Path("README.md"),
@@ -65,12 +65,14 @@ REQUIRED_PUBLIC_FILES = [
     Path("docs/ADOPTION_GUIDE.md"),
     Path("docs/BENCHMARK_STANDARD.md"),
     Path("docs/GOVERNANCE.md"),
+    Path("docs/SUBMISSION_REVIEW_RUBRIC.md"),
     Path("docs/RELEASE_CHECKLIST.md"),
     Path("docs/RELEASE_NOTES_v0_2_0.md"),
     Path("docs/RELEASE_NOTES_v0_3_0.md"),
     Path("docs/RELEASE_NOTES_v0_3_1.md"),
     Path("docs/RELEASE_NOTES_v0_3_2.md"),
     Path("docs/RELEASE_NOTES_v0_3_3.md"),
+    Path("docs/RELEASE_NOTES_v0_3_4.md"),
     Path("docs/ROADMAP.md"),
     Path("docs/SUBMISSION_GUIDE.md"),
     Path("schemas/benchmark_registry.schema.json"),
@@ -80,6 +82,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("schemas/leaderboard.schema.json"),
     Path("schemas/leaderboard_submission.schema.json"),
     Path("schemas/submission_bundle.schema.json"),
+    Path("schemas/submission_review.schema.json"),
     Path("schemas/release_manifest.schema.json"),
     Path("releases/README.md"),
     Path("submissions/README.md"),

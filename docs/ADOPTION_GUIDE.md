@@ -45,8 +45,11 @@ marked-bench --validate-submission-bundle your-submission-bundle.json
 Leaderboard entries without a valid report, submission file, and submission
 bundle should not be ranked.
 
+Accepted leaderboard entries should also have a validated submission review
+file using `docs/SUBMISSION_REVIEW_RUBRIC.md`.
+
 For a complete local example that writes predictions, report, submission
-metadata, and bundle evidence, run:
+metadata, bundle evidence, and a review template, run:
 
 ```bash
 python -m marked_bench.examples.external_submission_demo

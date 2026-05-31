@@ -40,7 +40,8 @@
         "predictions",
         "leaderboard",
         "leaderboard_submission",
-        "submission_bundle"
+        "submission_bundle",
+        "submission_review"
       ],
       "additionalProperties": {
         "type": "string"

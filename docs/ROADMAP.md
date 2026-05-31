@@ -24,10 +24,10 @@ This roadmap keeps the benchmark moving toward a credible public standard.
 - Versioned multi-hop contradiction track.
 - Structured rationale/evidence fields with explanation-audit coverage in
   scored reports.
+- Structured submission review rubric for leaderboard governance.
 
 ## Next
 
-- Add human review rubrics for explanation quality beyond coverage.
 - Add more non-contradiction distractor controls.
 - Add optional JSON Schema validation in CI when a schema validator dependency
   is available.

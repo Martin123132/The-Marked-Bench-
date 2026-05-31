@@ -132,7 +132,8 @@ marked-bench --create-submission-bundle my-submission-bundle.json --bundle-submi
 
 Bundle manifests use `schemas/submission_bundle.schema.json`.
 
-A complete local example is available:
+A complete local example is available. It writes predictions, a scored report,
+submission metadata, a bundle, and a review template:
 
 ```bash
 python -m marked_bench.examples.external_submission_demo
@@ -166,3 +167,17 @@ python scripts/validate_benchmark_artifacts.py
 ```
 
 Both commands must pass before a submission is ready for review.
+
+## 8. Create A Review Rubric
+
+Leaderboard maintainers should create a structured review file before accepting
+an entry:
+
+```bash
+marked-bench --create-submission-review my-review.json --review-bundle my-submission-bundle.json --reviewer reviewer-name
+marked-bench --validate-submission-review my-review.json
+```
+
+Fill the rubric scores in `my-review.json` after checking reproducibility,
+disclosures, score integrity, explanation coverage, evidence quality, and
+limitations. See `docs/SUBMISSION_REVIEW_RUBRIC.md`.

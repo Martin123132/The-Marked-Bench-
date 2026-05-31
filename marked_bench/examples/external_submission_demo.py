@@ -1,4 +1,4 @@
-"""Create a complete external JSONL submission bundle.
+"""Create a complete external JSONL submission bundle and review template.
 
 This demo behaves like an outside system that does not import the detector. It
 fills a prediction JSONL file, scores it into a report, creates submission
@@ -11,6 +11,11 @@ import json
 from pathlib import Path
 from typing import Any
 
+from marked_bench.benchmark_review import (
+    build_submission_review,
+    validate_submission_review,
+    write_submission_review,
+)
 from marked_bench.benchmark_submission import (
     build_leaderboard_submission,
     build_submission_bundle,
@@ -39,6 +44,7 @@ def run_demo(output_dir: str | Path = DEFAULT_OUTPUT_DIR, suite: str = DEFAULT_S
     report_path = output_path / "example_external_report.json"
     submission_path = output_path / "example_external_submission.json"
     bundle_path = output_path / "example_external_submission_bundle.json"
+    review_path = output_path / "example_external_submission_review.json"
 
     _write_demo_predictions(prediction_path, suite=suite)
     report = evaluate_prediction_file(
@@ -78,6 +84,17 @@ def run_demo(output_dir: str | Path = DEFAULT_OUTPUT_DIR, suite: str = DEFAULT_S
     if not validation["valid"]:
         raise RuntimeError(f"demo bundle failed validation: {validation['errors']}")
 
+    review = build_submission_review(
+        bundle_path.name,
+        reviewer="example-reviewer",
+        base_dir=output_path,
+        notes="Demo review template for the external submission workflow.",
+    )
+    write_submission_review(review, review_path)
+    review_validation = validate_submission_review(review, base_dir=output_path)
+    if not review_validation["valid"]:
+        raise RuntimeError(f"demo review failed validation: {review_validation['errors']}")
+
     return {
         "suite_id": report["suite_id"],
         "suite_version": report["suite_version"],
@@ -87,7 +104,9 @@ def run_demo(output_dir: str | Path = DEFAULT_OUTPUT_DIR, suite: str = DEFAULT_S
         "report_path": report_path.as_posix(),
         "submission_path": submission_path.as_posix(),
         "bundle_path": bundle_path.as_posix(),
+        "review_path": review_path.as_posix(),
         "bundle_valid": validation["valid"],
+        "review_valid": review_validation["valid"],
     }
 
 
@@ -121,6 +140,8 @@ def main() -> None:
     print(f"Submission: {summary['submission_path']}")
     print(f"Bundle: {summary['bundle_path']}")
     print(f"Bundle valid: {summary['bundle_valid']}")
+    print(f"Review: {summary['review_path']}")
+    print(f"Review valid: {summary['review_valid']}")
 
 
 if __name__ == "__main__":

@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from marked_bench.benchmark_leaderboard import LEADERBOARD_SCHEMA
+from marked_bench.benchmark_review import REVIEW_SCHEMA
 from marked_bench.benchmark_submission import SUBMISSION_BUNDLE_SCHEMA, SUBMISSION_SCHEMA
 from marked_bench.contradiction.benchmark_suite import (
     PREDICTION_SCHEMA,
@@ -131,6 +132,7 @@ def build_benchmark_registry() -> dict[str, Any]:
             "leaderboard": "schemas/leaderboard.schema.json",
             "leaderboard_submission": "schemas/leaderboard_submission.schema.json",
             "submission_bundle": "schemas/submission_bundle.schema.json",
+            "submission_review": "schemas/submission_review.schema.json",
             "release_manifest": "schemas/release_manifest.schema.json",
         },
         "schema_ids": {
@@ -140,6 +142,7 @@ def build_benchmark_registry() -> dict[str, Any]:
             "leaderboard": LEADERBOARD_SCHEMA,
             "leaderboard_submission": SUBMISSION_SCHEMA,
             "submission_bundle": SUBMISSION_BUNDLE_SCHEMA,
+            "submission_review": REVIEW_SCHEMA,
         },
         "governance_docs": [
             "docs/ADOPTION_GUIDE.md",
@@ -147,11 +150,13 @@ def build_benchmark_registry() -> dict[str, Any]:
             "docs/BENCHMARK_CARD.md",
             "docs/TECHNICAL_NOTE.md",
             "docs/GOVERNANCE.md",
+            "docs/SUBMISSION_REVIEW_RUBRIC.md",
             "docs/RELEASE_NOTES_v0_2_0.md",
             "docs/RELEASE_NOTES_v0_3_0.md",
             "docs/RELEASE_NOTES_v0_3_1.md",
             "docs/RELEASE_NOTES_v0_3_2.md",
             "docs/RELEASE_NOTES_v0_3_3.md",
+            "docs/RELEASE_NOTES_v0_3_4.md",
             "docs/SUBMISSION_GUIDE.md",
             "docs/RELEASE_CHECKLIST.md",
         ],

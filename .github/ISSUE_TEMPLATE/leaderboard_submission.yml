@@ -46,6 +46,20 @@ body:
       placeholder: 64 hex characters
     validations:
       required: true
+  - type: input
+    id: bundle_path
+    attributes:
+      label: Submission bundle path
+      placeholder: submissions/my_system_bundle.json
+    validations:
+      required: true
+  - type: input
+    id: review_path
+    attributes:
+      label: Submission review path
+      placeholder: submissions/my_system_review.json
+    validations:
+      required: false
   - type: textarea
     id: configuration
     attributes:
@@ -57,6 +71,6 @@ body:
     id: validation
     attributes:
       label: Validation output
-      description: Paste output from marked-bench --validate-report REPORT and marked-bench --validate-submission SUBMISSION.
+      description: Paste output from marked-bench --validate-report REPORT, --validate-submission SUBMISSION, --validate-submission-bundle BUNDLE, and --validate-submission-review REVIEW when available.
     validations:
       required: true

@@ -1,0 +1,231 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marked-ai-tools.local/schemas/submission_review.schema.json",
+  "title": "The Marked Bench Submission Review",
+  "type": "object",
+  "required": [
+    "schema",
+    "created_at",
+    "reviewer",
+    "decision",
+    "bundle_path",
+    "bundle_sha256",
+    "system_name",
+    "system_version",
+    "submitter",
+    "suite_id",
+    "suite_version",
+    "suite_hash",
+    "overall_score",
+    "explanation_audit",
+    "automated_checks",
+    "rubric",
+    "summary",
+    "notes"
+  ],
+  "properties": {
+    "schema": {
+      "const": "marked_bench.submission-review.v1"
+    },
+    "created_at": {
+      "type": "number"
+    },
+    "reviewer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "decision": {
+      "enum": [
+        "needs_review",
+        "accept",
+        "needs_revision",
+        "reject"
+      ]
+    },
+    "bundle_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "bundle_sha256": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "system_name": {
+      "type": "string"
+    },
+    "system_version": {
+      "type": "string"
+    },
+    "submitter": {
+      "type": "string"
+    },
+    "suite_id": {
+      "enum": [
+        "marked-bench-contradiction-standard",
+        "marked-bench-contradiction-adversarial",
+        "marked-bench-contradiction-multihop"
+      ]
+    },
+    "suite_version": {
+      "enum": [
+        "0.1.0",
+        "0.2.0",
+        "0.3.0"
+      ]
+    },
+    "suite_hash": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "overall_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "explanation_audit": {
+      "type": "object"
+    },
+    "automated_checks": {
+      "type": "object",
+      "required": [
+        "bundle_valid",
+        "bundle_error_count",
+        "bundle_warning_count",
+        "ready_for_leaderboard_review"
+      ],
+      "properties": {
+        "bundle_valid": {
+          "type": "boolean"
+        },
+        "bundle_error_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "bundle_warning_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "ready_for_leaderboard_review": {
+          "type": "boolean"
+        }
+      }
+    },
+    "rubric": {
+      "type": "object",
+      "required": [
+        "reproducibility",
+        "disclosure_quality",
+        "score_integrity",
+        "explanation_coverage",
+        "evidence_quality",
+        "limitations"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "reproducibility": {
+          "$ref": "#/$defs/rubric_item"
+        },
+        "disclosure_quality": {
+          "$ref": "#/$defs/rubric_item"
+        },
+        "score_integrity": {
+          "$ref": "#/$defs/rubric_item"
+        },
+        "explanation_coverage": {
+          "$ref": "#/$defs/rubric_item"
+        },
+        "evidence_quality": {
+          "$ref": "#/$defs/rubric_item"
+        },
+        "limitations": {
+          "$ref": "#/$defs/rubric_item"
+        }
+      }
+    },
+    "summary": {
+      "$ref": "#/$defs/summary"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "rubric_item": {
+      "type": "object",
+      "required": [
+        "score",
+        "max_score",
+        "criterion",
+        "notes"
+      ],
+      "properties": {
+        "score": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 2
+        },
+        "max_score": {
+          "const": 2
+        },
+        "criterion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "completed_dimensions",
+        "dimension_count",
+        "rubric_total",
+        "rubric_max",
+        "accept_recommendation_minimum",
+        "ready_for_decision",
+        "recommendation"
+      ],
+      "properties": {
+        "completed_dimensions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "dimension_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "rubric_total": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "rubric_max": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "accept_recommendation_minimum": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "ready_for_decision": {
+          "type": "boolean"
+        },
+        "recommendation": {
+          "enum": [
+            "needs_review",
+            "accept",
+            "needs_revision",
+            "reject"
+          ]
+        }
+      }
+    }
+  }
+}

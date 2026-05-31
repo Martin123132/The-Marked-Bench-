@@ -11,6 +11,8 @@ or submission quality.
 - Add new cases through a new suite version or new track.
 - Include full JSON reports for baseline or leaderboard changes.
 - Include validated submission metadata for leaderboard entries.
+- Include a validated submission bundle and review rubric for accepted
+  leaderboard entries.
 - Update `benchmark_registry.json` when public tracks or artifact paths change.
 - Regenerate `docs/TECHNICAL_NOTE.md` when public benchmark evidence changes.
 - Regenerate the release manifest after changing public benchmark artifacts.

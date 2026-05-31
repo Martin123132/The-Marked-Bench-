@@ -9,6 +9,13 @@ from pathlib import Path
 from marked_bench.benchmark_leaderboard import build_leaderboard, write_leaderboard
 from marked_bench.benchmark_release import write_release_manifest
 from marked_bench.benchmark_registry import write_benchmark_registry
+from marked_bench.benchmark_review import (
+    REVIEW_DECISIONS,
+    build_submission_review,
+    load_submission_review,
+    validate_submission_review,
+    write_submission_review,
+)
 from marked_bench.benchmark_submission import (
     DISCLOSURE_FIELDS,
     build_leaderboard_submission,
@@ -93,6 +100,18 @@ def build_parser() -> argparse.ArgumentParser:
         help="Validate a leaderboard submission bundle manifest and its referenced files.",
     )
     parser.add_argument(
+        "--create-submission-review",
+        default=None,
+        metavar="PATH",
+        help="Write a structured reviewer rubric for a submission bundle and exit.",
+    )
+    parser.add_argument(
+        "--validate-submission-review",
+        default=None,
+        metavar="PATH",
+        help="Validate a structured submission review rubric and its referenced bundle.",
+    )
+    parser.add_argument(
         "--bundle-submission",
         default=None,
         metavar="PATH",
@@ -103,6 +122,28 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         metavar="PATH",
         help="Optional prediction file path to include in a submission bundle.",
+    )
+    parser.add_argument(
+        "--review-bundle",
+        default=None,
+        metavar="PATH",
+        help="Submission bundle path referenced when creating a submission review.",
+    )
+    parser.add_argument(
+        "--reviewer",
+        default="unassigned",
+        help="Reviewer name or handle to store in a submission review.",
+    )
+    parser.add_argument(
+        "--review-decision",
+        default="needs_review",
+        choices=REVIEW_DECISIONS,
+        help="Review decision to store in a submission review.",
+    )
+    parser.add_argument(
+        "--review-notes",
+        default="",
+        help="Notes to store in a submission review.",
     )
     parser.add_argument(
         "--submission-report",
@@ -235,6 +276,28 @@ def main(argv: list[str] | None = None) -> None:
             raise SystemExit(1)
         return
 
+    if args.validate_submission_review:
+        review_path = Path(args.validate_submission_review)
+        validation = validate_submission_review(
+            load_submission_review(review_path),
+            base_dir=review_path.parent,
+        )
+        if args.json:
+            print(json.dumps(validation, indent=2, sort_keys=True))
+        else:
+            print(f"Submission review validation: {'pass' if validation['valid'] else 'fail'}")
+            print(f"Suite: {validation['summary']['suite_id']} v{validation['summary']['suite_version']}")
+            print(f"System: {validation['summary']['system_name']} {validation['summary']['system_version']}")
+            print(f"Overall score: {validation['summary']['overall_score']}")
+            print(f"Decision: {validation['summary']['decision']}")
+            print(f"Ready for decision: {validation['summary']['ready_for_decision']}")
+            print(f"Recommendation: {validation['summary']['recommendation']}")
+            print(f"Errors: {len(validation['errors'])}")
+            print(f"Warnings: {len(validation['warnings'])}")
+        if not validation["valid"]:
+            raise SystemExit(1)
+        return
+
     if args.create_submission:
         if not args.submission_report:
             parser.error("--create-submission requires --submission-report")
@@ -273,6 +336,26 @@ def main(argv: list[str] | None = None) -> None:
         write_submission_bundle(bundle, args.create_submission_bundle)
         print(f"Submission bundle: {args.create_submission_bundle}")
         print(f"Report SHA-256: {bundle['report_sha256']}")
+        return
+
+    if args.create_submission_review:
+        if not args.review_bundle:
+            parser.error("--create-submission-review requires --review-bundle")
+        try:
+            review_bundle_path = Path(args.review_bundle)
+            review = build_submission_review(
+                review_bundle_path.name,
+                reviewer=args.reviewer,
+                decision=args.review_decision,
+                notes=args.review_notes,
+                base_dir=review_bundle_path.parent,
+            )
+        except (OSError, ValueError) as exc:
+            parser.error(str(exc))
+        write_submission_review(review, args.create_submission_review)
+        print(f"Submission review: {args.create_submission_review}")
+        print(f"Bundle SHA-256: {review['bundle_sha256']}")
+        print(f"Recommendation: {review['summary']['recommendation']}")
         return
 
     if args.export_suite:

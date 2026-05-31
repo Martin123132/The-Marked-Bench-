@@ -96,6 +96,9 @@ Reports are validated with:
 marked-bench --validate-report PATH
 ```
 
+Leaderboard acceptance uses a structured review rubric documented in
+`docs/SUBMISSION_REVIEW_RUBRIC.md`.
+
 Repository artifacts are validated with:
 
 ```bash

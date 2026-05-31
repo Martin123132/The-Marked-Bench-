@@ -69,6 +69,7 @@ The source tree also includes JSON schemas for public infrastructure:
 - `schemas/leaderboard.schema.json`
 - `schemas/leaderboard_submission.schema.json`
 - `schemas/submission_bundle.schema.json`
+- `schemas/submission_review.schema.json`
 - `schemas/release_manifest.schema.json`
 
 For a high-level summary of intended use, non-use, limitations, and
@@ -139,7 +140,7 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public benchmark artifacts by SHA-256:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_3_3.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_3_4.json
 ```
 
 Run the harder adversarial track:
@@ -210,6 +211,16 @@ marked-bench --create-submission artifacts/my-detector-submission.json --submiss
 marked-bench --validate-submission artifacts/my-detector-submission.json
 ```
 
+Accepted leaderboard entries should also have a structured review file:
+
+```bash
+marked-bench --create-submission-review artifacts/my-detector-review.json --review-bundle artifacts/my-detector-bundle.json --reviewer reviewer-name
+marked-bench --validate-submission-review artifacts/my-detector-review.json
+```
+
+The standard review rubric is documented in
+`docs/SUBMISSION_REVIEW_RUBRIC.md`.
+
 External prediction records may include `rationale` and `evidence`. `rationale`
 is the system's short explanation for the predicted label. `evidence` is a list
 of quoted or named premise/query spans that support the decision. These fields
@@ -238,5 +249,6 @@ track with longer context, implicit contradictions, paraphrase traps, and
 distractor controls. Version `0.3.0` adds a multi-hop track for linked-evidence
 contradictions. Release `0.3.3` upgrades public report and prediction schemas
 for rationale/evidence audit fields and aligns schemas with the default
-multi-hop track. The next step toward a larger public standard is human review
-of explanation quality and third-party submissions.
+multi-hop track. Release `0.3.4` adds structured submission review rubrics for
+leaderboard governance. The next step toward a larger public standard is
+third-party submissions and human review evidence.

@@ -8,6 +8,13 @@ import unittest
 from marked_bench.benchmark_leaderboard import LEADERBOARD_SCHEMA, build_leaderboard, report_sha256
 from marked_bench.benchmark_release import RELEASE_MANIFEST_SCHEMA, build_release_manifest, file_sha256
 from marked_bench.benchmark_registry import REGISTRY_SCHEMA, build_benchmark_registry
+from marked_bench.benchmark_review import (
+    REVIEW_SCHEMA,
+    RUBRIC_DIMENSIONS,
+    build_submission_review,
+    validate_submission_review,
+    write_submission_review,
+)
 from marked_bench.benchmark_submission import (
     SUBMISSION_BUNDLE_SCHEMA,
     SUBMISSION_SCHEMA,
@@ -179,9 +186,15 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertIn("rationale", report_schema["$defs"]["case_result"]["required"])
         self.assertIn("evidence", report_schema["$defs"]["case_result"]["required"])
 
+    def test_public_registry_advertises_submission_review_schema(self) -> None:
+        registry = build_benchmark_registry()
+
+        self.assertEqual(registry["schema_ids"]["submission_review"], REVIEW_SCHEMA)
+        self.assertEqual(registry["schemas"]["submission_review"], "schemas/submission_review.schema.json")
+
     def test_checked_in_release_manifest_matches_current_artifacts(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "releases" / "marked_bench_release_v0_3_3.json"
+        path = root / "releases" / "marked_bench_release_v0_3_4.json"
 
         manifest = json.loads(path.read_text(encoding="utf-8"))
 
@@ -537,6 +550,130 @@ class BenchmarkSuiteTests(unittest.TestCase):
         finally:
             shutil.rmtree(output_root, ignore_errors=True)
 
+    def test_submission_review_template_validates_pending_rubric(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        report_path = output_root / "report.json"
+        submission_path = output_root / "submission.json"
+        bundle_path = output_root / "bundle.json"
+        review_path = output_root / "review.json"
+
+        try:
+            write_benchmark_report(evaluate_standard_suite(system_name="ReviewSystem"), report_path)
+            submission = build_leaderboard_submission(
+                "report.json",
+                system_version="1.0.0",
+                submitter="Marked Bench Test",
+                base_dir=output_root,
+                disclosures={
+                    "system_description": "symbolic baseline",
+                    "model": "none",
+                    "prompting": "none",
+                    "preprocessing": "none",
+                    "retrieval": "none",
+                    "postprocessing": "none",
+                    "training_data": "none",
+                    "runtime": "python unittest",
+                },
+            )
+            write_leaderboard_submission(submission, submission_path)
+            bundle = build_submission_bundle("submission.json", base_dir=output_root)
+            write_submission_bundle(bundle, bundle_path)
+
+            review = build_submission_review(
+                "bundle.json",
+                reviewer="reviewer-a",
+                base_dir=output_root,
+            )
+            write_submission_review(review, review_path)
+            validation = validate_submission_review(review, base_dir=output_root)
+
+            self.assertEqual(review["schema"], REVIEW_SCHEMA)
+            self.assertEqual(review["system_name"], "ReviewSystem")
+            self.assertEqual(set(review["rubric"]), set(RUBRIC_DIMENSIONS))
+            self.assertFalse(review["summary"]["ready_for_decision"])
+            self.assertTrue(validation["valid"], validation["errors"])
+            self.assertFalse(validation["summary"]["ready_for_decision"])
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_submission_review_accept_requires_complete_accept_level_rubric(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        report_path = output_root / "report.json"
+        submission_path = output_root / "submission.json"
+        bundle_path = output_root / "bundle.json"
+
+        try:
+            write_benchmark_report(evaluate_standard_suite(system_name="AcceptedReviewSystem"), report_path)
+            submission = build_leaderboard_submission(
+                "report.json",
+                system_version="1.0.0",
+                submitter="Marked Bench Test",
+                base_dir=output_root,
+                disclosures={
+                    "system_description": "symbolic baseline",
+                    "model": "none",
+                    "prompting": "none",
+                    "preprocessing": "none",
+                    "retrieval": "none",
+                    "postprocessing": "none",
+                    "training_data": "none",
+                    "runtime": "python unittest",
+                },
+            )
+            write_leaderboard_submission(submission, submission_path)
+            write_submission_bundle(build_submission_bundle("submission.json", base_dir=output_root), bundle_path)
+            review = build_submission_review(
+                "bundle.json",
+                reviewer="reviewer-a",
+                decision="accept",
+                base_dir=output_root,
+            )
+            for item in review["rubric"].values():
+                item["score"] = 2
+            review["summary"] = {
+                "completed_dimensions": len(RUBRIC_DIMENSIONS),
+                "dimension_count": len(RUBRIC_DIMENSIONS),
+                "rubric_total": 2 * len(RUBRIC_DIMENSIONS),
+                "rubric_max": 2 * len(RUBRIC_DIMENSIONS),
+                "accept_recommendation_minimum": 9,
+                "ready_for_decision": True,
+                "recommendation": "accept",
+            }
+
+            validation = validate_submission_review(review, base_dir=output_root)
+
+            self.assertTrue(validation["valid"], validation["errors"])
+            self.assertTrue(validation["summary"]["ready_for_decision"])
+            self.assertEqual(validation["summary"]["recommendation"], "accept")
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_submission_review_rejects_bundle_hash_mismatch(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        report_path = output_root / "report.json"
+        submission_path = output_root / "submission.json"
+        bundle_path = output_root / "bundle.json"
+
+        try:
+            write_benchmark_report(evaluate_standard_suite(system_name="ReviewSystem"), report_path)
+            submission = build_leaderboard_submission(
+                "report.json",
+                system_version="1.0.0",
+                submitter="Marked Bench Test",
+                base_dir=output_root,
+            )
+            write_leaderboard_submission(submission, submission_path)
+            write_submission_bundle(build_submission_bundle("submission.json", base_dir=output_root), bundle_path)
+            review = build_submission_review("bundle.json", base_dir=output_root)
+            review["bundle_sha256"] = "0" * 64
+
+            validation = validate_submission_review(review, base_dir=output_root)
+
+            self.assertFalse(validation["valid"])
+            self.assertTrue(any("bundle_sha256 mismatch" in error for error in validation["errors"]))
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
     def test_report_writer_creates_parent_directories(self) -> None:
         output_root = Path(__file__).resolve().parent.parent / ".test-output"
         path = output_root / "nested" / "report.json"
@@ -657,6 +794,63 @@ class BenchmarkSuiteTests(unittest.TestCase):
         finally:
             shutil.rmtree(output_root, ignore_errors=True)
 
+    def test_cli_creates_and_validates_submission_review_inside_repo(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        report_path = output_root / "cli-report.json"
+        submission_path = output_root / "submission.json"
+        bundle_path = output_root / "submission-bundle.json"
+        review_path = output_root / "submission-review.json"
+
+        try:
+            with redirect_stdout(StringIO()):
+                benchmark_main(["--system-name", "CliReviewSystem", "--report", str(report_path)])
+            with redirect_stdout(StringIO()):
+                benchmark_main(
+                    [
+                        "--create-submission",
+                        str(submission_path),
+                        "--submission-report",
+                        str(report_path),
+                        "--system-version",
+                        "2026.05",
+                        "--submitter",
+                        "Marked Bench Test",
+                        "--disclosure",
+                        "system_description=symbolic baseline",
+                    ]
+                )
+            with redirect_stdout(StringIO()):
+                benchmark_main(
+                    [
+                        "--create-submission-bundle",
+                        str(bundle_path),
+                        "--bundle-submission",
+                        str(submission_path),
+                    ]
+                )
+            with redirect_stdout(StringIO()) as create_output:
+                benchmark_main(
+                    [
+                        "--create-submission-review",
+                        str(review_path),
+                        "--review-bundle",
+                        str(bundle_path),
+                        "--reviewer",
+                        "reviewer-a",
+                    ]
+                )
+            with redirect_stdout(StringIO()) as validate_output:
+                benchmark_main(["--validate-submission-review", str(review_path)])
+
+            review = json.loads(review_path.read_text(encoding="utf-8"))
+            self.assertEqual(review["schema"], REVIEW_SCHEMA)
+            self.assertEqual(review["system_name"], "CliReviewSystem")
+            self.assertIn("Submission review:", create_output.getvalue())
+            self.assertIn("Submission review validation: pass", validate_output.getvalue())
+            self.assertIn("Ready for decision: False", validate_output.getvalue())
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
     def test_external_submission_demo_writes_valid_bundle(self) -> None:
         output_root = Path(__file__).resolve().parent.parent / ".test-output" / "external-demo"
 
@@ -671,6 +865,8 @@ class BenchmarkSuiteTests(unittest.TestCase):
             self.assertTrue(Path(summary["prediction_path"]).exists())
             self.assertTrue(Path(summary["report_path"]).exists())
             self.assertTrue(Path(summary["submission_path"]).exists())
+            self.assertTrue(Path(summary["review_path"]).exists())
+            self.assertTrue(summary["review_valid"])
             self.assertTrue(validation["valid"], validation["errors"])
         finally:
             shutil.rmtree(output_root.parent, ignore_errors=True)

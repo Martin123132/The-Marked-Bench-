@@ -23,7 +23,9 @@ New tracks should include:
 ## Leaderboard Entries
 
 Leaderboard entries must come from reports that pass the built-in validator.
-Claims without full JSON reports should not be ranked.
+Claims without full JSON reports should not be ranked. Accepted entries should
+also have a validated submission bundle and a completed submission review
+rubric.
 
 ## Review Priorities
 
@@ -32,6 +34,9 @@ Claims without full JSON reports should not be ranked.
 3. Resistance to trivial shortcuts.
 4. Useful coverage across contradiction types.
 5. Transparent limitations.
+
+Use `docs/SUBMISSION_REVIEW_RUBRIC.md` for public leaderboard acceptance
+decisions.
 
 ## Disputes
 

@@ -64,7 +64,7 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public artifact SHA-256 digests:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_3_3.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_3_4.json
 ```
 
 Export the generated technical note:
@@ -98,11 +98,19 @@ marked-bench --create-submission artifacts/my-system-submission.json --submissio
 marked-bench --validate-submission artifacts/my-system-submission.json
 ```
 
+Create a standardized review rubric for a validated submission bundle:
+
+```bash
+marked-bench --create-submission-review artifacts/my-system-review.json --review-bundle artifacts/my-system-submission-bundle.json --reviewer reviewer-name
+marked-bench --validate-submission-review artifacts/my-system-review.json
+```
+
 Create a complete external-submission example:
 
 ```bash
 python -m marked_bench.examples.external_submission_demo
 marked-bench --validate-submission-bundle artifacts/external_submission_demo/example_external_submission_bundle.json
+marked-bench --validate-submission-review artifacts/external_submission_demo/example_external_submission_review.json
 ```
 
 ## Build Leaderboards
@@ -138,9 +146,11 @@ marked-bench --build-leaderboard baselines/always_none_multihop_v0_3_0.json base
 - Technical note: `docs/TECHNICAL_NOTE.md`
 - Submission guide: `docs/SUBMISSION_GUIDE.md`
 - Submission bundle schema: `schemas/submission_bundle.schema.json`
+- Submission review schema: `schemas/submission_review.schema.json`
 - Adoption guide: `docs/ADOPTION_GUIDE.md`
+- Submission review rubric: `docs/SUBMISSION_REVIEW_RUBRIC.md`
 - Release notes: `docs/RELEASE_NOTES_v0_2_0.md`
-- Current release notes: `docs/RELEASE_NOTES_v0_3_3.md`
+- Current release notes: `docs/RELEASE_NOTES_v0_3_4.md`
 
 ## Quality Gates
 
