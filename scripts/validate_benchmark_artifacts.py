@@ -16,6 +16,7 @@ from marked_bench.benchmark_adoption import load_adoption_packet, validate_adopt
 from marked_bench.benchmark_conformance import load_conformance_report, validate_conformance_report  # noqa: E402
 from marked_bench.benchmark_evidence import load_evidence_ledger, validate_evidence_ledger  # noqa: E402
 from marked_bench.benchmark_leaderboard import build_leaderboard  # noqa: E402
+from marked_bench.benchmark_publication import load_publication_packet, validate_publication_packet  # noqa: E402
 from marked_bench.benchmark_release import build_release_manifest  # noqa: E402
 from marked_bench.benchmark_registry import build_benchmark_registry  # noqa: E402
 from marked_bench.benchmark_result_card import load_result_card, validate_result_card  # noqa: E402
@@ -81,10 +82,10 @@ CHECKED_SUBMISSION_PACKETS = [
 ]
 
 BENCHMARK_REGISTRY = Path("benchmark_registry.json")
-RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_0.json")
-CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_0.json")
-ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_0.json")
-EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_0.json")
+RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_1.json")
+CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_1.json")
+ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_1.json")
+EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_1.json")
 
 REQUIRED_PUBLIC_FILES = [
     Path("adoption/README.md"),
@@ -116,6 +117,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("docs/RELEASE_NOTES_v0_3_9.md"),
     Path("docs/RELEASE_NOTES_v0_3_10.md"),
     Path("docs/RELEASE_NOTES_v0_4_0.md"),
+    Path("docs/RELEASE_NOTES_v0_4_1.md"),
     Path("docs/ROADMAP.md"),
     Path("docs/SUBMISSION_GUIDE.md"),
     Path("docs/THIRD_PARTY_EVIDENCE.md"),
@@ -127,6 +129,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("schemas/leaderboard_submission.schema.json"),
     Path("schemas/submission_bundle.schema.json"),
     Path("schemas/submission_review.schema.json"),
+    Path("schemas/publication_packet.schema.json"),
     Path("schemas/release_manifest.schema.json"),
     Path("schemas/conformance_report.schema.json"),
     Path("schemas/result_card.schema.json"),
@@ -141,6 +144,13 @@ REQUIRED_PUBLIC_FILES = [
     Path("submissions/example_external_jsonl/example_external_submission_bundle.json"),
     Path("submissions/example_external_jsonl/example_external_submission_review.json"),
     Path("submissions/example_external_jsonl/example_external_result_card.json"),
+    Path("submissions/example_publication_packet/predictions.jsonl"),
+    Path("submissions/example_publication_packet/report.json"),
+    Path("submissions/example_publication_packet/submission.json"),
+    Path("submissions/example_publication_packet/submission_bundle.json"),
+    Path("submissions/example_publication_packet/submission_review.json"),
+    Path("submissions/example_publication_packet/result_card.json"),
+    Path("submissions/example_publication_packet/publication_packet.json"),
     Path(".github/PULL_REQUEST_TEMPLATE.md"),
     Path(".github/workflows/benchmark-ci.yml"),
     Path(".github/ISSUE_TEMPLATE/third_party_evidence.yml"),
@@ -161,6 +171,7 @@ SCHEMA_CONFORMANCE_FILES = {
     Path("submissions/example_external_jsonl/example_external_submission_bundle.json"): Path("schemas/submission_bundle.schema.json"),
     Path("submissions/example_external_jsonl/example_external_submission_review.json"): Path("schemas/submission_review.schema.json"),
     Path("submissions/example_external_jsonl/example_external_result_card.json"): Path("schemas/result_card.schema.json"),
+    Path("submissions/example_publication_packet/publication_packet.json"): Path("schemas/publication_packet.schema.json"),
     ADOPTION_PACKET: Path("schemas/adoption_packet.schema.json"),
     EVIDENCE_LEDGER: Path("schemas/third_party_evidence_ledger.schema.json"),
 }
@@ -183,6 +194,7 @@ def main() -> int:
         _validate_leaderboards(errors)
         _validate_checked_submission_packets(errors)
         _validate_checked_result_cards(errors)
+        _validate_checked_publication_packets(errors)
         _validate_schema_conformance(errors)
     finally:
         os.chdir(previous_cwd)
@@ -440,6 +452,19 @@ def _validate_checked_result_cards(errors: list[str]) -> None:
         validation = validate_result_card(card, base_dir=path.parent)
         if not validation["valid"]:
             errors.append(f"{path}: checked result card validation failed: {validation['errors']}")
+
+
+def _validate_checked_publication_packets(errors: list[str]) -> None:
+    paths = [Path("submissions/example_publication_packet/publication_packet.json")]
+    for path in paths:
+        try:
+            packet = load_publication_packet(path)
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            errors.append(f"{path}: could not load checked publication packet: {exc}")
+            continue
+        validation = validate_publication_packet(packet, base_dir=path.parent)
+        if not validation["valid"]:
+            errors.append(f"{path}: checked publication packet validation failed: {validation['errors']}")
 
 
 def _validate_leaderboards(errors: list[str]) -> None:

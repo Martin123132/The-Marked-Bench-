@@ -24,3 +24,11 @@ marked-bench --validate-submission-bundle submissions/example_external_jsonl/exa
 marked-bench --validate-submission-review submissions/example_external_jsonl/example_external_submission_review.json
 marked-bench --validate-result-card submissions/example_external_jsonl/example_external_result_card.json
 ```
+
+`example_publication_packet/` is a checked one-command publication packet. It
+contains a copied report, optional predictions, submission metadata, bundle,
+review file, result card, and packet manifest. Validate it with:
+
+```bash
+marked-bench --validate-publication-packet submissions/example_publication_packet/publication_packet.json
+```

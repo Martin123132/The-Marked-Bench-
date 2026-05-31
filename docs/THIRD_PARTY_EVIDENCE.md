@@ -9,7 +9,7 @@ and how it is recorded.
 The checked ledger is:
 
 ```text
-adoption/third_party_evidence_ledger_v0_4_0.json
+adoption/third_party_evidence_ledger_v0_4_1.json
 ```
 
 The current ledger may be empty. An empty ledger is valid and means no external
@@ -18,7 +18,7 @@ adoption evidence has been accepted for the release yet.
 Validate it with:
 
 ```bash
-marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_0.json
+marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_1.json
 ```
 
 ## What Counts
@@ -26,6 +26,8 @@ marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_
 A third-party evidence entry should include:
 
 - A public result card.
+- A publication packet when the result is submitted as a self-contained public
+  evidence folder.
 - A submission bundle with report hash evidence.
 - The suite ID, suite version, and suite hash.
 - Submitter, system name, and system version.

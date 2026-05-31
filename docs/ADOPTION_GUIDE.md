@@ -45,6 +45,15 @@ marked-bench --create-result-card your-result-card.json --result-report your-sys
 marked-bench --validate-result-card your-result-card.json
 ```
 
+If you want one public folder that contains the copied report, optional
+predictions, submission metadata, bundle, review template, result card, and
+hash manifest, use the publication packet command:
+
+```bash
+marked-bench --create-publication-packet your-publication-packet --publication-report your-system-report.json --publication-predictions predictions.jsonl --system-version "1.0.0" --submitter "name-or-org"
+marked-bench --validate-publication-packet your-publication-packet/publication_packet.json
+```
+
 Leaderboard entries without a valid report, submission file, and submission
 bundle should not be ranked.
 
@@ -61,6 +70,8 @@ python -m marked_bench.examples.external_submission_demo
 A checked example packet is committed under `submissions/example_external_jsonl/`.
 Use it as the reference shape for external JSONL predictions, scored reports,
 submission metadata, bundle evidence, review files, and result cards.
+`submissions/example_publication_packet/` shows the one-command publication
+packet shape.
 
 ## Check Release Conformance
 
@@ -68,9 +79,9 @@ Before adopting or mirroring a release package, validate the checked
 conformance report:
 
 ```bash
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_0.json
-marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_0.json
-marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_0.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_1.json
+marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_1.json
+marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_1.json
 ```
 
 The conformance report is the single machine-readable pass/fail artifact for

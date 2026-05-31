@@ -42,6 +42,7 @@
         "leaderboard_submission",
         "submission_bundle",
         "submission_review",
+        "publication_packet",
         "conformance_report",
         "result_card",
         "adoption_packet",
@@ -159,6 +160,8 @@
             "validate_submission_bundle",
             "create_result_card",
             "validate_result_card",
+            "create_publication_packet",
+            "validate_publication_packet",
             "build_leaderboard"
           ],
           "additionalProperties": {

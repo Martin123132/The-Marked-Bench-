@@ -169,7 +169,20 @@ marked-bench --validate-result-card my-result-card.json
 Result cards use `schemas/result_card.schema.json`. They do not replace the
 full report, bundle, or review; they point to those files and pin their hashes.
 
-## 7. Update Leaderboard
+## 7. Create A Publication Packet
+
+For public sharing, package the report, optional predictions, submission
+metadata, bundle, review template, result card, and file hashes into one
+self-contained directory:
+
+```bash
+marked-bench --create-publication-packet my-publication-packet --publication-report my-adversarial-report.json --publication-predictions predictions.jsonl --system-version "1.0.0" --submitter "name-or-org"
+marked-bench --validate-publication-packet my-publication-packet/publication_packet.json
+```
+
+Publication packets use `schemas/publication_packet.schema.json`.
+
+## 8. Update Leaderboard
 
 For foundation entries:
 
@@ -195,7 +208,7 @@ For controls entries:
 marked-bench --build-leaderboard baselines/*controls*.json --leaderboard-output leaderboard/leaderboard_controls_v0_4_0.json
 ```
 
-## 8. Run Repository Checks
+## 9. Run Repository Checks
 
 ```bash
 python -m unittest discover -s tests
@@ -204,7 +217,7 @@ python scripts/validate_benchmark_artifacts.py
 
 Both commands must pass before a submission is ready for review.
 
-## 9. Create A Review Rubric
+## 10. Create A Review Rubric
 
 Leaderboard maintainers should create a structured review file before accepting
 an entry:

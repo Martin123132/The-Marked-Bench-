@@ -78,6 +78,13 @@ from marked_bench.benchmark_evidence import (
     load_evidence_ledger,
     validate_evidence_ledger,
 )
+from marked_bench.benchmark_publication import (
+    PUBLICATION_PACKET_SCHEMA,
+    build_publication_packet,
+    create_publication_packet,
+    load_publication_packet,
+    validate_publication_packet,
+)
 from marked_bench.examples.external_submission_demo import run_demo as run_external_submission_demo
 
 
@@ -269,10 +276,10 @@ class BenchmarkSuiteTests(unittest.TestCase):
         root = Path(__file__).resolve().parent.parent
         checked_pairs = [
             ("benchmark_registry.json", "schemas/benchmark_registry.schema.json"),
-            ("releases/marked_bench_release_v0_4_0.json", "schemas/release_manifest.schema.json"),
-            ("conformance/marked_bench_conformance_v0_4_0.json", "schemas/conformance_report.schema.json"),
-            ("adoption/marked_bench_adoption_packet_v0_4_0.json", "schemas/adoption_packet.schema.json"),
-            ("adoption/third_party_evidence_ledger_v0_4_0.json", "schemas/third_party_evidence_ledger.schema.json"),
+            ("releases/marked_bench_release_v0_4_1.json", "schemas/release_manifest.schema.json"),
+            ("conformance/marked_bench_conformance_v0_4_1.json", "schemas/conformance_report.schema.json"),
+            ("adoption/marked_bench_adoption_packet_v0_4_1.json", "schemas/adoption_packet.schema.json"),
+            ("adoption/third_party_evidence_ledger_v0_4_1.json", "schemas/third_party_evidence_ledger.schema.json"),
             ("suites/marked_bench_contradiction_standard_v0_1_0.json", "schemas/contradiction_suite_manifest.schema.json"),
             ("suites/marked_bench_contradiction_adversarial_v0_2_0.json", "schemas/contradiction_suite_manifest.schema.json"),
             ("suites/marked_bench_contradiction_multihop_v0_3_0.json", "schemas/contradiction_suite_manifest.schema.json"),
@@ -282,6 +289,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
             ("leaderboard/leaderboard_multihop_v0_3_0.json", "schemas/leaderboard.schema.json"),
             ("leaderboard/leaderboard_controls_v0_4_0.json", "schemas/leaderboard.schema.json"),
             ("submissions/example_external_jsonl/example_external_result_card.json", "schemas/result_card.schema.json"),
+            ("submissions/example_publication_packet/publication_packet.json", "schemas/publication_packet.schema.json"),
         ]
 
         for artifact_path, schema_path in checked_pairs:
@@ -323,6 +331,8 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
         self.assertEqual(registry["schema_ids"]["submission_review"], REVIEW_SCHEMA)
         self.assertEqual(registry["schemas"]["submission_review"], "schemas/submission_review.schema.json")
+        self.assertEqual(registry["schema_ids"]["publication_packet"], PUBLICATION_PACKET_SCHEMA)
+        self.assertEqual(registry["schemas"]["publication_packet"], "schemas/publication_packet.schema.json")
         self.assertEqual(registry["schema_ids"]["result_card"], RESULT_CARD_SCHEMA)
         self.assertEqual(registry["schemas"]["result_card"], "schemas/result_card.schema.json")
         self.assertEqual(registry["schema_ids"]["adoption_packet"], ADOPTION_PACKET_SCHEMA)
@@ -335,7 +345,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_release_manifest_matches_current_artifacts(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "releases" / "marked_bench_release_v0_4_0.json"
+        path = root / "releases" / "marked_bench_release_v0_4_1.json"
 
         manifest = json.loads(path.read_text(encoding="utf-8"))
         artifact_paths = {entry["path"] for entry in manifest["artifacts"]}
@@ -346,20 +356,22 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertGreater(manifest["artifact_count"], 20)
         self.assertIn("submissions/example_external_jsonl/predictions.jsonl", artifact_paths)
         self.assertIn("submissions/example_external_jsonl/example_external_submission_review.json", artifact_paths)
-        self.assertIn("conformance/marked_bench_conformance_v0_4_0.json", artifact_paths)
-        self.assertIn("adoption/marked_bench_adoption_packet_v0_4_0.json", artifact_paths)
-        self.assertIn("adoption/third_party_evidence_ledger_v0_4_0.json", artifact_paths)
+        self.assertIn("conformance/marked_bench_conformance_v0_4_1.json", artifact_paths)
+        self.assertIn("adoption/marked_bench_adoption_packet_v0_4_1.json", artifact_paths)
+        self.assertIn("adoption/third_party_evidence_ledger_v0_4_1.json", artifact_paths)
         self.assertIn("suites/marked_bench_contradiction_controls_v0_4_0.json", artifact_paths)
         self.assertIn("leaderboard/leaderboard_controls_v0_4_0.json", artifact_paths)
         self.assertIn("docs/ANNOUNCEMENT_PACKAGE.md", artifact_paths)
         self.assertIn("docs/THIRD_PARTY_EVIDENCE.md", artifact_paths)
+        self.assertIn("schemas/publication_packet.schema.json", artifact_paths)
         self.assertIn("schemas/adoption_packet.schema.json", artifact_paths)
         self.assertIn("schemas/third_party_evidence_ledger.schema.json", artifact_paths)
         self.assertIn("submissions/example_external_jsonl/example_external_result_card.json", artifact_paths)
+        self.assertIn("submissions/example_publication_packet/publication_packet.json", artifact_paths)
 
     def test_checked_in_conformance_report_matches_current_evidence(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "conformance" / "marked_bench_conformance_v0_4_0.json"
+        path = root / "conformance" / "marked_bench_conformance_v0_4_1.json"
 
         report = load_conformance_report(path)
         validation = validate_conformance_report(report, root=root)
@@ -367,13 +379,14 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertEqual(report, build_conformance_report(root))
         self.assertEqual(report["schema"], CONFORMANCE_REPORT_SCHEMA)
         self.assertTrue(report["passed"], report["failures"])
+        self.assertIn("checked_publication_packets_valid", [check["name"] for check in report["checks"]])
         self.assertIn("adoption_packet_valid", [check["name"] for check in report["checks"]])
         self.assertIn("third_party_evidence_ledger_valid", [check["name"] for check in report["checks"]])
         self.assertTrue(validation["valid"], validation["errors"])
 
     def test_checked_in_adoption_packet_matches_current_evidence(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "adoption" / "marked_bench_adoption_packet_v0_4_0.json"
+        path = root / "adoption" / "marked_bench_adoption_packet_v0_4_1.json"
 
         packet = load_adoption_packet(path)
         validation = validate_adoption_packet(packet, root=root)
@@ -383,11 +396,12 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertEqual(packet["default_track"], "contradiction-multihop")
         self.assertTrue(packet["standard_claims"]["public_result_card_required"])
         self.assertTrue(packet["standard_claims"]["third_party_evidence_ledger_required"])
+        self.assertIn("checked_publication_packet", [item["name"] for item in packet["required_public_artifacts"]])
         self.assertTrue(validation["valid"], validation["errors"])
 
     def test_checked_in_evidence_ledger_matches_current_evidence(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "adoption" / "third_party_evidence_ledger_v0_4_0.json"
+        path = root / "adoption" / "third_party_evidence_ledger_v0_4_1.json"
 
         ledger = load_evidence_ledger(path)
         validation = validate_evidence_ledger(ledger, root=root)
@@ -440,6 +454,21 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertTrue(card["publication"]["ready_for_leaderboard_review"])
         self.assertFalse(card["publication"]["accepted"])
         self.assertTrue(validation["valid"], validation["errors"])
+
+    def test_checked_publication_packet_validates(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        packet_dir = root / "submissions" / "example_publication_packet"
+        path = packet_dir / "publication_packet.json"
+
+        packet = load_publication_packet(path)
+        validation = validate_publication_packet(packet, base_dir=packet_dir)
+
+        self.assertEqual(packet, build_publication_packet(packet_dir, notes=packet["notes"]))
+        self.assertEqual(packet["schema"], PUBLICATION_PACKET_SCHEMA)
+        self.assertEqual(packet["suite_id"], MULTIHOP_SUITE_ID)
+        self.assertTrue(packet["ready_for_publication"])
+        self.assertTrue(validation["valid"], validation["errors"])
+        self.assertIn("result_card", {entry["role"] for entry in packet["files"]})
 
     def test_checked_in_technical_note_matches_generated_evidence(self) -> None:
         root = Path(__file__).resolve().parent.parent
@@ -1120,6 +1149,54 @@ class BenchmarkSuiteTests(unittest.TestCase):
         finally:
             shutil.rmtree(output_root.parent, ignore_errors=True)
 
+    def test_publication_packet_builder_writes_self_contained_packet(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output" / "publication-builder"
+        source_dir = output_root / "source"
+        packet_dir = output_root / "packet"
+        prediction_path = source_dir / "predictions.jsonl"
+        report_path = source_dir / "report.json"
+
+        try:
+            source_dir.mkdir(parents=True, exist_ok=True)
+            records = [
+                {
+                    "case_id": record["case_id"],
+                    "predicted": "none",
+                    "detector_score": 0.0,
+                    "rationale": "Builder test predicts no contradiction.",
+                    "evidence": [record["premise"], record["query"]],
+                }
+                for record in build_prediction_template(suite="contradiction-multihop")["predictions"]
+            ]
+            prediction_path.write_text(
+                "\n".join(json.dumps(record, sort_keys=True) for record in records) + "\n",
+                encoding="utf-8",
+            )
+            report = evaluate_prediction_file(prediction_path, system_name="PublicationBuilder", suite="contradiction-multihop")
+            write_benchmark_report(report, report_path)
+
+            packet = create_publication_packet(
+                packet_dir,
+                report_path,
+                prediction_path=prediction_path,
+                system_version="builder-1",
+                submitter="Marked Bench Test",
+                packet_notes="builder packet",
+            )
+            loaded = load_publication_packet(packet_dir / "publication_packet.json")
+            validation = validate_publication_packet(loaded, base_dir=packet_dir)
+
+            self.assertEqual(packet, loaded)
+            self.assertEqual(packet, build_publication_packet(packet_dir, notes="builder packet"))
+            self.assertEqual(packet["schema"], PUBLICATION_PACKET_SCHEMA)
+            self.assertEqual(packet["system_name"], "PublicationBuilder")
+            self.assertTrue(packet["ready_for_publication"])
+            self.assertTrue((packet_dir / "report.json").exists())
+            self.assertTrue((packet_dir / "predictions.jsonl").exists())
+            self.assertTrue(validation["valid"], validation["errors"])
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
     def test_cli_writes_always_none_baseline_report(self) -> None:
         output_root = Path(__file__).resolve().parent.parent / ".test-output"
         path = output_root / "always-none.json"
@@ -1341,6 +1418,42 @@ class BenchmarkSuiteTests(unittest.TestCase):
             self.assertEqual(card["system_name"], "CliResultCardSystem")
             self.assertIn("Result card:", create_output.getvalue())
             self.assertIn("Result card validation: pass", validate_output.getvalue())
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_cli_creates_and_validates_publication_packet_inside_repo(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        report_path = output_root / "publication-report.json"
+        packet_dir = output_root / "publication-packet"
+        packet_path = packet_dir / "publication_packet.json"
+
+        try:
+            with redirect_stdout(StringIO()):
+                benchmark_main(["--system-name", "CliPublicationPacketSystem", "--report", str(report_path)])
+            with redirect_stdout(StringIO()) as create_output:
+                benchmark_main(
+                    [
+                        "--create-publication-packet",
+                        str(packet_dir),
+                        "--publication-report",
+                        str(report_path),
+                        "--system-version",
+                        "1.0.0",
+                        "--submitter",
+                        "Marked Bench Test",
+                        "--publication-notes",
+                        "CLI publication packet test",
+                    ]
+                )
+            with redirect_stdout(StringIO()) as validate_output:
+                benchmark_main(["--validate-publication-packet", str(packet_path)])
+
+            packet = json.loads(packet_path.read_text(encoding="utf-8"))
+            self.assertEqual(packet["schema"], PUBLICATION_PACKET_SCHEMA)
+            self.assertEqual(packet["system_name"], "CliPublicationPacketSystem")
+            self.assertTrue(packet["ready_for_publication"])
+            self.assertIn("Publication packet:", create_output.getvalue())
+            self.assertIn("Publication packet validation: pass", validate_output.getvalue())
         finally:
             shutil.rmtree(output_root, ignore_errors=True)
 

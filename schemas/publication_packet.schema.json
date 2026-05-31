@@ -1,0 +1,224 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marked-bench.local/schemas/publication_packet.schema.json",
+  "title": "The Marked Bench Publication Packet",
+  "type": "object",
+  "required": [
+    "schema",
+    "created_at",
+    "release_id",
+    "system_name",
+    "system_version",
+    "submitter",
+    "suite_id",
+    "suite_version",
+    "suite_hash",
+    "report_sha256",
+    "result_card_sha256",
+    "overall_score",
+    "case_count",
+    "failure_count",
+    "files",
+    "validations",
+    "ready_for_publication",
+    "standard_claims",
+    "notes"
+  ],
+  "properties": {
+    "schema": {
+      "const": "marked_bench.publication-packet.v1"
+    },
+    "created_at": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "release_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "system_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "system_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "submitter": {
+      "type": "string",
+      "minLength": 1
+    },
+    "suite_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "suite_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "suite_hash": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "report_sha256": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "result_card_sha256": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "overall_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "case_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "failure_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "files": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "$ref": "#/$defs/file"
+      }
+    },
+    "validations": {
+      "$ref": "#/$defs/validations"
+    },
+    "ready_for_publication": {
+      "type": "boolean"
+    },
+    "standard_claims": {
+      "$ref": "#/$defs/standard_claims"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "file": {
+      "type": "object",
+      "required": [
+        "role",
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "properties": {
+        "role": {
+          "enum": [
+            "report",
+            "submission",
+            "submission_bundle",
+            "submission_review",
+            "result_card",
+            "predictions"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "required": [
+        "schema",
+        "valid",
+        "error_count",
+        "warning_count"
+      ],
+      "properties": {
+        "schema": {
+          "type": "string"
+        },
+        "valid": {
+          "type": "boolean"
+        },
+        "error_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "warning_count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "validations": {
+      "type": "object",
+      "required": [
+        "report",
+        "submission",
+        "submission_bundle",
+        "submission_review",
+        "result_card"
+      ],
+      "properties": {
+        "report": {
+          "$ref": "#/$defs/validation"
+        },
+        "submission": {
+          "$ref": "#/$defs/validation"
+        },
+        "submission_bundle": {
+          "$ref": "#/$defs/validation"
+        },
+        "submission_review": {
+          "$ref": "#/$defs/validation"
+        },
+        "result_card": {
+          "$ref": "#/$defs/validation"
+        }
+      }
+    },
+    "standard_claims": {
+      "type": "object",
+      "required": [
+        "self_contained_public_result_packet",
+        "same_suite_hash_required",
+        "report_validator_required",
+        "submission_bundle_required",
+        "result_card_required",
+        "not_safety_certification"
+      ],
+      "properties": {
+        "self_contained_public_result_packet": {
+          "const": true
+        },
+        "same_suite_hash_required": {
+          "const": true
+        },
+        "report_validator_required": {
+          "const": true
+        },
+        "submission_bundle_required": {
+          "const": true
+        },
+        "result_card_required": {
+          "const": true
+        },
+        "not_safety_certification": {
+          "const": true
+        }
+      }
+    }
+  }
+}

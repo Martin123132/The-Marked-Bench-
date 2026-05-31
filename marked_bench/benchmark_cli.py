@@ -22,6 +22,12 @@ from marked_bench.benchmark_evidence import (
     write_evidence_ledger,
 )
 from marked_bench.benchmark_leaderboard import build_leaderboard, write_leaderboard
+from marked_bench.benchmark_publication import (
+    PACKET_FILENAME,
+    create_publication_packet,
+    load_publication_packet,
+    validate_publication_packet,
+)
 from marked_bench.benchmark_release import write_release_manifest
 from marked_bench.benchmark_registry import write_benchmark_registry
 from marked_bench.benchmark_review import (
@@ -150,6 +156,18 @@ def build_parser() -> argparse.ArgumentParser:
         help="Validate a standard result card and its referenced benchmark evidence.",
     )
     parser.add_argument(
+        "--create-publication-packet",
+        default=None,
+        metavar="DIR",
+        help="Write a complete public result packet directory and exit.",
+    )
+    parser.add_argument(
+        "--validate-publication-packet",
+        default=None,
+        metavar="PATH",
+        help="Validate a public result packet manifest and its referenced files.",
+    )
+    parser.add_argument(
         "--export-conformance-report",
         default=None,
         metavar="PATH",
@@ -247,6 +265,23 @@ def build_parser() -> argparse.ArgumentParser:
         "--result-notes",
         default="",
         help="Notes to store in a result card.",
+    )
+    parser.add_argument(
+        "--publication-report",
+        default=None,
+        metavar="PATH",
+        help="Report path to copy into a public result packet.",
+    )
+    parser.add_argument(
+        "--publication-predictions",
+        default=None,
+        metavar="PATH",
+        help="Optional prediction file to copy into a public result packet.",
+    )
+    parser.add_argument(
+        "--publication-notes",
+        default="",
+        help="Notes to store in a public result packet manifest.",
     )
     parser.add_argument(
         "--submission-report",
@@ -438,6 +473,27 @@ def main(argv: list[str] | None = None) -> None:
             raise SystemExit(1)
         return
 
+    if args.validate_publication_packet:
+        packet_path = Path(args.validate_publication_packet)
+        validation = validate_publication_packet(
+            load_publication_packet(packet_path),
+            base_dir=packet_path.parent,
+        )
+        if args.json:
+            print(json.dumps(validation, indent=2, sort_keys=True))
+        else:
+            print(f"Publication packet validation: {'pass' if validation['valid'] else 'fail'}")
+            print(f"Suite: {validation['summary']['suite_id']} v{validation['summary']['suite_version']}")
+            print(f"System: {validation['summary']['system_name']} {validation['summary']['system_version']}")
+            print(f"Overall score: {validation['summary']['overall_score']}")
+            print(f"Ready for publication: {validation['summary']['ready_for_publication']}")
+            print(f"Files: {validation['summary']['file_count']}")
+            print(f"Errors: {len(validation['errors'])}")
+            print(f"Warnings: {len(validation['warnings'])}")
+        if not validation["valid"]:
+            raise SystemExit(1)
+        return
+
     if args.validate_adoption_packet:
         validation = validate_adoption_packet(load_adoption_packet(args.validate_adoption_packet))
         if args.json:
@@ -548,6 +604,37 @@ def main(argv: list[str] | None = None) -> None:
         print(f"Result card: {args.create_result_card}")
         print(f"Overall score: {card['overall_score']}")
         print(f"Ready for leaderboard review: {card['publication']['ready_for_leaderboard_review']}")
+        return
+
+    if args.create_publication_packet:
+        if not args.publication_report:
+            parser.error("--create-publication-packet requires --publication-report")
+        if not args.system_version:
+            parser.error("--create-publication-packet requires --system-version")
+        if not args.submitter:
+            parser.error("--create-publication-packet requires --submitter")
+        try:
+            packet = create_publication_packet(
+                args.create_publication_packet,
+                args.publication_report,
+                prediction_path=args.publication_predictions,
+                system_version=args.system_version,
+                submitter=args.submitter,
+                reviewer=args.reviewer,
+                review_decision=args.review_decision,
+                submission_notes=args.submission_notes,
+                review_notes=args.review_notes,
+                result_notes=args.result_notes,
+                packet_notes=args.publication_notes,
+                disclosures=_parse_disclosures(args.disclosure),
+            )
+        except (OSError, ValueError) as exc:
+            parser.error(str(exc))
+        packet_path = Path(args.create_publication_packet) / PACKET_FILENAME
+        print(f"Publication packet: {packet_path}")
+        print(f"Overall score: {packet['overall_score']}")
+        print(f"Ready for publication: {packet['ready_for_publication']}")
+        print(f"Files: {len(packet['files'])}")
         return
 
     if args.export_suite:

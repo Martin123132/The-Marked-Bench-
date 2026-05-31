@@ -1,0 +1,57 @@
+{
+  "bundle_path": "submission_bundle.json",
+  "bundle_sha256": "587578a5df865f25649c2e2a005fd67f269b34c0030cb19e56271d9eb1273e01",
+  "case_count": 18,
+  "created_at": 1780241353.623,
+  "disclosures": {
+    "model": "none",
+    "postprocessing": "none",
+    "preprocessing": "none",
+    "prompting": "none",
+    "retrieval": "none",
+    "runtime": "Python example script",
+    "system_description": "Example JSONL submitter that predicts none for every case.",
+    "training_data": "none"
+  },
+  "failure_count": 10,
+  "metrics": {
+    "calibration_brier_score": 0.555556,
+    "calibration_ece": 0.555556,
+    "contradiction_macro_f1": 0.0,
+    "coverage_index": 0.0,
+    "detection_f1": 0.0,
+    "explanation_ready_rate": 1.0,
+    "type_accuracy": 0.444444
+  },
+  "notes": "Checked example result card for the publication packet workflow.",
+  "overall_score": 11.11,
+  "publication": {
+    "accepted": false,
+    "bundle_valid": true,
+    "ready_for_decision": false,
+    "ready_for_leaderboard_review": true,
+    "report_valid": true,
+    "review_decision": "needs_review",
+    "review_recommendation": "needs_review",
+    "review_valid": true
+  },
+  "report_path": "report.json",
+  "report_schema": "marked_bench.contradiction-benchmark-report.v2",
+  "report_sha256": "9028699a80c286fb644d9a7212209d452c5e5e0cbc8303c06599fb4950017c83",
+  "review_path": "submission_review.json",
+  "review_sha256": "40293d8748d31901e60dc4729d1c2a32dd7fbf960a19a4d46de13778fa1f5f10",
+  "schema": "marked_bench.result-card.v1",
+  "standard_claims": {
+    "bundle_required_for_leaderboard_review": true,
+    "not_safety_certification": true,
+    "public_test_result": true,
+    "report_validator_required": true,
+    "same_suite_hash_required": true
+  },
+  "submitter": "The Marked Bench Examples",
+  "suite_hash": "07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f",
+  "suite_id": "marked-bench-contradiction-multihop",
+  "suite_version": "0.3.0",
+  "system_name": "ExampleExternalJsonl",
+  "system_version": "demo-1.0"
+}

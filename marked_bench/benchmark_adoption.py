@@ -12,12 +12,12 @@ from marked_bench.schema_validation import load_json_schema, validate_json_schem
 
 
 ADOPTION_PACKET_SCHEMA = "marked_bench.adoption-packet.v1"
-DEFAULT_ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_0.json")
-DEFAULT_EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_0.json")
-DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_0.json")
-DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_0.json")
+DEFAULT_ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_1.json")
+DEFAULT_EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_1.json")
+DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_1.json")
+DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_1.json")
 REPOSITORY_URL = "https://github.com/Martin123132/The-Marked-Bench-"
-RELEASE_URL = "https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.4.0"
+RELEASE_URL = "https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.4.1"
 
 
 def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
@@ -78,6 +78,11 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
             _artifact("announcement_package", "docs/ANNOUNCEMENT_PACKAGE.md", "Copy-ready public launch and citation material."),
             _artifact("third_party_evidence", "docs/THIRD_PARTY_EVIDENCE.md", "Evidence rules for adoption claims."),
             _artifact("result_card_schema", "schemas/result_card.schema.json", "Schema for publishable benchmark result cards."),
+            _artifact(
+                "publication_packet_schema",
+                "schemas/publication_packet.schema.json",
+                "Schema for one-command public result packets.",
+            ),
             _artifact("adoption_packet_schema", "schemas/adoption_packet.schema.json", "Schema for this adoption packet."),
             _artifact(
                 "third_party_evidence_schema",
@@ -89,12 +94,17 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
                 "submissions/example_external_jsonl/example_external_result_card.json",
                 "Example result card with report, bundle, review, and hash evidence.",
             ),
+            _artifact(
+                "checked_publication_packet",
+                "submissions/example_publication_packet/publication_packet.json",
+                "Example one-command public result packet with copied report and complete evidence chain.",
+            ),
         ],
         "adopter_workflow": [
             {
                 "step": 1,
                 "name": "pin_release",
-                "command": "marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_0.json",
+                "command": "marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_1.json",
                 "output": "Release conformance validation passes.",
             },
             {
@@ -145,6 +155,17 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
                 ),
                 "output": "A standard result card suitable for citation or leaderboard review.",
             },
+            {
+                "step": 7,
+                "name": "create_publication_packet",
+                "command": (
+                    "marked-bench --create-publication-packet artifacts/system-publication-packet "
+                    "--publication-report artifacts/system-report.json "
+                    "--publication-predictions artifacts/multihop-predictions.jsonl "
+                    '--system-version "VERSION" --submitter "SUBMITTER"'
+                ),
+                "output": "A self-contained public result packet with report, submission, bundle, review, result card, and hashes.",
+            },
         ],
         "validation_commands": [
             {
@@ -161,7 +182,7 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
                 "name": "adoption_packet",
                 "command": (
                     "marked-bench --validate-adoption-packet "
-                    "adoption/marked_bench_adoption_packet_v0_4_0.json"
+                    "adoption/marked_bench_adoption_packet_v0_4_1.json"
                 ),
                 "proves": "The external adoption packet matches the current release evidence.",
             },
@@ -169,9 +190,17 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
                 "name": "third_party_evidence_ledger",
                 "command": (
                     "marked-bench --validate-evidence-ledger "
-                    "adoption/third_party_evidence_ledger_v0_4_0.json"
+                    "adoption/third_party_evidence_ledger_v0_4_1.json"
                 ),
                 "proves": "External adoption evidence claims are explicitly recorded and validated.",
+            },
+            {
+                "name": "checked_publication_packet",
+                "command": (
+                    "marked-bench --validate-publication-packet "
+                    "submissions/example_publication_packet/publication_packet.json"
+                ),
+                "proves": "The one-command public result packet is self-contained and hash-current.",
             },
         ],
         "submission_channels": [

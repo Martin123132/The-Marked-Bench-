@@ -1,0 +1,96 @@
+{
+  "case_count": 18,
+  "created_at": 1780241353.623,
+  "failure_count": 10,
+  "files": [
+    {
+      "bytes": 7705,
+      "path": "predictions.jsonl",
+      "role": "predictions",
+      "sha256": "e6ccdf33f7104b261ac52005881786cdbb25496a695410724e3a7001328261ce"
+    },
+    {
+      "bytes": 51186,
+      "path": "report.json",
+      "role": "report",
+      "sha256": "9028699a80c286fb644d9a7212209d452c5e5e0cbc8303c06599fb4950017c83"
+    },
+    {
+      "bytes": 2020,
+      "path": "result_card.json",
+      "role": "result_card",
+      "sha256": "ace8ca440e3593290b6b59d6cbef03a27b252c0884d8ad27d839e1dbb0517dd7"
+    },
+    {
+      "bytes": 1044,
+      "path": "submission.json",
+      "role": "submission",
+      "sha256": "040f96823043101ebd3b913d4e87abc4d411f80a6e965071ab8fe8848d47ba27"
+    },
+    {
+      "bytes": 1450,
+      "path": "submission_bundle.json",
+      "role": "submission_bundle",
+      "sha256": "587578a5df865f25649c2e2a005fd67f269b34c0030cb19e56271d9eb1273e01"
+    },
+    {
+      "bytes": 2554,
+      "path": "submission_review.json",
+      "role": "submission_review",
+      "sha256": "40293d8748d31901e60dc4729d1c2a32dd7fbf960a19a4d46de13778fa1f5f10"
+    }
+  ],
+  "notes": "Checked example publication packet for the external JSONL workflow.",
+  "overall_score": 11.11,
+  "ready_for_publication": true,
+  "release_id": "marked-bench-contradiction-standard-release-0.4.1",
+  "report_sha256": "9028699a80c286fb644d9a7212209d452c5e5e0cbc8303c06599fb4950017c83",
+  "result_card_sha256": "ace8ca440e3593290b6b59d6cbef03a27b252c0884d8ad27d839e1dbb0517dd7",
+  "schema": "marked_bench.publication-packet.v1",
+  "standard_claims": {
+    "not_safety_certification": true,
+    "report_validator_required": true,
+    "result_card_required": true,
+    "same_suite_hash_required": true,
+    "self_contained_public_result_packet": true,
+    "submission_bundle_required": true
+  },
+  "submitter": "The Marked Bench Examples",
+  "suite_hash": "07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f",
+  "suite_id": "marked-bench-contradiction-multihop",
+  "suite_version": "0.3.0",
+  "system_name": "ExampleExternalJsonl",
+  "system_version": "demo-1.0",
+  "validations": {
+    "report": {
+      "error_count": 0,
+      "schema": "marked_bench.contradiction-benchmark-validation.v1",
+      "valid": true,
+      "warning_count": 0
+    },
+    "result_card": {
+      "error_count": 0,
+      "schema": "marked_bench.result-card-validation.v1",
+      "valid": true,
+      "warning_count": 0
+    },
+    "submission": {
+      "error_count": 0,
+      "schema": "marked_bench.leaderboard-submission-validation.v1",
+      "valid": true,
+      "warning_count": 0
+    },
+    "submission_bundle": {
+      "error_count": 0,
+      "schema": "marked_bench.leaderboard-submission-bundle-validation.v1",
+      "valid": true,
+      "warning_count": 0
+    },
+    "submission_review": {
+      "error_count": 0,
+      "schema": "marked_bench.submission-review-validation.v1",
+      "valid": true,
+      "warning_count": 0
+    }
+  }
+}

@@ -2,7 +2,7 @@
 
 setup(
     name="marked_bench",
-    version="0.4.0",
+    version="0.4.1",
     description="The Marked Bench contradiction-detection evaluation benchmark",
     author="Martin Ollett",
     packages=find_packages(),

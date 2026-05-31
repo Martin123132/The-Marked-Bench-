@@ -18,6 +18,7 @@ from marked_bench.benchmark_evidence import (
     validate_evidence_ledger,
 )
 from marked_bench.benchmark_leaderboard import build_leaderboard
+from marked_bench.benchmark_publication import load_publication_packet, validate_publication_packet
 from marked_bench.benchmark_registry import build_benchmark_registry
 from marked_bench.benchmark_release import build_release_manifest
 from marked_bench.benchmark_result_card import load_result_card, validate_result_card
@@ -33,8 +34,8 @@ from marked_bench.schema_validation import load_json_schema, validate_json_file,
 
 
 CONFORMANCE_REPORT_SCHEMA = "marked_bench.conformance-report.v1"
-DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_0.json")
-DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_0.json")
+DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_1.json")
+DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_1.json")
 
 SUITE_MANIFESTS = {
     Path("suites/marked_bench_contradiction_standard_v0_1_0.json"): "contradiction",
@@ -89,6 +90,10 @@ CHECKED_RESULT_CARDS = [
     Path("submissions/example_external_jsonl/example_external_result_card.json"),
 ]
 
+CHECKED_PUBLICATION_PACKETS = [
+    Path("submissions/example_publication_packet/publication_packet.json"),
+]
+
 SCHEMA_CONFORMANCE_FILES = {
     Path("benchmark_registry.json"): Path("schemas/benchmark_registry.schema.json"),
     DEFAULT_RELEASE_MANIFEST: Path("schemas/release_manifest.schema.json"),
@@ -111,6 +116,9 @@ SCHEMA_CONFORMANCE_FILES = {
     ),
     Path("submissions/example_external_jsonl/example_external_result_card.json"): Path(
         "schemas/result_card.schema.json"
+    ),
+    Path("submissions/example_publication_packet/publication_packet.json"): Path(
+        "schemas/publication_packet.schema.json"
     ),
     DEFAULT_ADOPTION_PACKET: Path("schemas/adoption_packet.schema.json"),
     DEFAULT_EVIDENCE_LEDGER: Path("schemas/third_party_evidence_ledger.schema.json"),
@@ -138,6 +146,7 @@ def build_conformance_report(
         _check_prediction_templates(root_path),
         _check_submission_packets(root_path),
         _check_result_cards(root_path),
+        _check_publication_packets(root_path),
         _check_adoption_packet(root_path),
         _check_evidence_ledger(root_path),
     ]
@@ -399,6 +408,20 @@ def _check_result_cards(root: Path) -> dict[str, Any]:
         if not validation["valid"]:
             errors.append(f"{path}: result card validation failed: {validation['errors']}")
     return _check("checked_result_cards_valid", errors, {"card_count": len(CHECKED_RESULT_CARDS)})
+
+
+def _check_publication_packets(root: Path) -> dict[str, Any]:
+    errors: list[str] = []
+    for path in CHECKED_PUBLICATION_PACKETS:
+        try:
+            packet = load_publication_packet(root / path)
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            errors.append(f"{path}: could not load publication packet: {exc}")
+            continue
+        validation = validate_publication_packet(packet, base_dir=(root / path).parent)
+        if not validation["valid"]:
+            errors.append(f"{path}: publication packet validation failed: {validation['errors']}")
+    return _check("checked_publication_packets_valid", errors, {"packet_count": len(CHECKED_PUBLICATION_PACKETS)})
 
 
 def _check_adoption_packet(root: Path) -> dict[str, Any]:
