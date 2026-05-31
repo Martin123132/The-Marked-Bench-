@@ -108,10 +108,12 @@ def build_benchmark_registry() -> dict[str, Any]:
             "leaderboard_submission": SUBMISSION_SCHEMA,
         },
         "governance_docs": [
+            "docs/ADOPTION_GUIDE.md",
             "docs/BENCHMARK_STANDARD.md",
             "docs/BENCHMARK_CARD.md",
             "docs/TECHNICAL_NOTE.md",
             "docs/GOVERNANCE.md",
+            "docs/RELEASE_NOTES_v0_2_0.md",
             "docs/SUBMISSION_GUIDE.md",
             "docs/RELEASE_CHECKLIST.md",
         ],

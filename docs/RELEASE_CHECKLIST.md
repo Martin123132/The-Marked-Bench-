@@ -25,6 +25,8 @@ git diff --check
   valid report.
 - Documentation mentions every public track and suite version.
 - `docs/BENCHMARK_CARD.md` reflects current scope and limitations.
+- `docs/RELEASE_NOTES_v0_2_0.md` summarizes the public release.
+- `docs/ADOPTION_GUIDE.md` explains how external systems should submit results.
 
 ## Release Notes
 

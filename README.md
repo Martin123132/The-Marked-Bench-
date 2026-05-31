@@ -114,6 +114,8 @@ marked-bench --build-leaderboard baselines/always_none_adversarial_v0_2_0.json b
 - Benchmark card: `docs/BENCHMARK_CARD.md`
 - Technical note: `docs/TECHNICAL_NOTE.md`
 - Submission guide: `docs/SUBMISSION_GUIDE.md`
+- Adoption guide: `docs/ADOPTION_GUIDE.md`
+- Release notes: `docs/RELEASE_NOTES_v0_2_0.md`
 
 ## Quality Gates
 

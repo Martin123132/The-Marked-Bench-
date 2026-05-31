@@ -19,6 +19,8 @@ This roadmap keeps the benchmark moving toward a credible public standard.
 - Confidence calibration metrics from detector scores.
 - Suite coverage profiles and quality gates.
 - Generated technical note for release evidence.
+- Adoption guide for external users.
+- Versioned release notes.
 
 ## Next
 
@@ -28,7 +30,8 @@ This roadmap keeps the benchmark moving toward a credible public standard.
 - Add optional JSON Schema validation in CI when a schema validator dependency
   is available.
 - Add third-party report submissions and review evidence.
-- Draft an external announcement package around the generated technical note.
+- Draft an external announcement package around the release notes and generated
+  technical note.
 
 ## Later
 
@@ -37,4 +40,4 @@ This roadmap keeps the benchmark moving toward a credible public standard.
 - Long-context document contradiction track.
 - Reliability diagrams and richer calibration review.
 - Human review workflow for disputed cases.
-- Versioned release notes and archived suite snapshots.
+- Archived suite snapshots.

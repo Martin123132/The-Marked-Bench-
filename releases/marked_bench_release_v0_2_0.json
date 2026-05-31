@@ -1,5 +1,5 @@
 {
-  "artifact_count": 48,
+  "artifact_count": 50,
   "artifacts": [
     {
       "bytes": 1252,
@@ -50,10 +50,10 @@
       "sha256": "65f336e791f3f5dfc5d7da84e6d9bc197c1ab322de0ea5cf917610513265d313"
     },
     {
-      "bytes": 5134,
+      "bytes": 5225,
       "category": "root",
       "path": "README.md",
-      "sha256": "56e30d9651647b9c364aa74d59f0ba7bd55b02e337d114a1e38d9ddb639ed609"
+      "sha256": "be61a9539ff596875b7d30cffc842ca82f3afe34bc9ebb89cfcfaa9479f93599"
     },
     {
       "bytes": 723,
@@ -86,10 +86,16 @@
       "sha256": "fedf8e00fa706c166bac9c3fc28a09842fae312e4fd0155a90488b4f66718ce5"
     },
     {
-      "bytes": 9655,
+      "bytes": 9721,
       "category": "root",
       "path": "benchmark_registry.json",
-      "sha256": "74831e8257af2c36521c43d83310184edfdb75400e0971145e782d1c2fb9ce5b"
+      "sha256": "5e6991ceb5a125e0c59ab827c48d6d3931cca8c1faee29a1da9d7335e312acf2"
+    },
+    {
+      "bytes": 1720,
+      "category": "governance",
+      "path": "docs/ADOPTION_GUIDE.md",
+      "sha256": "bdeb6e86229cbd66fd4aa95d65127f8c4025b1098cb4bff2e2429453d641f6a2"
     },
     {
       "bytes": 3114,
@@ -110,10 +116,16 @@
       "sha256": "0d11f5584bf3e688049a8171db7e2f3527c0719f12222757904c5b673657b218"
     },
     {
-      "bytes": 1384,
+      "bytes": 1528,
       "category": "governance",
       "path": "docs/RELEASE_CHECKLIST.md",
-      "sha256": "55ff43b2f92c3da2b7861cf5e3a69ad01dcc3372aa12ce2df5b8af9c5b1e687c"
+      "sha256": "4d9ec014a5042f3961e3322ae090748b3c72aeb20ba41abb0cd49f187232a4a9"
+    },
+    {
+      "bytes": 1596,
+      "category": "governance",
+      "path": "docs/RELEASE_NOTES_v0_2_0.md",
+      "sha256": "ee60d8112f840794fef0f6c73bcf64a1b7f04bb71a7083ade7d0d266b9fc3aa2"
     },
     {
       "bytes": 3978,
@@ -158,10 +170,10 @@
       "sha256": "54fc6a6582f57ebcf6cba95d6a726c96ba2a75594693f9036b56515a77e337a6"
     },
     {
-      "bytes": 6554,
+      "bytes": 6636,
       "category": "source",
       "path": "marked_bench/benchmark_registry.py",
-      "sha256": "703bb8bfa259542bdcc5cb19908f44767adb8207a1e964961e6b87f3f9e0cc1c"
+      "sha256": "f398998734fc997ec2f5218a4f64319ab380b9fe65e45a9e19951dc7819e9f57"
     },
     {
       "bytes": 5273,
@@ -254,10 +266,10 @@
       "sha256": "c59075403c0eeadbdaea286e3db9ff12129f0514f69927439495cd04464a3ec7"
     },
     {
-      "bytes": 9115,
+      "bytes": 9193,
       "category": "source",
       "path": "scripts/validate_benchmark_artifacts.py",
-      "sha256": "67f13e3abbfacd57d61217550e044ac45cabf34de3c32310d76884c45f3ff445"
+      "sha256": "2720ee873bf63447997cf2480ed265890da641c0c42fbef80dae007ff7f48643"
     },
     {
       "bytes": 424,
@@ -295,7 +307,7 @@
   "project": "The Marked Bench",
   "registry_path": "benchmark_registry.json",
   "registry_schema": "marked_bench.benchmark-registry.v1",
-  "registry_sha256": "74831e8257af2c36521c43d83310184edfdb75400e0971145e782d1c2fb9ce5b",
+  "registry_sha256": "5e6991ceb5a125e0c59ab827c48d6d3931cca8c1faee29a1da9d7335e312acf2",
   "release_id": "marked-bench-contradiction-standard-release-0.2.0",
   "schema": "marked_bench.benchmark-release-manifest.v1",
   "tracks": [
