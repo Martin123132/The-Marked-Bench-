@@ -155,6 +155,7 @@
         "public_result_claim_required",
         "implementation_kit_required",
         "standard_profile_required",
+        "change_control_required",
         "scoring_compatibility_required",
         "scoring_spec_required",
         "not_safety_certification",
@@ -181,6 +182,9 @@
           "type": "boolean"
         },
         "standard_profile_required": {
+          "type": "boolean"
+        },
+        "change_control_required": {
           "type": "boolean"
         },
         "scoring_compatibility_required": {

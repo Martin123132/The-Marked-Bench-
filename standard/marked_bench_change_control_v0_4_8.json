@@ -1,0 +1,204 @@
+{
+  "benchmark_family": "contradiction-detection",
+  "change_types": [
+    {
+      "conformance_update_required": true,
+      "id": "suite_case_change",
+      "public_proposal_required": true,
+      "release_notes_required": true,
+      "scope": "Adding, correcting, retiring, or relabeling benchmark cases.",
+      "versioning": "new suite version or new track when released case meaning changes"
+    },
+    {
+      "conformance_update_required": true,
+      "id": "new_track",
+      "public_proposal_required": true,
+      "release_notes_required": true,
+      "scope": "Adding a public benchmark track with its own suite ID, manifest, baselines, and leaderboard.",
+      "versioning": "new suite ID and version"
+    },
+    {
+      "conformance_update_required": true,
+      "id": "schema_change",
+      "public_proposal_required": true,
+      "release_notes_required": true,
+      "scope": "Changing a public JSON artifact schema or validation contract.",
+      "versioning": "new release tag and documented compatibility note"
+    },
+    {
+      "conformance_update_required": true,
+      "id": "scoring_change",
+      "public_proposal_required": true,
+      "release_notes_required": true,
+      "scope": "Changing labels, metrics, weights, rounding, calibration, or score interpretation.",
+      "versioning": "new release tag and updated scoring spec plus compatibility vectors"
+    },
+    {
+      "conformance_update_required": true,
+      "id": "evidence_policy_change",
+      "public_proposal_required": true,
+      "release_notes_required": true,
+      "scope": "Changing result cards, claims, publication packets, or third-party evidence rules.",
+      "versioning": "new release tag and updated standard profile"
+    },
+    {
+      "conformance_update_required": true,
+      "id": "governance_change",
+      "public_proposal_required": true,
+      "release_notes_required": true,
+      "scope": "Changing release, review, adoption, claim, or change-control process.",
+      "versioning": "new release tag and release notes"
+    }
+  ],
+  "compatibility_rules": {
+    "evidence_policy_change_requires_standard_profile_update": true,
+    "release_notes_required_for_public_changes": true,
+    "released_case_meaning_is_immutable": true,
+    "schema_change_requires_schema_file_update": true,
+    "scoring_change_requires_spec_and_vectors": true,
+    "suite_hash_change_blocks_direct_comparison": true
+  },
+  "decision_rules": {
+    "automated_validation_required": true,
+    "maintainer_acceptance_required": true,
+    "private_or_uninspectable_standard_changes_forbidden": true,
+    "public_review_required": true,
+    "rejected_changes_remain_visible": true
+  },
+  "default_track": "contradiction-multihop",
+  "intake_channels": [
+    {
+      "name": "standard_change_issue",
+      "path": ".github/ISSUE_TEMPLATE/standard_change.yml",
+      "purpose": "Structured intake for proposed standard, schema, scoring, evidence, or governance changes."
+    },
+    {
+      "name": "benchmark_case_issue",
+      "path": ".github/ISSUE_TEMPLATE/benchmark_case.yml",
+      "purpose": "Structured intake for new cases and case-label disputes."
+    },
+    {
+      "name": "pull_request_template",
+      "path": ".github/PULL_REQUEST_TEMPLATE.md",
+      "purpose": "Release hygiene and validation checklist for proposed repository changes."
+    }
+  ],
+  "project": "The Marked Bench",
+  "proposal_requirements": [
+    {
+      "evidence_paths": [
+        ".github/ISSUE_TEMPLATE/standard_change.yml",
+        ".github/PULL_REQUEST_TEMPLATE.md"
+      ],
+      "id": "public_proposal",
+      "statement": "A public issue or pull request states the change type, motivation, impacted artifacts, and compatibility impact.",
+      "validation_commands": [
+        "manual proposal review"
+      ]
+    },
+    {
+      "evidence_paths": [
+        "docs/GOVERNANCE.md",
+        "docs/BENCHMARK_STANDARD.md"
+      ],
+      "id": "case_stability",
+      "statement": "Released case IDs keep their meaning; incompatible case changes require a new suite version or track.",
+      "validation_commands": [
+        "manual case-stability review"
+      ]
+    },
+    {
+      "evidence_paths": [
+        "scripts/validate_benchmark_artifacts.py",
+        "releases/README.md"
+      ],
+      "id": "artifact_regeneration",
+      "statement": "Affected manifests, registry entries, release artifacts, conformance reports, and docs are regenerated.",
+      "validation_commands": [
+        "python scripts/validate_benchmark_artifacts.py"
+      ]
+    },
+    {
+      "evidence_paths": [
+        "docs/SCORING_SPEC.md",
+        "standard/marked_bench_scoring_spec_v0_4_8.json",
+        "standard/marked_bench_scoring_compatibility_v0_4_8.json"
+      ],
+      "id": "scoring_compatibility",
+      "statement": "Scoring changes update the scoring specification and deterministic compatibility vectors.",
+      "validation_commands": [
+        "marked-bench --validate-scoring-spec standard/marked_bench_scoring_spec_v0_4_8.json",
+        "marked-bench --validate-scoring-compatibility standard/marked_bench_scoring_compatibility_v0_4_8.json"
+      ]
+    },
+    {
+      "evidence_paths": [
+        "adoption/marked_bench_adoption_packet_v0_4_8.json",
+        "adoption/marked_bench_implementation_kit_v0_4_8.json",
+        "standard/marked_bench_standard_profile_v0_4_8.json",
+        "adoption/third_party_evidence_ledger_v0_4_8.json"
+      ],
+      "id": "evidence_gate",
+      "statement": "Evidence-policy changes update adoption, implementation-kit, standard-profile, and evidence-ledger checks.",
+      "validation_commands": [
+        "marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_8.json",
+        "marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_8.json",
+        "marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_8.json"
+      ]
+    }
+  ],
+  "release_id": "marked-bench-contradiction-standard-release-0.4.8",
+  "release_url": "https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.4.8",
+  "repository_url": "https://github.com/Martin123132/The-Marked-Bench-",
+  "schema": "marked_bench.change-control.v1",
+  "validation_commands": [
+    {
+      "command": "marked-bench --validate-change-control standard/marked_bench_change_control_v0_4_8.json",
+      "name": "change_control"
+    },
+    {
+      "command": "python scripts/validate_benchmark_artifacts.py",
+      "name": "artifact_gate"
+    },
+    {
+      "command": "python -m unittest discover -s tests",
+      "name": "unit_tests"
+    },
+    {
+      "command": "marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_8.json",
+      "name": "conformance"
+    }
+  ],
+  "workflow": [
+    {
+      "description": "Use the standard-change issue template or a pull request.",
+      "name": "open_public_proposal",
+      "step": 1
+    },
+    {
+      "description": "Choose the change type and identify affected public artifacts.",
+      "name": "classify_change",
+      "step": 2
+    },
+    {
+      "description": "Declare whether suite hashes, scoring, schemas, or claims change.",
+      "name": "state_compatibility",
+      "step": 3
+    },
+    {
+      "description": "Regenerate checked artifacts and release notes for the new release.",
+      "name": "update_evidence",
+      "step": 4
+    },
+    {
+      "description": "Run artifact validation, tests, conformance, and relevant CLI validators.",
+      "name": "run_gates",
+      "step": 5
+    },
+    {
+      "description": "Publish a release with the updated manifest and evidence artifacts.",
+      "name": "publish_release",
+      "step": 6
+    }
+  ]
+}

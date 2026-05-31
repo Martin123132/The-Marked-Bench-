@@ -104,7 +104,7 @@ marked-bench-result/
 The machine-readable kit descriptor is:
 
 ```bash
-marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_7.json
+marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_8.json
 ```
 
 ## Check Release Conformance
@@ -113,13 +113,14 @@ Before adopting or mirroring a release package, validate the checked
 conformance report:
 
 ```bash
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_7.json
-marked-bench --validate-standard-profile standard/marked_bench_standard_profile_v0_4_7.json
-marked-bench --validate-scoring-compatibility standard/marked_bench_scoring_compatibility_v0_4_7.json
-marked-bench --validate-scoring-spec standard/marked_bench_scoring_spec_v0_4_7.json
-marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_7.json
-marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_7.json
-marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_7.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_8.json
+marked-bench --validate-standard-profile standard/marked_bench_standard_profile_v0_4_8.json
+marked-bench --validate-change-control standard/marked_bench_change_control_v0_4_8.json
+marked-bench --validate-scoring-compatibility standard/marked_bench_scoring_compatibility_v0_4_8.json
+marked-bench --validate-scoring-spec standard/marked_bench_scoring_spec_v0_4_8.json
+marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_8.json
+marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_8.json
+marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_8.json
 ```
 
 The conformance report is the single machine-readable pass/fail artifact for
@@ -129,6 +130,8 @@ The standard profile is the machine-readable requirement matrix for the
 benchmark standard itself: it names the evidence files and validation commands
 that make a release reproducible, comparable, externally adoptable, and
 bounded.
+The change-control profile is the machine-readable proposal and compatibility
+process for suite, schema, scoring, evidence-policy, and governance changes.
 The scoring compatibility profile provides deterministic prediction vectors
 and expected score summaries for every public track so independent
 implementations can check their scoring math.
@@ -153,5 +156,5 @@ suite hash in papers, benchmark reports, or model cards.
 - Keep existing case IDs stable after release.
 - Add new coverage through a new suite version or track.
 - Regenerate suite manifests, reports, leaderboards, registry, technical note,
-  and release manifest after public artifact changes.
+  change-control profile, and release manifest after public artifact changes.
 - Run `python scripts/validate_benchmark_artifacts.py` before publishing.

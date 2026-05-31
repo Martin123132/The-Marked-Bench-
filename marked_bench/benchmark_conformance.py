@@ -12,6 +12,11 @@ from marked_bench.benchmark_adoption import (
     load_adoption_packet,
     validate_adoption_packet,
 )
+from marked_bench.benchmark_change_control import (
+    DEFAULT_CHANGE_CONTROL,
+    load_change_control,
+    validate_change_control,
+)
 from marked_bench.benchmark_claim import load_result_claim, validate_result_claim
 from marked_bench.benchmark_evidence import (
     DEFAULT_EVIDENCE_LEDGER,
@@ -57,8 +62,8 @@ from marked_bench.schema_validation import load_json_schema, validate_json_file,
 
 
 CONFORMANCE_REPORT_SCHEMA = "marked_bench.conformance-report.v1"
-DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_7.json")
-DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_7.json")
+DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_8.json")
+DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_8.json")
 
 SUITE_MANIFESTS = {
     Path("suites/marked_bench_contradiction_standard_v0_1_0.json"): "contradiction",
@@ -152,6 +157,7 @@ SCHEMA_CONFORMANCE_FILES = {
     DEFAULT_EVIDENCE_LEDGER: Path("schemas/third_party_evidence_ledger.schema.json"),
     DEFAULT_IMPLEMENTATION_KIT: Path("schemas/implementation_kit.schema.json"),
     DEFAULT_STANDARD_PROFILE: Path("schemas/standard_profile.schema.json"),
+    DEFAULT_CHANGE_CONTROL: Path("schemas/change_control.schema.json"),
     DEFAULT_SCORING_COMPATIBILITY_PROFILE: Path("schemas/scoring_compatibility.schema.json"),
     DEFAULT_SCORING_SPEC: Path("schemas/scoring_spec.schema.json"),
 }
@@ -184,6 +190,7 @@ def build_conformance_report(
         _check_evidence_ledger(root_path),
         _check_implementation_kit(root_path),
         _check_standard_profile(root_path),
+        _check_change_control(root_path),
         _check_scoring_compatibility_profile(root_path),
         _check_scoring_spec(root_path),
     ]
@@ -525,6 +532,19 @@ def _check_standard_profile(root: Path) -> dict[str, Any]:
         if not validation["valid"]:
             errors.append(f"{DEFAULT_STANDARD_PROFILE}: standard profile validation failed: {validation['errors']}")
     return _check("standard_profile_valid", errors, {"path": DEFAULT_STANDARD_PROFILE.as_posix()})
+
+
+def _check_change_control(root: Path) -> dict[str, Any]:
+    errors: list[str] = []
+    try:
+        profile = load_change_control(root / DEFAULT_CHANGE_CONTROL)
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        errors.append(f"{DEFAULT_CHANGE_CONTROL}: could not load change-control profile: {exc}")
+    else:
+        validation = validate_change_control(profile, root=root)
+        if not validation["valid"]:
+            errors.append(f"{DEFAULT_CHANGE_CONTROL}: change-control validation failed: {validation['errors']}")
+    return _check("change_control_valid", errors, {"path": DEFAULT_CHANGE_CONTROL.as_posix()})
 
 
 def _check_scoring_compatibility_profile(root: Path) -> dict[str, Any]:

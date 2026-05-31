@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 """Command line runner for The Marked Bench standards."""
 
@@ -16,6 +16,11 @@ from marked_bench.benchmark_claim import (
     load_result_claim,
     validate_result_claim,
     write_result_claim,
+)
+from marked_bench.benchmark_change_control import (
+    load_change_control,
+    validate_change_control,
+    write_change_control,
 )
 from marked_bench.benchmark_conformance import (
     load_conformance_report,
@@ -301,6 +306,18 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         metavar="PATH",
         help="Write the generated human-readable scoring spec document and exit.",
+    )
+    parser.add_argument(
+        "--export-change-control",
+        default=None,
+        metavar="PATH",
+        help="Write the machine-readable standard change-control profile and exit.",
+    )
+    parser.add_argument(
+        "--validate-change-control",
+        default=None,
+        metavar="PATH",
+        help="Validate a standard change-control profile.",
     )
     parser.add_argument(
         "--bundle-submission",
@@ -723,6 +740,22 @@ def main(argv: list[str] | None = None) -> None:
             raise SystemExit(1)
         return
 
+    if args.validate_change_control:
+        validation = validate_change_control(load_change_control(args.validate_change_control))
+        if args.json:
+            print(json.dumps(validation, indent=2, sort_keys=True))
+        else:
+            print(f"Change-control validation: {'pass' if validation['valid'] else 'fail'}")
+            print(f"Release: {validation['summary']['release_id']}")
+            print(f"Change types: {validation['summary']['change_type_count']}")
+            print(f"Proposal requirements: {validation['summary']['proposal_requirement_count']}")
+            print(f"Intake channels: {validation['summary']['intake_channel_count']}")
+            print(f"Errors: {len(validation['errors'])}")
+            print(f"Warnings: {len(validation['warnings'])}")
+        if not validation["valid"]:
+            raise SystemExit(1)
+        return
+
     if args.create_submission:
         if not args.submission_report:
             parser.error("--create-submission requires --submission-report")
@@ -915,6 +948,11 @@ def main(argv: list[str] | None = None) -> None:
     if args.export_scoring_spec_doc:
         write_scoring_spec_markdown(args.export_scoring_spec_doc)
         print(f"Scoring spec document: {args.export_scoring_spec_doc}")
+        return
+
+    if args.export_change_control:
+        write_change_control(args.export_change_control)
+        print(f"Change-control profile: {args.export_change_control}")
         return
 
     if args.export_prediction_template:

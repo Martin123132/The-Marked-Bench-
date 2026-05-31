@@ -13,9 +13,10 @@ from marked_bench.schema_validation import load_json_schema, validate_json_schem
 
 STANDARD_PROFILE_SCHEMA = "marked_bench.standard-profile.v1"
 STANDARD_PROFILE_VALIDATION_SCHEMA = "marked_bench.standard-profile-validation.v1"
-DEFAULT_STANDARD_PROFILE = Path("standard/marked_bench_standard_profile_v0_4_7.json")
+DEFAULT_STANDARD_PROFILE = Path("standard/marked_bench_standard_profile_v0_4_8.json")
+DEFAULT_CHANGE_CONTROL = Path("standard/marked_bench_change_control_v0_4_8.json")
 REPOSITORY_URL = "https://github.com/Martin123132/The-Marked-Bench-"
-RELEASE_URL = "https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.4.7"
+RELEASE_URL = "https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.4.8"
 
 
 def build_standard_profile(root: str | Path = ".") -> dict[str, Any]:
@@ -45,14 +46,15 @@ def build_standard_profile(root: str | Path = ".") -> dict[str, Any]:
         ],
         "release_artifacts": {
             "registry": "benchmark_registry.json",
-            "release_manifest": "releases/marked_bench_release_v0_4_7.json",
-            "conformance_report": "conformance/marked_bench_conformance_v0_4_7.json",
+            "release_manifest": "releases/marked_bench_release_v0_4_8.json",
+            "conformance_report": "conformance/marked_bench_conformance_v0_4_8.json",
             "standard_profile": DEFAULT_STANDARD_PROFILE.as_posix(),
-            "scoring_compatibility": "standard/marked_bench_scoring_compatibility_v0_4_7.json",
-            "scoring_spec": "standard/marked_bench_scoring_spec_v0_4_7.json",
-            "adoption_packet": "adoption/marked_bench_adoption_packet_v0_4_7.json",
-            "third_party_evidence_ledger": "adoption/third_party_evidence_ledger_v0_4_7.json",
-            "implementation_kit": "adoption/marked_bench_implementation_kit_v0_4_7.json",
+            "change_control": DEFAULT_CHANGE_CONTROL.as_posix(),
+            "scoring_compatibility": "standard/marked_bench_scoring_compatibility_v0_4_8.json",
+            "scoring_spec": "standard/marked_bench_scoring_spec_v0_4_8.json",
+            "adoption_packet": "adoption/marked_bench_adoption_packet_v0_4_8.json",
+            "third_party_evidence_ledger": "adoption/third_party_evidence_ledger_v0_4_8.json",
+            "implementation_kit": "adoption/marked_bench_implementation_kit_v0_4_8.json",
         },
         "standard_requirements": requirements,
         "requirement_summary": {
@@ -87,27 +89,31 @@ def build_standard_profile(root: str | Path = ".") -> dict[str, Any]:
             _command("unit_tests", "python -m unittest discover -s tests"),
             _command(
                 "conformance_report",
-                "marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_7.json",
+                "marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_8.json",
             ),
             _command(
                 "standard_profile",
-                "marked-bench --validate-standard-profile standard/marked_bench_standard_profile_v0_4_7.json",
+                "marked-bench --validate-standard-profile standard/marked_bench_standard_profile_v0_4_8.json",
+            ),
+            _command(
+                "change_control",
+                "marked-bench --validate-change-control standard/marked_bench_change_control_v0_4_8.json",
             ),
             _command(
                 "adoption_packet",
-                "marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_7.json",
+                "marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_8.json",
             ),
             _command(
                 "implementation_kit",
-                "marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_7.json",
+                "marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_8.json",
             ),
             _command(
                 "scoring_compatibility",
-                "marked-bench --validate-scoring-compatibility standard/marked_bench_scoring_compatibility_v0_4_7.json",
+                "marked-bench --validate-scoring-compatibility standard/marked_bench_scoring_compatibility_v0_4_8.json",
             ),
             _command(
                 "scoring_spec",
-                "marked-bench --validate-scoring-spec standard/marked_bench_scoring_spec_v0_4_7.json",
+                "marked-bench --validate-scoring-spec standard/marked_bench_scoring_spec_v0_4_8.json",
             ),
         ],
     }
@@ -245,57 +251,68 @@ def _standard_requirements() -> list[dict[str, Any]]:
         _requirement(
             "release_manifest_hashing",
             "Release files are pinned by path, bytes, and SHA-256 digest.",
-            ["releases/marked_bench_release_v0_4_7.json", "schemas/release_manifest.schema.json"],
-            ["marked-bench --export-release-manifest releases/marked_bench_release_v0_4_7.json"],
+            ["releases/marked_bench_release_v0_4_8.json", "schemas/release_manifest.schema.json"],
+            ["marked-bench --export-release-manifest releases/marked_bench_release_v0_4_8.json"],
         ),
         _requirement(
             "release_conformance",
             "A single conformance report validates the full release package.",
-            ["conformance/marked_bench_conformance_v0_4_7.json", "schemas/conformance_report.schema.json"],
-            ["marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_7.json"],
+            ["conformance/marked_bench_conformance_v0_4_8.json", "schemas/conformance_report.schema.json"],
+            ["marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_8.json"],
+        ),
+        _requirement(
+            "change_control",
+            "Standard changes use a checked public proposal, compatibility, versioning, and validation process.",
+            [
+                "standard/marked_bench_change_control_v0_4_8.json",
+                "schemas/change_control.schema.json",
+                "docs/CHANGE_CONTROL.md",
+                ".github/ISSUE_TEMPLATE/standard_change.yml",
+            ],
+            ["marked-bench --validate-change-control standard/marked_bench_change_control_v0_4_8.json"],
         ),
         _requirement(
             "adoption_packet",
             "External users have a checked handoff packet for release adoption.",
-            ["adoption/marked_bench_adoption_packet_v0_4_7.json", "schemas/adoption_packet.schema.json"],
-            ["marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_7.json"],
+            ["adoption/marked_bench_adoption_packet_v0_4_8.json", "schemas/adoption_packet.schema.json"],
+            ["marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_8.json"],
         ),
         _requirement(
             "third_party_evidence_gate",
             "Third-party adoption claims require checked public evidence, bundle and review hashes, and verification status.",
-            ["adoption/third_party_evidence_ledger_v0_4_7.json", "docs/THIRD_PARTY_EVIDENCE.md"],
-            ["marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_7.json"],
+            ["adoption/third_party_evidence_ledger_v0_4_8.json", "docs/THIRD_PARTY_EVIDENCE.md"],
+            ["marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_8.json"],
         ),
         _requirement(
             "implementation_kit",
             "External repositories get copy-ready CI validation for public result artifacts.",
             [
-                "adoption/marked_bench_implementation_kit_v0_4_7.json",
+                "adoption/marked_bench_implementation_kit_v0_4_8.json",
                 "adoption/implementation_kit/github_actions_validate_result.yml",
             ],
-            ["marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_7.json"],
+            ["marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_8.json"],
         ),
         _requirement(
             "scoring_compatibility_vectors",
             "External scoring implementations have deterministic prediction vectors and expected summaries.",
             [
-                "standard/marked_bench_scoring_compatibility_v0_4_7.json",
+                "standard/marked_bench_scoring_compatibility_v0_4_8.json",
                 "schemas/scoring_compatibility.schema.json",
             ],
             [
                 "marked-bench --validate-scoring-compatibility "
-                "standard/marked_bench_scoring_compatibility_v0_4_7.json"
+                "standard/marked_bench_scoring_compatibility_v0_4_8.json"
             ],
         ),
         _requirement(
             "scoring_spec",
             "Independent implementations have a language-neutral scoring contract.",
             [
-                "standard/marked_bench_scoring_spec_v0_4_7.json",
+                "standard/marked_bench_scoring_spec_v0_4_8.json",
                 "schemas/scoring_spec.schema.json",
                 "docs/SCORING_SPEC.md",
             ],
-            ["marked-bench --validate-scoring-spec standard/marked_bench_scoring_spec_v0_4_7.json"],
+            ["marked-bench --validate-scoring-spec standard/marked_bench_scoring_spec_v0_4_8.json"],
         ),
         _requirement(
             "benchmark_only_scope",

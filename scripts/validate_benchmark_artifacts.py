@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from marked_bench.benchmark_adoption import load_adoption_packet, validate_adoption_packet  # noqa: E402
+from marked_bench.benchmark_change_control import load_change_control, validate_change_control  # noqa: E402
 from marked_bench.benchmark_claim import load_result_claim, validate_result_claim  # noqa: E402
 from marked_bench.benchmark_conformance import load_conformance_report, validate_conformance_report  # noqa: E402
 from marked_bench.benchmark_evidence import load_evidence_ledger, validate_evidence_ledger  # noqa: E402
@@ -94,14 +95,15 @@ CHECKED_SUBMISSION_PACKETS = [
 ]
 
 BENCHMARK_REGISTRY = Path("benchmark_registry.json")
-RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_7.json")
-CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_7.json")
-ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_7.json")
-EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_7.json")
-IMPLEMENTATION_KIT = Path("adoption/marked_bench_implementation_kit_v0_4_7.json")
-STANDARD_PROFILE = Path("standard/marked_bench_standard_profile_v0_4_7.json")
-SCORING_COMPATIBILITY_PROFILE = Path("standard/marked_bench_scoring_compatibility_v0_4_7.json")
-SCORING_SPEC = Path("standard/marked_bench_scoring_spec_v0_4_7.json")
+RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_8.json")
+CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_8.json")
+ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_8.json")
+EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_8.json")
+IMPLEMENTATION_KIT = Path("adoption/marked_bench_implementation_kit_v0_4_8.json")
+STANDARD_PROFILE = Path("standard/marked_bench_standard_profile_v0_4_8.json")
+CHANGE_CONTROL = Path("standard/marked_bench_change_control_v0_4_8.json")
+SCORING_COMPATIBILITY_PROFILE = Path("standard/marked_bench_scoring_compatibility_v0_4_8.json")
+SCORING_SPEC = Path("standard/marked_bench_scoring_spec_v0_4_8.json")
 
 REQUIRED_PUBLIC_FILES = [
     Path("adoption/README.md"),
@@ -109,6 +111,7 @@ REQUIRED_PUBLIC_FILES = [
     EVIDENCE_LEDGER,
     IMPLEMENTATION_KIT,
     STANDARD_PROFILE,
+    CHANGE_CONTROL,
     SCORING_COMPATIBILITY_PROFILE,
     SCORING_SPEC,
     Path("adoption/implementation_kit/README.md"),
@@ -121,6 +124,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("CONTRIBUTING.md"),
     Path("CITATION.cff"),
     Path("docs/BENCHMARK_CARD.md"),
+    Path("docs/CHANGE_CONTROL.md"),
     Path("docs/ADOPTION_GUIDE.md"),
     Path("docs/ANNOUNCEMENT_PACKAGE.md"),
     Path("docs/BENCHMARK_STANDARD.md"),
@@ -147,6 +151,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("docs/RELEASE_NOTES_v0_4_5.md"),
     Path("docs/RELEASE_NOTES_v0_4_6.md"),
     Path("docs/RELEASE_NOTES_v0_4_7.md"),
+    Path("docs/RELEASE_NOTES_v0_4_8.md"),
     Path("docs/ROADMAP.md"),
     Path("docs/SCORING_SPEC.md"),
     Path("docs/SUBMISSION_GUIDE.md"),
@@ -163,6 +168,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("schemas/result_claim.schema.json"),
     Path("schemas/implementation_kit.schema.json"),
     Path("schemas/standard_profile.schema.json"),
+    Path("schemas/change_control.schema.json"),
     Path("schemas/scoring_compatibility.schema.json"),
     Path("schemas/scoring_spec.schema.json"),
     Path("schemas/release_manifest.schema.json"),
@@ -191,6 +197,7 @@ REQUIRED_PUBLIC_FILES = [
     Path(".github/PULL_REQUEST_TEMPLATE.md"),
     Path(".github/workflows/benchmark-ci.yml"),
     Path(".github/ISSUE_TEMPLATE/third_party_evidence.yml"),
+    Path(".github/ISSUE_TEMPLATE/standard_change.yml"),
 ]
 
 SCHEMA_CONFORMANCE_FILES = {
@@ -214,6 +221,7 @@ SCHEMA_CONFORMANCE_FILES = {
     EVIDENCE_LEDGER: Path("schemas/third_party_evidence_ledger.schema.json"),
     IMPLEMENTATION_KIT: Path("schemas/implementation_kit.schema.json"),
     STANDARD_PROFILE: Path("schemas/standard_profile.schema.json"),
+    CHANGE_CONTROL: Path("schemas/change_control.schema.json"),
     SCORING_COMPATIBILITY_PROFILE: Path("schemas/scoring_compatibility.schema.json"),
     SCORING_SPEC: Path("schemas/scoring_spec.schema.json"),
 }
@@ -233,6 +241,7 @@ def main() -> int:
         _validate_evidence_ledger(errors)
         _validate_implementation_kit(errors)
         _validate_standard_profile(errors)
+        _validate_change_control(errors)
         _validate_scoring_compatibility_profile(errors)
         _validate_scoring_spec(errors)
         _validate_suite_manifests(errors)
@@ -439,6 +448,17 @@ def _validate_standard_profile(errors: list[str]) -> None:
     validation = validate_standard_profile(profile, root=ROOT)
     if not validation["valid"]:
         errors.append(f"{STANDARD_PROFILE}: standard profile validation failed: {validation['errors']}")
+
+
+def _validate_change_control(errors: list[str]) -> None:
+    try:
+        profile = load_change_control(CHANGE_CONTROL)
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        errors.append(f"{CHANGE_CONTROL}: could not load change-control profile: {exc}")
+        return
+    validation = validate_change_control(profile, root=ROOT)
+    if not validation["valid"]:
+        errors.append(f"{CHANGE_CONTROL}: change-control validation failed: {validation['errors']}")
 
 
 def _validate_scoring_compatibility_profile(errors: list[str]) -> None:

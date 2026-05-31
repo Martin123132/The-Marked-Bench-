@@ -39,6 +39,9 @@ labels, metric formulas, rounding, calibration, or report semantics change.
 Release maintainers should keep the third-party evidence ledger strict: public
 adoption claims need checked result-card, submission-bundle, review, and
 result-claim evidence with current hashes.
+Release maintainers should keep the change-control profile current so suite,
+schema, scoring, evidence-policy, and governance changes have a public proposal
+path before they become release artifacts.
 
 ## Review Priorities
 
@@ -62,3 +65,5 @@ If a case label is disputed, open an issue with:
 - examples or counterexamples
 
 Do not silently edit checked-in suite manifests.
+Use the standard-change issue template for schema, scoring, evidence-policy, or
+governance changes that are broader than a single case dispute.

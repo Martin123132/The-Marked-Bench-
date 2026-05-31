@@ -1,0 +1,137 @@
+{
+  "benchmark_family": "contradiction-detection",
+  "calibration_contract": {
+    "bin_count": 10,
+    "bin_interval": "Each bin is [index / 10, (index + 1) / 10); the final bin includes 1.0.",
+    "positive_target": "1.0 when expected label is not none, else 0.0."
+  },
+  "compatibility_artifacts": {
+    "scoring_compatibility_profile": "standard/marked_bench_scoring_compatibility_v0_4_8.json",
+    "scoring_compatibility_schema": "schemas/scoring_compatibility.schema.json",
+    "validation_command": "marked-bench --validate-scoring-compatibility standard/marked_bench_scoring_compatibility_v0_4_8.json"
+  },
+  "contradiction_labels": [
+    "direct_negation",
+    "property_mismatch",
+    "definitional_violation",
+    "universal_counterexample",
+    "temporal_conflict"
+  ],
+  "default_track": "contradiction-multihop",
+  "input_contract": {
+    "all_case_ids_required_once": true,
+    "detector_score_default": 0.0,
+    "detector_score_range": [
+      0.0,
+      1.0
+    ],
+    "detector_score_semantics": "Binary contradiction confidence on [0, 1].",
+    "duplicate_case_ids_are_invalid": true,
+    "label_aliases": {
+      "no_contradiction": "none",
+      "non_contradiction": "none",
+      "not_contradiction": "none",
+      "null": "none"
+    },
+    "missing_case_ids_are_invalid": true,
+    "prediction_order_is_ignored": true,
+    "unknown_case_ids_are_invalid": true
+  },
+  "labels": [
+    "direct_negation",
+    "property_mismatch",
+    "definitional_violation",
+    "universal_counterexample",
+    "temporal_conflict",
+    "none"
+  ],
+  "metric_definitions": {
+    "binary_detection_f1": "2 * precision * recall / max(precision + recall, 1e-9)",
+    "binary_detection_precision": "binary_true_positive / max(binary_true_positive + binary_false_positive, 1)",
+    "binary_detection_recall": "binary_true_positive / max(binary_true_positive + binary_false_negative, 1)",
+    "calibration_brier_score": "mean((detector_score - expected_binary_contradiction) ** 2)",
+    "calibration_ece": "sum(bin_count / total * abs(mean_confidence - empirical_positive_rate)) over 10 bins",
+    "contradiction_macro_f1": "mean(per_class_f1 for contradiction labels with support > 0)",
+    "contradiction_type_accuracy": "exact_type_correct_on_non_none_cases / non_none_case_count",
+    "coverage_index": "contradiction labels with support > 0 and recall > 0 divided by contradiction label count",
+    "overall_score": "round(100 * (0.45 * contradiction_macro_f1 + 0.25 * type_accuracy + 0.20 * binary_detection_f1 + 0.10 * coverage_index), 2)",
+    "per_class_f1": "2 * precision * recall / max(precision + recall, 1e-9)",
+    "per_class_precision": "true_positive / max(true_positive + false_positive, 1)",
+    "per_class_recall": "true_positive / max(true_positive + false_negative, 1)",
+    "type_accuracy": "exact_type_correct / case_count"
+  },
+  "project": "The Marked Bench",
+  "purpose": "Define language-neutral scoring semantics for independent Marked Bench implementations.",
+  "release_id": "marked-bench-contradiction-standard-release-0.4.8",
+  "release_url": "https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.4.8",
+  "report_contract": {
+    "comparability_key": [
+      "suite_id",
+      "suite_version",
+      "suite_hash"
+    ],
+    "compare_only_same_suite_hash": true,
+    "required_summary_fields": [
+      "suite_id",
+      "suite_version",
+      "suite_hash",
+      "case_count",
+      "overall_score",
+      "metrics",
+      "confusion_matrix",
+      "failures",
+      "case_results",
+      "suite_cases"
+    ]
+  },
+  "repository_url": "https://github.com/Martin123132/The-Marked-Bench-",
+  "rounding_contract": {
+    "calibration_bin_decimals": 6,
+    "metric_decimals": 6,
+    "overall_score_decimals": 2,
+    "rounding_function": "round half to even is acceptable when values are represented exactly as JSON numbers."
+  },
+  "schema": "marked_bench.scoring-spec.v1",
+  "scoring_pipeline": [
+    "Normalize predicted labels to lowercase snake_case and apply label aliases.",
+    "Validate that each canonical case_id appears exactly once.",
+    "For each case, compute type_correct as predicted == expected.",
+    "For each case, compute detection_correct from contradiction-vs-none polarity.",
+    "Build a full label confusion matrix using expected labels as rows and predicted labels as columns.",
+    "Compute per-label precision, recall, f1, and support from the confusion matrix.",
+    "Compute binary contradiction detection metrics from none-vs-non-none polarity.",
+    "Compute calibration metrics from detector_score and expected contradiction polarity.",
+    "Compute slice metrics by domain, difficulty, capability, and tag.",
+    "Compute the weighted overall score and failure list."
+  ],
+  "tracks": [
+    {
+      "case_count": 17,
+      "name": "contradiction",
+      "suite_hash": "8c1f80ff67874af54869bab2e361b3cc7416ce1d86f80ff583636a55e3462765",
+      "suite_id": "marked-bench-contradiction-standard",
+      "suite_version": "0.1.0"
+    },
+    {
+      "case_count": 17,
+      "name": "contradiction-adversarial",
+      "suite_hash": "454c1aff69d5028224549dfc14fd8e6c10818251d0abf8becf36f0856b2dbd67",
+      "suite_id": "marked-bench-contradiction-adversarial",
+      "suite_version": "0.2.0"
+    },
+    {
+      "case_count": 18,
+      "name": "contradiction-multihop",
+      "suite_hash": "07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f",
+      "suite_id": "marked-bench-contradiction-multihop",
+      "suite_version": "0.3.0"
+    },
+    {
+      "case_count": 18,
+      "name": "contradiction-controls",
+      "suite_hash": "33a0777f6f93504bde517d922f46c24c1d93992256bfe95b32287695babfb08a",
+      "suite_id": "marked-bench-contradiction-controls",
+      "suite_version": "0.4.0"
+    }
+  ]
+}

@@ -41,6 +41,8 @@ This roadmap keeps the benchmark moving toward a credible public standard.
 - Language-neutral scoring specification for independent implementations.
 - Hardened third-party evidence validation for bundles, reviews, hashes, and
   optional result claims.
+- Checked standard change-control profile for suite, schema, scoring, evidence,
+  and governance changes.
 
 ## Next
 

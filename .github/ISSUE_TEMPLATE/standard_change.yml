@@ -1,0 +1,54 @@
+name: Standard change proposal
+description: Propose a change to benchmark suites, schemas, scoring, evidence policy, or governance.
+title: "Standard change: "
+labels:
+  - standard-change
+body:
+  - type: dropdown
+    id: change_type
+    attributes:
+      label: Change type
+      options:
+        - suite_case_change
+        - new_track
+        - schema_change
+        - scoring_change
+        - evidence_policy_change
+        - governance_change
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What should change and why?
+    validations:
+      required: true
+  - type: textarea
+    id: affected_artifacts
+    attributes:
+      label: Affected public artifacts
+      description: List suites, schemas, docs, release artifacts, validators, or CLI commands affected by the proposal.
+    validations:
+      required: true
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: Compatibility impact
+      description: State whether suite hashes, scoring, schemas, or public claims change.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence_plan
+    attributes:
+      label: Evidence and validation plan
+      description: List the artifacts to regenerate and commands that should pass.
+    validations:
+      required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks or alternatives
+      description: Note possible overclaiming, comparability, review, or adoption risks.
+    validations:
+      required: false

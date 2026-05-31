@@ -11,7 +11,7 @@ from marked_bench.benchmark_registry import REGISTRY_SCHEMA, build_benchmark_reg
 
 
 RELEASE_MANIFEST_SCHEMA = "marked_bench.benchmark-release-manifest.v1"
-RELEASE_ID = "marked-bench-contradiction-standard-release-0.4.7"
+RELEASE_ID = "marked-bench-contradiction-standard-release-0.4.8"
 
 ROOT_PUBLIC_ARTIFACTS = (
     "README.md",
@@ -24,6 +24,7 @@ ROOT_PUBLIC_ARTIFACTS = (
 BENCHMARK_SOURCE_ARTIFACTS = (
     "setup.py",
     "marked_bench/benchmark_adoption.py",
+    "marked_bench/benchmark_change_control.py",
     "marked_bench/benchmark_claim.py",
     "marked_bench/benchmark_conformance.py",
     "marked_bench/benchmark_evidence.py",
@@ -58,6 +59,7 @@ SUPPORT_ARTIFACTS = (
     "baselines/README.md",
     "conformance/README.md",
     "docs/SCORING_SPEC.md",
+    "docs/CHANGE_CONTROL.md",
     "leaderboard/README.md",
     "releases/README.md",
     "standard/README.md",
@@ -67,6 +69,7 @@ SUPPORT_ARTIFACTS = (
     ".github/ISSUE_TEMPLATE/benchmark_case.yml",
     ".github/ISSUE_TEMPLATE/config.yml",
     ".github/ISSUE_TEMPLATE/leaderboard_submission.yml",
+    ".github/ISSUE_TEMPLATE/standard_change.yml",
     ".github/ISSUE_TEMPLATE/third_party_evidence.yml",
 )
 
@@ -88,19 +91,20 @@ SUBMISSION_EXAMPLE_ARTIFACTS = (
 )
 
 CONFORMANCE_ARTIFACTS = (
-    "conformance/marked_bench_conformance_v0_4_7.json",
+    "conformance/marked_bench_conformance_v0_4_8.json",
 )
 
 ADOPTION_ARTIFACTS = (
-    "adoption/marked_bench_adoption_packet_v0_4_7.json",
-    "adoption/third_party_evidence_ledger_v0_4_7.json",
-    "adoption/marked_bench_implementation_kit_v0_4_7.json",
+    "adoption/marked_bench_adoption_packet_v0_4_8.json",
+    "adoption/third_party_evidence_ledger_v0_4_8.json",
+    "adoption/marked_bench_implementation_kit_v0_4_8.json",
 )
 
 STANDARD_ARTIFACTS = (
-    "standard/marked_bench_standard_profile_v0_4_7.json",
-    "standard/marked_bench_scoring_compatibility_v0_4_7.json",
-    "standard/marked_bench_scoring_spec_v0_4_7.json",
+    "standard/marked_bench_standard_profile_v0_4_8.json",
+    "standard/marked_bench_change_control_v0_4_8.json",
+    "standard/marked_bench_scoring_compatibility_v0_4_8.json",
+    "standard/marked_bench_scoring_spec_v0_4_8.json",
 )
 
 

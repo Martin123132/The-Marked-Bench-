@@ -1,0 +1,230 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marked-bench.local/schemas/change_control.schema.json",
+  "title": "The Marked Bench Change Control Profile",
+  "type": "object",
+  "required": [
+    "schema",
+    "project",
+    "benchmark_family",
+    "release_id",
+    "repository_url",
+    "release_url",
+    "default_track",
+    "change_types",
+    "proposal_requirements",
+    "workflow",
+    "compatibility_rules",
+    "decision_rules",
+    "intake_channels",
+    "validation_commands"
+  ],
+  "properties": {
+    "schema": {
+      "const": "marked_bench.change-control.v1"
+    },
+    "project": {
+      "type": "string",
+      "minLength": 1
+    },
+    "benchmark_family": {
+      "type": "string",
+      "minLength": 1
+    },
+    "release_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "repository_url": {
+      "type": "string",
+      "minLength": 1
+    },
+    "release_url": {
+      "type": "string",
+      "minLength": 1
+    },
+    "default_track": {
+      "type": "string",
+      "minLength": 1
+    },
+    "change_types": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/change_type"
+      }
+    },
+    "proposal_requirements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/requirement"
+      }
+    },
+    "workflow": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/workflow_step"
+      }
+    },
+    "compatibility_rules": {
+      "$ref": "#/$defs/boolean_map"
+    },
+    "decision_rules": {
+      "$ref": "#/$defs/boolean_map"
+    },
+    "intake_channels": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/channel"
+      }
+    },
+    "validation_commands": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/command"
+      }
+    }
+  },
+  "$defs": {
+    "change_type": {
+      "type": "object",
+      "required": [
+        "id",
+        "scope",
+        "versioning",
+        "public_proposal_required",
+        "release_notes_required",
+        "conformance_update_required"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "versioning": {
+          "type": "string",
+          "minLength": 1
+        },
+        "public_proposal_required": {
+          "const": true
+        },
+        "release_notes_required": {
+          "const": true
+        },
+        "conformance_update_required": {
+          "const": true
+        }
+      }
+    },
+    "requirement": {
+      "type": "object",
+      "required": [
+        "id",
+        "statement",
+        "evidence_paths",
+        "validation_commands"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_paths": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "validation_commands": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "workflow_step": {
+      "type": "object",
+      "required": [
+        "step",
+        "name",
+        "description"
+      ],
+      "properties": {
+        "step": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "channel": {
+      "type": "object",
+      "required": [
+        "name",
+        "path",
+        "purpose"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "purpose": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "command": {
+      "type": "object",
+      "required": [
+        "name",
+        "command"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "command": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "boolean_map": {
+      "type": "object",
+      "additionalProperties": {
+        "const": true
+      }
+    }
+  }
+}

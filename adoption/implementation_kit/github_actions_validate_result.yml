@@ -15,7 +15,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install pinned Marked Bench release
-        run: python -m pip install git+https://github.com/Martin123132/The-Marked-Bench-.git@v0.4.7
+        run: python -m pip install git+https://github.com/Martin123132/The-Marked-Bench-.git@v0.4.8
       - name: Validate publication packet
         run: marked-bench --validate-publication-packet marked-bench-result/publication_packet.json
       - name: Validate result claim

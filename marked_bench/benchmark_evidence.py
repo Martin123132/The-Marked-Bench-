@@ -16,10 +16,10 @@ from marked_bench.schema_validation import load_json_schema, validate_json_schem
 
 
 EVIDENCE_LEDGER_SCHEMA = "marked_bench.third-party-evidence-ledger.v1"
-DEFAULT_EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_7.json")
-DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_7.json")
-DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_7.json")
-DEFAULT_ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_7.json")
+DEFAULT_EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_8.json")
+DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_8.json")
+DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_8.json")
+DEFAULT_ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_8.json")
 
 
 def build_evidence_ledger(entries: list[Mapping[str, Any]] | None = None) -> dict[str, Any]:

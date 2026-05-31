@@ -12,16 +12,17 @@ from marked_bench.schema_validation import load_json_schema, validate_json_schem
 
 
 ADOPTION_PACKET_SCHEMA = "marked_bench.adoption-packet.v1"
-DEFAULT_ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_7.json")
-DEFAULT_EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_7.json")
-DEFAULT_IMPLEMENTATION_KIT = Path("adoption/marked_bench_implementation_kit_v0_4_7.json")
-DEFAULT_STANDARD_PROFILE = Path("standard/marked_bench_standard_profile_v0_4_7.json")
-DEFAULT_SCORING_COMPATIBILITY_PROFILE = Path("standard/marked_bench_scoring_compatibility_v0_4_7.json")
-DEFAULT_SCORING_SPEC = Path("standard/marked_bench_scoring_spec_v0_4_7.json")
-DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_7.json")
-DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_7.json")
+DEFAULT_ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_8.json")
+DEFAULT_EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_8.json")
+DEFAULT_IMPLEMENTATION_KIT = Path("adoption/marked_bench_implementation_kit_v0_4_8.json")
+DEFAULT_STANDARD_PROFILE = Path("standard/marked_bench_standard_profile_v0_4_8.json")
+DEFAULT_CHANGE_CONTROL = Path("standard/marked_bench_change_control_v0_4_8.json")
+DEFAULT_SCORING_COMPATIBILITY_PROFILE = Path("standard/marked_bench_scoring_compatibility_v0_4_8.json")
+DEFAULT_SCORING_SPEC = Path("standard/marked_bench_scoring_spec_v0_4_8.json")
+DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_8.json")
+DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_8.json")
 REPOSITORY_URL = "https://github.com/Martin123132/The-Marked-Bench-"
-RELEASE_URL = "https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.4.7"
+RELEASE_URL = "https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.4.8"
 
 
 def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
@@ -58,6 +59,7 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
             "public_result_claim_required": True,
             "implementation_kit_required": True,
             "standard_profile_required": True,
+            "change_control_required": True,
             "scoring_compatibility_required": True,
             "scoring_spec_required": True,
             "not_safety_certification": True,
@@ -93,6 +95,11 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
                 "Machine-readable benchmark standard requirement matrix.",
             ),
             _artifact(
+                "change_control",
+                DEFAULT_CHANGE_CONTROL.as_posix(),
+                "Machine-readable public change-control and compatibility process.",
+            ),
+            _artifact(
                 "scoring_compatibility",
                 DEFAULT_SCORING_COMPATIBILITY_PROFILE.as_posix(),
                 "Deterministic scoring vectors for external implementations.",
@@ -103,6 +110,7 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
                 "Language-neutral scoring contract for independent implementations.",
             ),
             _artifact("scoring_spec_doc", "docs/SCORING_SPEC.md", "Human-readable scoring contract."),
+            _artifact("change_control_doc", "docs/CHANGE_CONTROL.md", "Human-readable standard change-control process."),
             _artifact("technical_note", "docs/TECHNICAL_NOTE.md", "Generated suite hashes, baselines, and limitations."),
             _artifact("adoption_guide", "docs/ADOPTION_GUIDE.md", "External user workflow for scoring and submitting systems."),
             _artifact("announcement_package", "docs/ANNOUNCEMENT_PACKAGE.md", "Copy-ready public launch and citation material."),
@@ -128,6 +136,11 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
                 "standard_profile_schema",
                 "schemas/standard_profile.schema.json",
                 "Schema for benchmark standard profiles.",
+            ),
+            _artifact(
+                "change_control_schema",
+                "schemas/change_control.schema.json",
+                "Schema for benchmark standard change-control profiles.",
             ),
             _artifact(
                 "scoring_compatibility_schema",
@@ -179,7 +192,7 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
             {
                 "step": 1,
                 "name": "pin_release",
-                "command": "marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_7.json",
+                "command": "marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_8.json",
                 "output": "Release conformance validation passes.",
             },
             {
@@ -266,7 +279,7 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
                 "name": "adoption_packet",
                 "command": (
                     "marked-bench --validate-adoption-packet "
-                    "adoption/marked_bench_adoption_packet_v0_4_7.json"
+                    "adoption/marked_bench_adoption_packet_v0_4_8.json"
                 ),
                 "proves": "The external adoption packet matches the current release evidence.",
             },
@@ -274,7 +287,7 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
                 "name": "third_party_evidence_ledger",
                 "command": (
                     "marked-bench --validate-evidence-ledger "
-                    "adoption/third_party_evidence_ledger_v0_4_7.json"
+                    "adoption/third_party_evidence_ledger_v0_4_8.json"
                 ),
                 "proves": "External adoption evidence claims are explicitly recorded and validated.",
             },
@@ -298,7 +311,7 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
                 "name": "implementation_kit",
                 "command": (
                     "marked-bench --validate-implementation-kit "
-                    "adoption/marked_bench_implementation_kit_v0_4_7.json"
+                    "adoption/marked_bench_implementation_kit_v0_4_8.json"
                 ),
                 "proves": "The external implementation kit matches the current release evidence.",
             },
@@ -306,15 +319,23 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
                 "name": "standard_profile",
                 "command": (
                     "marked-bench --validate-standard-profile "
-                    "standard/marked_bench_standard_profile_v0_4_7.json"
+                    "standard/marked_bench_standard_profile_v0_4_8.json"
                 ),
                 "proves": "The benchmark standard requirement matrix matches the current release evidence.",
+            },
+            {
+                "name": "change_control",
+                "command": (
+                    "marked-bench --validate-change-control "
+                    "standard/marked_bench_change_control_v0_4_8.json"
+                ),
+                "proves": "The public standard change-control process matches the current release evidence.",
             },
             {
                 "name": "scoring_compatibility",
                 "command": (
                     "marked-bench --validate-scoring-compatibility "
-                    "standard/marked_bench_scoring_compatibility_v0_4_7.json"
+                    "standard/marked_bench_scoring_compatibility_v0_4_8.json"
                 ),
                 "proves": "External scoring compatibility vectors match the current scoring implementation.",
             },
@@ -322,7 +343,7 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
                 "name": "scoring_spec",
                 "command": (
                     "marked-bench --validate-scoring-spec "
-                    "standard/marked_bench_scoring_spec_v0_4_7.json"
+                    "standard/marked_bench_scoring_spec_v0_4_8.json"
                 ),
                 "proves": "The language-neutral scoring contract matches the current release evidence.",
             },
@@ -342,6 +363,11 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
                 "name": "pull_request_template",
                 "path": ".github/PULL_REQUEST_TEMPLATE.md",
                 "purpose": "Contributor checklist for artifact validation and release hygiene.",
+            },
+            {
+                "name": "standard_change_issue",
+                "path": ".github/ISSUE_TEMPLATE/standard_change.yml",
+                "purpose": "Structured public intake for standard, scoring, schema, evidence, or governance changes.",
             },
             {
                 "name": "third_party_evidence_issue",
@@ -364,6 +390,11 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
                 "audience": "reviewers",
                 "path": "docs/SUBMISSION_REVIEW_RUBRIC.md",
                 "purpose": "Review criteria before leaderboard acceptance.",
+            },
+            {
+                "audience": "maintainers",
+                "path": "docs/CHANGE_CONTROL.md",
+                "purpose": "Rules for public standard changes, compatibility, and release evidence.",
             },
             {
                 "audience": "maintainers",

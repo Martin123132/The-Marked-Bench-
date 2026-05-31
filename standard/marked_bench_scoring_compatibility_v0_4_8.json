@@ -1,0 +1,2912 @@
+{
+  "benchmark_family": "contradiction-detection",
+  "default_track": "contradiction-multihop",
+  "project": "The Marked Bench",
+  "purpose": "Give external implementations deterministic prediction vectors and expected score summaries.",
+  "release_id": "marked-bench-contradiction-standard-release-0.4.8",
+  "release_url": "https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.4.8",
+  "repository_url": "https://github.com/Martin123132/The-Marked-Bench-",
+  "schema": "marked_bench.scoring-compatibility.v1",
+  "scoring_contract": {
+    "all_case_ids_required_once": true,
+    "compare_only_same_suite_hash": true,
+    "detector_score_semantics": "Binary contradiction confidence on [0, 1].",
+    "overall_score_weights": {
+      "binary_detection_f1": 0.2,
+      "contradiction_macro_f1": 0.45,
+      "coverage_index": 0.1,
+      "type_accuracy": 0.25
+    },
+    "prediction_order_is_ignored": true
+  },
+  "tracks": [
+    {
+      "case_count": 17,
+      "name": "contradiction",
+      "suite_hash": "8c1f80ff67874af54869bab2e361b3cc7416ce1d86f80ff583636a55e3462765",
+      "suite_id": "marked-bench-contradiction-standard",
+      "suite_version": "0.1.0"
+    },
+    {
+      "case_count": 17,
+      "name": "contradiction-adversarial",
+      "suite_hash": "454c1aff69d5028224549dfc14fd8e6c10818251d0abf8becf36f0856b2dbd67",
+      "suite_id": "marked-bench-contradiction-adversarial",
+      "suite_version": "0.2.0"
+    },
+    {
+      "case_count": 18,
+      "name": "contradiction-multihop",
+      "suite_hash": "07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f",
+      "suite_id": "marked-bench-contradiction-multihop",
+      "suite_version": "0.3.0"
+    },
+    {
+      "case_count": 18,
+      "name": "contradiction-controls",
+      "suite_hash": "33a0777f6f93504bde517d922f46c24c1d93992256bfe95b32287695babfb08a",
+      "suite_id": "marked-bench-contradiction-controls",
+      "suite_version": "0.4.0"
+    }
+  ],
+  "vector_count": 12,
+  "vectors": [
+    {
+      "expected_summary": {
+        "binary_detection_f1": 1.0,
+        "calibration_brier_score": 0.0,
+        "calibration_ece": 0.0,
+        "case_count": 17,
+        "confusion_matrix": {
+          "definitional_violation": {
+            "definitional_violation": 2,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "direct_negation": {
+            "definitional_violation": 0,
+            "direct_negation": 3,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "none": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 6,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "property_mismatch": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 2,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "temporal_conflict": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 2,
+            "universal_counterexample": 0
+          },
+          "universal_counterexample": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 2
+          }
+        },
+        "contradiction_macro_f1": 1.0,
+        "coverage_index": 1.0,
+        "failure_case_ids": [],
+        "failure_count": 0,
+        "overall_score": 100.0,
+        "suite_hash": "8c1f80ff67874af54869bab2e361b3cc7416ce1d86f80ff583636a55e3462765",
+        "suite_id": "marked-bench-contradiction-standard",
+        "suite_version": "0.1.0",
+        "type_accuracy": 1.0
+      },
+      "input_predictions": [
+        {
+          "case_id": "marked-direct-001",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-direct-001"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-direct-002",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-direct-002"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-direct-003",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-direct-003"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-property-001",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-property-001"
+          ],
+          "predicted": "property_mismatch",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-property-002",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-property-002"
+          ],
+          "predicted": "property_mismatch",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-property-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-property-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-definition-001",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-definition-001"
+          ],
+          "predicted": "definitional_violation",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-definition-002",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-definition-002"
+          ],
+          "predicted": "definitional_violation",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-definition-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-definition-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-universal-001",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-universal-001"
+          ],
+          "predicted": "universal_counterexample",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-universal-002",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-universal-002"
+          ],
+          "predicted": "universal_counterexample",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-universal-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-universal-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-temporal-001",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-temporal-001"
+          ],
+          "predicted": "temporal_conflict",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-temporal-002",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-temporal-002"
+          ],
+          "predicted": "temporal_conflict",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-temporal-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-temporal-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-control-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-control-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-control-002",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-control-002"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        }
+      ],
+      "name": "perfect",
+      "suite": "contradiction"
+    },
+    {
+      "expected_summary": {
+        "binary_detection_f1": 0.0,
+        "calibration_brier_score": 0.647059,
+        "calibration_ece": 0.647059,
+        "case_count": 17,
+        "confusion_matrix": {
+          "definitional_violation": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 2,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "direct_negation": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 3,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "none": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 6,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "property_mismatch": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 2,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "temporal_conflict": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 2,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "universal_counterexample": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 2,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          }
+        },
+        "contradiction_macro_f1": 0.0,
+        "coverage_index": 0.0,
+        "failure_case_ids": [
+          "marked-direct-001",
+          "marked-direct-002",
+          "marked-direct-003",
+          "marked-property-001",
+          "marked-property-002",
+          "marked-definition-001",
+          "marked-definition-002",
+          "marked-universal-001",
+          "marked-universal-002",
+          "marked-temporal-001",
+          "marked-temporal-002"
+        ],
+        "failure_count": 11,
+        "overall_score": 8.82,
+        "suite_hash": "8c1f80ff67874af54869bab2e361b3cc7416ce1d86f80ff583636a55e3462765",
+        "suite_id": "marked-bench-contradiction-standard",
+        "suite_version": "0.1.0",
+        "type_accuracy": 0.352941
+      },
+      "input_predictions": [
+        {
+          "case_id": "marked-direct-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-direct-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-direct-002",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-direct-002"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-direct-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-direct-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-property-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-property-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-property-002",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-property-002"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-property-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-property-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-definition-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-definition-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-definition-002",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-definition-002"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-definition-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-definition-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-universal-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-universal-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-universal-002",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-universal-002"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-universal-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-universal-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-temporal-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-temporal-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-temporal-002",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-temporal-002"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-temporal-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-temporal-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-control-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-control-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-control-002",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-control-002"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        }
+      ],
+      "name": "always_none",
+      "suite": "contradiction"
+    },
+    {
+      "expected_summary": {
+        "binary_detection_f1": 0.692308,
+        "calibration_brier_score": 0.25,
+        "calibration_ece": 0.147059,
+        "case_count": 17,
+        "confusion_matrix": {
+          "definitional_violation": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 2
+          },
+          "direct_negation": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 3,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "none": {
+            "definitional_violation": 0,
+            "direct_negation": 6,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "property_mismatch": {
+            "definitional_violation": 2,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "temporal_conflict": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 2,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "universal_counterexample": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 2,
+            "universal_counterexample": 0
+          }
+        },
+        "contradiction_macro_f1": 0.0,
+        "coverage_index": 0.0,
+        "failure_case_ids": [
+          "marked-direct-001",
+          "marked-direct-002",
+          "marked-direct-003",
+          "marked-property-001",
+          "marked-property-002",
+          "marked-property-003",
+          "marked-definition-001",
+          "marked-definition-002",
+          "marked-definition-003",
+          "marked-universal-001",
+          "marked-universal-002",
+          "marked-universal-003",
+          "marked-temporal-001",
+          "marked-temporal-002",
+          "marked-temporal-003",
+          "marked-control-001",
+          "marked-control-002"
+        ],
+        "failure_count": 17,
+        "overall_score": 13.85,
+        "suite_hash": "8c1f80ff67874af54869bab2e361b3cc7416ce1d86f80ff583636a55e3462765",
+        "suite_id": "marked-bench-contradiction-standard",
+        "suite_version": "0.1.0",
+        "type_accuracy": 0.0
+      },
+      "input_predictions": [
+        {
+          "case_id": "marked-direct-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-direct-001"
+          ],
+          "predicted": "property_mismatch",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-direct-002",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-direct-002"
+          ],
+          "predicted": "property_mismatch",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-direct-003",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-direct-003"
+          ],
+          "predicted": "property_mismatch",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-property-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-property-001"
+          ],
+          "predicted": "definitional_violation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-property-002",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-property-002"
+          ],
+          "predicted": "definitional_violation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-property-003",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-property-003"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-definition-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-definition-001"
+          ],
+          "predicted": "universal_counterexample",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-definition-002",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-definition-002"
+          ],
+          "predicted": "universal_counterexample",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-definition-003",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-definition-003"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-universal-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-universal-001"
+          ],
+          "predicted": "temporal_conflict",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-universal-002",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-universal-002"
+          ],
+          "predicted": "temporal_conflict",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-universal-003",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-universal-003"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-temporal-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-temporal-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-temporal-002",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-temporal-002"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-temporal-003",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-temporal-003"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-control-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-control-001"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-control-002",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-control-002"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        }
+      ],
+      "name": "rotated_labels",
+      "suite": "contradiction"
+    },
+    {
+      "expected_summary": {
+        "binary_detection_f1": 1.0,
+        "calibration_brier_score": 0.0,
+        "calibration_ece": 0.0,
+        "case_count": 17,
+        "confusion_matrix": {
+          "definitional_violation": {
+            "definitional_violation": 2,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "direct_negation": {
+            "definitional_violation": 0,
+            "direct_negation": 3,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "none": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 6,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "property_mismatch": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 2,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "temporal_conflict": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 2,
+            "universal_counterexample": 0
+          },
+          "universal_counterexample": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 2
+          }
+        },
+        "contradiction_macro_f1": 1.0,
+        "coverage_index": 1.0,
+        "failure_case_ids": [],
+        "failure_count": 0,
+        "overall_score": 100.0,
+        "suite_hash": "454c1aff69d5028224549dfc14fd8e6c10818251d0abf8becf36f0856b2dbd67",
+        "suite_id": "marked-bench-contradiction-adversarial",
+        "suite_version": "0.2.0",
+        "type_accuracy": 1.0
+      },
+      "input_predictions": [
+        {
+          "case_id": "marked-adv-direct-001",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-adv-direct-001"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-adv-direct-002",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-adv-direct-002"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-adv-direct-003",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-adv-direct-003"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-adv-property-001",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-adv-property-001"
+          ],
+          "predicted": "property_mismatch",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-adv-property-002",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-adv-property-002"
+          ],
+          "predicted": "property_mismatch",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-adv-property-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-adv-property-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-adv-definition-001",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-adv-definition-001"
+          ],
+          "predicted": "definitional_violation",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-adv-definition-002",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-adv-definition-002"
+          ],
+          "predicted": "definitional_violation",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-adv-definition-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-adv-definition-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-adv-universal-001",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-adv-universal-001"
+          ],
+          "predicted": "universal_counterexample",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-adv-universal-002",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-adv-universal-002"
+          ],
+          "predicted": "universal_counterexample",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-adv-universal-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-adv-universal-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-adv-temporal-001",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-adv-temporal-001"
+          ],
+          "predicted": "temporal_conflict",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-adv-temporal-002",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-adv-temporal-002"
+          ],
+          "predicted": "temporal_conflict",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-adv-temporal-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-adv-temporal-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-adv-control-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-adv-control-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-adv-control-002",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-adv-control-002"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        }
+      ],
+      "name": "perfect",
+      "suite": "contradiction-adversarial"
+    },
+    {
+      "expected_summary": {
+        "binary_detection_f1": 0.0,
+        "calibration_brier_score": 0.647059,
+        "calibration_ece": 0.647059,
+        "case_count": 17,
+        "confusion_matrix": {
+          "definitional_violation": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 2,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "direct_negation": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 3,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "none": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 6,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "property_mismatch": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 2,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "temporal_conflict": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 2,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "universal_counterexample": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 2,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          }
+        },
+        "contradiction_macro_f1": 0.0,
+        "coverage_index": 0.0,
+        "failure_case_ids": [
+          "marked-adv-direct-001",
+          "marked-adv-direct-002",
+          "marked-adv-direct-003",
+          "marked-adv-property-001",
+          "marked-adv-property-002",
+          "marked-adv-definition-001",
+          "marked-adv-definition-002",
+          "marked-adv-universal-001",
+          "marked-adv-universal-002",
+          "marked-adv-temporal-001",
+          "marked-adv-temporal-002"
+        ],
+        "failure_count": 11,
+        "overall_score": 8.82,
+        "suite_hash": "454c1aff69d5028224549dfc14fd8e6c10818251d0abf8becf36f0856b2dbd67",
+        "suite_id": "marked-bench-contradiction-adversarial",
+        "suite_version": "0.2.0",
+        "type_accuracy": 0.352941
+      },
+      "input_predictions": [
+        {
+          "case_id": "marked-adv-direct-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-adv-direct-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-adv-direct-002",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-adv-direct-002"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-adv-direct-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-adv-direct-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-adv-property-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-adv-property-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-adv-property-002",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-adv-property-002"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-adv-property-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-adv-property-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-adv-definition-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-adv-definition-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-adv-definition-002",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-adv-definition-002"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-adv-definition-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-adv-definition-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-adv-universal-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-adv-universal-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-adv-universal-002",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-adv-universal-002"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-adv-universal-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-adv-universal-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-adv-temporal-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-adv-temporal-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-adv-temporal-002",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-adv-temporal-002"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-adv-temporal-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-adv-temporal-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-adv-control-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-adv-control-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-adv-control-002",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-adv-control-002"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        }
+      ],
+      "name": "always_none",
+      "suite": "contradiction-adversarial"
+    },
+    {
+      "expected_summary": {
+        "binary_detection_f1": 0.692308,
+        "calibration_brier_score": 0.25,
+        "calibration_ece": 0.147059,
+        "case_count": 17,
+        "confusion_matrix": {
+          "definitional_violation": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 2
+          },
+          "direct_negation": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 3,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "none": {
+            "definitional_violation": 0,
+            "direct_negation": 6,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "property_mismatch": {
+            "definitional_violation": 2,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "temporal_conflict": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 2,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "universal_counterexample": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 2,
+            "universal_counterexample": 0
+          }
+        },
+        "contradiction_macro_f1": 0.0,
+        "coverage_index": 0.0,
+        "failure_case_ids": [
+          "marked-adv-direct-001",
+          "marked-adv-direct-002",
+          "marked-adv-direct-003",
+          "marked-adv-property-001",
+          "marked-adv-property-002",
+          "marked-adv-property-003",
+          "marked-adv-definition-001",
+          "marked-adv-definition-002",
+          "marked-adv-definition-003",
+          "marked-adv-universal-001",
+          "marked-adv-universal-002",
+          "marked-adv-universal-003",
+          "marked-adv-temporal-001",
+          "marked-adv-temporal-002",
+          "marked-adv-temporal-003",
+          "marked-adv-control-001",
+          "marked-adv-control-002"
+        ],
+        "failure_count": 17,
+        "overall_score": 13.85,
+        "suite_hash": "454c1aff69d5028224549dfc14fd8e6c10818251d0abf8becf36f0856b2dbd67",
+        "suite_id": "marked-bench-contradiction-adversarial",
+        "suite_version": "0.2.0",
+        "type_accuracy": 0.0
+      },
+      "input_predictions": [
+        {
+          "case_id": "marked-adv-direct-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-adv-direct-001"
+          ],
+          "predicted": "property_mismatch",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-adv-direct-002",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-adv-direct-002"
+          ],
+          "predicted": "property_mismatch",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-adv-direct-003",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-adv-direct-003"
+          ],
+          "predicted": "property_mismatch",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-adv-property-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-adv-property-001"
+          ],
+          "predicted": "definitional_violation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-adv-property-002",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-adv-property-002"
+          ],
+          "predicted": "definitional_violation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-adv-property-003",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-adv-property-003"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-adv-definition-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-adv-definition-001"
+          ],
+          "predicted": "universal_counterexample",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-adv-definition-002",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-adv-definition-002"
+          ],
+          "predicted": "universal_counterexample",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-adv-definition-003",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-adv-definition-003"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-adv-universal-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-adv-universal-001"
+          ],
+          "predicted": "temporal_conflict",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-adv-universal-002",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-adv-universal-002"
+          ],
+          "predicted": "temporal_conflict",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-adv-universal-003",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-adv-universal-003"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-adv-temporal-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-adv-temporal-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-adv-temporal-002",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-adv-temporal-002"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-adv-temporal-003",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-adv-temporal-003"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-adv-control-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-adv-control-001"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-adv-control-002",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-adv-control-002"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        }
+      ],
+      "name": "rotated_labels",
+      "suite": "contradiction-adversarial"
+    },
+    {
+      "expected_summary": {
+        "binary_detection_f1": 1.0,
+        "calibration_brier_score": 0.0,
+        "calibration_ece": 0.0,
+        "case_count": 18,
+        "confusion_matrix": {
+          "definitional_violation": {
+            "definitional_violation": 2,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "direct_negation": {
+            "definitional_violation": 0,
+            "direct_negation": 2,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "none": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 8,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "property_mismatch": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 2,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "temporal_conflict": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 2,
+            "universal_counterexample": 0
+          },
+          "universal_counterexample": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 2
+          }
+        },
+        "contradiction_macro_f1": 1.0,
+        "coverage_index": 1.0,
+        "failure_case_ids": [],
+        "failure_count": 0,
+        "overall_score": 100.0,
+        "suite_hash": "07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f",
+        "suite_id": "marked-bench-contradiction-multihop",
+        "suite_version": "0.3.0",
+        "type_accuracy": 1.0
+      },
+      "input_predictions": [
+        {
+          "case_id": "marked-hop-direct-001",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-hop-direct-001"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-hop-direct-002",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-hop-direct-002"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-hop-direct-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-hop-direct-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-hop-property-001",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-hop-property-001"
+          ],
+          "predicted": "property_mismatch",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-hop-property-002",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-hop-property-002"
+          ],
+          "predicted": "property_mismatch",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-hop-property-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-hop-property-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-hop-definition-001",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-hop-definition-001"
+          ],
+          "predicted": "definitional_violation",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-hop-definition-002",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-hop-definition-002"
+          ],
+          "predicted": "definitional_violation",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-hop-definition-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-hop-definition-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-hop-universal-001",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-hop-universal-001"
+          ],
+          "predicted": "universal_counterexample",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-hop-universal-002",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-hop-universal-002"
+          ],
+          "predicted": "universal_counterexample",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-hop-universal-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-hop-universal-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-hop-temporal-001",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-hop-temporal-001"
+          ],
+          "predicted": "temporal_conflict",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-hop-temporal-002",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-hop-temporal-002"
+          ],
+          "predicted": "temporal_conflict",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-hop-temporal-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-hop-temporal-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-hop-control-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-hop-control-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-hop-control-002",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-hop-control-002"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-hop-control-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-hop-control-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        }
+      ],
+      "name": "perfect",
+      "suite": "contradiction-multihop"
+    },
+    {
+      "expected_summary": {
+        "binary_detection_f1": 0.0,
+        "calibration_brier_score": 0.555556,
+        "calibration_ece": 0.555556,
+        "case_count": 18,
+        "confusion_matrix": {
+          "definitional_violation": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 2,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "direct_negation": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 2,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "none": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 8,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "property_mismatch": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 2,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "temporal_conflict": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 2,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "universal_counterexample": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 2,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          }
+        },
+        "contradiction_macro_f1": 0.0,
+        "coverage_index": 0.0,
+        "failure_case_ids": [
+          "marked-hop-direct-001",
+          "marked-hop-direct-002",
+          "marked-hop-property-001",
+          "marked-hop-property-002",
+          "marked-hop-definition-001",
+          "marked-hop-definition-002",
+          "marked-hop-universal-001",
+          "marked-hop-universal-002",
+          "marked-hop-temporal-001",
+          "marked-hop-temporal-002"
+        ],
+        "failure_count": 10,
+        "overall_score": 11.11,
+        "suite_hash": "07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f",
+        "suite_id": "marked-bench-contradiction-multihop",
+        "suite_version": "0.3.0",
+        "type_accuracy": 0.444444
+      },
+      "input_predictions": [
+        {
+          "case_id": "marked-hop-direct-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-hop-direct-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-hop-direct-002",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-hop-direct-002"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-hop-direct-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-hop-direct-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-hop-property-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-hop-property-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-hop-property-002",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-hop-property-002"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-hop-property-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-hop-property-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-hop-definition-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-hop-definition-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-hop-definition-002",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-hop-definition-002"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-hop-definition-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-hop-definition-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-hop-universal-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-hop-universal-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-hop-universal-002",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-hop-universal-002"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-hop-universal-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-hop-universal-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-hop-temporal-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-hop-temporal-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-hop-temporal-002",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-hop-temporal-002"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-hop-temporal-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-hop-temporal-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-hop-control-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-hop-control-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-hop-control-002",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-hop-control-002"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-hop-control-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-hop-control-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        }
+      ],
+      "name": "always_none",
+      "suite": "contradiction-multihop"
+    },
+    {
+      "expected_summary": {
+        "binary_detection_f1": 0.615385,
+        "calibration_brier_score": 0.25,
+        "calibration_ece": 0.055556,
+        "case_count": 18,
+        "confusion_matrix": {
+          "definitional_violation": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 2
+          },
+          "direct_negation": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 2,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "none": {
+            "definitional_violation": 0,
+            "direct_negation": 8,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "property_mismatch": {
+            "definitional_violation": 2,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "temporal_conflict": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 2,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "universal_counterexample": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 2,
+            "universal_counterexample": 0
+          }
+        },
+        "contradiction_macro_f1": 0.0,
+        "coverage_index": 0.0,
+        "failure_case_ids": [
+          "marked-hop-direct-001",
+          "marked-hop-direct-002",
+          "marked-hop-direct-003",
+          "marked-hop-property-001",
+          "marked-hop-property-002",
+          "marked-hop-property-003",
+          "marked-hop-definition-001",
+          "marked-hop-definition-002",
+          "marked-hop-definition-003",
+          "marked-hop-universal-001",
+          "marked-hop-universal-002",
+          "marked-hop-universal-003",
+          "marked-hop-temporal-001",
+          "marked-hop-temporal-002",
+          "marked-hop-temporal-003",
+          "marked-hop-control-001",
+          "marked-hop-control-002",
+          "marked-hop-control-003"
+        ],
+        "failure_count": 18,
+        "overall_score": 12.31,
+        "suite_hash": "07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f",
+        "suite_id": "marked-bench-contradiction-multihop",
+        "suite_version": "0.3.0",
+        "type_accuracy": 0.0
+      },
+      "input_predictions": [
+        {
+          "case_id": "marked-hop-direct-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-hop-direct-001"
+          ],
+          "predicted": "property_mismatch",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-hop-direct-002",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-hop-direct-002"
+          ],
+          "predicted": "property_mismatch",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-hop-direct-003",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-hop-direct-003"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-hop-property-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-hop-property-001"
+          ],
+          "predicted": "definitional_violation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-hop-property-002",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-hop-property-002"
+          ],
+          "predicted": "definitional_violation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-hop-property-003",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-hop-property-003"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-hop-definition-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-hop-definition-001"
+          ],
+          "predicted": "universal_counterexample",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-hop-definition-002",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-hop-definition-002"
+          ],
+          "predicted": "universal_counterexample",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-hop-definition-003",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-hop-definition-003"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-hop-universal-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-hop-universal-001"
+          ],
+          "predicted": "temporal_conflict",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-hop-universal-002",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-hop-universal-002"
+          ],
+          "predicted": "temporal_conflict",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-hop-universal-003",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-hop-universal-003"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-hop-temporal-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-hop-temporal-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-hop-temporal-002",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-hop-temporal-002"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-hop-temporal-003",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-hop-temporal-003"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-hop-control-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-hop-control-001"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-hop-control-002",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-hop-control-002"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-hop-control-003",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-hop-control-003"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        }
+      ],
+      "name": "rotated_labels",
+      "suite": "contradiction-multihop"
+    },
+    {
+      "expected_summary": {
+        "binary_detection_f1": 1.0,
+        "calibration_brier_score": 0.0,
+        "calibration_ece": 0.0,
+        "case_count": 18,
+        "confusion_matrix": {
+          "definitional_violation": {
+            "definitional_violation": 1,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "direct_negation": {
+            "definitional_violation": 0,
+            "direct_negation": 1,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "none": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 13,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "property_mismatch": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 1,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "temporal_conflict": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 1,
+            "universal_counterexample": 0
+          },
+          "universal_counterexample": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 1
+          }
+        },
+        "contradiction_macro_f1": 1.0,
+        "coverage_index": 1.0,
+        "failure_case_ids": [],
+        "failure_count": 0,
+        "overall_score": 100.0,
+        "suite_hash": "33a0777f6f93504bde517d922f46c24c1d93992256bfe95b32287695babfb08a",
+        "suite_id": "marked-bench-contradiction-controls",
+        "suite_version": "0.4.0",
+        "type_accuracy": 1.0
+      },
+      "input_predictions": [
+        {
+          "case_id": "marked-ctrl-direct-001",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-ctrl-direct-001"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-ctrl-property-001",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-ctrl-property-001"
+          ],
+          "predicted": "property_mismatch",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-ctrl-definition-001",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-ctrl-definition-001"
+          ],
+          "predicted": "definitional_violation",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-ctrl-universal-001",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-ctrl-universal-001"
+          ],
+          "predicted": "universal_counterexample",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-ctrl-temporal-001",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-ctrl-temporal-001"
+          ],
+          "predicted": "temporal_conflict",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-ctrl-control-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-control-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-ctrl-control-002",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-control-002"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-ctrl-control-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-control-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-ctrl-control-004",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-control-004"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-ctrl-control-005",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-control-005"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-ctrl-control-006",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-control-006"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-ctrl-control-007",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-control-007"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-ctrl-control-008",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-control-008"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-ctrl-control-009",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-control-009"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-ctrl-control-010",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-control-010"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-ctrl-control-011",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-control-011"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-ctrl-control-012",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-control-012"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-ctrl-control-013",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-control-013"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
+        }
+      ],
+      "name": "perfect",
+      "suite": "contradiction-controls"
+    },
+    {
+      "expected_summary": {
+        "binary_detection_f1": 0.0,
+        "calibration_brier_score": 0.277778,
+        "calibration_ece": 0.277778,
+        "case_count": 18,
+        "confusion_matrix": {
+          "definitional_violation": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 1,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "direct_negation": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 1,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "none": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 13,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "property_mismatch": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 1,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "temporal_conflict": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 1,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "universal_counterexample": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 1,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          }
+        },
+        "contradiction_macro_f1": 0.0,
+        "coverage_index": 0.0,
+        "failure_case_ids": [
+          "marked-ctrl-direct-001",
+          "marked-ctrl-property-001",
+          "marked-ctrl-definition-001",
+          "marked-ctrl-universal-001",
+          "marked-ctrl-temporal-001"
+        ],
+        "failure_count": 5,
+        "overall_score": 18.06,
+        "suite_hash": "33a0777f6f93504bde517d922f46c24c1d93992256bfe95b32287695babfb08a",
+        "suite_id": "marked-bench-contradiction-controls",
+        "suite_version": "0.4.0",
+        "type_accuracy": 0.722222
+      },
+      "input_predictions": [
+        {
+          "case_id": "marked-ctrl-direct-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-direct-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-ctrl-property-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-property-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-ctrl-definition-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-definition-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-ctrl-universal-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-universal-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-ctrl-temporal-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-temporal-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-ctrl-control-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-control-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-ctrl-control-002",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-control-002"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-ctrl-control-003",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-control-003"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-ctrl-control-004",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-control-004"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-ctrl-control-005",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-control-005"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-ctrl-control-006",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-control-006"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-ctrl-control-007",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-control-007"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-ctrl-control-008",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-control-008"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-ctrl-control-009",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-control-009"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-ctrl-control-010",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-control-010"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-ctrl-control-011",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-control-011"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-ctrl-control-012",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-control-012"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-ctrl-control-013",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-ctrl-control-013"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        }
+      ],
+      "name": "always_none",
+      "suite": "contradiction-controls"
+    },
+    {
+      "expected_summary": {
+        "binary_detection_f1": 0.363636,
+        "calibration_brier_score": 0.25,
+        "calibration_ece": 0.222222,
+        "case_count": 18,
+        "confusion_matrix": {
+          "definitional_violation": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 1
+          },
+          "direct_negation": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 1,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "none": {
+            "definitional_violation": 0,
+            "direct_negation": 13,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "property_mismatch": {
+            "definitional_violation": 1,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "temporal_conflict": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 1,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
+          "universal_counterexample": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 0,
+            "property_mismatch": 0,
+            "temporal_conflict": 1,
+            "universal_counterexample": 0
+          }
+        },
+        "contradiction_macro_f1": 0.0,
+        "coverage_index": 0.0,
+        "failure_case_ids": [
+          "marked-ctrl-direct-001",
+          "marked-ctrl-property-001",
+          "marked-ctrl-definition-001",
+          "marked-ctrl-universal-001",
+          "marked-ctrl-temporal-001",
+          "marked-ctrl-control-001",
+          "marked-ctrl-control-002",
+          "marked-ctrl-control-003",
+          "marked-ctrl-control-004",
+          "marked-ctrl-control-005",
+          "marked-ctrl-control-006",
+          "marked-ctrl-control-007",
+          "marked-ctrl-control-008",
+          "marked-ctrl-control-009",
+          "marked-ctrl-control-010",
+          "marked-ctrl-control-011",
+          "marked-ctrl-control-012",
+          "marked-ctrl-control-013"
+        ],
+        "failure_count": 18,
+        "overall_score": 7.27,
+        "suite_hash": "33a0777f6f93504bde517d922f46c24c1d93992256bfe95b32287695babfb08a",
+        "suite_id": "marked-bench-contradiction-controls",
+        "suite_version": "0.4.0",
+        "type_accuracy": 0.0
+      },
+      "input_predictions": [
+        {
+          "case_id": "marked-ctrl-direct-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-ctrl-direct-001"
+          ],
+          "predicted": "property_mismatch",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-ctrl-property-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-ctrl-property-001"
+          ],
+          "predicted": "definitional_violation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-ctrl-definition-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-ctrl-definition-001"
+          ],
+          "predicted": "universal_counterexample",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-ctrl-universal-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-ctrl-universal-001"
+          ],
+          "predicted": "temporal_conflict",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-ctrl-temporal-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-ctrl-temporal-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-ctrl-control-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-ctrl-control-001"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-ctrl-control-002",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-ctrl-control-002"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-ctrl-control-003",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-ctrl-control-003"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-ctrl-control-004",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-ctrl-control-004"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-ctrl-control-005",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-ctrl-control-005"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-ctrl-control-006",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-ctrl-control-006"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-ctrl-control-007",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-ctrl-control-007"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-ctrl-control-008",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-ctrl-control-008"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-ctrl-control-009",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-ctrl-control-009"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-ctrl-control-010",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-ctrl-control-010"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-ctrl-control-011",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-ctrl-control-011"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-ctrl-control-012",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-ctrl-control-012"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-ctrl-control-013",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-ctrl-control-013"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        }
+      ],
+      "name": "rotated_labels",
+      "suite": "contradiction-controls"
+    }
+  ]
+}
