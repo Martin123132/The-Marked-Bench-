@@ -107,3 +107,5 @@ python scripts/validate_benchmark_artifacts.py
 
 The checked release manifest under `releases/` records SHA-256 digests for
 public benchmark artifacts.
+The checked conformance report under `conformance/` provides a single
+machine-readable pass/fail audit for release-package consistency.

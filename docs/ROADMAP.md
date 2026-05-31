@@ -28,6 +28,7 @@ This roadmap keeps the benchmark moving toward a credible public standard.
 - Dependency-free schema conformance validation for public JSON artifacts.
 - Checked external-style submission packet with report, bundle, review, and
   prediction evidence.
+- Machine-readable release conformance report.
 
 ## Next
 

@@ -6,6 +6,11 @@ import argparse
 import json
 from pathlib import Path
 
+from marked_bench.benchmark_conformance import (
+    load_conformance_report,
+    validate_conformance_report,
+    write_conformance_report,
+)
 from marked_bench.benchmark_leaderboard import build_leaderboard, write_leaderboard
 from marked_bench.benchmark_release import write_release_manifest
 from marked_bench.benchmark_registry import write_benchmark_registry
@@ -110,6 +115,24 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         metavar="PATH",
         help="Validate a structured submission review rubric and its referenced bundle.",
+    )
+    parser.add_argument(
+        "--export-conformance-report",
+        default=None,
+        metavar="PATH",
+        help="Write a machine-readable benchmark release conformance report and exit.",
+    )
+    parser.add_argument(
+        "--validate-conformance-report",
+        default=None,
+        metavar="PATH",
+        help="Validate a conformance report against the current release evidence.",
+    )
+    parser.add_argument(
+        "--conformance-release-manifest",
+        default=None,
+        metavar="PATH",
+        help="Release manifest path to use when exporting a conformance report.",
     )
     parser.add_argument(
         "--bundle-submission",
@@ -298,6 +321,25 @@ def main(argv: list[str] | None = None) -> None:
             raise SystemExit(1)
         return
 
+    if args.validate_conformance_report:
+        validation = validate_conformance_report(load_conformance_report(args.validate_conformance_report))
+        if args.json:
+            print(json.dumps(validation, indent=2, sort_keys=True))
+        else:
+            print(f"Conformance validation: {'pass' if validation['valid'] else 'fail'}")
+            print(f"Release: {validation['summary']['release_id']}")
+            print(f"Manifest: {validation['summary']['release_manifest_path']}")
+            print(
+                "Checks: "
+                f"{validation['summary']['checks_passed']}/{validation['summary']['checks_total']}"
+            )
+            print(f"Artifacts: {validation['summary']['checked_artifact_count']}")
+            print(f"Errors: {len(validation['errors'])}")
+            print(f"Warnings: {len(validation['warnings'])}")
+        if not validation["valid"]:
+            raise SystemExit(1)
+        return
+
     if args.create_submission:
         if not args.submission_report:
             parser.error("--create-submission requires --submission-report")
@@ -376,6 +418,14 @@ def main(argv: list[str] | None = None) -> None:
     if args.export_technical_note:
         write_technical_note(args.export_technical_note)
         print(f"Technical note: {args.export_technical_note}")
+        return
+
+    if args.export_conformance_report:
+        kwargs = {}
+        if args.conformance_release_manifest:
+            kwargs["release_manifest_path"] = args.conformance_release_manifest
+        write_conformance_report(args.export_conformance_report, **kwargs)
+        print(f"Conformance report: {args.export_conformance_report}")
         return
 
     if args.export_prediction_template:

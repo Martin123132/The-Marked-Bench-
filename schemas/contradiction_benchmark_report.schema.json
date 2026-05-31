@@ -1,6 +1,6 @@
 ﻿{
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://marked-ai-tools.local/schemas/contradiction_benchmark_report.schema.json",
+  "$id": "https://marked-bench.local/schemas/contradiction_benchmark_report.schema.json",
   "title": "The Marked Bench Contradiction Benchmark Report",
   "type": "object",
   "required": [

@@ -64,13 +64,20 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public artifact SHA-256 digests:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_3_6.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_3_7.json
 ```
 
 Export the generated technical note:
 
 ```bash
 marked-bench --export-technical-note docs/TECHNICAL_NOTE.md
+```
+
+Export and validate the machine-readable conformance report:
+
+```bash
+marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_3_7.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_7.json
 ```
 
 ## Score External Systems
@@ -141,6 +148,7 @@ marked-bench --build-leaderboard baselines/always_none_multihop_v0_3_0.json base
 
 - Benchmark registry: `benchmark_registry.json`
 - Release manifest: `releases/`
+- Conformance report: `conformance/marked_bench_conformance_v0_3_7.json`
 - Suite manifests and coverage profiles: `suites/`
 - Baseline reports: `baselines/`
 - Leaderboard snapshots: `leaderboard/`
@@ -155,7 +163,7 @@ marked-bench --build-leaderboard baselines/always_none_multihop_v0_3_0.json base
 - Adoption guide: `docs/ADOPTION_GUIDE.md`
 - Submission review rubric: `docs/SUBMISSION_REVIEW_RUBRIC.md`
 - Release notes: `docs/RELEASE_NOTES_v0_2_0.md`
-- Current release notes: `docs/RELEASE_NOTES_v0_3_6.md`
+- Current release notes: `docs/RELEASE_NOTES_v0_3_7.md`
 
 ## Quality Gates
 
@@ -174,6 +182,8 @@ their public schemas.
 The checked external submission packet is also validated end-to-end so its
 JSONL predictions, report, submission bundle, review file, and file hashes stay
 consistent.
+The conformance report provides one machine-readable pass/fail artifact for
+the full release package.
 
 ## Package Layout
 

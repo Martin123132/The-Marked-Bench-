@@ -16,6 +16,7 @@
     "docs/RELEASE_NOTES_v0_3_4.md",
     "docs/RELEASE_NOTES_v0_3_5.md",
     "docs/RELEASE_NOTES_v0_3_6.md",
+    "docs/RELEASE_NOTES_v0_3_7.md",
     "docs/SUBMISSION_GUIDE.md",
     "docs/RELEASE_CHECKLIST.md"
   ],
@@ -23,6 +24,7 @@
   "schema": "marked_bench.benchmark-registry.v1",
   "schema_ids": {
     "benchmark_report": "marked_bench.contradiction-benchmark-report.v2",
+    "conformance_report": "marked_bench.conformance-report.v1",
     "leaderboard": "marked_bench.benchmark-leaderboard.v1",
     "leaderboard_submission": "marked_bench.leaderboard-submission.v1",
     "predictions": "marked_bench.contradiction-predictions.v2",
@@ -33,6 +35,7 @@
   "schemas": {
     "benchmark_registry": "schemas/benchmark_registry.schema.json",
     "benchmark_report": "schemas/contradiction_benchmark_report.schema.json",
+    "conformance_report": "schemas/conformance_report.schema.json",
     "leaderboard": "schemas/leaderboard.schema.json",
     "leaderboard_submission": "schemas/leaderboard_submission.schema.json",
     "predictions": "schemas/contradiction_predictions.schema.json",

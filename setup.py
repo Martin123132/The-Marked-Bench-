@@ -2,8 +2,8 @@
 
 setup(
     name="marked_bench",
-    version="0.3.6",
-    description="The Marked Bench contradiction benchmark and AI tooling",
+    version="0.3.7",
+    description="The Marked Bench contradiction-detection evaluation benchmark",
     author="Martin Ollett",
     packages=find_packages(),
     python_requires=">=3.10",

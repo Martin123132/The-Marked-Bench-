@@ -134,6 +134,7 @@ def build_benchmark_registry() -> dict[str, Any]:
             "submission_bundle": "schemas/submission_bundle.schema.json",
             "submission_review": "schemas/submission_review.schema.json",
             "release_manifest": "schemas/release_manifest.schema.json",
+            "conformance_report": "schemas/conformance_report.schema.json",
         },
         "schema_ids": {
             "suite_manifest": SUITE_MANIFEST_SCHEMA,
@@ -143,6 +144,7 @@ def build_benchmark_registry() -> dict[str, Any]:
             "leaderboard_submission": SUBMISSION_SCHEMA,
             "submission_bundle": SUBMISSION_BUNDLE_SCHEMA,
             "submission_review": REVIEW_SCHEMA,
+            "conformance_report": "marked_bench.conformance-report.v1",
         },
         "governance_docs": [
             "docs/ADOPTION_GUIDE.md",
@@ -159,6 +161,7 @@ def build_benchmark_registry() -> dict[str, Any]:
             "docs/RELEASE_NOTES_v0_3_4.md",
             "docs/RELEASE_NOTES_v0_3_5.md",
             "docs/RELEASE_NOTES_v0_3_6.md",
+            "docs/RELEASE_NOTES_v0_3_7.md",
             "docs/SUBMISSION_GUIDE.md",
             "docs/RELEASE_CHECKLIST.md",
         ],

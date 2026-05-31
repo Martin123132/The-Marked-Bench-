@@ -1,6 +1,6 @@
 ﻿{
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://marked-ai-tools.local/schemas/benchmark_registry.schema.json",
+  "$id": "https://marked-bench.local/schemas/benchmark_registry.schema.json",
   "title": "The Marked Bench Registry",
   "type": "object",
   "required": [
@@ -41,7 +41,8 @@
         "leaderboard",
         "leaderboard_submission",
         "submission_bundle",
-        "submission_review"
+        "submission_review",
+        "conformance_report"
       ],
       "additionalProperties": {
         "type": "string"

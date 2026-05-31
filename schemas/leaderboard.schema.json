@@ -1,6 +1,6 @@
 ﻿{
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://marked-ai-tools.local/schemas/leaderboard.schema.json",
+  "$id": "https://marked-bench.local/schemas/leaderboard.schema.json",
   "title": "The Marked Bench Leaderboard",
   "type": "object",
   "required": [

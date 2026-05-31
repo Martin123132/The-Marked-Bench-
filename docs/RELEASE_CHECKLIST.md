@@ -16,8 +16,10 @@ git diff --check
 - Baseline reports are updated under `baselines/`.
 - Leaderboard snapshots are updated under `leaderboard/`.
 - `benchmark_registry.json` matches the code-generated registry.
-- `releases/marked_bench_release_v0_3_6.json` matches the current public
+- `releases/marked_bench_release_v0_3_7.json` matches the current public
   artifact hashes.
+- `conformance/marked_bench_conformance_v0_3_7.json` validates against the
+  current release evidence.
 - `docs/TECHNICAL_NOTE.md` matches generated benchmark evidence.
 - JSON schemas still match the public report shapes.
 - Checked public JSON artifacts conform to their public schemas.
@@ -39,6 +41,7 @@ git diff --check
 - `docs/RELEASE_NOTES_v0_3_4.md` summarizes the public release.
 - `docs/RELEASE_NOTES_v0_3_5.md` summarizes the public release.
 - `docs/RELEASE_NOTES_v0_3_6.md` summarizes the public release.
+- `docs/RELEASE_NOTES_v0_3_7.md` summarizes the public release.
 - `docs/ADOPTION_GUIDE.md` explains how external systems should submit results.
 - `docs/SUBMISSION_REVIEW_RUBRIC.md` explains how reviewers should score
   submissions before leaderboard acceptance.

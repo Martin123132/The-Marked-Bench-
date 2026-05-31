@@ -12,6 +12,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+from marked_bench.benchmark_conformance import load_conformance_report, validate_conformance_report  # noqa: E402
 from marked_bench.benchmark_leaderboard import build_leaderboard  # noqa: E402
 from marked_bench.benchmark_release import build_release_manifest  # noqa: E402
 from marked_bench.benchmark_registry import build_benchmark_registry  # noqa: E402
@@ -70,12 +71,14 @@ CHECKED_SUBMISSION_PACKETS = [
 ]
 
 BENCHMARK_REGISTRY = Path("benchmark_registry.json")
-RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_6.json")
+RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_7.json")
+CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_3_7.json")
 
 REQUIRED_PUBLIC_FILES = [
     Path("README.md"),
     BENCHMARK_REGISTRY,
     RELEASE_MANIFEST,
+    CONFORMANCE_REPORT,
     Path("CONTRIBUTING.md"),
     Path("CITATION.cff"),
     Path("docs/BENCHMARK_CARD.md"),
@@ -92,6 +95,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("docs/RELEASE_NOTES_v0_3_4.md"),
     Path("docs/RELEASE_NOTES_v0_3_5.md"),
     Path("docs/RELEASE_NOTES_v0_3_6.md"),
+    Path("docs/RELEASE_NOTES_v0_3_7.md"),
     Path("docs/ROADMAP.md"),
     Path("docs/SUBMISSION_GUIDE.md"),
     Path("schemas/benchmark_registry.schema.json"),
@@ -103,6 +107,8 @@ REQUIRED_PUBLIC_FILES = [
     Path("schemas/submission_bundle.schema.json"),
     Path("schemas/submission_review.schema.json"),
     Path("schemas/release_manifest.schema.json"),
+    Path("schemas/conformance_report.schema.json"),
+    Path("conformance/README.md"),
     Path("releases/README.md"),
     Path("submissions/README.md"),
     Path("submissions/example_external_jsonl/predictions.jsonl"),
@@ -117,6 +123,7 @@ REQUIRED_PUBLIC_FILES = [
 SCHEMA_CONFORMANCE_FILES = {
     BENCHMARK_REGISTRY: Path("schemas/benchmark_registry.schema.json"),
     RELEASE_MANIFEST: Path("schemas/release_manifest.schema.json"),
+    CONFORMANCE_REPORT: Path("schemas/conformance_report.schema.json"),
     Path("leaderboard/leaderboard_v0_1_0.json"): Path("schemas/leaderboard.schema.json"),
     Path("leaderboard/leaderboard_adversarial_v0_2_0.json"): Path("schemas/leaderboard.schema.json"),
     Path("leaderboard/leaderboard_multihop_v0_3_0.json"): Path("schemas/leaderboard.schema.json"),
@@ -138,6 +145,7 @@ def main() -> int:
         _validate_benchmark_registry(errors)
         _validate_technical_note(errors)
         _validate_release_manifest(errors)
+        _validate_conformance_report(errors)
         _validate_suite_manifests(errors)
         _validate_baseline_reports(errors)
         _validate_leaderboards(errors)
@@ -284,6 +292,17 @@ def _validate_release_manifest(errors: list[str]) -> None:
         return
     if manifest != expected:
         errors.append(f"{RELEASE_MANIFEST}: release manifest does not match current public artifacts")
+
+
+def _validate_conformance_report(errors: list[str]) -> None:
+    try:
+        report = load_conformance_report(CONFORMANCE_REPORT)
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        errors.append(f"{CONFORMANCE_REPORT}: could not load conformance report: {exc}")
+        return
+    validation = validate_conformance_report(report, root=ROOT)
+    if not validation["valid"]:
+        errors.append(f"{CONFORMANCE_REPORT}: conformance validation failed: {validation['errors']}")
 
 
 def _validate_baseline_reports(errors: list[str]) -> None:

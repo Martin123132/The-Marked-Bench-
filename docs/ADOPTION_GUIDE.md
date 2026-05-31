@@ -59,6 +59,19 @@ A checked example packet is committed under `submissions/example_external_jsonl/
 Use it as the reference shape for external JSONL predictions, scored reports,
 submission metadata, bundle evidence, and review files.
 
+## Check Release Conformance
+
+Before adopting or mirroring a release package, validate the checked
+conformance report:
+
+```bash
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_7.json
+```
+
+The conformance report is the single machine-readable pass/fail artifact for
+registry, manifest, schema, leaderboard, baseline, prediction-template, and
+checked-submission consistency.
+
 ## Cite The Benchmark
 
 Use `CITATION.cff` and include the release tag, suite ID, suite version, and

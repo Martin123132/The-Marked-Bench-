@@ -140,7 +140,14 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public benchmark artifacts by SHA-256:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_3_6.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_3_7.json
+```
+
+Export and validate the release conformance report:
+
+```bash
+marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_3_7.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_7.json
 ```
 
 Run the harder adversarial track:
@@ -259,5 +266,6 @@ multi-hop track. Release `0.3.4` adds structured submission review rubrics for
 leaderboard governance. Release `0.3.5` adds dependency-free schema
 conformance checks for checked public artifacts. Release `0.3.6` adds a
 checked external-style submission packet and validates it as part of the normal
-artifact gate. The next step toward a larger public standard is real
+artifact gate. Release `0.3.7` adds a machine-readable conformance report for
+the full release package. The next step toward a larger public standard is real
 third-party submissions and human review evidence.

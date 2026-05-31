@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://marked-ai-tools.local/schemas/submission_bundle.schema.json",
+  "$id": "https://marked-bench.local/schemas/submission_bundle.schema.json",
   "title": "The Marked Bench Submission Bundle",
   "type": "object",
   "required": [

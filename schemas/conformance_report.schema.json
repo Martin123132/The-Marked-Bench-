@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marked-bench.local/schemas/conformance_report.schema.json",
+  "title": "The Marked Bench Conformance Report",
+  "type": "object",
+  "required": [
+    "schema",
+    "project",
+    "benchmark_family",
+    "release_manifest_path",
+    "release_id",
+    "default_track",
+    "track_count",
+    "checked_artifact_count",
+    "checked_schema_file_count",
+    "passed",
+    "checks",
+    "failures"
+  ],
+  "properties": {
+    "schema": {
+      "const": "marked_bench.conformance-report.v1"
+    },
+    "project": {
+      "type": "string"
+    },
+    "benchmark_family": {
+      "type": "string"
+    },
+    "release_manifest_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "release_id": {
+      "type": "string"
+    },
+    "default_track": {
+      "type": "string"
+    },
+    "track_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "checked_artifact_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "checked_schema_file_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "passed": {
+      "type": "boolean"
+    },
+    "checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/check"
+      }
+    },
+    "failures": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "check": {
+      "type": "object",
+      "required": [
+        "name",
+        "status",
+        "details",
+        "errors"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "pass",
+            "fail"
+          ]
+        },
+        "details": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "string",
+              "integer",
+              "number",
+              "boolean",
+              "array",
+              "object",
+              "null"
+            ]
+          }
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

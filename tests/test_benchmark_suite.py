@@ -52,6 +52,12 @@ from marked_bench.contradiction.benchmark_suite import (
 )
 from marked_bench.contradiction.engine import Claim, ContradictionType
 from marked_bench.benchmark_cli import main as benchmark_main
+from marked_bench.benchmark_conformance import (
+    CONFORMANCE_REPORT_SCHEMA,
+    build_conformance_report,
+    load_conformance_report,
+    validate_conformance_report,
+)
 from marked_bench.examples.external_submission_demo import run_demo as run_external_submission_demo
 
 
@@ -198,7 +204,8 @@ class BenchmarkSuiteTests(unittest.TestCase):
         root = Path(__file__).resolve().parent.parent
         checked_pairs = [
             ("benchmark_registry.json", "schemas/benchmark_registry.schema.json"),
-            ("releases/marked_bench_release_v0_3_6.json", "schemas/release_manifest.schema.json"),
+            ("releases/marked_bench_release_v0_3_7.json", "schemas/release_manifest.schema.json"),
+            ("conformance/marked_bench_conformance_v0_3_7.json", "schemas/conformance_report.schema.json"),
             ("suites/marked_bench_contradiction_standard_v0_1_0.json", "schemas/contradiction_suite_manifest.schema.json"),
             ("suites/marked_bench_contradiction_adversarial_v0_2_0.json", "schemas/contradiction_suite_manifest.schema.json"),
             ("suites/marked_bench_contradiction_multihop_v0_3_0.json", "schemas/contradiction_suite_manifest.schema.json"),
@@ -248,7 +255,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_release_manifest_matches_current_artifacts(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "releases" / "marked_bench_release_v0_3_6.json"
+        path = root / "releases" / "marked_bench_release_v0_3_7.json"
 
         manifest = json.loads(path.read_text(encoding="utf-8"))
         artifact_paths = {entry["path"] for entry in manifest["artifacts"]}
@@ -259,6 +266,19 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertGreater(manifest["artifact_count"], 20)
         self.assertIn("submissions/example_external_jsonl/predictions.jsonl", artifact_paths)
         self.assertIn("submissions/example_external_jsonl/example_external_submission_review.json", artifact_paths)
+        self.assertIn("conformance/marked_bench_conformance_v0_3_7.json", artifact_paths)
+
+    def test_checked_in_conformance_report_matches_current_evidence(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        path = root / "conformance" / "marked_bench_conformance_v0_3_7.json"
+
+        report = load_conformance_report(path)
+        validation = validate_conformance_report(report, root=root)
+
+        self.assertEqual(report, build_conformance_report(root))
+        self.assertEqual(report["schema"], CONFORMANCE_REPORT_SCHEMA)
+        self.assertTrue(report["passed"], report["failures"])
+        self.assertTrue(validation["valid"], validation["errors"])
 
     def test_checked_external_submission_packet_validates(self) -> None:
         root = Path(__file__).resolve().parent.parent
@@ -1036,6 +1056,23 @@ class BenchmarkSuiteTests(unittest.TestCase):
             manifest = json.loads(path.read_text(encoding="utf-8"))
             self.assertEqual(manifest, build_release_manifest(Path(__file__).resolve().parent.parent))
             self.assertEqual(manifest["schema"], RELEASE_MANIFEST_SCHEMA)
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_cli_exports_and_validates_conformance_report_inside_repo(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        path = output_root / "conformance-report.json"
+
+        try:
+            with redirect_stdout(StringIO()):
+                benchmark_main(["--export-conformance-report", str(path)])
+            with redirect_stdout(StringIO()) as captured:
+                benchmark_main(["--validate-conformance-report", str(path)])
+
+            report = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(report, build_conformance_report(Path(__file__).resolve().parent.parent))
+            self.assertEqual(report["schema"], CONFORMANCE_REPORT_SCHEMA)
+            self.assertIn("Conformance validation: pass", captured.getvalue())
         finally:
             shutil.rmtree(output_root, ignore_errors=True)
 

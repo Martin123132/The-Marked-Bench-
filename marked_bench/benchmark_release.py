@@ -11,7 +11,7 @@ from marked_bench.benchmark_registry import REGISTRY_SCHEMA, build_benchmark_reg
 
 
 RELEASE_MANIFEST_SCHEMA = "marked_bench.benchmark-release-manifest.v1"
-RELEASE_ID = "marked-bench-contradiction-standard-release-0.3.6"
+RELEASE_ID = "marked-bench-contradiction-standard-release-0.3.7"
 
 ROOT_PUBLIC_ARTIFACTS = (
     "README.md",
@@ -23,6 +23,7 @@ ROOT_PUBLIC_ARTIFACTS = (
 
 BENCHMARK_SOURCE_ARTIFACTS = (
     "setup.py",
+    "marked_bench/benchmark_conformance.py",
     "marked_bench/benchmark_cli.py",
     "marked_bench/benchmark_leaderboard.py",
     "marked_bench/benchmark_registry.py",
@@ -42,6 +43,7 @@ BENCHMARK_SOURCE_ARTIFACTS = (
 
 SUPPORT_ARTIFACTS = (
     "baselines/README.md",
+    "conformance/README.md",
     "leaderboard/README.md",
     "releases/README.md",
     "submissions/README.md",
@@ -58,6 +60,10 @@ SUBMISSION_EXAMPLE_ARTIFACTS = (
     "submissions/example_external_jsonl/example_external_submission.json",
     "submissions/example_external_jsonl/example_external_submission_bundle.json",
     "submissions/example_external_jsonl/example_external_submission_review.json",
+)
+
+CONFORMANCE_ARTIFACTS = (
+    "conformance/marked_bench_conformance_v0_3_7.json",
 )
 
 
@@ -125,6 +131,7 @@ def _collect_artifacts(registry: dict[str, Any]) -> list[tuple[str, str]]:
     artifacts.extend((path, "root") for path in ROOT_PUBLIC_ARTIFACTS)
     artifacts.extend((path, "source") for path in BENCHMARK_SOURCE_ARTIFACTS)
     artifacts.extend((path, "support") for path in SUPPORT_ARTIFACTS)
+    artifacts.extend((path, "conformance") for path in CONFORMANCE_ARTIFACTS)
     artifacts.extend((path, "submission-example") for path in SUBMISSION_EXAMPLE_ARTIFACTS)
     artifacts.extend((path, "schema") for path in registry["schemas"].values())
     artifacts.extend((path, "governance") for path in registry["governance_docs"])

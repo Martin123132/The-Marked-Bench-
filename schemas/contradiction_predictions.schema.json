@@ -1,6 +1,6 @@
 ﻿{
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://marked-ai-tools.local/schemas/contradiction_predictions.schema.json",
+  "$id": "https://marked-bench.local/schemas/contradiction_predictions.schema.json",
   "title": "The Marked Bench Contradiction Prediction Submission",
   "description": "External system predictions before they are scored into a benchmark report. JSONL uses one prediction object per line with the same prediction shape.",
   "oneOf": [
