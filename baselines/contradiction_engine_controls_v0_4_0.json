@@ -1,0 +1,1191 @@
+{
+  "case_count": 18,
+  "case_results": [
+    {
+      "capability": "anchor_negation",
+      "case_id": "marked-ctrl-direct-001",
+      "detection_correct": true,
+      "detector_note": "Query uses an antonym that reverses the premise",
+      "detector_score": 0.78,
+      "difficulty": "easy",
+      "domain": "governance",
+      "evidence": [],
+      "expected": "direct_negation",
+      "predicted": "direct_negation",
+      "rationale": "Query uses an antonym that reverses the premise",
+      "tags": [
+        "control-track",
+        "anchor",
+        "negation"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "anchor_numeric_property",
+      "case_id": "marked-ctrl-property-001",
+      "detection_correct": true,
+      "detector_note": "Boiling point differs: premise=100.0, query=95.0",
+      "detector_score": 0.8,
+      "difficulty": "easy",
+      "domain": "science",
+      "evidence": [],
+      "expected": "property_mismatch",
+      "predicted": "property_mismatch",
+      "rationale": "Boiling point differs: premise=100.0, query=95.0",
+      "tags": [
+        "control-track",
+        "anchor",
+        "numeric"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "anchor_definition",
+      "case_id": "marked-ctrl-definition-001",
+      "detection_correct": true,
+      "detector_note": "Query denies definitional property of triangles",
+      "detector_score": 0.95,
+      "difficulty": "easy",
+      "domain": "geometry",
+      "evidence": [],
+      "expected": "definitional_violation",
+      "predicted": "definitional_violation",
+      "rationale": "Query denies definitional property of triangles",
+      "tags": [
+        "control-track",
+        "anchor",
+        "definition"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "anchor_universal",
+      "case_id": "marked-ctrl-universal-001",
+      "detection_correct": true,
+      "detector_note": "Universal premise challenged by a counterexample in the query",
+      "detector_score": 0.88,
+      "difficulty": "medium",
+      "domain": "ai_safety",
+      "evidence": [],
+      "expected": "universal_counterexample",
+      "predicted": "universal_counterexample",
+      "rationale": "Universal premise challenged by a counterexample in the query",
+      "tags": [
+        "control-track",
+        "anchor",
+        "universal"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "anchor_temporal",
+      "case_id": "marked-ctrl-temporal-001",
+      "detection_correct": true,
+      "detector_note": "Time-dependent statement conflicts with 'always' quantifier",
+      "detector_score": 0.6,
+      "difficulty": "medium",
+      "domain": "operations",
+      "evidence": [],
+      "expected": "temporal_conflict",
+      "predicted": "temporal_conflict",
+      "rationale": "Time-dependent statement conflicts with 'always' quantifier",
+      "tags": [
+        "control-track",
+        "anchor",
+        "temporal"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "elaboration_control",
+      "case_id": "marked-ctrl-control-001",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "operations",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "control-track",
+        "control",
+        "elaboration"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "negation_scope_control",
+      "case_id": "marked-ctrl-control-002",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "hard",
+      "domain": "security",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "control-track",
+        "control",
+        "negation_scope"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "quantifier_control",
+      "case_id": "marked-ctrl-control-003",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "ai_safety",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "control-track",
+        "control",
+        "quantifier"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "temporal_change_control",
+      "case_id": "marked-ctrl-control-004",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "operations",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "control-track",
+        "control",
+        "temporal"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "same_value_context_control",
+      "case_id": "marked-ctrl-control-005",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "measurement",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "control-track",
+        "control",
+        "numeric"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "same_unit_control",
+      "case_id": "marked-ctrl-control-006",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "measurement",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "control-track",
+        "control",
+        "unit"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "paraphrase_control",
+      "case_id": "marked-ctrl-control-007",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "ai_safety",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "control-track",
+        "control",
+        "paraphrase"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "state_paraphrase_control",
+      "case_id": "marked-ctrl-control-008",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "governance",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "control-track",
+        "control",
+        "paraphrase"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "definition_elaboration_control",
+      "case_id": "marked-ctrl-control-009",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "geometry",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "control-track",
+        "control",
+        "definition"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "entity_elaboration_control",
+      "case_id": "marked-ctrl-control-010",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "data_governance",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "control-track",
+        "control",
+        "dataset"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "numeric_scope_control",
+      "case_id": "marked-ctrl-control-011",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "finance",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "control-track",
+        "control",
+        "numeric"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "causal_paraphrase_control",
+      "case_id": "marked-ctrl-control-012",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "operations",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "control-track",
+        "control",
+        "operations"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "event_paraphrase_control",
+      "case_id": "marked-ctrl-control-013",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "operations",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "control-track",
+        "control",
+        "operations"
+      ],
+      "type_correct": true
+    }
+  ],
+  "confusion_matrix": {
+    "definitional_violation": {
+      "definitional_violation": 1,
+      "direct_negation": 0,
+      "none": 0,
+      "property_mismatch": 0,
+      "temporal_conflict": 0,
+      "universal_counterexample": 0
+    },
+    "direct_negation": {
+      "definitional_violation": 0,
+      "direct_negation": 1,
+      "none": 0,
+      "property_mismatch": 0,
+      "temporal_conflict": 0,
+      "universal_counterexample": 0
+    },
+    "none": {
+      "definitional_violation": 0,
+      "direct_negation": 0,
+      "none": 13,
+      "property_mismatch": 0,
+      "temporal_conflict": 0,
+      "universal_counterexample": 0
+    },
+    "property_mismatch": {
+      "definitional_violation": 0,
+      "direct_negation": 0,
+      "none": 0,
+      "property_mismatch": 1,
+      "temporal_conflict": 0,
+      "universal_counterexample": 0
+    },
+    "temporal_conflict": {
+      "definitional_violation": 0,
+      "direct_negation": 0,
+      "none": 0,
+      "property_mismatch": 0,
+      "temporal_conflict": 1,
+      "universal_counterexample": 0
+    },
+    "universal_counterexample": {
+      "definitional_violation": 0,
+      "direct_negation": 0,
+      "none": 0,
+      "property_mismatch": 0,
+      "temporal_conflict": 0,
+      "universal_counterexample": 1
+    }
+  },
+  "created_at": 1780240432.852,
+  "duration_seconds": 0.001475,
+  "explanation_audit": {
+    "case_count": 18,
+    "correct_explanation_ready_rate": 0.0,
+    "evidence_count": 0,
+    "evidence_coverage": 0.0,
+    "explanation_ready_count": 0,
+    "explanation_ready_rate": 0.0,
+    "rationale_count": 5,
+    "rationale_coverage": 0.277778
+  },
+  "failures": [],
+  "metrics": {
+    "calibration": {
+      "bin_count": 10,
+      "bins": [
+        {
+          "case_count": 13,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.0,
+          "mean_confidence": 0.0,
+          "upper": 0.1
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.1,
+          "mean_confidence": 0.0,
+          "upper": 0.2
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.2,
+          "mean_confidence": 0.0,
+          "upper": 0.3
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.3,
+          "mean_confidence": 0.0,
+          "upper": 0.4
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.4,
+          "mean_confidence": 0.0,
+          "upper": 0.5
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.5,
+          "mean_confidence": 0.0,
+          "upper": 0.6
+        },
+        {
+          "case_count": 1,
+          "empirical_positive_rate": 1.0,
+          "lower": 0.6,
+          "mean_confidence": 0.6,
+          "upper": 0.7
+        },
+        {
+          "case_count": 1,
+          "empirical_positive_rate": 1.0,
+          "lower": 0.7,
+          "mean_confidence": 0.78,
+          "upper": 0.8
+        },
+        {
+          "case_count": 2,
+          "empirical_positive_rate": 1.0,
+          "lower": 0.8,
+          "mean_confidence": 0.84,
+          "upper": 0.9
+        },
+        {
+          "case_count": 1,
+          "empirical_positive_rate": 1.0,
+          "lower": 0.9,
+          "mean_confidence": 0.95,
+          "upper": 1.0
+        }
+      ],
+      "brier_score": 0.014739,
+      "expected_calibration_error": 0.055,
+      "mean_confidence": 0.222778,
+      "positive_rate": 0.277778
+    },
+    "contradiction_macro_f1": 1.0,
+    "contradiction_type_accuracy": 1.0,
+    "coverage_index": 1.0,
+    "detection": {
+      "accuracy": 1.0,
+      "f1": 1.0,
+      "false_negative": 0,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "true_negative": 13,
+      "true_positive": 5
+    },
+    "per_class": {
+      "definitional_violation": {
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "support": 1
+      },
+      "direct_negation": {
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "support": 1
+      },
+      "none": {
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "support": 13
+      },
+      "property_mismatch": {
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "support": 1
+      },
+      "temporal_conflict": {
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "support": 1
+      },
+      "universal_counterexample": {
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "support": 1
+      }
+    },
+    "slices": {
+      "capability": {
+        "anchor_definition": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "anchor_negation": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "anchor_numeric_property": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "anchor_temporal": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "anchor_universal": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "causal_paraphrase_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "definition_elaboration_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "elaboration_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "entity_elaboration_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "event_paraphrase_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "negation_scope_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "numeric_scope_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "paraphrase_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "quantifier_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "same_unit_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "same_value_context_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "state_paraphrase_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "temporal_change_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        }
+      },
+      "difficulty": {
+        "easy": {
+          "case_count": 10,
+          "contradiction_case_count": 3,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "hard": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "medium": {
+          "case_count": 7,
+          "contradiction_case_count": 2,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        }
+      },
+      "domain": {
+        "ai_safety": {
+          "case_count": 3,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "data_governance": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "finance": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "geometry": {
+          "case_count": 2,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "governance": {
+          "case_count": 2,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "measurement": {
+          "case_count": 2,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "operations": {
+          "case_count": 5,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "science": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "security": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        }
+      },
+      "tag": {
+        "anchor": {
+          "case_count": 5,
+          "contradiction_case_count": 5,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "control": {
+          "case_count": 13,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "control-track": {
+          "case_count": 18,
+          "contradiction_case_count": 5,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "dataset": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "definition": {
+          "case_count": 2,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "elaboration": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "negation": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "negation_scope": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "numeric": {
+          "case_count": 3,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "operations": {
+          "case_count": 2,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "paraphrase": {
+          "case_count": 2,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "quantifier": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "temporal": {
+          "case_count": 2,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "unit": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "universal": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        }
+      }
+    },
+    "type_accuracy": 1.0
+  },
+  "overall_score": 100.0,
+  "schema": "marked_bench.contradiction-benchmark-report.v2",
+  "suite_cases": [
+    {
+      "capability": "anchor_negation",
+      "difficulty": "easy",
+      "domain": "governance",
+      "expected": "direct_negation",
+      "id": "marked-ctrl-direct-001",
+      "note": "Anchor direct-negation case to keep contradiction detection visible.",
+      "premise": "The audit packet is complete",
+      "query": "The audit packet is incomplete",
+      "tags": [
+        "control-track",
+        "anchor",
+        "negation"
+      ]
+    },
+    {
+      "capability": "anchor_numeric_property",
+      "difficulty": "easy",
+      "domain": "science",
+      "expected": "property_mismatch",
+      "id": "marked-ctrl-property-001",
+      "note": "Anchor numeric property mismatch.",
+      "premise": "Water boils at 100C in the reference note",
+      "query": "Water boils at 95C in the reference note",
+      "tags": [
+        "control-track",
+        "anchor",
+        "numeric"
+      ]
+    },
+    {
+      "capability": "anchor_definition",
+      "difficulty": "easy",
+      "domain": "geometry",
+      "expected": "definitional_violation",
+      "id": "marked-ctrl-definition-001",
+      "note": "Anchor definitional violation.",
+      "premise": "Triangles have three sides",
+      "query": "Triangle false three sides in this glossary",
+      "tags": [
+        "control-track",
+        "anchor",
+        "definition"
+      ]
+    },
+    {
+      "capability": "anchor_universal",
+      "difficulty": "medium",
+      "domain": "ai_safety",
+      "expected": "universal_counterexample",
+      "id": "marked-ctrl-universal-001",
+      "note": "Anchor universal-counterexample case.",
+      "premise": "All sandbox agents require approval before launch",
+      "query": "A counterexample exists: sandbox agent S9 launched without approval",
+      "tags": [
+        "control-track",
+        "anchor",
+        "universal"
+      ]
+    },
+    {
+      "capability": "anchor_temporal",
+      "difficulty": "medium",
+      "domain": "operations",
+      "expected": "temporal_conflict",
+      "id": "marked-ctrl-temporal-001",
+      "note": "Anchor temporal conflict.",
+      "premise": "Always in 2021 the service used manual approval",
+      "query": "In 2024 the service used automated approval",
+      "tags": [
+        "control-track",
+        "anchor",
+        "temporal"
+      ]
+    },
+    {
+      "capability": "elaboration_control",
+      "difficulty": "easy",
+      "domain": "operations",
+      "expected": "none",
+      "id": "marked-ctrl-control-001",
+      "note": "Added temporal context does not reverse the staging gate state.",
+      "premise": "The deployment gate is enabled for staging",
+      "query": "The deployment gate is enabled for staging after the policy update",
+      "tags": [
+        "control-track",
+        "control",
+        "elaboration"
+      ]
+    },
+    {
+      "capability": "negation_scope_control",
+      "difficulty": "hard",
+      "domain": "security",
+      "expected": "none",
+      "id": "marked-ctrl-control-002",
+      "note": "Two cautious negative claims are compatible.",
+      "premise": "The audit found no evidence that keys left the vault",
+      "query": "The audit did not prove that keys left the vault",
+      "tags": [
+        "control-track",
+        "control",
+        "negation_scope"
+      ]
+    },
+    {
+      "capability": "quantifier_control",
+      "difficulty": "medium",
+      "domain": "ai_safety",
+      "expected": "none",
+      "id": "marked-ctrl-control-003",
+      "note": "A non-universal quantifier allows exceptions.",
+      "premise": "Most sandbox agents require review before launch",
+      "query": "Some sandbox agents launch automatically during tests",
+      "tags": [
+        "control-track",
+        "control",
+        "quantifier"
+      ]
+    },
+    {
+      "capability": "temporal_change_control",
+      "difficulty": "medium",
+      "domain": "operations",
+      "expected": "none",
+      "id": "marked-ctrl-control-004",
+      "note": "A system can change across years without contradiction.",
+      "premise": "The service used manual approval in 2021",
+      "query": "The service used automated approval in 2024",
+      "tags": [
+        "control-track",
+        "control",
+        "temporal"
+      ]
+    },
+    {
+      "capability": "same_value_context_control",
+      "difficulty": "medium",
+      "domain": "measurement",
+      "expected": "none",
+      "id": "marked-ctrl-control-005",
+      "note": "Same numeric value under a changed condition is not a mismatch.",
+      "premise": "The threshold is 0.80 before calibration",
+      "query": "The threshold is 0.80 after calibration",
+      "tags": [
+        "control-track",
+        "control",
+        "numeric"
+      ]
+    },
+    {
+      "capability": "same_unit_control",
+      "difficulty": "easy",
+      "domain": "measurement",
+      "expected": "none",
+      "id": "marked-ctrl-control-006",
+      "note": "Same value and unit should not trigger the unit-conflict rule.",
+      "premise": "The crate mass is 12 kg before repacking",
+      "query": "The crate mass is 12 kg after repacking",
+      "tags": [
+        "control-track",
+        "control",
+        "unit"
+      ]
+    },
+    {
+      "capability": "paraphrase_control",
+      "difficulty": "medium",
+      "domain": "ai_safety",
+      "expected": "none",
+      "id": "marked-ctrl-control-007",
+      "note": "Near-paraphrase should remain non-contradictory.",
+      "premise": "The model declined the unsafe request and offered a safe alternative",
+      "query": "The model refused the unsafe request while offering a safe alternative",
+      "tags": [
+        "control-track",
+        "control",
+        "paraphrase"
+      ]
+    },
+    {
+      "capability": "state_paraphrase_control",
+      "difficulty": "easy",
+      "domain": "governance",
+      "expected": "none",
+      "id": "marked-ctrl-control-008",
+      "note": "Pending and awaiting approval are compatible states.",
+      "premise": "The policy is pending approval",
+      "query": "The policy is awaiting approval",
+      "tags": [
+        "control-track",
+        "control",
+        "paraphrase"
+      ]
+    },
+    {
+      "capability": "definition_elaboration_control",
+      "difficulty": "easy",
+      "domain": "geometry",
+      "expected": "none",
+      "id": "marked-ctrl-control-009",
+      "note": "Additional visual detail does not violate the definition.",
+      "premise": "Triangles have three sides",
+      "query": "The shape is a triangle with three sides and a red outline",
+      "tags": [
+        "control-track",
+        "control",
+        "definition"
+      ]
+    },
+    {
+      "capability": "entity_elaboration_control",
+      "difficulty": "easy",
+      "domain": "data_governance",
+      "expected": "none",
+      "id": "marked-ctrl-control-010",
+      "note": "The query elaborates the same dataset classification.",
+      "premise": "Dataset Echo is synthetic",
+      "query": "Dataset Echo is a synthetic dataset used for testing",
+      "tags": [
+        "control-track",
+        "control",
+        "dataset"
+      ]
+    },
+    {
+      "capability": "numeric_scope_control",
+      "difficulty": "medium",
+      "domain": "finance",
+      "expected": "none",
+      "id": "marked-ctrl-control-011",
+      "note": "The same scoped amount is repeated with extra accounting context.",
+      "premise": "The invoice total is 95 dollars before tax",
+      "query": "The invoice total is 95 dollars before tax and fees",
+      "tags": [
+        "control-track",
+        "control",
+        "numeric"
+      ]
+    },
+    {
+      "capability": "causal_paraphrase_control",
+      "difficulty": "easy",
+      "domain": "operations",
+      "expected": "none",
+      "id": "marked-ctrl-control-012",
+      "note": "The query restates the same resolution path.",
+      "premise": "The incident was resolved by rollback",
+      "query": "The incident was resolved after rollback completed",
+      "tags": [
+        "control-track",
+        "control",
+        "operations"
+      ]
+    },
+    {
+      "capability": "event_paraphrase_control",
+      "difficulty": "easy",
+      "domain": "operations",
+      "expected": "none",
+      "id": "marked-ctrl-control-013",
+      "note": "Equivalent event order with different wording.",
+      "premise": "The cache refresh happened after deploy",
+      "query": "The cache refresh happened after the deployment completed",
+      "tags": [
+        "control-track",
+        "control",
+        "operations"
+      ]
+    }
+  ],
+  "suite_hash": "33a0777f6f93504bde517d922f46c24c1d93992256bfe95b32287695babfb08a",
+  "suite_id": "marked-bench-contradiction-controls",
+  "suite_version": "0.4.0",
+  "system_name": "ContradictionEngine"
+}

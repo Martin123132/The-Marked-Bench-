@@ -43,11 +43,13 @@ from marked_bench.benchmark_technical_note import build_technical_note
 from marked_bench.schema_validation import validate_json_file, validate_json_schema
 from marked_bench.contradiction.benchmark_suite import (
     ADVERSARIAL_SUITE_ID,
+    CONTROL_SUITE_ID,
     MULTIHOP_SUITE_ID,
     PREDICTION_SCHEMA,
     REPORT_SCHEMA,
     SUITE_ID,
     build_adversarial_suite,
+    build_control_suite,
     build_multihop_suite,
     build_prediction_template,
     build_suite_hash,
@@ -138,6 +140,29 @@ class BenchmarkSuiteTests(unittest.TestCase):
             {case.expected for case in cases if case.expected != ContradictionType.NONE},
         )
 
+    def test_control_suite_has_stable_public_shape(self) -> None:
+        cases = build_control_suite()
+        ids = [case.id for case in cases]
+
+        self.assertGreaterEqual(len(cases), 15)
+        self.assertEqual(len(ids), len(set(ids)))
+        self.assertTrue(all(case.id.startswith("marked-ctrl-") for case in cases))
+        self.assertGreater(
+            sum(1 for case in cases if case.expected == ContradictionType.NONE),
+            sum(1 for case in cases if case.expected != ContradictionType.NONE),
+        )
+        self.assertTrue(all("control-track" in case.tags for case in cases))
+        self.assertEqual(
+            {
+                ContradictionType.DIRECT_NEGATION,
+                ContradictionType.PROPERTY_MISMATCH,
+                ContradictionType.DEFINITIONAL_VIOLATION,
+                ContradictionType.UNIVERSAL_COUNTEREXAMPLE,
+                ContradictionType.TEMPORAL_CONFLICT,
+            },
+            {case.expected for case in cases if case.expected != ContradictionType.NONE},
+        )
+
     def test_checked_in_suite_manifest_matches_code(self) -> None:
         root = Path(__file__).resolve().parent.parent
         path = root / "suites" / "marked_bench_contradiction_standard_v0_1_0.json"
@@ -173,6 +198,17 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertEqual(manifest["suite_hash"], build_suite_hash(suite="contradiction-multihop"))
         self.assertEqual(manifest["profile"], build_suite_profile(suite="contradiction-multihop"))
 
+    def test_checked_in_control_suite_manifest_matches_code(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        path = root / "suites" / "marked_bench_contradiction_controls_v0_4_0.json"
+
+        manifest = json.loads(path.read_text(encoding="utf-8"))
+
+        self.assertEqual(manifest, build_suite_manifest(suite="contradiction-controls"))
+        self.assertEqual(manifest["suite_id"], CONTROL_SUITE_ID)
+        self.assertEqual(manifest["suite_hash"], build_suite_hash(suite="contradiction-controls"))
+        self.assertEqual(manifest["profile"], build_suite_profile(suite="contradiction-controls"))
+
     def test_checked_in_benchmark_registry_matches_code(self) -> None:
         root = Path(__file__).resolve().parent.parent
         path = root / "benchmark_registry.json"
@@ -183,7 +219,12 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertEqual(registry["schema"], REGISTRY_SCHEMA)
         self.assertEqual(
             [track["name"] for track in registry["tracks"]],
-            ["contradiction", "contradiction-adversarial", "contradiction-multihop"],
+            [
+                "contradiction",
+                "contradiction-adversarial",
+                "contradiction-multihop",
+                "contradiction-controls",
+            ],
         )
         self.assertEqual(registry["default_track"], "contradiction-multihop")
         self.assertIn("profile", registry["tracks"][0])
@@ -206,31 +247,40 @@ class BenchmarkSuiteTests(unittest.TestCase):
             PREDICTION_SCHEMA,
         )
         self.assertIn(MULTIHOP_SUITE_ID, prediction_schema["oneOf"][1]["properties"]["suite_id"]["enum"])
+        self.assertIn(CONTROL_SUITE_ID, prediction_schema["oneOf"][1]["properties"]["suite_id"]["enum"])
         self.assertIn("0.3.0", prediction_schema["oneOf"][1]["properties"]["suite_version"]["enum"])
+        self.assertIn("0.4.0", prediction_schema["oneOf"][1]["properties"]["suite_version"]["enum"])
         self.assertIn("rationale", prediction_schema["$defs"]["prediction"]["properties"])
         self.assertIn("evidence", prediction_schema["$defs"]["prediction"]["properties"])
         self.assertEqual(report_schema["properties"]["schema"]["const"], REPORT_SCHEMA)
         self.assertIn(MULTIHOP_SUITE_ID, report_schema["properties"]["suite_id"]["enum"])
+        self.assertIn(CONTROL_SUITE_ID, report_schema["properties"]["suite_id"]["enum"])
         self.assertIn("0.3.0", report_schema["properties"]["suite_version"]["enum"])
+        self.assertIn("0.4.0", report_schema["properties"]["suite_version"]["enum"])
         self.assertIn("explanation_audit", report_schema["required"])
         self.assertIn("rationale", report_schema["$defs"]["case_result"]["required"])
         self.assertIn("evidence", report_schema["$defs"]["case_result"]["required"])
         self.assertIn(MULTIHOP_SUITE_ID, suite_schema["properties"]["suite_id"]["enum"])
+        self.assertIn(CONTROL_SUITE_ID, suite_schema["properties"]["suite_id"]["enum"])
         self.assertIn("0.3.0", suite_schema["properties"]["suite_version"]["enum"])
+        self.assertIn("0.4.0", suite_schema["properties"]["suite_version"]["enum"])
 
     def test_public_json_artifacts_conform_to_public_schemas(self) -> None:
         root = Path(__file__).resolve().parent.parent
         checked_pairs = [
             ("benchmark_registry.json", "schemas/benchmark_registry.schema.json"),
-            ("releases/marked_bench_release_v0_3_10.json", "schemas/release_manifest.schema.json"),
-            ("conformance/marked_bench_conformance_v0_3_10.json", "schemas/conformance_report.schema.json"),
-            ("adoption/marked_bench_adoption_packet_v0_3_10.json", "schemas/adoption_packet.schema.json"),
-            ("adoption/third_party_evidence_ledger_v0_3_10.json", "schemas/third_party_evidence_ledger.schema.json"),
+            ("releases/marked_bench_release_v0_4_0.json", "schemas/release_manifest.schema.json"),
+            ("conformance/marked_bench_conformance_v0_4_0.json", "schemas/conformance_report.schema.json"),
+            ("adoption/marked_bench_adoption_packet_v0_4_0.json", "schemas/adoption_packet.schema.json"),
+            ("adoption/third_party_evidence_ledger_v0_4_0.json", "schemas/third_party_evidence_ledger.schema.json"),
             ("suites/marked_bench_contradiction_standard_v0_1_0.json", "schemas/contradiction_suite_manifest.schema.json"),
             ("suites/marked_bench_contradiction_adversarial_v0_2_0.json", "schemas/contradiction_suite_manifest.schema.json"),
             ("suites/marked_bench_contradiction_multihop_v0_3_0.json", "schemas/contradiction_suite_manifest.schema.json"),
+            ("suites/marked_bench_contradiction_controls_v0_4_0.json", "schemas/contradiction_suite_manifest.schema.json"),
             ("baselines/contradiction_engine_multihop_v0_3_0.json", "schemas/contradiction_benchmark_report.schema.json"),
+            ("baselines/contradiction_engine_controls_v0_4_0.json", "schemas/contradiction_benchmark_report.schema.json"),
             ("leaderboard/leaderboard_multihop_v0_3_0.json", "schemas/leaderboard.schema.json"),
+            ("leaderboard/leaderboard_controls_v0_4_0.json", "schemas/leaderboard.schema.json"),
             ("submissions/example_external_jsonl/example_external_result_card.json", "schemas/result_card.schema.json"),
         ]
 
@@ -285,7 +335,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_release_manifest_matches_current_artifacts(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "releases" / "marked_bench_release_v0_3_10.json"
+        path = root / "releases" / "marked_bench_release_v0_4_0.json"
 
         manifest = json.loads(path.read_text(encoding="utf-8"))
         artifact_paths = {entry["path"] for entry in manifest["artifacts"]}
@@ -296,9 +346,11 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertGreater(manifest["artifact_count"], 20)
         self.assertIn("submissions/example_external_jsonl/predictions.jsonl", artifact_paths)
         self.assertIn("submissions/example_external_jsonl/example_external_submission_review.json", artifact_paths)
-        self.assertIn("conformance/marked_bench_conformance_v0_3_10.json", artifact_paths)
-        self.assertIn("adoption/marked_bench_adoption_packet_v0_3_10.json", artifact_paths)
-        self.assertIn("adoption/third_party_evidence_ledger_v0_3_10.json", artifact_paths)
+        self.assertIn("conformance/marked_bench_conformance_v0_4_0.json", artifact_paths)
+        self.assertIn("adoption/marked_bench_adoption_packet_v0_4_0.json", artifact_paths)
+        self.assertIn("adoption/third_party_evidence_ledger_v0_4_0.json", artifact_paths)
+        self.assertIn("suites/marked_bench_contradiction_controls_v0_4_0.json", artifact_paths)
+        self.assertIn("leaderboard/leaderboard_controls_v0_4_0.json", artifact_paths)
         self.assertIn("docs/ANNOUNCEMENT_PACKAGE.md", artifact_paths)
         self.assertIn("docs/THIRD_PARTY_EVIDENCE.md", artifact_paths)
         self.assertIn("schemas/adoption_packet.schema.json", artifact_paths)
@@ -307,7 +359,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_conformance_report_matches_current_evidence(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "conformance" / "marked_bench_conformance_v0_3_10.json"
+        path = root / "conformance" / "marked_bench_conformance_v0_4_0.json"
 
         report = load_conformance_report(path)
         validation = validate_conformance_report(report, root=root)
@@ -321,7 +373,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_adoption_packet_matches_current_evidence(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "adoption" / "marked_bench_adoption_packet_v0_3_10.json"
+        path = root / "adoption" / "marked_bench_adoption_packet_v0_4_0.json"
 
         packet = load_adoption_packet(path)
         validation = validate_adoption_packet(packet, root=root)
@@ -335,7 +387,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_evidence_ledger_matches_current_evidence(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "adoption" / "third_party_evidence_ledger_v0_3_10.json"
+        path = root / "adoption" / "third_party_evidence_ledger_v0_4_0.json"
 
         ledger = load_evidence_ledger(path)
         validation = validate_evidence_ledger(ledger, root=root)
@@ -399,6 +451,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertIn("## Public Tracks", note)
         self.assertIn("marked-bench-contradiction-adversarial", note)
         self.assertIn("marked-bench-contradiction-multihop", note)
+        self.assertIn("marked-bench-contradiction-controls", note)
         self.assertIn("## Baseline Evidence", note)
 
     def test_default_engine_report_is_json_serializable(self) -> None:
@@ -437,6 +490,16 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertEqual(report["suite_id"], MULTIHOP_SUITE_ID)
         self.assertLess(report["overall_score"], 70.0)
         self.assertGreater(len(report["failures"]), 0)
+        self.assertTrue(validate_benchmark_report(report)["valid"])
+
+    def test_default_engine_handles_control_suite_without_false_positive_controls(self) -> None:
+        report = evaluate_standard_suite(suite="contradiction-controls")
+
+        self.assertEqual(report["suite_id"], CONTROL_SUITE_ID)
+        self.assertGreaterEqual(report["overall_score"], 90.0)
+        control_results = [item for item in report["case_results"] if "control" in item["tags"]]
+        self.assertTrue(control_results)
+        self.assertTrue(all(item["predicted"] == ContradictionType.NONE.value for item in control_results))
         self.assertTrue(validate_benchmark_report(report)["valid"])
 
     def test_report_validator_rejects_tampered_scores(self) -> None:
@@ -1120,6 +1183,20 @@ class BenchmarkSuiteTests(unittest.TestCase):
         finally:
             shutil.rmtree(output_root, ignore_errors=True)
 
+    def test_cli_exports_control_suite_manifest_inside_repo(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        path = output_root / "control-suite.json"
+
+        try:
+            with redirect_stdout(StringIO()):
+                benchmark_main(["--suite", "contradiction-controls", "--export-suite", str(path)])
+
+            manifest = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(manifest, build_suite_manifest(suite="contradiction-controls"))
+            self.assertEqual(manifest["suite_id"], CONTROL_SUITE_ID)
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
     def test_cli_exports_benchmark_registry_inside_repo(self) -> None:
         output_root = Path(__file__).resolve().parent.parent / ".test-output"
         path = output_root / "benchmark-registry.json"
@@ -1324,6 +1401,28 @@ class BenchmarkSuiteTests(unittest.TestCase):
         finally:
             shutil.rmtree(output_root, ignore_errors=True)
 
+    def test_cli_exports_control_prediction_template_inside_repo(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        path = output_root / "controls-predictions.jsonl"
+
+        try:
+            with redirect_stdout(StringIO()):
+                benchmark_main(
+                    [
+                        "--suite",
+                        "contradiction-controls",
+                        "--export-prediction-template",
+                        str(path),
+                    ]
+                )
+
+            records = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
+            self.assertEqual(len(records), len(build_control_suite()))
+            self.assertTrue(records[0]["case_id"].startswith("marked-ctrl-"))
+            self.assertNotIn("expected", records[0])
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
     def test_cli_scores_prediction_jsonl_inside_repo(self) -> None:
         output_root = Path(__file__).resolve().parent.parent / ".test-output"
         prediction_path = output_root / "predictions.jsonl"
@@ -1458,6 +1557,21 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertLess(strong["overall_score"], 70.0)
         self.assertEqual(weak["system_name"], "AlwaysNoneDetector")
 
+    def test_checked_in_control_baseline_reports_validate(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        strong_path = root / "baselines" / "contradiction_engine_controls_v0_4_0.json"
+        weak_path = root / "baselines" / "always_none_controls_v0_4_0.json"
+
+        strong = json.loads(strong_path.read_text(encoding="utf-8"))
+        weak = json.loads(weak_path.read_text(encoding="utf-8"))
+
+        self.assertTrue(validate_benchmark_report(strong)["valid"])
+        self.assertTrue(validate_benchmark_report(weak)["valid"])
+        self.assertEqual(strong["suite_id"], CONTROL_SUITE_ID)
+        self.assertGreaterEqual(strong["overall_score"], 90.0)
+        self.assertEqual(weak["system_name"], "AlwaysNoneDetector")
+        self.assertLess(weak["overall_score"], 40.0)
+
     def test_checked_in_leaderboard_matches_baseline_reports(self) -> None:
         root = Path(__file__).resolve().parent.parent
         weak_path = root / "baselines" / "always_none_v0_1_0.json"
@@ -1509,6 +1623,25 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertEqual(leaderboard["entries"][0]["system_name"], "ContradictionEngine")
         self.assertEqual(leaderboard["entries"][0]["rank"], 1)
         self.assertEqual(leaderboard["entries"][0]["suite_id"], MULTIHOP_SUITE_ID)
+        self.assertEqual(leaderboard["entries"][0]["report_sha256"], report_sha256(strong_path))
+        self.assertEqual(leaderboard["entries"][1]["system_name"], "AlwaysNoneDetector")
+        self.assertEqual(leaderboard["entries"][1]["rank"], 2)
+        self.assertEqual(leaderboard["entries"][1]["report_sha256"], report_sha256(weak_path))
+
+    def test_checked_in_control_leaderboard_matches_baseline_reports(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        weak_path = root / "baselines" / "always_none_controls_v0_4_0.json"
+        strong_path = root / "baselines" / "contradiction_engine_controls_v0_4_0.json"
+        leaderboard_path = root / "leaderboard" / "leaderboard_controls_v0_4_0.json"
+
+        leaderboard = json.loads(leaderboard_path.read_text(encoding="utf-8"))
+
+        self.assertEqual(leaderboard["schema"], LEADERBOARD_SCHEMA)
+        self.assertEqual(leaderboard["entry_count"], 2)
+        self.assertEqual(leaderboard["rejected_count"], 0)
+        self.assertEqual(leaderboard["entries"][0]["system_name"], "ContradictionEngine")
+        self.assertEqual(leaderboard["entries"][0]["rank"], 1)
+        self.assertEqual(leaderboard["entries"][0]["suite_id"], CONTROL_SUITE_ID)
         self.assertEqual(leaderboard["entries"][0]["report_sha256"], report_sha256(strong_path))
         self.assertEqual(leaderboard["entries"][1]["system_name"], "AlwaysNoneDetector")
         self.assertEqual(leaderboard["entries"][1]["rank"], 2)

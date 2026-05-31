@@ -68,9 +68,9 @@ Before adopting or mirroring a release package, validate the checked
 conformance report:
 
 ```bash
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_10.json
-marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_3_10.json
-marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_3_10.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_0.json
+marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_0.json
+marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_0.json
 ```
 
 The conformance report is the single machine-readable pass/fail artifact for

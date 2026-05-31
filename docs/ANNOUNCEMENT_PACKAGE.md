@@ -6,12 +6,13 @@ instructions.
 
 ## Release Summary
 
-The Marked Bench v0.3.10 is a reproducible contradiction-detection benchmark
+The Marked Bench v0.4.0 is a reproducible contradiction-detection benchmark
 release with versioned suites, pinned suite hashes, public JSON schemas,
 baseline reports, leaderboard snapshots, release manifest hashing,
 machine-readable conformance, checked external submission evidence, standard
 result cards, a machine-readable adoption packet, and a checked third-party
-evidence ledger.
+evidence ledger. This release adds a false-positive controls track for
+paraphrases, scoped negatives, time shifts, and harmless elaborations.
 
 Default track:
 
@@ -20,15 +21,21 @@ Default track:
 - Required comparison key: `suite_id`, `suite_version`, and `suite_hash`
 - Result publication artifact: standard result card JSON
 
+New controls track:
+
+- Suite ID: `marked-bench-contradiction-controls`
+- Suite version: `0.4.0`
+- Purpose: false-positive stress testing with contradiction anchors
+
 ## Public Link Set
 
 - Repository: `https://github.com/Martin123132/The-Marked-Bench-`
-- Current release: `https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.3.10`
+- Current release: `https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.4.0`
 - Registry: `benchmark_registry.json`
-- Release manifest: `releases/marked_bench_release_v0_3_10.json`
-- Conformance report: `conformance/marked_bench_conformance_v0_3_10.json`
-- Adoption packet: `adoption/marked_bench_adoption_packet_v0_3_10.json`
-- Third-party evidence ledger: `adoption/third_party_evidence_ledger_v0_3_10.json`
+- Release manifest: `releases/marked_bench_release_v0_4_0.json`
+- Conformance report: `conformance/marked_bench_conformance_v0_4_0.json`
+- Adoption packet: `adoption/marked_bench_adoption_packet_v0_4_0.json`
+- Third-party evidence ledger: `adoption/third_party_evidence_ledger_v0_4_0.json`
 - Technical note: `docs/TECHNICAL_NOTE.md`
 - Adoption guide: `docs/ADOPTION_GUIDE.md`
 - Submission review rubric: `docs/SUBMISSION_REVIEW_RUBRIC.md`
@@ -36,12 +43,14 @@ Default track:
 
 ## Suggested Announcement Text
 
-The Marked Bench v0.3.10 is now available as a public, reproducible benchmark
+The Marked Bench v0.4.0 is now available as a public, reproducible benchmark
 package for contradiction detection and classification. The release pins every
 public track by suite ID, suite version, and deterministic suite hash, and it
 ships validation commands for reports, submissions, result cards, release
 manifests, conformance reports, the adoption packet, and the third-party
-evidence ledger.
+evidence ledger. The new controls track makes false-positive behavior visible
+on non-contradictory paraphrases, scoped negatives, time shifts, numeric
+context shifts, and harmless elaborations.
 
 External systems can participate without importing the Python package: export a
 JSONL prediction template, fill predicted labels, score it into a standard JSON
@@ -52,9 +61,9 @@ report, create a submission bundle, and publish a result card.
 ```bash
 python -m unittest discover -s tests
 python scripts/validate_benchmark_artifacts.py
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_10.json
-marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_3_10.json
-marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_3_10.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_0.json
+marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_0.json
+marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_0.json
 ```
 
 ## External Result Command Path

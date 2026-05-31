@@ -66,7 +66,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--suite",
         default="contradiction",
-        choices=["contradiction", "contradiction-adversarial", "contradiction-multihop"],
+        choices=[
+            "contradiction",
+            "contradiction-adversarial",
+            "contradiction-multihop",
+            "contradiction-controls",
+        ],
         help="Benchmark suite to run.",
     )
     parser.add_argument(

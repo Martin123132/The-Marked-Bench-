@@ -31,7 +31,7 @@ body:
     attributes:
       label: Suite identity
       description: Include suite ID, suite version, and suite hash.
-      placeholder: marked-bench-contradiction-multihop / 0.3.0 / 64 hex characters
+      placeholder: marked-bench-contradiction-controls / 0.4.0 / 64 hex characters
     validations:
       required: true
   - type: input

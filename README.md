@@ -16,10 +16,14 @@ slice metrics, result card, and leaderboard entry.
 | Foundation | `marked-bench-contradiction-standard` | `0.1.0` | Compact canonical contradiction suite | `100.00` |
 | Adversarial | `marked-bench-contradiction-adversarial` | `0.2.0` | Longer-context, implicit, and trap cases | `52.37` |
 | Multi-hop | `marked-bench-contradiction-multihop` | `0.3.0` | Linked-evidence contradiction cases | `24.14` |
+| Controls | `marked-bench-contradiction-controls` | `0.4.0` | False-positive distractor controls with contradiction anchors | `100.00` |
 
 The adversarial track is intentionally not solved by the packaged symbolic
 baseline. The multi-hop track is the default target for future symbolic,
 neural, retrieval-augmented, and hybrid systems.
+The controls track is a false-positive stress track for systems that over-call
+contradictions on paraphrases, scoped negatives, time shifts, and harmless
+elaborations.
 
 ## Install
 
@@ -49,6 +53,12 @@ Multi-hop track:
 marked-bench --suite contradiction-multihop --report artifacts/multihop-report.json
 ```
 
+Control track:
+
+```bash
+marked-bench --suite contradiction-controls --report artifacts/controls-report.json
+```
+
 Validate a report before publication:
 
 ```bash
@@ -64,7 +74,7 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public artifact SHA-256 digests:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_3_10.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_4_0.json
 ```
 
 Export the generated technical note:
@@ -76,16 +86,16 @@ marked-bench --export-technical-note docs/TECHNICAL_NOTE.md
 Export and validate the machine-readable conformance report:
 
 ```bash
-marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_3_10.json
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_10.json
+marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_4_0.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_0.json
 ```
 
 Export and validate the machine-readable adoption packet for external users:
 
 ```bash
-marked-bench --export-adoption-packet adoption/marked_bench_adoption_packet_v0_3_10.json
-marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_3_10.json
-marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_3_10.json
+marked-bench --export-adoption-packet adoption/marked_bench_adoption_packet_v0_4_0.json
+marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_0.json
+marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_0.json
 ```
 
 ## Score External Systems
@@ -160,13 +170,19 @@ Multi-hop leaderboard:
 marked-bench --build-leaderboard baselines/always_none_multihop_v0_3_0.json baselines/contradiction_engine_multihop_v0_3_0.json --leaderboard-output leaderboard/leaderboard_multihop_v0_3_0.json
 ```
 
+Controls leaderboard:
+
+```bash
+marked-bench --build-leaderboard baselines/always_none_controls_v0_4_0.json baselines/contradiction_engine_controls_v0_4_0.json --leaderboard-output leaderboard/leaderboard_controls_v0_4_0.json
+```
+
 ## Checked-In Evidence
 
 - Benchmark registry: `benchmark_registry.json`
 - Release manifest: `releases/`
-- Conformance report: `conformance/marked_bench_conformance_v0_3_10.json`
-- Adoption packet: `adoption/marked_bench_adoption_packet_v0_3_10.json`
-- Third-party evidence ledger: `adoption/third_party_evidence_ledger_v0_3_10.json`
+- Conformance report: `conformance/marked_bench_conformance_v0_4_0.json`
+- Adoption packet: `adoption/marked_bench_adoption_packet_v0_4_0.json`
+- Third-party evidence ledger: `adoption/third_party_evidence_ledger_v0_4_0.json`
 - Suite manifests and coverage profiles: `suites/`
 - Baseline reports: `baselines/`
 - Leaderboard snapshots: `leaderboard/`
@@ -186,7 +202,7 @@ marked-bench --build-leaderboard baselines/always_none_multihop_v0_3_0.json base
 - Third-party evidence protocol: `docs/THIRD_PARTY_EVIDENCE.md`
 - Submission review rubric: `docs/SUBMISSION_REVIEW_RUBRIC.md`
 - Release notes: `docs/RELEASE_NOTES_v0_2_0.md`
-- Current release notes: `docs/RELEASE_NOTES_v0_3_10.md`
+- Current release notes: `docs/RELEASE_NOTES_v0_4_0.md`
 
 ## Quality Gates
 

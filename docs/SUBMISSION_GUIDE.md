@@ -12,6 +12,8 @@ Current tracks:
   v0.2.0.
 - `contradiction-multihop`: default linked-evidence suite,
   `marked-bench-contradiction-multihop` v0.3.0.
+- `contradiction-controls`: false-positive controls suite,
+  `marked-bench-contradiction-controls` v0.4.0.
 
 The machine-readable track registry is `benchmark_registry.json`. It lists the
 canonical suite manifests, report schemas, prediction schema, baseline reports,
@@ -35,6 +37,12 @@ For the multi-hop track:
 
 ```bash
 marked-bench --suite contradiction-multihop --system-name "my-system" --report my-multihop-report.json
+```
+
+For the controls track:
+
+```bash
+marked-bench --suite contradiction-controls --system-name "my-system" --report my-controls-report.json
 ```
 
 Custom systems should call
@@ -179,6 +187,12 @@ For multi-hop entries:
 
 ```bash
 marked-bench --build-leaderboard baselines/*multihop*.json --leaderboard-output leaderboard/leaderboard_multihop_v0_3_0.json
+```
+
+For controls entries:
+
+```bash
+marked-bench --build-leaderboard baselines/*controls*.json --leaderboard-output leaderboard/leaderboard_controls_v0_4_0.json
 ```
 
 ## 8. Run Repository Checks

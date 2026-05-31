@@ -113,6 +113,38 @@ _TRACKS: tuple[Mapping[str, Any], ...] = (
             ),
         },
     },
+    {
+        "name": "contradiction-controls",
+        "title": "False-positive control contradiction detection",
+        "status": "active",
+        "suite": "contradiction-controls",
+        "suite_manifest": "suites/marked_bench_contradiction_controls_v0_4_0.json",
+        "leaderboard": "leaderboard/leaderboard_controls_v0_4_0.json",
+        "baseline_reports": [
+            "baselines/contradiction_engine_controls_v0_4_0.json",
+            "baselines/always_none_controls_v0_4_0.json",
+        ],
+        "commands": {
+            "run_baseline": (
+                "marked-bench --suite contradiction-controls "
+                "--report artifacts/controls-report.json"
+            ),
+            "export_prediction_template": (
+                "marked-bench --suite contradiction-controls "
+                "--export-prediction-template artifacts/controls-predictions.jsonl"
+            ),
+            "score_predictions": (
+                "marked-bench --suite contradiction-controls "
+                "--score-predictions artifacts/controls-predictions.jsonl "
+                "--system-name SYSTEM --report artifacts/controls-system-report.json"
+            ),
+            "create_submission": (
+                "marked-bench --create-submission submissions/controls-system.json "
+                "--submission-report artifacts/controls-system-report.json "
+                "--system-version VERSION --submitter SUBMITTER"
+            ),
+        },
+    },
 )
 
 
@@ -173,6 +205,7 @@ def build_benchmark_registry() -> dict[str, Any]:
             "docs/RELEASE_NOTES_v0_3_8.md",
             "docs/RELEASE_NOTES_v0_3_9.md",
             "docs/RELEASE_NOTES_v0_3_10.md",
+            "docs/RELEASE_NOTES_v0_4_0.md",
             "docs/SUBMISSION_GUIDE.md",
             "docs/RELEASE_CHECKLIST.md",
         ],

@@ -18,3 +18,11 @@ The current baseline is:
   `ContradictionEngine` on the harder adversarial suite version `0.2.0`.
 - `always_none_adversarial_v0_2_0.json`: intentionally weak detector on the
   adversarial suite.
+- `contradiction_engine_multihop_v0_3_0.json`: packaged symbolic
+  `ContradictionEngine` on the linked-evidence multi-hop suite version `0.3.0`.
+- `always_none_multihop_v0_3_0.json`: intentionally weak detector on the
+  multi-hop suite.
+- `contradiction_engine_controls_v0_4_0.json`: packaged symbolic
+  `ContradictionEngine` on the false-positive controls suite version `0.4.0`.
+- `always_none_controls_v0_4_0.json`: intentionally weak detector on the
+  controls suite.

@@ -33,13 +33,14 @@ from marked_bench.schema_validation import load_json_schema, validate_json_file,
 
 
 CONFORMANCE_REPORT_SCHEMA = "marked_bench.conformance-report.v1"
-DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_3_10.json")
-DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_10.json")
+DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_0.json")
+DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_0.json")
 
 SUITE_MANIFESTS = {
     Path("suites/marked_bench_contradiction_standard_v0_1_0.json"): "contradiction",
     Path("suites/marked_bench_contradiction_adversarial_v0_2_0.json"): "contradiction-adversarial",
     Path("suites/marked_bench_contradiction_multihop_v0_3_0.json"): "contradiction-multihop",
+    Path("suites/marked_bench_contradiction_controls_v0_4_0.json"): "contradiction-controls",
 }
 
 BASELINE_REPORTS = [
@@ -49,6 +50,8 @@ BASELINE_REPORTS = [
     Path("baselines/always_none_adversarial_v0_2_0.json"),
     Path("baselines/contradiction_engine_multihop_v0_3_0.json"),
     Path("baselines/always_none_multihop_v0_3_0.json"),
+    Path("baselines/contradiction_engine_controls_v0_4_0.json"),
+    Path("baselines/always_none_controls_v0_4_0.json"),
 ]
 
 LEADERBOARDS = {
@@ -63,6 +66,10 @@ LEADERBOARDS = {
     Path("leaderboard/leaderboard_multihop_v0_3_0.json"): [
         Path("baselines/always_none_multihop_v0_3_0.json"),
         Path("baselines/contradiction_engine_multihop_v0_3_0.json"),
+    ],
+    Path("leaderboard/leaderboard_controls_v0_4_0.json"): [
+        Path("baselines/always_none_controls_v0_4_0.json"),
+        Path("baselines/contradiction_engine_controls_v0_4_0.json"),
     ],
 }
 
@@ -89,6 +96,7 @@ SCHEMA_CONFORMANCE_FILES = {
     Path("leaderboard/leaderboard_v0_1_0.json"): Path("schemas/leaderboard.schema.json"),
     Path("leaderboard/leaderboard_adversarial_v0_2_0.json"): Path("schemas/leaderboard.schema.json"),
     Path("leaderboard/leaderboard_multihop_v0_3_0.json"): Path("schemas/leaderboard.schema.json"),
+    Path("leaderboard/leaderboard_controls_v0_4_0.json"): Path("schemas/leaderboard.schema.json"),
     Path("submissions/example_external_jsonl/example_external_report.json"): Path(
         "schemas/contradiction_benchmark_report.schema.json"
     ),

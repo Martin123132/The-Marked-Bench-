@@ -32,10 +32,10 @@ This roadmap keeps the benchmark moving toward a credible public standard.
 - Standard result cards for publishable benchmark results.
 - Checked adoption packet and announcement package for external public uptake.
 - Checked third-party evidence ledger for public adoption claims.
+- False-positive controls track for distractor and paraphrase robustness.
 
 ## Next
 
-- Add more non-contradiction distractor controls.
 - Add real third-party report submissions and review evidence.
 - Add signed or independently mirrored release evidence once external adopters
   exist.

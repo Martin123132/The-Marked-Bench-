@@ -35,6 +35,7 @@ SUITE_MANIFESTS = {
     Path("suites/marked_bench_contradiction_standard_v0_1_0.json"): "contradiction",
     Path("suites/marked_bench_contradiction_adversarial_v0_2_0.json"): "contradiction-adversarial",
     Path("suites/marked_bench_contradiction_multihop_v0_3_0.json"): "contradiction-multihop",
+    Path("suites/marked_bench_contradiction_controls_v0_4_0.json"): "contradiction-controls",
 }
 
 BASELINE_REPORTS = [
@@ -44,6 +45,8 @@ BASELINE_REPORTS = [
     Path("baselines/always_none_adversarial_v0_2_0.json"),
     Path("baselines/contradiction_engine_multihop_v0_3_0.json"),
     Path("baselines/always_none_multihop_v0_3_0.json"),
+    Path("baselines/contradiction_engine_controls_v0_4_0.json"),
+    Path("baselines/always_none_controls_v0_4_0.json"),
 ]
 
 LEADERBOARDS = {
@@ -58,6 +61,10 @@ LEADERBOARDS = {
     Path("leaderboard/leaderboard_multihop_v0_3_0.json"): [
         Path("baselines/always_none_multihop_v0_3_0.json"),
         Path("baselines/contradiction_engine_multihop_v0_3_0.json"),
+    ],
+    Path("leaderboard/leaderboard_controls_v0_4_0.json"): [
+        Path("baselines/always_none_controls_v0_4_0.json"),
+        Path("baselines/contradiction_engine_controls_v0_4_0.json"),
     ],
 }
 
@@ -74,10 +81,10 @@ CHECKED_SUBMISSION_PACKETS = [
 ]
 
 BENCHMARK_REGISTRY = Path("benchmark_registry.json")
-RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_10.json")
-CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_3_10.json")
-ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_3_10.json")
-EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_3_10.json")
+RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_0.json")
+CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_0.json")
+ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_0.json")
+EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_0.json")
 
 REQUIRED_PUBLIC_FILES = [
     Path("adoption/README.md"),
@@ -108,6 +115,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("docs/RELEASE_NOTES_v0_3_8.md"),
     Path("docs/RELEASE_NOTES_v0_3_9.md"),
     Path("docs/RELEASE_NOTES_v0_3_10.md"),
+    Path("docs/RELEASE_NOTES_v0_4_0.md"),
     Path("docs/ROADMAP.md"),
     Path("docs/SUBMISSION_GUIDE.md"),
     Path("docs/THIRD_PARTY_EVIDENCE.md"),
@@ -145,6 +153,7 @@ SCHEMA_CONFORMANCE_FILES = {
     Path("leaderboard/leaderboard_v0_1_0.json"): Path("schemas/leaderboard.schema.json"),
     Path("leaderboard/leaderboard_adversarial_v0_2_0.json"): Path("schemas/leaderboard.schema.json"),
     Path("leaderboard/leaderboard_multihop_v0_3_0.json"): Path("schemas/leaderboard.schema.json"),
+    Path("leaderboard/leaderboard_controls_v0_4_0.json"): Path("schemas/leaderboard.schema.json"),
     Path("submissions/example_external_jsonl/example_external_report.json"): Path(
         "schemas/contradiction_benchmark_report.schema.json"
     ),

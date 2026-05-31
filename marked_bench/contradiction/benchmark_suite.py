@@ -24,6 +24,8 @@ ADVERSARIAL_SUITE_ID = "marked-bench-contradiction-adversarial"
 ADVERSARIAL_SUITE_VERSION = "0.2.0"
 MULTIHOP_SUITE_ID = "marked-bench-contradiction-multihop"
 MULTIHOP_SUITE_VERSION = "0.3.0"
+CONTROL_SUITE_ID = "marked-bench-contradiction-controls"
+CONTROL_SUITE_VERSION = "0.4.0"
 REPORT_SCHEMA = "marked_bench.contradiction-benchmark-report.v2"
 VALIDATION_SCHEMA = "marked_bench.contradiction-benchmark-validation.v1"
 SUITE_MANIFEST_SCHEMA = "marked_bench.contradiction-suite-manifest.v1"
@@ -725,10 +727,222 @@ def build_multihop_suite() -> list[BenchmarkCase]:
     ]
 
 
+def build_control_suite() -> list[BenchmarkCase]:
+    """Return a false-positive control track for contradiction detectors.
+
+    This track stresses non-contradiction distractors while retaining anchor
+    contradictions for every public label so ordinary scoring remains
+    comparable with the other tracks.
+    """
+
+    return [
+        BenchmarkCase(
+            "marked-ctrl-direct-001",
+            "The audit packet is complete",
+            "The audit packet is incomplete",
+            ContradictionType.DIRECT_NEGATION,
+            "governance",
+            "easy",
+            "anchor_negation",
+            ("control-track", "anchor", "negation"),
+            "Anchor direct-negation case to keep contradiction detection visible.",
+        ),
+        BenchmarkCase(
+            "marked-ctrl-property-001",
+            "Water boils at 100C in the reference note",
+            "Water boils at 95C in the reference note",
+            ContradictionType.PROPERTY_MISMATCH,
+            "science",
+            "easy",
+            "anchor_numeric_property",
+            ("control-track", "anchor", "numeric"),
+            "Anchor numeric property mismatch.",
+        ),
+        BenchmarkCase(
+            "marked-ctrl-definition-001",
+            "Triangles have three sides",
+            "Triangle false three sides in this glossary",
+            ContradictionType.DEFINITIONAL_VIOLATION,
+            "geometry",
+            "easy",
+            "anchor_definition",
+            ("control-track", "anchor", "definition"),
+            "Anchor definitional violation.",
+        ),
+        BenchmarkCase(
+            "marked-ctrl-universal-001",
+            "All sandbox agents require approval before launch",
+            "A counterexample exists: sandbox agent S9 launched without approval",
+            ContradictionType.UNIVERSAL_COUNTEREXAMPLE,
+            "ai_safety",
+            "medium",
+            "anchor_universal",
+            ("control-track", "anchor", "universal"),
+            "Anchor universal-counterexample case.",
+        ),
+        BenchmarkCase(
+            "marked-ctrl-temporal-001",
+            "Always in 2021 the service used manual approval",
+            "In 2024 the service used automated approval",
+            ContradictionType.TEMPORAL_CONFLICT,
+            "operations",
+            "medium",
+            "anchor_temporal",
+            ("control-track", "anchor", "temporal"),
+            "Anchor temporal conflict.",
+        ),
+        BenchmarkCase(
+            "marked-ctrl-control-001",
+            "The deployment gate is enabled for staging",
+            "The deployment gate is enabled for staging after the policy update",
+            ContradictionType.NONE,
+            "operations",
+            "easy",
+            "elaboration_control",
+            ("control-track", "control", "elaboration"),
+            "Added temporal context does not reverse the staging gate state.",
+        ),
+        BenchmarkCase(
+            "marked-ctrl-control-002",
+            "The audit found no evidence that keys left the vault",
+            "The audit did not prove that keys left the vault",
+            ContradictionType.NONE,
+            "security",
+            "hard",
+            "negation_scope_control",
+            ("control-track", "control", "negation_scope"),
+            "Two cautious negative claims are compatible.",
+        ),
+        BenchmarkCase(
+            "marked-ctrl-control-003",
+            "Most sandbox agents require review before launch",
+            "Some sandbox agents launch automatically during tests",
+            ContradictionType.NONE,
+            "ai_safety",
+            "medium",
+            "quantifier_control",
+            ("control-track", "control", "quantifier"),
+            "A non-universal quantifier allows exceptions.",
+        ),
+        BenchmarkCase(
+            "marked-ctrl-control-004",
+            "The service used manual approval in 2021",
+            "The service used automated approval in 2024",
+            ContradictionType.NONE,
+            "operations",
+            "medium",
+            "temporal_change_control",
+            ("control-track", "control", "temporal"),
+            "A system can change across years without contradiction.",
+        ),
+        BenchmarkCase(
+            "marked-ctrl-control-005",
+            "The threshold is 0.80 before calibration",
+            "The threshold is 0.80 after calibration",
+            ContradictionType.NONE,
+            "measurement",
+            "medium",
+            "same_value_context_control",
+            ("control-track", "control", "numeric"),
+            "Same numeric value under a changed condition is not a mismatch.",
+        ),
+        BenchmarkCase(
+            "marked-ctrl-control-006",
+            "The crate mass is 12 kg before repacking",
+            "The crate mass is 12 kg after repacking",
+            ContradictionType.NONE,
+            "measurement",
+            "easy",
+            "same_unit_control",
+            ("control-track", "control", "unit"),
+            "Same value and unit should not trigger the unit-conflict rule.",
+        ),
+        BenchmarkCase(
+            "marked-ctrl-control-007",
+            "The model declined the unsafe request and offered a safe alternative",
+            "The model refused the unsafe request while offering a safe alternative",
+            ContradictionType.NONE,
+            "ai_safety",
+            "medium",
+            "paraphrase_control",
+            ("control-track", "control", "paraphrase"),
+            "Near-paraphrase should remain non-contradictory.",
+        ),
+        BenchmarkCase(
+            "marked-ctrl-control-008",
+            "The policy is pending approval",
+            "The policy is awaiting approval",
+            ContradictionType.NONE,
+            "governance",
+            "easy",
+            "state_paraphrase_control",
+            ("control-track", "control", "paraphrase"),
+            "Pending and awaiting approval are compatible states.",
+        ),
+        BenchmarkCase(
+            "marked-ctrl-control-009",
+            "Triangles have three sides",
+            "The shape is a triangle with three sides and a red outline",
+            ContradictionType.NONE,
+            "geometry",
+            "easy",
+            "definition_elaboration_control",
+            ("control-track", "control", "definition"),
+            "Additional visual detail does not violate the definition.",
+        ),
+        BenchmarkCase(
+            "marked-ctrl-control-010",
+            "Dataset Echo is synthetic",
+            "Dataset Echo is a synthetic dataset used for testing",
+            ContradictionType.NONE,
+            "data_governance",
+            "easy",
+            "entity_elaboration_control",
+            ("control-track", "control", "dataset"),
+            "The query elaborates the same dataset classification.",
+        ),
+        BenchmarkCase(
+            "marked-ctrl-control-011",
+            "The invoice total is 95 dollars before tax",
+            "The invoice total is 95 dollars before tax and fees",
+            ContradictionType.NONE,
+            "finance",
+            "medium",
+            "numeric_scope_control",
+            ("control-track", "control", "numeric"),
+            "The same scoped amount is repeated with extra accounting context.",
+        ),
+        BenchmarkCase(
+            "marked-ctrl-control-012",
+            "The incident was resolved by rollback",
+            "The incident was resolved after rollback completed",
+            ContradictionType.NONE,
+            "operations",
+            "easy",
+            "causal_paraphrase_control",
+            ("control-track", "control", "operations"),
+            "The query restates the same resolution path.",
+        ),
+        BenchmarkCase(
+            "marked-ctrl-control-013",
+            "The cache refresh happened after deploy",
+            "The cache refresh happened after the deployment completed",
+            ContradictionType.NONE,
+            "operations",
+            "easy",
+            "event_paraphrase_control",
+            ("control-track", "control", "operations"),
+            "Equivalent event order with different wording.",
+        ),
+    ]
+
+
 def build_suite(suite: str = DEFAULT_SUITE) -> list[BenchmarkCase]:
     """Return cases for a named public suite."""
 
     key = _suite_key(suite)
+    if key == "controls":
+        return build_control_suite()
     if key == "multihop":
         return build_multihop_suite()
     if key == "adversarial":
@@ -1355,6 +1569,8 @@ def _case_hash_record(case: BenchmarkCase | Mapping[str, Any]) -> dict[str, Any]
 
 def _suite_identity(suite: str) -> tuple[str, str]:
     key = _suite_key(suite)
+    if key == "controls":
+        return CONTROL_SUITE_ID, CONTROL_SUITE_VERSION
     if key == "multihop":
         return MULTIHOP_SUITE_ID, MULTIHOP_SUITE_VERSION
     if key == "adversarial":
@@ -1378,6 +1594,12 @@ def _suite_key(suite: str) -> str:
         "multihop": "multihop",
         MULTIHOP_SUITE_ID: "multihop",
         f"{MULTIHOP_SUITE_ID}:{MULTIHOP_SUITE_VERSION}": "multihop",
+        "contradiction-controls": "controls",
+        "controls": "controls",
+        "control": "controls",
+        "false-positive-controls": "controls",
+        CONTROL_SUITE_ID: "controls",
+        f"{CONTROL_SUITE_ID}:{CONTROL_SUITE_VERSION}": "controls",
     }
     if normalized not in aliases:
         raise ValueError(f"Unknown benchmark suite: {suite!r}")
@@ -1658,6 +1880,8 @@ __all__ = [
     "BenchmarkCase",
     "ADVERSARIAL_SUITE_ID",
     "ADVERSARIAL_SUITE_VERSION",
+    "CONTROL_SUITE_ID",
+    "CONTROL_SUITE_VERSION",
     "DEFAULT_SUITE",
     "MULTIHOP_SUITE_ID",
     "MULTIHOP_SUITE_VERSION",
@@ -1668,6 +1892,7 @@ __all__ = [
     "SUITE_VERSION",
     "VALIDATION_SCHEMA",
     "build_adversarial_suite",
+    "build_control_suite",
     "build_multihop_suite",
     "build_prediction_template",
     "build_suite",

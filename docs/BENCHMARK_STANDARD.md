@@ -17,6 +17,8 @@ bundle, review status, standard publication claims, and file hashes.
 - Adversarial suite version: `0.2.0`
 - Multi-hop suite ID: `marked-bench-contradiction-multihop`
 - Multi-hop suite version: `0.3.0`
+- Controls suite ID: `marked-bench-contradiction-controls`
+- Controls suite version: `0.4.0`
 - Report schema: `marked_bench.contradiction-benchmark-report.v2`
 - Canonical builder: `marked_bench.contradiction.benchmark_suite.build_standard_suite`
 
@@ -146,22 +148,22 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public benchmark artifacts by SHA-256:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_3_10.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_4_0.json
 ```
 
 Export and validate the release conformance report:
 
 ```bash
-marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_3_10.json
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_10.json
+marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_4_0.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_0.json
 ```
 
 Export and validate the external adoption packet:
 
 ```bash
-marked-bench --export-adoption-packet adoption/marked_bench_adoption_packet_v0_3_10.json
-marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_3_10.json
-marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_3_10.json
+marked-bench --export-adoption-packet adoption/marked_bench_adoption_packet_v0_4_0.json
+marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_0.json
+marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_0.json
 ```
 
 Run the harder adversarial track:
@@ -174,6 +176,12 @@ Run the multi-hop track:
 
 ```bash
 marked-bench --suite contradiction-multihop --report artifacts/marked_bench_contradiction_multihop_report.json
+```
+
+Run the false-positive controls track:
+
+```bash
+marked-bench --suite contradiction-controls --report artifacts/marked_bench_contradiction_controls_report.json
 ```
 
 The checked-in symbolic baseline lives at:
@@ -198,6 +206,12 @@ The checked-in multi-hop suite manifest lives at:
 
 ```text
 suites/marked_bench_contradiction_multihop_v0_3_0.json
+```
+
+The checked-in controls suite manifest lives at:
+
+```text
+suites/marked_bench_contradiction_controls_v0_4_0.json
 ```
 
 ## Score A Custom Detector
@@ -293,6 +307,7 @@ the full release package. Release `0.3.8` adds standardized result cards for
 publishable benchmark results. Release `0.3.9` adds a checked adoption packet
 and announcement package so external users have a validated public handoff.
 Release `0.3.10` adds a checked third-party evidence ledger so adoption claims
-can be recorded without overstating unverified use. The next step toward a
-larger public standard is real third-party submissions and human review
-evidence.
+can be recorded without overstating unverified use. Version `0.4.0` adds a
+false-positive controls track for paraphrases, scoped negatives, time shifts,
+and harmless elaborations. The next step toward a larger public standard is
+real third-party submissions and human review evidence.

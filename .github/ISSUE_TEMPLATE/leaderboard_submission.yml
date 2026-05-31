@@ -72,7 +72,7 @@ body:
     attributes:
       label: Third-party evidence ledger entry
       description: Link or path if this submission should also count as external adoption evidence.
-      placeholder: adoption/third_party_evidence_ledger_v0_3_10.json
+      placeholder: adoption/third_party_evidence_ledger_v0_4_0.json
     validations:
       required: false
   - type: textarea

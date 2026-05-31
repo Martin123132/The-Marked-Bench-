@@ -7,6 +7,7 @@ Describe the benchmark, report, leaderboard, or infrastructure change.
 - [ ] `contradiction` v0.1.0
 - [ ] `contradiction-adversarial` v0.2.0
 - [ ] `contradiction-multihop` v0.3.0
+- [ ] `contradiction-controls` v0.4.0
 - [ ] New suite or infrastructure only
 
 ## Evidence

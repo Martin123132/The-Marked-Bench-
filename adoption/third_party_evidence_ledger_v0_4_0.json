@@ -1,0 +1,20 @@
+{
+  "adoption_packet_path": "adoption/marked_bench_adoption_packet_v0_4_0.json",
+  "benchmark_family": "contradiction-detection",
+  "conformance_report_path": "conformance/marked_bench_conformance_v0_4_0.json",
+  "entries": [],
+  "entry_count": 0,
+  "evidence_requirements": {
+    "no_unverified_adoption_claims": true,
+    "public_url_or_committed_path_required": true,
+    "result_card_required": true,
+    "review_required_for_verified_status": true,
+    "same_suite_hash_required": true,
+    "submission_bundle_required": true
+  },
+  "project": "The Marked Bench",
+  "release_id": "marked-bench-contradiction-standard-release-0.4.0",
+  "release_manifest_path": "releases/marked_bench_release_v0_4_0.json",
+  "schema": "marked_bench.third-party-evidence-ledger.v1",
+  "status": "awaiting-third-party-evidence"
+}

@@ -11,7 +11,7 @@ from marked_bench.benchmark_registry import REGISTRY_SCHEMA, build_benchmark_reg
 
 
 RELEASE_MANIFEST_SCHEMA = "marked_bench.benchmark-release-manifest.v1"
-RELEASE_ID = "marked-bench-contradiction-standard-release-0.3.10"
+RELEASE_ID = "marked-bench-contradiction-standard-release-0.4.0"
 
 ROOT_PUBLIC_ARTIFACTS = (
     "README.md",
@@ -69,12 +69,12 @@ SUBMISSION_EXAMPLE_ARTIFACTS = (
 )
 
 CONFORMANCE_ARTIFACTS = (
-    "conformance/marked_bench_conformance_v0_3_10.json",
+    "conformance/marked_bench_conformance_v0_4_0.json",
 )
 
 ADOPTION_ARTIFACTS = (
-    "adoption/marked_bench_adoption_packet_v0_3_10.json",
-    "adoption/third_party_evidence_ledger_v0_3_10.json",
+    "adoption/marked_bench_adoption_packet_v0_4_0.json",
+    "adoption/third_party_evidence_ledger_v0_4_0.json",
 )
 
 

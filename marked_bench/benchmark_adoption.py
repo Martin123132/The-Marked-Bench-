@@ -12,12 +12,12 @@ from marked_bench.schema_validation import load_json_schema, validate_json_schem
 
 
 ADOPTION_PACKET_SCHEMA = "marked_bench.adoption-packet.v1"
-DEFAULT_ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_3_10.json")
-DEFAULT_EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_3_10.json")
-DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_10.json")
-DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_3_10.json")
+DEFAULT_ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_0.json")
+DEFAULT_EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_0.json")
+DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_0.json")
+DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_0.json")
 REPOSITORY_URL = "https://github.com/Martin123132/The-Marked-Bench-"
-RELEASE_URL = "https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.3.10"
+RELEASE_URL = "https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.4.0"
 
 
 def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
@@ -94,7 +94,7 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
             {
                 "step": 1,
                 "name": "pin_release",
-                "command": "marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_3_10.json",
+                "command": "marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_0.json",
                 "output": "Release conformance validation passes.",
             },
             {
@@ -161,7 +161,7 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
                 "name": "adoption_packet",
                 "command": (
                     "marked-bench --validate-adoption-packet "
-                    "adoption/marked_bench_adoption_packet_v0_3_10.json"
+                    "adoption/marked_bench_adoption_packet_v0_4_0.json"
                 ),
                 "proves": "The external adoption packet matches the current release evidence.",
             },
@@ -169,7 +169,7 @@ def build_adoption_packet(root: str | Path = ".") -> dict[str, Any]:
                 "name": "third_party_evidence_ledger",
                 "command": (
                     "marked-bench --validate-evidence-ledger "
-                    "adoption/third_party_evidence_ledger_v0_3_10.json"
+                    "adoption/third_party_evidence_ledger_v0_4_0.json"
                 ),
                 "proves": "External adoption evidence claims are explicitly recorded and validated.",
             },

@@ -1,0 +1,368 @@
+{
+  "case_count": 18,
+  "cases": [
+    {
+      "capability": "anchor_negation",
+      "difficulty": "easy",
+      "domain": "governance",
+      "expected": "direct_negation",
+      "id": "marked-ctrl-direct-001",
+      "note": "Anchor direct-negation case to keep contradiction detection visible.",
+      "premise": "The audit packet is complete",
+      "query": "The audit packet is incomplete",
+      "tags": [
+        "control-track",
+        "anchor",
+        "negation"
+      ]
+    },
+    {
+      "capability": "anchor_numeric_property",
+      "difficulty": "easy",
+      "domain": "science",
+      "expected": "property_mismatch",
+      "id": "marked-ctrl-property-001",
+      "note": "Anchor numeric property mismatch.",
+      "premise": "Water boils at 100C in the reference note",
+      "query": "Water boils at 95C in the reference note",
+      "tags": [
+        "control-track",
+        "anchor",
+        "numeric"
+      ]
+    },
+    {
+      "capability": "anchor_definition",
+      "difficulty": "easy",
+      "domain": "geometry",
+      "expected": "definitional_violation",
+      "id": "marked-ctrl-definition-001",
+      "note": "Anchor definitional violation.",
+      "premise": "Triangles have three sides",
+      "query": "Triangle false three sides in this glossary",
+      "tags": [
+        "control-track",
+        "anchor",
+        "definition"
+      ]
+    },
+    {
+      "capability": "anchor_universal",
+      "difficulty": "medium",
+      "domain": "ai_safety",
+      "expected": "universal_counterexample",
+      "id": "marked-ctrl-universal-001",
+      "note": "Anchor universal-counterexample case.",
+      "premise": "All sandbox agents require approval before launch",
+      "query": "A counterexample exists: sandbox agent S9 launched without approval",
+      "tags": [
+        "control-track",
+        "anchor",
+        "universal"
+      ]
+    },
+    {
+      "capability": "anchor_temporal",
+      "difficulty": "medium",
+      "domain": "operations",
+      "expected": "temporal_conflict",
+      "id": "marked-ctrl-temporal-001",
+      "note": "Anchor temporal conflict.",
+      "premise": "Always in 2021 the service used manual approval",
+      "query": "In 2024 the service used automated approval",
+      "tags": [
+        "control-track",
+        "anchor",
+        "temporal"
+      ]
+    },
+    {
+      "capability": "elaboration_control",
+      "difficulty": "easy",
+      "domain": "operations",
+      "expected": "none",
+      "id": "marked-ctrl-control-001",
+      "note": "Added temporal context does not reverse the staging gate state.",
+      "premise": "The deployment gate is enabled for staging",
+      "query": "The deployment gate is enabled for staging after the policy update",
+      "tags": [
+        "control-track",
+        "control",
+        "elaboration"
+      ]
+    },
+    {
+      "capability": "negation_scope_control",
+      "difficulty": "hard",
+      "domain": "security",
+      "expected": "none",
+      "id": "marked-ctrl-control-002",
+      "note": "Two cautious negative claims are compatible.",
+      "premise": "The audit found no evidence that keys left the vault",
+      "query": "The audit did not prove that keys left the vault",
+      "tags": [
+        "control-track",
+        "control",
+        "negation_scope"
+      ]
+    },
+    {
+      "capability": "quantifier_control",
+      "difficulty": "medium",
+      "domain": "ai_safety",
+      "expected": "none",
+      "id": "marked-ctrl-control-003",
+      "note": "A non-universal quantifier allows exceptions.",
+      "premise": "Most sandbox agents require review before launch",
+      "query": "Some sandbox agents launch automatically during tests",
+      "tags": [
+        "control-track",
+        "control",
+        "quantifier"
+      ]
+    },
+    {
+      "capability": "temporal_change_control",
+      "difficulty": "medium",
+      "domain": "operations",
+      "expected": "none",
+      "id": "marked-ctrl-control-004",
+      "note": "A system can change across years without contradiction.",
+      "premise": "The service used manual approval in 2021",
+      "query": "The service used automated approval in 2024",
+      "tags": [
+        "control-track",
+        "control",
+        "temporal"
+      ]
+    },
+    {
+      "capability": "same_value_context_control",
+      "difficulty": "medium",
+      "domain": "measurement",
+      "expected": "none",
+      "id": "marked-ctrl-control-005",
+      "note": "Same numeric value under a changed condition is not a mismatch.",
+      "premise": "The threshold is 0.80 before calibration",
+      "query": "The threshold is 0.80 after calibration",
+      "tags": [
+        "control-track",
+        "control",
+        "numeric"
+      ]
+    },
+    {
+      "capability": "same_unit_control",
+      "difficulty": "easy",
+      "domain": "measurement",
+      "expected": "none",
+      "id": "marked-ctrl-control-006",
+      "note": "Same value and unit should not trigger the unit-conflict rule.",
+      "premise": "The crate mass is 12 kg before repacking",
+      "query": "The crate mass is 12 kg after repacking",
+      "tags": [
+        "control-track",
+        "control",
+        "unit"
+      ]
+    },
+    {
+      "capability": "paraphrase_control",
+      "difficulty": "medium",
+      "domain": "ai_safety",
+      "expected": "none",
+      "id": "marked-ctrl-control-007",
+      "note": "Near-paraphrase should remain non-contradictory.",
+      "premise": "The model declined the unsafe request and offered a safe alternative",
+      "query": "The model refused the unsafe request while offering a safe alternative",
+      "tags": [
+        "control-track",
+        "control",
+        "paraphrase"
+      ]
+    },
+    {
+      "capability": "state_paraphrase_control",
+      "difficulty": "easy",
+      "domain": "governance",
+      "expected": "none",
+      "id": "marked-ctrl-control-008",
+      "note": "Pending and awaiting approval are compatible states.",
+      "premise": "The policy is pending approval",
+      "query": "The policy is awaiting approval",
+      "tags": [
+        "control-track",
+        "control",
+        "paraphrase"
+      ]
+    },
+    {
+      "capability": "definition_elaboration_control",
+      "difficulty": "easy",
+      "domain": "geometry",
+      "expected": "none",
+      "id": "marked-ctrl-control-009",
+      "note": "Additional visual detail does not violate the definition.",
+      "premise": "Triangles have three sides",
+      "query": "The shape is a triangle with three sides and a red outline",
+      "tags": [
+        "control-track",
+        "control",
+        "definition"
+      ]
+    },
+    {
+      "capability": "entity_elaboration_control",
+      "difficulty": "easy",
+      "domain": "data_governance",
+      "expected": "none",
+      "id": "marked-ctrl-control-010",
+      "note": "The query elaborates the same dataset classification.",
+      "premise": "Dataset Echo is synthetic",
+      "query": "Dataset Echo is a synthetic dataset used for testing",
+      "tags": [
+        "control-track",
+        "control",
+        "dataset"
+      ]
+    },
+    {
+      "capability": "numeric_scope_control",
+      "difficulty": "medium",
+      "domain": "finance",
+      "expected": "none",
+      "id": "marked-ctrl-control-011",
+      "note": "The same scoped amount is repeated with extra accounting context.",
+      "premise": "The invoice total is 95 dollars before tax",
+      "query": "The invoice total is 95 dollars before tax and fees",
+      "tags": [
+        "control-track",
+        "control",
+        "numeric"
+      ]
+    },
+    {
+      "capability": "causal_paraphrase_control",
+      "difficulty": "easy",
+      "domain": "operations",
+      "expected": "none",
+      "id": "marked-ctrl-control-012",
+      "note": "The query restates the same resolution path.",
+      "premise": "The incident was resolved by rollback",
+      "query": "The incident was resolved after rollback completed",
+      "tags": [
+        "control-track",
+        "control",
+        "operations"
+      ]
+    },
+    {
+      "capability": "event_paraphrase_control",
+      "difficulty": "easy",
+      "domain": "operations",
+      "expected": "none",
+      "id": "marked-ctrl-control-013",
+      "note": "Equivalent event order with different wording.",
+      "premise": "The cache refresh happened after deploy",
+      "query": "The cache refresh happened after the deployment completed",
+      "tags": [
+        "control-track",
+        "control",
+        "operations"
+      ]
+    }
+  ],
+  "labels": [
+    "direct_negation",
+    "property_mismatch",
+    "definitional_violation",
+    "universal_counterexample",
+    "temporal_conflict",
+    "none"
+  ],
+  "profile": {
+    "capability_counts": {
+      "anchor_definition": 1,
+      "anchor_negation": 1,
+      "anchor_numeric_property": 1,
+      "anchor_temporal": 1,
+      "anchor_universal": 1,
+      "causal_paraphrase_control": 1,
+      "definition_elaboration_control": 1,
+      "elaboration_control": 1,
+      "entity_elaboration_control": 1,
+      "event_paraphrase_control": 1,
+      "negation_scope_control": 1,
+      "numeric_scope_control": 1,
+      "paraphrase_control": 1,
+      "quantifier_control": 1,
+      "same_unit_control": 1,
+      "same_value_context_control": 1,
+      "state_paraphrase_control": 1,
+      "temporal_change_control": 1
+    },
+    "case_count": 18,
+    "contradiction_case_count": 5,
+    "control_case_count": 13,
+    "difficulty_counts": {
+      "easy": 10,
+      "hard": 1,
+      "medium": 7
+    },
+    "domain_counts": {
+      "ai_safety": 3,
+      "data_governance": 1,
+      "finance": 1,
+      "geometry": 2,
+      "governance": 2,
+      "measurement": 2,
+      "operations": 5,
+      "science": 1,
+      "security": 1
+    },
+    "label_counts": {
+      "definitional_violation": 1,
+      "direct_negation": 1,
+      "none": 13,
+      "property_mismatch": 1,
+      "temporal_conflict": 1,
+      "universal_counterexample": 1
+    },
+    "quality_gates": {
+      "min_cases": 15,
+      "requires_all_contradiction_labels": true,
+      "requires_control_cases": true,
+      "requires_multiple_difficulties": true,
+      "requires_multiple_domains": true
+    },
+    "tag_counts": {
+      "anchor": 5,
+      "control": 13,
+      "control-track": 18,
+      "dataset": 1,
+      "definition": 2,
+      "elaboration": 1,
+      "negation": 1,
+      "negation_scope": 1,
+      "numeric": 3,
+      "operations": 2,
+      "paraphrase": 2,
+      "quantifier": 1,
+      "temporal": 2,
+      "unit": 1,
+      "universal": 1
+    }
+  },
+  "schema": "marked_bench.contradiction-suite-manifest.v1",
+  "scoring": {
+    "overall_score_weights": {
+      "binary_detection_f1": 0.2,
+      "contradiction_macro_f1": 0.45,
+      "coverage_index": 0.1,
+      "type_accuracy": 0.25
+    }
+  },
+  "suite_hash": "33a0777f6f93504bde517d922f46c24c1d93992256bfe95b32287695babfb08a",
+  "suite_id": "marked-bench-contradiction-controls",
+  "suite_version": "0.4.0"
+}
