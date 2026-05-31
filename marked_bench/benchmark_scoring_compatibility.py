@@ -19,9 +19,9 @@ from marked_bench.schema_validation import load_json_schema, validate_json_schem
 
 SCORING_COMPATIBILITY_SCHEMA = "marked_bench.scoring-compatibility.v1"
 SCORING_COMPATIBILITY_VALIDATION_SCHEMA = "marked_bench.scoring-compatibility-validation.v1"
-DEFAULT_SCORING_COMPATIBILITY_PROFILE = Path("standard/marked_bench_scoring_compatibility_v0_4_6.json")
+DEFAULT_SCORING_COMPATIBILITY_PROFILE = Path("standard/marked_bench_scoring_compatibility_v0_4_7.json")
 REPOSITORY_URL = "https://github.com/Martin123132/The-Marked-Bench-"
-RELEASE_URL = "https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.4.6"
+RELEASE_URL = "https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.4.7"
 
 VECTOR_NAMES = ("perfect", "always_none", "rotated_labels")
 LABEL_ROTATION = {

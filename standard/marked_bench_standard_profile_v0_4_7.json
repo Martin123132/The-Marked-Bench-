@@ -1,0 +1,321 @@
+{
+  "benchmark_family": "contradiction-detection",
+  "claim_boundaries": {
+    "not_general_intelligence_claim": true,
+    "not_safety_certification": true,
+    "not_third_party_adoption_without_verified_evidence": true,
+    "public_suite_can_be_overfit": true
+  },
+  "comparability_rules": {
+    "compare_only_same_suite_hash": true,
+    "compare_only_same_suite_id": true,
+    "compare_only_same_suite_version": true,
+    "suite_hash_mismatch_invalidates_direct_comparison": true
+  },
+  "default_track": "contradiction-multihop",
+  "minimum_external_result_evidence": [
+    "validated benchmark report",
+    "leaderboard submission metadata",
+    "submission bundle",
+    "submission review for ranked entries",
+    "result card for cited or ranked results",
+    "publication packet for self-contained public result evidence",
+    "result claim for short score statements",
+    "suite_id, suite_version, and suite_hash"
+  ],
+  "project": "The Marked Bench",
+  "release_artifacts": {
+    "adoption_packet": "adoption/marked_bench_adoption_packet_v0_4_7.json",
+    "conformance_report": "conformance/marked_bench_conformance_v0_4_7.json",
+    "implementation_kit": "adoption/marked_bench_implementation_kit_v0_4_7.json",
+    "registry": "benchmark_registry.json",
+    "release_manifest": "releases/marked_bench_release_v0_4_7.json",
+    "scoring_compatibility": "standard/marked_bench_scoring_compatibility_v0_4_7.json",
+    "scoring_spec": "standard/marked_bench_scoring_spec_v0_4_7.json",
+    "standard_profile": "standard/marked_bench_standard_profile_v0_4_7.json",
+    "third_party_evidence_ledger": "adoption/third_party_evidence_ledger_v0_4_7.json"
+  },
+  "release_id": "marked-bench-contradiction-standard-release-0.4.7",
+  "release_url": "https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.4.7",
+  "repository_url": "https://github.com/Martin123132/The-Marked-Bench-",
+  "requirement_summary": {
+    "satisfied": 17,
+    "total": 17,
+    "unsatisfied": 0
+  },
+  "schema": "marked_bench.standard-profile.v1",
+  "standard_requirements": [
+    {
+      "evidence_paths": [
+        "benchmark_registry.json",
+        "suites/marked_bench_contradiction_multihop_v0_3_0.json"
+      ],
+      "id": "stable_suite_identity",
+      "statement": "Every public track has a stable suite ID, version, hash, and manifest.",
+      "status": "satisfied",
+      "validation_commands": [
+        "marked-bench --export-registry benchmark_registry.json"
+      ]
+    },
+    {
+      "evidence_paths": [
+        "schemas/benchmark_registry.schema.json",
+        "schemas/contradiction_benchmark_report.schema.json"
+      ],
+      "id": "public_json_schemas",
+      "statement": "Public artifacts have checked JSON schemas.",
+      "status": "satisfied",
+      "validation_commands": [
+        "python scripts/validate_benchmark_artifacts.py"
+      ]
+    },
+    {
+      "evidence_paths": [
+        "schemas/contradiction_benchmark_report.schema.json",
+        "baselines/contradiction_engine_multihop_v0_3_0.json"
+      ],
+      "id": "validated_reports",
+      "statement": "Benchmark reports can be validated before publication.",
+      "status": "satisfied",
+      "validation_commands": [
+        "marked-bench --validate-report REPORT"
+      ]
+    },
+    {
+      "evidence_paths": [
+        "baselines/contradiction_engine_multihop_v0_3_0.json",
+        "leaderboard/leaderboard_multihop_v0_3_0.json"
+      ],
+      "id": "baseline_and_leaderboard_evidence",
+      "statement": "Baseline reports and leaderboard snapshots are checked against each other.",
+      "status": "satisfied",
+      "validation_commands": [
+        "python scripts/validate_benchmark_artifacts.py"
+      ]
+    },
+    {
+      "evidence_paths": [
+        "README.md",
+        "schemas/contradiction_predictions.schema.json"
+      ],
+      "id": "external_prediction_scoring",
+      "statement": "Non-Python systems can export templates and score JSON or JSONL predictions.",
+      "status": "satisfied",
+      "validation_commands": [
+        "marked-bench --suite contradiction-multihop --score-predictions PREDICTIONS --report REPORT"
+      ]
+    },
+    {
+      "evidence_paths": [
+        "schemas/submission_bundle.schema.json",
+        "docs/SUBMISSION_REVIEW_RUBRIC.md",
+        "submissions/example_external_jsonl/example_external_submission_bundle.json"
+      ],
+      "id": "submission_bundle_review",
+      "statement": "External results have submission metadata, bundle evidence, and a review rubric.",
+      "status": "satisfied",
+      "validation_commands": [
+        "marked-bench --validate-submission-bundle BUNDLE",
+        "marked-bench --validate-submission-review REVIEW"
+      ]
+    },
+    {
+      "evidence_paths": [
+        "schemas/result_card.schema.json",
+        "submissions/example_external_jsonl/example_external_result_card.json"
+      ],
+      "id": "result_card_publication",
+      "statement": "Cited or ranked results have result cards tied to reports, bundles, reviews, and hashes.",
+      "status": "satisfied",
+      "validation_commands": [
+        "marked-bench --validate-result-card CARD"
+      ]
+    },
+    {
+      "evidence_paths": [
+        "schemas/publication_packet.schema.json",
+        "submissions/example_publication_packet/publication_packet.json"
+      ],
+      "id": "publication_packet",
+      "statement": "Public result folders can be self-contained and hash-checked.",
+      "status": "satisfied",
+      "validation_commands": [
+        "marked-bench --validate-publication-packet PACKET"
+      ]
+    },
+    {
+      "evidence_paths": [
+        "schemas/result_claim.schema.json",
+        "submissions/example_publication_packet/result_claim.json"
+      ],
+      "id": "result_claim_boundaries",
+      "statement": "Short score statements are hash-pinned and carry explicit overclaim boundaries.",
+      "status": "satisfied",
+      "validation_commands": [
+        "marked-bench --validate-result-claim CLAIM"
+      ]
+    },
+    {
+      "evidence_paths": [
+        "releases/marked_bench_release_v0_4_7.json",
+        "schemas/release_manifest.schema.json"
+      ],
+      "id": "release_manifest_hashing",
+      "statement": "Release files are pinned by path, bytes, and SHA-256 digest.",
+      "status": "satisfied",
+      "validation_commands": [
+        "marked-bench --export-release-manifest releases/marked_bench_release_v0_4_7.json"
+      ]
+    },
+    {
+      "evidence_paths": [
+        "conformance/marked_bench_conformance_v0_4_7.json",
+        "schemas/conformance_report.schema.json"
+      ],
+      "id": "release_conformance",
+      "statement": "A single conformance report validates the full release package.",
+      "status": "satisfied",
+      "validation_commands": [
+        "marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_7.json"
+      ]
+    },
+    {
+      "evidence_paths": [
+        "adoption/marked_bench_adoption_packet_v0_4_7.json",
+        "schemas/adoption_packet.schema.json"
+      ],
+      "id": "adoption_packet",
+      "statement": "External users have a checked handoff packet for release adoption.",
+      "status": "satisfied",
+      "validation_commands": [
+        "marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_7.json"
+      ]
+    },
+    {
+      "evidence_paths": [
+        "adoption/third_party_evidence_ledger_v0_4_7.json",
+        "docs/THIRD_PARTY_EVIDENCE.md"
+      ],
+      "id": "third_party_evidence_gate",
+      "statement": "Third-party adoption claims require checked public evidence, bundle and review hashes, and verification status.",
+      "status": "satisfied",
+      "validation_commands": [
+        "marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_7.json"
+      ]
+    },
+    {
+      "evidence_paths": [
+        "adoption/marked_bench_implementation_kit_v0_4_7.json",
+        "adoption/implementation_kit/github_actions_validate_result.yml"
+      ],
+      "id": "implementation_kit",
+      "statement": "External repositories get copy-ready CI validation for public result artifacts.",
+      "status": "satisfied",
+      "validation_commands": [
+        "marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_7.json"
+      ]
+    },
+    {
+      "evidence_paths": [
+        "standard/marked_bench_scoring_compatibility_v0_4_7.json",
+        "schemas/scoring_compatibility.schema.json"
+      ],
+      "id": "scoring_compatibility_vectors",
+      "statement": "External scoring implementations have deterministic prediction vectors and expected summaries.",
+      "status": "satisfied",
+      "validation_commands": [
+        "marked-bench --validate-scoring-compatibility standard/marked_bench_scoring_compatibility_v0_4_7.json"
+      ]
+    },
+    {
+      "evidence_paths": [
+        "standard/marked_bench_scoring_spec_v0_4_7.json",
+        "schemas/scoring_spec.schema.json",
+        "docs/SCORING_SPEC.md"
+      ],
+      "id": "scoring_spec",
+      "statement": "Independent implementations have a language-neutral scoring contract.",
+      "status": "satisfied",
+      "validation_commands": [
+        "marked-bench --validate-scoring-spec standard/marked_bench_scoring_spec_v0_4_7.json"
+      ]
+    },
+    {
+      "evidence_paths": [
+        "README.md",
+        "docs/BENCHMARK_CARD.md"
+      ],
+      "id": "benchmark_only_scope",
+      "statement": "The repository scope is benchmark-only and excludes unrelated toolkit material.",
+      "status": "satisfied",
+      "validation_commands": [
+        "manual benchmark-only scope scan before release"
+      ]
+    }
+  ],
+  "standardization_status": "public-standard-candidate",
+  "tracks": [
+    {
+      "case_count": 17,
+      "name": "contradiction",
+      "suite_hash": "8c1f80ff67874af54869bab2e361b3cc7416ce1d86f80ff583636a55e3462765",
+      "suite_id": "marked-bench-contradiction-standard",
+      "suite_version": "0.1.0"
+    },
+    {
+      "case_count": 17,
+      "name": "contradiction-adversarial",
+      "suite_hash": "454c1aff69d5028224549dfc14fd8e6c10818251d0abf8becf36f0856b2dbd67",
+      "suite_id": "marked-bench-contradiction-adversarial",
+      "suite_version": "0.2.0"
+    },
+    {
+      "case_count": 18,
+      "name": "contradiction-multihop",
+      "suite_hash": "07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f",
+      "suite_id": "marked-bench-contradiction-multihop",
+      "suite_version": "0.3.0"
+    },
+    {
+      "case_count": 18,
+      "name": "contradiction-controls",
+      "suite_hash": "33a0777f6f93504bde517d922f46c24c1d93992256bfe95b32287695babfb08a",
+      "suite_id": "marked-bench-contradiction-controls",
+      "suite_version": "0.4.0"
+    }
+  ],
+  "validation_commands": [
+    {
+      "command": "python scripts/validate_benchmark_artifacts.py",
+      "name": "artifact_gate"
+    },
+    {
+      "command": "python -m unittest discover -s tests",
+      "name": "unit_tests"
+    },
+    {
+      "command": "marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_7.json",
+      "name": "conformance_report"
+    },
+    {
+      "command": "marked-bench --validate-standard-profile standard/marked_bench_standard_profile_v0_4_7.json",
+      "name": "standard_profile"
+    },
+    {
+      "command": "marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_7.json",
+      "name": "adoption_packet"
+    },
+    {
+      "command": "marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_7.json",
+      "name": "implementation_kit"
+    },
+    {
+      "command": "marked-bench --validate-scoring-compatibility standard/marked_bench_scoring_compatibility_v0_4_7.json",
+      "name": "scoring_compatibility"
+    },
+    {
+      "command": "marked-bench --validate-scoring-spec standard/marked_bench_scoring_spec_v0_4_7.json",
+      "name": "scoring_spec"
+    }
+  ]
+}

@@ -10,14 +10,16 @@ from marked_bench.benchmark_claim import load_result_claim, validate_result_clai
 from marked_bench.benchmark_registry import build_benchmark_registry
 from marked_bench.benchmark_release import RELEASE_ID, file_sha256
 from marked_bench.benchmark_result_card import load_result_card, validate_result_card
+from marked_bench.benchmark_review import load_submission_review, validate_submission_review
+from marked_bench.benchmark_submission import load_submission_bundle, validate_submission_bundle
 from marked_bench.schema_validation import load_json_schema, validate_json_schema
 
 
 EVIDENCE_LEDGER_SCHEMA = "marked_bench.third-party-evidence-ledger.v1"
-DEFAULT_EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_6.json")
-DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_6.json")
-DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_6.json")
-DEFAULT_ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_6.json")
+DEFAULT_EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_7.json")
+DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_7.json")
+DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_7.json")
+DEFAULT_ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_7.json")
 
 
 def build_evidence_ledger(entries: list[Mapping[str, Any]] | None = None) -> dict[str, Any]:
@@ -38,7 +40,9 @@ def build_evidence_ledger(entries: list[Mapping[str, Any]] | None = None) -> dic
         "evidence_requirements": {
             "result_card_required": True,
             "submission_bundle_required": True,
+            "submission_bundle_hash_required": True,
             "result_claim_required_for_public_score_claims": True,
+            "review_hash_required_for_verified_status": True,
             "review_required_for_verified_status": True,
             "same_suite_hash_required": True,
             "public_url_or_committed_path_required": True,
@@ -147,9 +151,9 @@ def _entry_errors(
     if identity not in track_by_identity:
         errors.append(f"entries[{index}]: suite identity is not in the benchmark registry")
 
-    result_card_path = Path(str(entry.get("result_card_path", "")))
-    result_card_sha = str(entry.get("result_card_sha256", ""))
-    if not result_card_path.as_posix():
+    result_card_path = _entry_path(entry, "result_card_path", errors, index)
+    result_card_sha = _required_sha(entry, "result_card_sha256", errors, index)
+    if result_card_path is None:
         errors.append(f"entries[{index}]: result_card_path is required")
     elif not (root / result_card_path).exists():
         errors.append(f"entries[{index}]: result card is missing: {result_card_path}")
@@ -169,14 +173,67 @@ def _entry_errors(
                 if entry.get(key) != card.get(key):
                     errors.append(f"entries[{index}]: {key} does not match result card")
 
+    bundle_path = _entry_path(entry, "submission_bundle_path", errors, index)
+    bundle_sha = _required_sha(entry, "submission_bundle_sha256", errors, index)
+    if bundle_path is None:
+        errors.append(f"entries[{index}]: submission_bundle_path is required")
+    elif not (root / bundle_path).exists():
+        errors.append(f"entries[{index}]: submission bundle is missing: {bundle_path}")
+    else:
+        actual_sha = file_sha256(root / bundle_path)
+        if bundle_sha and actual_sha != bundle_sha:
+            errors.append(f"entries[{index}]: submission_bundle_sha256 does not match {bundle_path}")
+        try:
+            bundle = load_submission_bundle(root / bundle_path)
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            errors.append(f"entries[{index}]: could not load submission bundle: {exc}")
+        else:
+            validation = validate_submission_bundle(bundle, base_dir=(root / bundle_path).parent)
+            if not validation["valid"]:
+                errors.append(f"entries[{index}]: submission bundle validation failed: {validation['errors']}")
+            for key in ["suite_id", "suite_version", "suite_hash", "system_name", "system_version", "submitter"]:
+                if entry.get(key) != bundle.get(key):
+                    errors.append(f"entries[{index}]: {key} does not match submission bundle")
+
     status = entry.get("verification_status")
     if status == "verified" and not entry.get("review_path"):
         errors.append(f"entries[{index}]: verified entries require review_path")
+    if status == "verified" and not entry.get("review_sha256"):
+        errors.append(f"entries[{index}]: verified entries require review_sha256")
     if entry.get("adoption_claim") is True and status != "verified":
         errors.append(f"entries[{index}]: adoption_claim requires verified status")
-    result_claim_path = Path(str(entry.get("result_claim_path", "")))
+
+    review_path = _entry_path(entry, "review_path", errors, index)
+    review_decision = entry.get("review_decision")
+    if review_path is not None:
+        review_sha = _required_sha(entry, "review_sha256", errors, index)
+        if not (root / review_path).exists():
+            errors.append(f"entries[{index}]: review is missing: {review_path}")
+        else:
+            actual_sha = file_sha256(root / review_path)
+            if review_sha and actual_sha != review_sha:
+                errors.append(f"entries[{index}]: review_sha256 does not match {review_path}")
+            try:
+                review = load_submission_review(root / review_path)
+            except (OSError, ValueError, json.JSONDecodeError) as exc:
+                errors.append(f"entries[{index}]: could not load submission review: {exc}")
+            else:
+                validation = validate_submission_review(review, base_dir=(root / review_path).parent)
+                if not validation["valid"]:
+                    errors.append(f"entries[{index}]: submission review validation failed: {validation['errors']}")
+                for key in ["suite_id", "suite_version", "suite_hash", "system_name", "system_version", "submitter"]:
+                    if entry.get(key) != review.get(key):
+                        errors.append(f"entries[{index}]: {key} does not match submission review")
+                if review_decision is not None and review_decision != review.get("decision"):
+                    errors.append(f"entries[{index}]: review_decision does not match submission review")
+    if entry.get("adoption_claim") is True and review_decision != "accept":
+        errors.append(f"entries[{index}]: adoption_claim requires an accepted review decision")
+
+    result_claim_path = _entry_path(entry, "result_claim_path", errors, index)
     result_claim_sha = str(entry.get("result_claim_sha256", ""))
-    if result_claim_path.as_posix():
+    if result_claim_path is not None:
+        if not result_claim_sha:
+            errors.append(f"entries[{index}]: result_claim_sha256 is required when result_claim_path is set")
         if not (root / result_claim_path).exists():
             errors.append(f"entries[{index}]: result claim is missing: {result_claim_path}")
         else:
@@ -195,6 +252,29 @@ def _entry_errors(
                     if entry.get(key) != claim.get(key):
                         errors.append(f"entries[{index}]: {key} does not match result claim")
     return errors
+
+
+def _entry_path(
+    entry: Mapping[str, Any],
+    key: str,
+    errors: list[str],
+    index: int,
+) -> Path | None:
+    raw_value = entry.get(key)
+    if raw_value in (None, ""):
+        return None
+    path = Path(str(raw_value))
+    if path.is_absolute() or ".." in path.parts:
+        errors.append(f"entries[{index}]: {key} must be a safe relative path")
+        return None
+    return path
+
+
+def _required_sha(entry: Mapping[str, Any], key: str, errors: list[str], index: int) -> str:
+    value = str(entry.get(key, ""))
+    if not value:
+        errors.append(f"entries[{index}]: {key} is required")
+    return value
 
 
 __all__ = [

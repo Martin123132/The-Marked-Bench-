@@ -9,7 +9,7 @@ and how it is recorded.
 The checked ledger is:
 
 ```text
-adoption/third_party_evidence_ledger_v0_4_6.json
+adoption/third_party_evidence_ledger_v0_4_7.json
 ```
 
 The current ledger may be empty. An empty ledger is valid and means no external
@@ -18,8 +18,13 @@ adoption evidence has been accepted for the release yet.
 Validate it with:
 
 ```bash
-marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_6.json
+marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_7.json
 ```
+
+The validator checks local result-card, submission-bundle, review, and
+result-claim hashes when those paths are recorded in a ledger entry. Verified
+entries require review evidence, and adoption claims require verified status
+with an accepted review decision.
 
 ## What Counts
 
@@ -51,8 +56,9 @@ External teams can open a third-party evidence issue with:
 ```
 
 Maintainers should only add ledger entries after checking the linked result
-card and bundle. If the evidence is accepted for leaderboard claims, add or
-link the review file and set `verification_status` to `verified`.
+card, bundle, review file, and any result claim. If the evidence is accepted
+for leaderboard claims, add or link the accepted review file and set
+`verification_status` to `verified`.
 
 ## Boundary
 

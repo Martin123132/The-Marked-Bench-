@@ -14,10 +14,10 @@ from marked_bench.schema_validation import load_json_schema, validate_json_schem
 
 SCORING_SPEC_SCHEMA = "marked_bench.scoring-spec.v1"
 SCORING_SPEC_VALIDATION_SCHEMA = "marked_bench.scoring-spec-validation.v1"
-DEFAULT_SCORING_SPEC = Path("standard/marked_bench_scoring_spec_v0_4_6.json")
+DEFAULT_SCORING_SPEC = Path("standard/marked_bench_scoring_spec_v0_4_7.json")
 DEFAULT_SCORING_SPEC_DOC = Path("docs/SCORING_SPEC.md")
 REPOSITORY_URL = "https://github.com/Martin123132/The-Marked-Bench-"
-RELEASE_URL = "https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.4.6"
+RELEASE_URL = "https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.4.7"
 
 SCORE_WEIGHTS = {
     "contradiction_macro_f1": 0.45,
@@ -119,11 +119,11 @@ def build_scoring_spec(root: str | Path = ".") -> dict[str, Any]:
             "compare_only_same_suite_hash": True,
         },
         "compatibility_artifacts": {
-            "scoring_compatibility_profile": "standard/marked_bench_scoring_compatibility_v0_4_6.json",
+            "scoring_compatibility_profile": "standard/marked_bench_scoring_compatibility_v0_4_7.json",
             "scoring_compatibility_schema": "schemas/scoring_compatibility.schema.json",
             "validation_command": (
                 "marked-bench --validate-scoring-compatibility "
-                "standard/marked_bench_scoring_compatibility_v0_4_6.json"
+                "standard/marked_bench_scoring_compatibility_v0_4_7.json"
             ),
         },
         "tracks": [
@@ -205,7 +205,7 @@ def build_scoring_spec_markdown(root: str | Path = ".") -> str:
             "",
             (
                 "Independent implementations should validate against "
-                "`standard/marked_bench_scoring_compatibility_v0_4_6.json`."
+                "`standard/marked_bench_scoring_compatibility_v0_4_7.json`."
             ),
             "",
             "```bash",

@@ -161,51 +161,51 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public benchmark artifacts by SHA-256:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_4_6.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_4_7.json
 ```
 
 Export and validate the release conformance report:
 
 ```bash
-marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_4_6.json
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_6.json
+marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_4_7.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_7.json
 ```
 
 Export and validate the benchmark standard profile:
 
 ```bash
-marked-bench --export-standard-profile standard/marked_bench_standard_profile_v0_4_6.json
-marked-bench --validate-standard-profile standard/marked_bench_standard_profile_v0_4_6.json
+marked-bench --export-standard-profile standard/marked_bench_standard_profile_v0_4_7.json
+marked-bench --validate-standard-profile standard/marked_bench_standard_profile_v0_4_7.json
 ```
 
 Export and validate deterministic scoring compatibility vectors:
 
 ```bash
-marked-bench --export-scoring-compatibility standard/marked_bench_scoring_compatibility_v0_4_6.json
-marked-bench --validate-scoring-compatibility standard/marked_bench_scoring_compatibility_v0_4_6.json
+marked-bench --export-scoring-compatibility standard/marked_bench_scoring_compatibility_v0_4_7.json
+marked-bench --validate-scoring-compatibility standard/marked_bench_scoring_compatibility_v0_4_7.json
 ```
 
 Export and validate the language-neutral scoring specification:
 
 ```bash
-marked-bench --export-scoring-spec standard/marked_bench_scoring_spec_v0_4_6.json
-marked-bench --validate-scoring-spec standard/marked_bench_scoring_spec_v0_4_6.json
+marked-bench --export-scoring-spec standard/marked_bench_scoring_spec_v0_4_7.json
+marked-bench --validate-scoring-spec standard/marked_bench_scoring_spec_v0_4_7.json
 marked-bench --export-scoring-spec-doc docs/SCORING_SPEC.md
 ```
 
 Export and validate the external adoption packet:
 
 ```bash
-marked-bench --export-adoption-packet adoption/marked_bench_adoption_packet_v0_4_6.json
-marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_6.json
-marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_6.json
+marked-bench --export-adoption-packet adoption/marked_bench_adoption_packet_v0_4_7.json
+marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_7.json
+marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_7.json
 ```
 
 Export and validate the third-party implementation kit:
 
 ```bash
-marked-bench --export-implementation-kit adoption/marked_bench_implementation_kit_v0_4_6.json
-marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_6.json
+marked-bench --export-implementation-kit adoption/marked_bench_implementation_kit_v0_4_7.json
+marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_7.json
 ```
 
 Run the harder adversarial track:
@@ -394,6 +394,7 @@ standard profile that turns benchmark-standard requirements into a checked
 evidence matrix. Release `0.4.5` adds deterministic scoring compatibility
 vectors so independent implementations can validate their score calculations
 against the reference release. Release `0.4.6` adds a language-neutral scoring
-specification for metric formulas, rounding, and calibration. The next step
-toward a larger public standard is real third-party submissions and human
-review evidence.
+specification for metric formulas, rounding, and calibration. Release `0.4.7`
+hardens third-party evidence validation for bundles, reviews, and optional
+result claims. The next step toward a larger public standard is real
+third-party submissions and human review evidence.

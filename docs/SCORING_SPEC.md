@@ -6,7 +6,7 @@ This document is generated from the machine-readable scoring spec. It is the lan
 
 ## Identity
 
-- Release: `marked-bench-contradiction-standard-release-0.4.6`
+- Release: `marked-bench-contradiction-standard-release-0.4.7`
 - Default track: `contradiction-multihop`
 - Schema: `marked_bench.scoring-spec.v1`
 
@@ -69,10 +69,10 @@ This document is generated from the machine-readable scoring spec. It is the lan
 
 ## Compatibility
 
-Independent implementations should validate against `standard/marked_bench_scoring_compatibility_v0_4_6.json`.
+Independent implementations should validate against `standard/marked_bench_scoring_compatibility_v0_4_7.json`.
 
 ```bash
-marked-bench --validate-scoring-compatibility standard/marked_bench_scoring_compatibility_v0_4_6.json
+marked-bench --validate-scoring-compatibility standard/marked_bench_scoring_compatibility_v0_4_7.json
 ```
 
 ## Public Tracks

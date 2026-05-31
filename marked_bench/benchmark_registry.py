@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 """Machine-readable registry for The Marked Bench public artifacts."""
 
@@ -224,6 +224,7 @@ def build_benchmark_registry() -> dict[str, Any]:
             "docs/RELEASE_NOTES_v0_4_4.md",
             "docs/RELEASE_NOTES_v0_4_5.md",
             "docs/RELEASE_NOTES_v0_4_6.md",
+            "docs/RELEASE_NOTES_v0_4_7.md",
             "docs/SCORING_SPEC.md",
             "docs/SUBMISSION_GUIDE.md",
             "docs/RELEASE_CHECKLIST.md",

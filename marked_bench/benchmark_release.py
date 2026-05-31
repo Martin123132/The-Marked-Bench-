@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 """Release manifest generation for public benchmark artifacts."""
 
@@ -11,7 +11,7 @@ from marked_bench.benchmark_registry import REGISTRY_SCHEMA, build_benchmark_reg
 
 
 RELEASE_MANIFEST_SCHEMA = "marked_bench.benchmark-release-manifest.v1"
-RELEASE_ID = "marked-bench-contradiction-standard-release-0.4.6"
+RELEASE_ID = "marked-bench-contradiction-standard-release-0.4.7"
 
 ROOT_PUBLIC_ARTIFACTS = (
     "README.md",
@@ -88,19 +88,19 @@ SUBMISSION_EXAMPLE_ARTIFACTS = (
 )
 
 CONFORMANCE_ARTIFACTS = (
-    "conformance/marked_bench_conformance_v0_4_6.json",
+    "conformance/marked_bench_conformance_v0_4_7.json",
 )
 
 ADOPTION_ARTIFACTS = (
-    "adoption/marked_bench_adoption_packet_v0_4_6.json",
-    "adoption/third_party_evidence_ledger_v0_4_6.json",
-    "adoption/marked_bench_implementation_kit_v0_4_6.json",
+    "adoption/marked_bench_adoption_packet_v0_4_7.json",
+    "adoption/third_party_evidence_ledger_v0_4_7.json",
+    "adoption/marked_bench_implementation_kit_v0_4_7.json",
 )
 
 STANDARD_ARTIFACTS = (
-    "standard/marked_bench_standard_profile_v0_4_6.json",
-    "standard/marked_bench_scoring_compatibility_v0_4_6.json",
-    "standard/marked_bench_scoring_spec_v0_4_6.json",
+    "standard/marked_bench_standard_profile_v0_4_7.json",
+    "standard/marked_bench_scoring_compatibility_v0_4_7.json",
+    "standard/marked_bench_scoring_spec_v0_4_7.json",
 )
 
 

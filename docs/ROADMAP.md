@@ -39,6 +39,8 @@ This roadmap keeps the benchmark moving toward a credible public standard.
 - Machine-readable standard profile for release requirement evidence.
 - Deterministic scoring compatibility vectors for independent implementations.
 - Language-neutral scoring specification for independent implementations.
+- Hardened third-party evidence validation for bundles, reviews, hashes, and
+  optional result claims.
 
 ## Next
 

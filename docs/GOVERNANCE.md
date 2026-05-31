@@ -36,6 +36,9 @@ independent implementations can verify score calculations against the public
 reference release.
 Release maintainers should keep the scoring specification current whenever
 labels, metric formulas, rounding, calibration, or report semantics change.
+Release maintainers should keep the third-party evidence ledger strict: public
+adoption claims need checked result-card, submission-bundle, review, and
+result-claim evidence with current hashes.
 
 ## Review Priorities
 
