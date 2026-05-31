@@ -35,6 +35,7 @@ This roadmap keeps the benchmark moving toward a credible public standard.
 - False-positive controls track for distractor and paraphrase robustness.
 - One-command publication packets for self-contained public result evidence.
 - Hash-pinned result claims for citeable benchmark score statements.
+- Third-party implementation kit for external CI validation.
 
 ## Next
 

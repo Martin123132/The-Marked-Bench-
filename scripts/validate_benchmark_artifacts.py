@@ -16,6 +16,7 @@ from marked_bench.benchmark_adoption import load_adoption_packet, validate_adopt
 from marked_bench.benchmark_claim import load_result_claim, validate_result_claim  # noqa: E402
 from marked_bench.benchmark_conformance import load_conformance_report, validate_conformance_report  # noqa: E402
 from marked_bench.benchmark_evidence import load_evidence_ledger, validate_evidence_ledger  # noqa: E402
+from marked_bench.benchmark_implementation import load_implementation_kit, validate_implementation_kit  # noqa: E402
 from marked_bench.benchmark_leaderboard import build_leaderboard  # noqa: E402
 from marked_bench.benchmark_publication import load_publication_packet, validate_publication_packet  # noqa: E402
 from marked_bench.benchmark_release import build_release_manifest  # noqa: E402
@@ -83,15 +84,20 @@ CHECKED_SUBMISSION_PACKETS = [
 ]
 
 BENCHMARK_REGISTRY = Path("benchmark_registry.json")
-RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_2.json")
-CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_2.json")
-ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_2.json")
-EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_2.json")
+RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_3.json")
+CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_3.json")
+ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_3.json")
+EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_3.json")
+IMPLEMENTATION_KIT = Path("adoption/marked_bench_implementation_kit_v0_4_3.json")
 
 REQUIRED_PUBLIC_FILES = [
     Path("adoption/README.md"),
     ADOPTION_PACKET,
     EVIDENCE_LEDGER,
+    IMPLEMENTATION_KIT,
+    Path("adoption/implementation_kit/README.md"),
+    Path("adoption/implementation_kit/github_actions_validate_result.yml"),
+    Path("adoption/implementation_kit/result_claim_badge.md"),
     Path("README.md"),
     BENCHMARK_REGISTRY,
     RELEASE_MANIFEST,
@@ -120,6 +126,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("docs/RELEASE_NOTES_v0_4_0.md"),
     Path("docs/RELEASE_NOTES_v0_4_1.md"),
     Path("docs/RELEASE_NOTES_v0_4_2.md"),
+    Path("docs/RELEASE_NOTES_v0_4_3.md"),
     Path("docs/ROADMAP.md"),
     Path("docs/SUBMISSION_GUIDE.md"),
     Path("docs/THIRD_PARTY_EVIDENCE.md"),
@@ -133,6 +140,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("schemas/submission_review.schema.json"),
     Path("schemas/publication_packet.schema.json"),
     Path("schemas/result_claim.schema.json"),
+    Path("schemas/implementation_kit.schema.json"),
     Path("schemas/release_manifest.schema.json"),
     Path("schemas/conformance_report.schema.json"),
     Path("schemas/result_card.schema.json"),
@@ -179,6 +187,7 @@ SCHEMA_CONFORMANCE_FILES = {
     Path("submissions/example_publication_packet/result_claim.json"): Path("schemas/result_claim.schema.json"),
     ADOPTION_PACKET: Path("schemas/adoption_packet.schema.json"),
     EVIDENCE_LEDGER: Path("schemas/third_party_evidence_ledger.schema.json"),
+    IMPLEMENTATION_KIT: Path("schemas/implementation_kit.schema.json"),
 }
 
 
@@ -194,6 +203,7 @@ def main() -> int:
         _validate_conformance_report(errors)
         _validate_adoption_packet(errors)
         _validate_evidence_ledger(errors)
+        _validate_implementation_kit(errors)
         _validate_suite_manifests(errors)
         _validate_baseline_reports(errors)
         _validate_leaderboards(errors)
@@ -376,6 +386,17 @@ def _validate_evidence_ledger(errors: list[str]) -> None:
     validation = validate_evidence_ledger(ledger, root=ROOT)
     if not validation["valid"]:
         errors.append(f"{EVIDENCE_LEDGER}: evidence ledger validation failed: {validation['errors']}")
+
+
+def _validate_implementation_kit(errors: list[str]) -> None:
+    try:
+        kit = load_implementation_kit(IMPLEMENTATION_KIT)
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        errors.append(f"{IMPLEMENTATION_KIT}: could not load implementation kit: {exc}")
+        return
+    validation = validate_implementation_kit(kit, root=ROOT)
+    if not validation["valid"]:
+        errors.append(f"{IMPLEMENTATION_KIT}: implementation kit validation failed: {validation['errors']}")
 
 
 def _validate_baseline_reports(errors: list[str]) -> None:

@@ -44,6 +44,7 @@
         "submission_review",
         "publication_packet",
         "result_claim",
+        "implementation_kit",
         "conformance_report",
         "result_card",
         "adoption_packet",

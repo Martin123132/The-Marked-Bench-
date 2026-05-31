@@ -13,6 +13,8 @@ Every published result should pin:
 - report schema
 - exact report JSON
 - result card JSON
+- result claim JSON for short public score statements
+- implementation kit version when using the external CI workflow
 - explanation-audit coverage, when rationale/evidence fields are submitted
 
 The current default public track is `contradiction-multihop`:
@@ -82,15 +84,38 @@ submission metadata, bundle evidence, review files, and result cards.
 `submissions/example_publication_packet/` shows the one-command publication
 packet shape and the checked result-claim shape.
 
+## Use The Implementation Kit
+
+External repositories can copy the workflow template from:
+
+```text
+adoption/implementation_kit/github_actions_validate_result.yml
+```
+
+Use it with this layout:
+
+```text
+marked-bench-result/
+    publication_packet.json
+    result_claim.json
+```
+
+The machine-readable kit descriptor is:
+
+```bash
+marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_3.json
+```
+
 ## Check Release Conformance
 
 Before adopting or mirroring a release package, validate the checked
 conformance report:
 
 ```bash
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_2.json
-marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_2.json
-marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_2.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_3.json
+marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_3.json
+marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_3.json
+marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_3.json
 ```
 
 The conformance report is the single machine-readable pass/fail artifact for
@@ -102,6 +127,8 @@ submission channels, and citation requirements.
 The third-party evidence ledger is the public record for verified external
 adoption evidence. It can be valid while empty; that means no external evidence
 has been accepted yet.
+The implementation kit is the copy-ready contract for external CI checks,
+result-claim snippets, and version-pinned installation commands.
 
 ## Cite The Benchmark
 

@@ -25,6 +25,7 @@
     "docs/RELEASE_NOTES_v0_4_0.md",
     "docs/RELEASE_NOTES_v0_4_1.md",
     "docs/RELEASE_NOTES_v0_4_2.md",
+    "docs/RELEASE_NOTES_v0_4_3.md",
     "docs/SUBMISSION_GUIDE.md",
     "docs/RELEASE_CHECKLIST.md"
   ],
@@ -34,6 +35,7 @@
     "adoption_packet": "marked_bench.adoption-packet.v1",
     "benchmark_report": "marked_bench.contradiction-benchmark-report.v2",
     "conformance_report": "marked_bench.conformance-report.v1",
+    "implementation_kit": "marked_bench.implementation-kit.v1",
     "leaderboard": "marked_bench.benchmark-leaderboard.v1",
     "leaderboard_submission": "marked_bench.leaderboard-submission.v1",
     "predictions": "marked_bench.contradiction-predictions.v2",
@@ -50,6 +52,7 @@
     "benchmark_registry": "schemas/benchmark_registry.schema.json",
     "benchmark_report": "schemas/contradiction_benchmark_report.schema.json",
     "conformance_report": "schemas/conformance_report.schema.json",
+    "implementation_kit": "schemas/implementation_kit.schema.json",
     "leaderboard": "schemas/leaderboard.schema.json",
     "leaderboard_submission": "schemas/leaderboard_submission.schema.json",
     "predictions": "schemas/contradiction_predictions.schema.json",

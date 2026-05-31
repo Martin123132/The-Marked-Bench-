@@ -33,3 +33,7 @@ review file, result card, packet manifest, and result claim. Validate it with:
 marked-bench --validate-publication-packet submissions/example_publication_packet/publication_packet.json
 marked-bench --validate-result-claim submissions/example_publication_packet/result_claim.json
 ```
+
+External repositories can copy the implementation kit workflow from
+`adoption/implementation_kit/github_actions_validate_result.yml` to validate a
+public packet and result claim in CI before submitting evidence.

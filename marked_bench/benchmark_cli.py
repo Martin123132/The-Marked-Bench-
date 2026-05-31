@@ -27,6 +27,11 @@ from marked_bench.benchmark_evidence import (
     validate_evidence_ledger,
     write_evidence_ledger,
 )
+from marked_bench.benchmark_implementation import (
+    load_implementation_kit,
+    validate_implementation_kit,
+    write_implementation_kit,
+)
 from marked_bench.benchmark_leaderboard import build_leaderboard, write_leaderboard
 from marked_bench.benchmark_publication import (
     PACKET_FILENAME,
@@ -226,6 +231,18 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         metavar="PATH",
         help="Validate a third-party adoption evidence ledger.",
+    )
+    parser.add_argument(
+        "--export-implementation-kit",
+        default=None,
+        metavar="PATH",
+        help="Write a machine-readable third-party implementation kit and exit.",
+    )
+    parser.add_argument(
+        "--validate-implementation-kit",
+        default=None,
+        metavar="PATH",
+        help="Validate a third-party implementation kit.",
     )
     parser.add_argument(
         "--bundle-submission",
@@ -582,6 +599,21 @@ def main(argv: list[str] | None = None) -> None:
             raise SystemExit(1)
         return
 
+    if args.validate_implementation_kit:
+        validation = validate_implementation_kit(load_implementation_kit(args.validate_implementation_kit))
+        if args.json:
+            print(json.dumps(validation, indent=2, sort_keys=True))
+        else:
+            print(f"Implementation kit validation: {'pass' if validation['valid'] else 'fail'}")
+            print(f"Release: {validation['summary']['release_id']}")
+            print(f"Kit files: {validation['summary']['kit_file_count']}")
+            print(f"External CI commands: {validation['summary']['external_ci_command_count']}")
+            print(f"Errors: {len(validation['errors'])}")
+            print(f"Warnings: {len(validation['warnings'])}")
+        if not validation["valid"]:
+            raise SystemExit(1)
+        return
+
     if args.create_submission:
         if not args.submission_report:
             parser.error("--create-submission requires --submission-report")
@@ -749,6 +781,11 @@ def main(argv: list[str] | None = None) -> None:
     if args.export_evidence_ledger:
         write_evidence_ledger(args.export_evidence_ledger)
         print(f"Evidence ledger: {args.export_evidence_ledger}")
+        return
+
+    if args.export_implementation_kit:
+        write_implementation_kit(args.export_implementation_kit)
+        print(f"Implementation kit: {args.export_implementation_kit}")
         return
 
     if args.export_prediction_template:

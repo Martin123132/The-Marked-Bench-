@@ -93,6 +93,7 @@ All public reports must include:
 - failures
 - result card for cited or ranked results
 - result claim for short public score statements
+- implementation kit for external CI validation
 
 Reports are validated with:
 
@@ -117,3 +118,6 @@ Result cards are validated with `marked-bench --validate-result-card PATH` and
 pin the score to its report, bundle, review status, and file hashes.
 Result claims are validated with `marked-bench --validate-result-claim PATH`
 and pin citeable score wording to a publication packet hash.
+The implementation kit is validated with
+`marked-bench --validate-implementation-kit PATH` and pins external CI
+templates to the current release evidence.

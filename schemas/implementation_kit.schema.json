@@ -1,0 +1,254 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marked-bench.local/schemas/implementation_kit.schema.json",
+  "title": "The Marked Bench Implementation Kit",
+  "type": "object",
+  "required": [
+    "schema",
+    "project",
+    "benchmark_family",
+    "release_id",
+    "repository_url",
+    "release_url",
+    "purpose",
+    "release_artifacts",
+    "default_track",
+    "tracks",
+    "public_schemas",
+    "kit_files",
+    "required_local_artifacts",
+    "external_ci_commands",
+    "release_validation_commands",
+    "submission_requirements",
+    "version_pinning"
+  ],
+  "properties": {
+    "schema": {
+      "const": "marked_bench.implementation-kit.v1"
+    },
+    "project": {
+      "type": "string",
+      "minLength": 1
+    },
+    "benchmark_family": {
+      "type": "string",
+      "minLength": 1
+    },
+    "release_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "repository_url": {
+      "type": "string",
+      "minLength": 1
+    },
+    "release_url": {
+      "type": "string",
+      "minLength": 1
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 1
+    },
+    "release_artifacts": {
+      "$ref": "#/$defs/string_map"
+    },
+    "default_track": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tracks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/track"
+      }
+    },
+    "public_schemas": {
+      "$ref": "#/$defs/string_map"
+    },
+    "kit_files": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/kit_file"
+      }
+    },
+    "required_local_artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/artifact"
+      }
+    },
+    "external_ci_commands": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/command"
+      }
+    },
+    "release_validation_commands": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/command"
+      }
+    },
+    "submission_requirements": {
+      "$ref": "#/$defs/submission_requirements"
+    },
+    "version_pinning": {
+      "$ref": "#/$defs/version_pinning"
+    }
+  },
+  "$defs": {
+    "string_map": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "track": {
+      "type": "object",
+      "required": [
+        "name",
+        "suite_id",
+        "suite_version",
+        "suite_hash",
+        "case_count"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "suite_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "suite_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "suite_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "case_count": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "kit_file": {
+      "type": "object",
+      "required": [
+        "name",
+        "path",
+        "purpose"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "purpose": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "required": [
+        "name",
+        "path"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "command": {
+      "type": "object",
+      "required": [
+        "name",
+        "command"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "command": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "submission_requirements": {
+      "type": "object",
+      "required": [
+        "publication_packet_required",
+        "result_claim_required",
+        "same_suite_hash_required",
+        "public_url_or_committed_path_required",
+        "third_party_evidence_requires_review",
+        "not_safety_certification"
+      ],
+      "properties": {
+        "publication_packet_required": {
+          "const": true
+        },
+        "result_claim_required": {
+          "const": true
+        },
+        "same_suite_hash_required": {
+          "const": true
+        },
+        "public_url_or_committed_path_required": {
+          "const": true
+        },
+        "third_party_evidence_requires_review": {
+          "const": true
+        },
+        "not_safety_certification": {
+          "const": true
+        }
+      }
+    },
+    "version_pinning": {
+      "type": "object",
+      "required": [
+        "release_tag",
+        "install_reference",
+        "compare_only_same_suite_hash"
+      ],
+      "properties": {
+        "release_tag": {
+          "type": "string",
+          "minLength": 1
+        },
+        "install_reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "compare_only_same_suite_hash": {
+          "const": true
+        }
+      }
+    }
+  }
+}

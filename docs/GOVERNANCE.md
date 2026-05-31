@@ -27,6 +27,8 @@ Claims without full JSON reports should not be ranked. Accepted entries should
 also have a validated submission bundle and a completed submission review
 rubric. Short public score statements should use a validated result claim so
 the wording stays tied to the publication packet hash and benchmark boundaries.
+External repositories should use the implementation kit workflow before making
+public result claims.
 
 ## Review Priorities
 

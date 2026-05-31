@@ -7,7 +7,8 @@ The project is designed to become a reproducible public standard: every score
 is tied to a suite ID, suite version, deterministic suite hash, immutable case
 list, JSON report schema, confusion matrix, per-class metrics, confidence
 calibration metrics, explanation-audit coverage, validation result, diagnostic
-slice metrics, result card, and leaderboard entry.
+slice metrics, result card, result claim, implementation kit, and leaderboard
+entry.
 
 ## Current Tracks
 
@@ -74,7 +75,7 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public artifact SHA-256 digests:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_4_2.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_4_3.json
 ```
 
 Export the generated technical note:
@@ -86,16 +87,23 @@ marked-bench --export-technical-note docs/TECHNICAL_NOTE.md
 Export and validate the machine-readable conformance report:
 
 ```bash
-marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_4_2.json
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_2.json
+marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_4_3.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_3.json
 ```
 
 Export and validate the machine-readable adoption packet for external users:
 
 ```bash
-marked-bench --export-adoption-packet adoption/marked_bench_adoption_packet_v0_4_2.json
-marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_2.json
-marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_2.json
+marked-bench --export-adoption-packet adoption/marked_bench_adoption_packet_v0_4_3.json
+marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_3.json
+marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_3.json
+```
+
+Export and validate the external implementation kit:
+
+```bash
+marked-bench --export-implementation-kit adoption/marked_bench_implementation_kit_v0_4_3.json
+marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_3.json
 ```
 
 ## Score External Systems
@@ -196,9 +204,11 @@ marked-bench --build-leaderboard baselines/always_none_controls_v0_4_0.json base
 
 - Benchmark registry: `benchmark_registry.json`
 - Release manifest: `releases/`
-- Conformance report: `conformance/marked_bench_conformance_v0_4_2.json`
-- Adoption packet: `adoption/marked_bench_adoption_packet_v0_4_2.json`
-- Third-party evidence ledger: `adoption/third_party_evidence_ledger_v0_4_2.json`
+- Conformance report: `conformance/marked_bench_conformance_v0_4_3.json`
+- Adoption packet: `adoption/marked_bench_adoption_packet_v0_4_3.json`
+- Third-party evidence ledger: `adoption/third_party_evidence_ledger_v0_4_3.json`
+- Implementation kit: `adoption/marked_bench_implementation_kit_v0_4_3.json`
+- Implementation kit templates: `adoption/implementation_kit/`
 - Suite manifests and coverage profiles: `suites/`
 - Baseline reports: `baselines/`
 - Leaderboard snapshots: `leaderboard/`
@@ -212,6 +222,7 @@ marked-bench --build-leaderboard baselines/always_none_controls_v0_4_0.json base
 - Result card schema: `schemas/result_card.schema.json`
 - Publication packet schema: `schemas/publication_packet.schema.json`
 - Result claim schema: `schemas/result_claim.schema.json`
+- Implementation kit schema: `schemas/implementation_kit.schema.json`
 - Adoption packet schema: `schemas/adoption_packet.schema.json`
 - Third-party evidence ledger schema: `schemas/third_party_evidence_ledger.schema.json`
 - Checked external submission packet: `submissions/example_external_jsonl/`
@@ -221,7 +232,7 @@ marked-bench --build-leaderboard baselines/always_none_controls_v0_4_0.json base
 - Third-party evidence protocol: `docs/THIRD_PARTY_EVIDENCE.md`
 - Submission review rubric: `docs/SUBMISSION_REVIEW_RUBRIC.md`
 - Release notes: `docs/RELEASE_NOTES_v0_2_0.md`
-- Current release notes: `docs/RELEASE_NOTES_v0_4_2.md`
+- Current release notes: `docs/RELEASE_NOTES_v0_4_3.md`
 
 ## Quality Gates
 
@@ -252,6 +263,8 @@ The adoption packet is validated so external handoff, announcement, and
 citation material stays pinned to the same release evidence.
 The third-party evidence ledger is validated so adoption claims stay separate
 from unverified interest or private anecdotes.
+The implementation kit is validated so external CI templates, result-claim
+snippets, and pinned release paths stay aligned with the current release.
 
 ## Package Layout
 
@@ -260,6 +273,7 @@ marked_bench/
     benchmark_adoption.py         # Adoption packet export/validation
     benchmark_cli.py              # CLI runner
     benchmark_evidence.py         # Third-party evidence ledger validation
+    benchmark_implementation.py   # External implementation kit validation
     benchmark_leaderboard.py      # Validated leaderboard builder
     benchmark_publication.py      # One-command public result packets
     benchmark_claim.py            # Citeable result claim validation

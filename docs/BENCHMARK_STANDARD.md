@@ -12,6 +12,9 @@ Publication packets provide a self-contained folder for sharing the full
 evidence chain.
 Result claims provide exact citeable wording tied to the publication packet
 hash, so scores are not detached from their evidence or overstated.
+Implementation kits provide copy-ready external CI guidance and a
+machine-readable contract for validating public result packets outside this
+repository.
 
 ## Suite Identity
 
@@ -80,6 +83,7 @@ The source tree also includes JSON schemas for public infrastructure:
 - `schemas/submission_review.schema.json`
 - `schemas/publication_packet.schema.json`
 - `schemas/result_claim.schema.json`
+- `schemas/implementation_kit.schema.json`
 - `schemas/release_manifest.schema.json`
 - `schemas/result_card.schema.json`
 - `schemas/conformance_report.schema.json`
@@ -154,22 +158,29 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public benchmark artifacts by SHA-256:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_4_2.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_4_3.json
 ```
 
 Export and validate the release conformance report:
 
 ```bash
-marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_4_2.json
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_2.json
+marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_4_3.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_3.json
 ```
 
 Export and validate the external adoption packet:
 
 ```bash
-marked-bench --export-adoption-packet adoption/marked_bench_adoption_packet_v0_4_2.json
-marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_2.json
-marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_2.json
+marked-bench --export-adoption-packet adoption/marked_bench_adoption_packet_v0_4_3.json
+marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_3.json
+marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_3.json
+```
+
+Export and validate the third-party implementation kit:
+
+```bash
+marked-bench --export-implementation-kit adoption/marked_bench_implementation_kit_v0_4_3.json
+marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_3.json
 ```
 
 Run the harder adversarial track:
@@ -283,6 +294,12 @@ marked-bench --create-result-claim artifacts/my-detector-publication-packet/resu
 marked-bench --validate-result-claim artifacts/my-detector-publication-packet/result_claim.json
 ```
 
+External repositories can copy
+`adoption/implementation_kit/github_actions_validate_result.yml` into
+`.github/workflows/marked-bench-result.yml` to validate a checked
+`marked-bench-result/publication_packet.json` and
+`marked-bench-result/result_claim.json` against the pinned benchmark release.
+
 The checked example under `submissions/example_external_jsonl/` shows the full
 external packet shape: JSONL predictions, scored report, submission metadata,
 bundle manifest, structured review file, and result card.
@@ -312,6 +329,8 @@ inspectable submissions.
   public evidence folder.
 - Require result claims when a benchmark score is cited as a short public
   statement or badge.
+- Keep the implementation kit current when release paths, schemas, or public
+  result-validation commands change.
 - Keep `python scripts/validate_benchmark_artifacts.py` passing after any
   baseline, suite, or leaderboard change.
 - Keep checked public JSON artifacts conformant with the schemas under
@@ -337,6 +356,8 @@ can be recorded without overstating unverified use. Version `0.4.0` adds a
 false-positive controls track for paraphrases, scoped negatives, time shifts,
 and harmless elaborations. Release `0.4.1` adds one-command publication packets
 for self-contained public result evidence. Release `0.4.2` adds result claims
-so public score statements are hash-pinned and bounded. The next step toward a
+so public score statements are hash-pinned and bounded. Release `0.4.3` adds
+the third-party implementation kit so external repositories can validate
+publication packets and result claims in their own CI. The next step toward a
 larger public standard is real third-party submissions and human review
 evidence.
