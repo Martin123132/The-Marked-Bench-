@@ -139,6 +139,15 @@ submission metadata, a bundle, and a review template:
 python -m marked_bench.examples.external_submission_demo
 ```
 
+The repository also includes a checked example packet at
+`submissions/example_external_jsonl/`. It can be validated without regenerating
+anything:
+
+```bash
+marked-bench --validate-submission-bundle submissions/example_external_jsonl/example_external_submission_bundle.json
+marked-bench --validate-submission-review submissions/example_external_jsonl/example_external_submission_review.json
+```
+
 ## 6. Update Leaderboard
 
 For foundation entries:

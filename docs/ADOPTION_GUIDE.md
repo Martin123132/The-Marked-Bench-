@@ -55,6 +55,10 @@ metadata, bundle evidence, and a review template, run:
 python -m marked_bench.examples.external_submission_demo
 ```
 
+A checked example packet is committed under `submissions/example_external_jsonl/`.
+Use it as the reference shape for external JSONL predictions, scored reports,
+submission metadata, bundle evidence, and review files.
+
 ## Cite The Benchmark
 
 Use `CITATION.cff` and include the release tag, suite ID, suite version, and

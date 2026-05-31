@@ -12,6 +12,7 @@ from marked_bench.benchmark_review import (
     REVIEW_SCHEMA,
     RUBRIC_DIMENSIONS,
     build_submission_review,
+    load_submission_review,
     validate_submission_review,
     write_submission_review,
 )
@@ -20,6 +21,7 @@ from marked_bench.benchmark_submission import (
     SUBMISSION_SCHEMA,
     build_leaderboard_submission,
     build_submission_bundle,
+    load_submission_bundle,
     validate_submission_bundle,
     validate_leaderboard_submission,
     write_leaderboard_submission,
@@ -196,7 +198,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
         root = Path(__file__).resolve().parent.parent
         checked_pairs = [
             ("benchmark_registry.json", "schemas/benchmark_registry.schema.json"),
-            ("releases/marked_bench_release_v0_3_5.json", "schemas/release_manifest.schema.json"),
+            ("releases/marked_bench_release_v0_3_6.json", "schemas/release_manifest.schema.json"),
             ("suites/marked_bench_contradiction_standard_v0_1_0.json", "schemas/contradiction_suite_manifest.schema.json"),
             ("suites/marked_bench_contradiction_adversarial_v0_2_0.json", "schemas/contradiction_suite_manifest.schema.json"),
             ("suites/marked_bench_contradiction_multihop_v0_3_0.json", "schemas/contradiction_suite_manifest.schema.json"),
@@ -246,14 +248,37 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_release_manifest_matches_current_artifacts(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "releases" / "marked_bench_release_v0_3_5.json"
+        path = root / "releases" / "marked_bench_release_v0_3_6.json"
 
         manifest = json.loads(path.read_text(encoding="utf-8"))
+        artifact_paths = {entry["path"] for entry in manifest["artifacts"]}
 
         self.assertEqual(manifest, build_release_manifest(root))
         self.assertEqual(manifest["schema"], RELEASE_MANIFEST_SCHEMA)
         self.assertEqual(manifest["registry_sha256"], file_sha256(root / "benchmark_registry.json"))
         self.assertGreater(manifest["artifact_count"], 20)
+        self.assertIn("submissions/example_external_jsonl/predictions.jsonl", artifact_paths)
+        self.assertIn("submissions/example_external_jsonl/example_external_submission_review.json", artifact_paths)
+
+    def test_checked_external_submission_packet_validates(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        packet_dir = root / "submissions" / "example_external_jsonl"
+        report_path = packet_dir / "example_external_report.json"
+
+        report = json.loads(report_path.read_text(encoding="utf-8"))
+        scored_report = evaluate_prediction_file(
+            packet_dir / "predictions.jsonl",
+            system_name="ExampleExternalJsonl",
+            suite="contradiction-multihop",
+        )
+        bundle = load_submission_bundle(packet_dir / "example_external_submission_bundle.json")
+        review = load_submission_review(packet_dir / "example_external_submission_review.json")
+
+        self.assertTrue(validate_benchmark_report(report)["valid"])
+        self.assertEqual(report["suite_id"], MULTIHOP_SUITE_ID)
+        self.assertEqual(report["overall_score"], scored_report["overall_score"])
+        self.assertTrue(validate_submission_bundle(bundle, base_dir=packet_dir)["valid"])
+        self.assertTrue(validate_submission_review(review, base_dir=packet_dir)["valid"])
 
     def test_checked_in_technical_note_matches_generated_evidence(self) -> None:
         root = Path(__file__).resolve().parent.parent

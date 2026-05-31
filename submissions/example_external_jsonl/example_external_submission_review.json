@@ -1,0 +1,79 @@
+{
+  "automated_checks": {
+    "bundle_error_count": 0,
+    "bundle_valid": true,
+    "bundle_warning_count": 0,
+    "ready_for_leaderboard_review": true
+  },
+  "bundle_path": "example_external_submission_bundle.json",
+  "bundle_sha256": "7469903189259e803f17ba310710f82677a0e8a5f37cc64198ec629d0e9ee89e",
+  "created_at": 1780231286.964,
+  "decision": "needs_review",
+  "explanation_audit": {
+    "case_count": 18,
+    "correct_explanation_ready_rate": 1.0,
+    "evidence_count": 18,
+    "evidence_coverage": 1.0,
+    "explanation_ready_count": 18,
+    "explanation_ready_rate": 1.0,
+    "rationale_count": 18,
+    "rationale_coverage": 1.0
+  },
+  "notes": "Demo review template for the external submission workflow.",
+  "overall_score": 11.11,
+  "reviewer": "example-reviewer",
+  "rubric": {
+    "disclosure_quality": {
+      "criterion": "Model, prompting, preprocessing, retrieval, postprocessing, training data, and runtime are disclosed.",
+      "max_score": 2,
+      "notes": "",
+      "score": null
+    },
+    "evidence_quality": {
+      "criterion": "Evidence quotes or references support the predicted labels without leaking expected labels.",
+      "max_score": 2,
+      "notes": "",
+      "score": null
+    },
+    "explanation_coverage": {
+      "criterion": "Rationale and evidence fields cover enough cases for meaningful review.",
+      "max_score": 2,
+      "notes": "",
+      "score": null
+    },
+    "limitations": {
+      "criterion": "Known limitations, failure modes, and benchmark-use caveats are stated clearly.",
+      "max_score": 2,
+      "notes": "",
+      "score": null
+    },
+    "reproducibility": {
+      "criterion": "The bundle, report, hashes, suite identity, and commands are reproducible.",
+      "max_score": 2,
+      "notes": "",
+      "score": null
+    },
+    "score_integrity": {
+      "criterion": "The reported score is backed by a valid report and no unexplained metric mismatch.",
+      "max_score": 2,
+      "notes": "",
+      "score": null
+    }
+  },
+  "schema": "marked_bench.submission-review.v1",
+  "submitter": "The Marked Bench Examples",
+  "suite_hash": "07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f",
+  "suite_id": "marked-bench-contradiction-multihop",
+  "suite_version": "0.3.0",
+  "summary": {
+    "accept_recommendation_minimum": 9,
+    "completed_dimensions": 0,
+    "dimension_count": 6,
+    "ready_for_decision": false,
+    "recommendation": "needs_review",
+    "rubric_max": 12,
+    "rubric_total": null
+  },
+  "system_name": "ExampleExternalJsonl",
+  "system_version": "demo-1.0"
+}

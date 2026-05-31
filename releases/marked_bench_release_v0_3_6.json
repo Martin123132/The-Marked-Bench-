@@ -1,0 +1,465 @@
+{
+  "artifact_count": 72,
+  "artifacts": [
+    {
+      "bytes": 1252,
+      "category": "support",
+      "path": ".github/ISSUE_TEMPLATE/benchmark_case.yml",
+      "sha256": "3e05e84b607097a826ad4790157eb0382932355825f8fd4fa5388147ce707077"
+    },
+    {
+      "bytes": 30,
+      "category": "support",
+      "path": ".github/ISSUE_TEMPLATE/config.yml",
+      "sha256": "408ee312d9fa0f969866944296fecc640300e93a9a16d7aadaf24fb58948bc5b"
+    },
+    {
+      "bytes": 2040,
+      "category": "support",
+      "path": ".github/ISSUE_TEMPLATE/leaderboard_submission.yml",
+      "sha256": "206f57ad20fd6823104fb8990e2a10bbc337c727a0700c51ea6308a239e3c34f"
+    },
+    {
+      "bytes": 657,
+      "category": "support",
+      "path": ".github/PULL_REQUEST_TEMPLATE.md",
+      "sha256": "85dc1d4a2e44201ca558b4cc31d3627bb29bb0f0dff6b7997c502fbb3f5c8656"
+    },
+    {
+      "bytes": 431,
+      "category": "support",
+      "path": ".github/workflows/benchmark-ci.yml",
+      "sha256": "eb9cc50cf7df2067bb87cc7f3627eac792bafcf8f905123c73eafe2457d7d53a"
+    },
+    {
+      "bytes": 584,
+      "category": "root",
+      "path": "CITATION.cff",
+      "sha256": "51736194737a3d79703f3c68ac2c87bf4f311df7912f8eb2e8819da00a96d21a"
+    },
+    {
+      "bytes": 1839,
+      "category": "root",
+      "path": "CONTRIBUTING.md",
+      "sha256": "691199753f651e78e1d9f05989c4c85541d2ea7cac21c02f88970e66a20704cd"
+    },
+    {
+      "bytes": 2350,
+      "category": "root",
+      "path": "LICENSE",
+      "sha256": "fe70234e152ad5faadd9d3e8dad33988186edba5ac618f3ce2b69be893fdf205"
+    },
+    {
+      "bytes": 7443,
+      "category": "root",
+      "path": "README.md",
+      "sha256": "a6a0062988ebbb577c0fc20ae8a8fdb88eb92f51202516a92bea4e017ac4a126"
+    },
+    {
+      "bytes": 723,
+      "category": "support",
+      "path": "baselines/README.md",
+      "sha256": "66d189f6a1b64414255d9ecbd158d979c7ad98017d43f7979f128189b05c6bd9"
+    },
+    {
+      "bytes": 40813,
+      "category": "track:contradiction-adversarial:baseline",
+      "path": "baselines/always_none_adversarial_v0_2_0.json",
+      "sha256": "c965975dba10ba54b4546cdecd3b41665b9f1a8b230a1ea8b1884d1d95a62960"
+    },
+    {
+      "bytes": 42546,
+      "category": "track:contradiction-multihop:baseline",
+      "path": "baselines/always_none_multihop_v0_3_0.json",
+      "sha256": "3f93efeccfd9641d9fad6353eba3182ae9b3cf80aa52f7a00e83865365b00560"
+    },
+    {
+      "bytes": 36290,
+      "category": "track:contradiction:baseline",
+      "path": "baselines/always_none_v0_1_0.json",
+      "sha256": "1556817246fdcd8468896fac2d9109566cc10322d1553e6cd4b27f0be56d37ee"
+    },
+    {
+      "bytes": 39452,
+      "category": "track:contradiction-adversarial:baseline",
+      "path": "baselines/contradiction_engine_adversarial_v0_2_0.json",
+      "sha256": "6c37a8ca3ee43252dfafeb053b09433bab36afeaa051c80795fb7a95012a9d73"
+    },
+    {
+      "bytes": 42189,
+      "category": "track:contradiction-multihop:baseline",
+      "path": "baselines/contradiction_engine_multihop_v0_3_0.json",
+      "sha256": "99e042d3d4b0690bd793722c245cbfceb4c26811147b6661a3293c7e6f98395a"
+    },
+    {
+      "bytes": 32549,
+      "category": "track:contradiction:baseline",
+      "path": "baselines/contradiction_engine_v0_1_0.json",
+      "sha256": "63892e8732090bdd27ac95cb63882e10f59b47bed3c03aed4a43d4b488c7b834"
+    },
+    {
+      "bytes": 15268,
+      "category": "root",
+      "path": "benchmark_registry.json",
+      "sha256": "af5606bf3399767b197d8ae9c99fa9cd7a2f7accf09445c4f1b0cf696867bbf7"
+    },
+    {
+      "bytes": 2679,
+      "category": "governance",
+      "path": "docs/ADOPTION_GUIDE.md",
+      "sha256": "376551afdd6e2467b75149998323514014dc99ed0707e39e04f1195ae7cbb1b4"
+    },
+    {
+      "bytes": 3560,
+      "category": "governance",
+      "path": "docs/BENCHMARK_CARD.md",
+      "sha256": "4e97f7e9a38c44528a4b7f1969e420b0d7abf58693dbb4edfb73f83d03a43bce"
+    },
+    {
+      "bytes": 9699,
+      "category": "governance",
+      "path": "docs/BENCHMARK_STANDARD.md",
+      "sha256": "07f840e859282bca43e0f179cfefdafbd33c89477edb626651f586033691c126"
+    },
+    {
+      "bytes": 1190,
+      "category": "governance",
+      "path": "docs/GOVERNANCE.md",
+      "sha256": "ec2af728e16f9140d19580ba688bb4eb789dd415b4ac53a024698587fcc70df8"
+    },
+    {
+      "bytes": 2426,
+      "category": "governance",
+      "path": "docs/RELEASE_CHECKLIST.md",
+      "sha256": "1112c1dbe7a82f7519ff564dff670293caf01db4c852ab5e13dc7ecca2f26bdb"
+    },
+    {
+      "bytes": 1596,
+      "category": "governance",
+      "path": "docs/RELEASE_NOTES_v0_2_0.md",
+      "sha256": "ee60d8112f840794fef0f6c73bcf64a1b7f04bb71a7083ade7d0d266b9fc3aa2"
+    },
+    {
+      "bytes": 2317,
+      "category": "governance",
+      "path": "docs/RELEASE_NOTES_v0_3_0.md",
+      "sha256": "0478851975227d0fe0e33404490082deed9142c8d722a2d36bcdcf46136cbedb"
+    },
+    {
+      "bytes": 1407,
+      "category": "governance",
+      "path": "docs/RELEASE_NOTES_v0_3_1.md",
+      "sha256": "89766854b39a9c90f42986e797d4677a93cf4ca4acc90005edb992424a8ed935"
+    },
+    {
+      "bytes": 1154,
+      "category": "governance",
+      "path": "docs/RELEASE_NOTES_v0_3_2.md",
+      "sha256": "f46eefc40376a9dad2fe6835caf7cf1b908f0c1262a27ee9159a44f733b12351"
+    },
+    {
+      "bytes": 1271,
+      "category": "governance",
+      "path": "docs/RELEASE_NOTES_v0_3_3.md",
+      "sha256": "d6e8b9fd7e55e79e7f716b941badf4fede681ca6248587c9b5b30f55df292e5f"
+    },
+    {
+      "bytes": 1051,
+      "category": "governance",
+      "path": "docs/RELEASE_NOTES_v0_3_4.md",
+      "sha256": "d1b5b128ebb016eaf1bfd3fd180694f848c6c16ef66a005a9b244750c1389d6e"
+    },
+    {
+      "bytes": 1058,
+      "category": "governance",
+      "path": "docs/RELEASE_NOTES_v0_3_5.md",
+      "sha256": "d618c4b6d16608f10eb63cd0fa48293abafb4e3afefa276e3ec48a36e7cce50f"
+    },
+    {
+      "bytes": 1200,
+      "category": "governance",
+      "path": "docs/RELEASE_NOTES_v0_3_6.md",
+      "sha256": "236cfc4c63d126d67a49e8784a7b028f5ced54ac370f6e0e6e1ebf6451da1693"
+    },
+    {
+      "bytes": 6676,
+      "category": "governance",
+      "path": "docs/SUBMISSION_GUIDE.md",
+      "sha256": "1bbf1a58c0e76d4ab7594f6333ce8b0301cabb2b629f4f804734f61d61d34de9"
+    },
+    {
+      "bytes": 2410,
+      "category": "governance",
+      "path": "docs/SUBMISSION_REVIEW_RUBRIC.md",
+      "sha256": "aa8ddd1ad04876abbb567991e018b2a7f48001b5da32de753b2e599a7b129fe9"
+    },
+    {
+      "bytes": 4124,
+      "category": "governance",
+      "path": "docs/TECHNICAL_NOTE.md",
+      "sha256": "a55e18f9804aacf4fdbdf178402ed14d5f3e1bc6f862d312ab592de0f4f62dcd"
+    },
+    {
+      "bytes": 2619,
+      "category": "support",
+      "path": "leaderboard/README.md",
+      "sha256": "51e95993694691ecee9039f37d856c60a6e316a4fe821c315017cfc399303a7b"
+    },
+    {
+      "bytes": 1793,
+      "category": "track:contradiction-adversarial:leaderboard",
+      "path": "leaderboard/leaderboard_adversarial_v0_2_0.json",
+      "sha256": "56adfae4fb5c16cd517f2860fc0dadc624fa44f5b9f3c478a23152b355ad14a1"
+    },
+    {
+      "bytes": 1773,
+      "category": "track:contradiction-multihop:leaderboard",
+      "path": "leaderboard/leaderboard_multihop_v0_3_0.json",
+      "sha256": "b8c434cedfd4eeea55c9228929674f95be33bc67b665abbb1a5c59544e658105"
+    },
+    {
+      "bytes": 1748,
+      "category": "track:contradiction:leaderboard",
+      "path": "leaderboard/leaderboard_v0_1_0.json",
+      "sha256": "f0b0673a5fe0533731d2580f954f5b23d274302c9ceed7e691b61c30e5a5eb23"
+    },
+    {
+      "bytes": 17283,
+      "category": "source",
+      "path": "marked_bench/benchmark_cli.py",
+      "sha256": "27b6d9c32ea1ee28e974dd5daf3d014ed9e789ae2d3ac3bcb0bf478b9b4743ff"
+    },
+    {
+      "bytes": 3490,
+      "category": "source",
+      "path": "marked_bench/benchmark_leaderboard.py",
+      "sha256": "54fc6a6582f57ebcf6cba95d6a726c96ba2a75594693f9036b56515a77e337a6"
+    },
+    {
+      "bytes": 9050,
+      "category": "source",
+      "path": "marked_bench/benchmark_registry.py",
+      "sha256": "51724917399e62d8537866fe185ff5d3fe49bc93feeb60814966cc01b38bb3d9"
+    },
+    {
+      "bytes": 5909,
+      "category": "source",
+      "path": "marked_bench/benchmark_release.py",
+      "sha256": "5fe67533623d4f6afc08293e6b715d99f84d80c131b2ac722052f750f68b9d46"
+    },
+    {
+      "bytes": 12581,
+      "category": "source",
+      "path": "marked_bench/benchmark_review.py",
+      "sha256": "eae56a5db9cdb5da76c2c5791666cc08fb0430deee9ad51f5f98484cf2b9d192"
+    },
+    {
+      "bytes": 19125,
+      "category": "source",
+      "path": "marked_bench/benchmark_submission.py",
+      "sha256": "360eeff3fa1769b643cb6617ae4180e9ac361d1687783e053d424b3c58e28907"
+    },
+    {
+      "bytes": 5830,
+      "category": "source",
+      "path": "marked_bench/benchmark_technical_note.py",
+      "sha256": "d41f05615ba89aa6e8d9fd98b86556249b64312cab8525cc47dfb5cd8ee54552"
+    },
+    {
+      "bytes": 1794,
+      "category": "source",
+      "path": "marked_bench/contradiction/__init__.py",
+      "sha256": "8ae7a30497e391d668f23b26cdd7721ff4fc786e867128241d1d665ed38006c8"
+    },
+    {
+      "bytes": 68143,
+      "category": "source",
+      "path": "marked_bench/contradiction/benchmark_suite.py",
+      "sha256": "3f2463304adab5a58d90fce3c6125ca569da9a821ce8e90fdb622ff9a4aeb53d"
+    },
+    {
+      "bytes": 10646,
+      "category": "source",
+      "path": "marked_bench/contradiction/engine.py",
+      "sha256": "ec7f7b776044400423e221c3ed35432c4812dceefe99d663c22757167a18cda9"
+    },
+    {
+      "bytes": 796,
+      "category": "source",
+      "path": "marked_bench/examples/benchmark_standard_demo.py",
+      "sha256": "4bfdaa3ac0363db9df8e244be25286c0fa44fcbffc312a5b4e0ffce51f612fb9"
+    },
+    {
+      "bytes": 5412,
+      "category": "source",
+      "path": "marked_bench/examples/external_submission_demo.py",
+      "sha256": "cfca5a021389ca96a29592c6762f7a225f7f49043bd51e595fc1a3bf81cc82ae"
+    },
+    {
+      "bytes": 11518,
+      "category": "source",
+      "path": "marked_bench/schema_validation.py",
+      "sha256": "3a51d47641066e079117fe9d4585dc497788df6e43e31ade32fd118e81445257"
+    },
+    {
+      "bytes": 546,
+      "category": "support",
+      "path": "releases/README.md",
+      "sha256": "1f5d41a48fed4f899ea1283c01668dec4dd0298d88d07b25b4b6f50403a29be2"
+    },
+    {
+      "bytes": 3524,
+      "category": "schema",
+      "path": "schemas/benchmark_registry.schema.json",
+      "sha256": "603e16e1d4dbffab8cbf4087225cf7549f64f4b26c56d76ee14de99f5bc3bcc3"
+    },
+    {
+      "bytes": 5951,
+      "category": "schema",
+      "path": "schemas/contradiction_benchmark_report.schema.json",
+      "sha256": "0a2c471f72bb82aa1806e09275b6c389f898a82824074d440cf8e4468724ed30"
+    },
+    {
+      "bytes": 2774,
+      "category": "schema",
+      "path": "schemas/contradiction_predictions.schema.json",
+      "sha256": "67da6ced082a1eff90cb5faa33c8b1f62d80c7d944146d1456570a2c359e2e11"
+    },
+    {
+      "bytes": 2761,
+      "category": "schema",
+      "path": "schemas/contradiction_suite_manifest.schema.json",
+      "sha256": "7cb5255bf7d2850f64a0d69e8b82ec5f9549ba633019877b5d3a4ffe08d0076e"
+    },
+    {
+      "bytes": 2948,
+      "category": "schema",
+      "path": "schemas/leaderboard.schema.json",
+      "sha256": "3985b36cc5e374b47eac63c3d5949b6d3e6e8d1a2840ab9c4001926d6c436a17"
+    },
+    {
+      "bytes": 2983,
+      "category": "schema",
+      "path": "schemas/leaderboard_submission.schema.json",
+      "sha256": "c6901ad2a093450d69887c22a4691585e53b5f779b8b8e3e3976b0fa74f9c155"
+    },
+    {
+      "bytes": 2301,
+      "category": "schema",
+      "path": "schemas/release_manifest.schema.json",
+      "sha256": "c59075403c0eeadbdaea286e3db9ff12129f0514f69927439495cd04464a3ec7"
+    },
+    {
+      "bytes": 3167,
+      "category": "schema",
+      "path": "schemas/submission_bundle.schema.json",
+      "sha256": "e1c1390147b4efd5aceee69f29f4a6c614bd45fd8f5a74e174d4c0e0d70c1af0"
+    },
+    {
+      "bytes": 4858,
+      "category": "schema",
+      "path": "schemas/submission_review.schema.json",
+      "sha256": "bff2a18f4929c98ab13250264af24be99bf571507d42fd54fb2194a9e26c3aa2"
+    },
+    {
+      "bytes": 16591,
+      "category": "source",
+      "path": "scripts/validate_benchmark_artifacts.py",
+      "sha256": "1842c67d6ac31a2ab1af8174ccbf55952fbf40bf6fdaae7bd9fecdd256fd1b5c"
+    },
+    {
+      "bytes": 424,
+      "category": "source",
+      "path": "setup.py",
+      "sha256": "15b2c30bf6f4ec26b2ba8c1171280e4892a648f9305abb0d74d39cc38ba798b4"
+    },
+    {
+      "bytes": 1134,
+      "category": "support",
+      "path": "submissions/README.md",
+      "sha256": "0618a62097215ca7103419fde2e7cb4665e74a4f93ffa3d3bc6549464bd58684"
+    },
+    {
+      "bytes": 51186,
+      "category": "submission-example",
+      "path": "submissions/example_external_jsonl/example_external_report.json",
+      "sha256": "9028699a80c286fb644d9a7212209d452c5e5e0cbc8303c06599fb4950017c83"
+    },
+    {
+      "bytes": 1050,
+      "category": "submission-example",
+      "path": "submissions/example_external_jsonl/example_external_submission.json",
+      "sha256": "a05818fb18f47b528b0403018330946e53052888881bf93ac00e8cfb347da87b"
+    },
+    {
+      "bytes": 1504,
+      "category": "submission-example",
+      "path": "submissions/example_external_jsonl/example_external_submission_bundle.json",
+      "sha256": "7469903189259e803f17ba310710f82677a0e8a5f37cc64198ec629d0e9ee89e"
+    },
+    {
+      "bytes": 2561,
+      "category": "submission-example",
+      "path": "submissions/example_external_jsonl/example_external_submission_review.json",
+      "sha256": "1b5ca48bd8669e2efc876a534754c195af638e0ebf2799481372e22820d02b5b"
+    },
+    {
+      "bytes": 7705,
+      "category": "submission-example",
+      "path": "submissions/example_external_jsonl/predictions.jsonl",
+      "sha256": "e6ccdf33f7104b261ac52005881786cdbb25496a695410724e3a7001328261ce"
+    },
+    {
+      "bytes": 11675,
+      "category": "track:contradiction-adversarial:suite",
+      "path": "suites/marked_bench_contradiction_adversarial_v0_2_0.json",
+      "sha256": "e3ed2a0daa982f6eb327c5d9418c91e690d22eff7ee882c327ef383e3edd5983"
+    },
+    {
+      "bytes": 13224,
+      "category": "track:contradiction-multihop:suite",
+      "path": "suites/marked_bench_contradiction_multihop_v0_3_0.json",
+      "sha256": "3571dea3939688beae1b5745d59d77190ae99c0b116316a03e352cf27023b831"
+    },
+    {
+      "bytes": 9545,
+      "category": "track:contradiction:suite",
+      "path": "suites/marked_bench_contradiction_standard_v0_1_0.json",
+      "sha256": "2c23ca8e71692efd1fc988a2fa778bc515f9548cb9520084370529ee9682900a"
+    },
+    {
+      "bytes": 61131,
+      "category": "source",
+      "path": "tests/test_benchmark_suite.py",
+      "sha256": "6e5aea4617d079ce1a8905eeb63ddf8ef97ca939dd88bf23ced5d247a03f4f81"
+    }
+  ],
+  "benchmark_family": "contradiction-detection",
+  "default_track": "contradiction-multihop",
+  "project": "The Marked Bench",
+  "registry_path": "benchmark_registry.json",
+  "registry_schema": "marked_bench.benchmark-registry.v1",
+  "registry_sha256": "af5606bf3399767b197d8ae9c99fa9cd7a2f7accf09445c4f1b0cf696867bbf7",
+  "release_id": "marked-bench-contradiction-standard-release-0.3.6",
+  "schema": "marked_bench.benchmark-release-manifest.v1",
+  "tracks": [
+    {
+      "name": "contradiction",
+      "suite_hash": "8c1f80ff67874af54869bab2e361b3cc7416ce1d86f80ff583636a55e3462765",
+      "suite_id": "marked-bench-contradiction-standard",
+      "suite_version": "0.1.0"
+    },
+    {
+      "name": "contradiction-adversarial",
+      "suite_hash": "454c1aff69d5028224549dfc14fd8e6c10818251d0abf8becf36f0856b2dbd67",
+      "suite_id": "marked-bench-contradiction-adversarial",
+      "suite_version": "0.2.0"
+    },
+    {
+      "name": "contradiction-multihop",
+      "suite_hash": "07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f",
+      "suite_id": "marked-bench-contradiction-multihop",
+      "suite_version": "0.3.0"
+    }
+  ]
+}

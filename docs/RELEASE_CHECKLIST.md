@@ -16,7 +16,7 @@ git diff --check
 - Baseline reports are updated under `baselines/`.
 - Leaderboard snapshots are updated under `leaderboard/`.
 - `benchmark_registry.json` matches the code-generated registry.
-- `releases/marked_bench_release_v0_3_5.json` matches the current public
+- `releases/marked_bench_release_v0_3_6.json` matches the current public
   artifact hashes.
 - `docs/TECHNICAL_NOTE.md` matches generated benchmark evidence.
 - JSON schemas still match the public report shapes.
@@ -28,6 +28,7 @@ git diff --check
   report/submission pair.
 - Submission review create and validate commands run against at least one valid
   bundle.
+- Checked submission packets under `submissions/` validate end-to-end.
 - Documentation mentions every public track and suite version.
 - `docs/BENCHMARK_CARD.md` reflects current scope and limitations.
 - `docs/RELEASE_NOTES_v0_2_0.md` summarizes the public release.
@@ -37,6 +38,7 @@ git diff --check
 - `docs/RELEASE_NOTES_v0_3_3.md` summarizes the public release.
 - `docs/RELEASE_NOTES_v0_3_4.md` summarizes the public release.
 - `docs/RELEASE_NOTES_v0_3_5.md` summarizes the public release.
+- `docs/RELEASE_NOTES_v0_3_6.md` summarizes the public release.
 - `docs/ADOPTION_GUIDE.md` explains how external systems should submit results.
 - `docs/SUBMISSION_REVIEW_RUBRIC.md` explains how reviewers should score
   submissions before leaderboard acceptance.

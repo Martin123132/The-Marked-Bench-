@@ -1,0 +1,28 @@
+{
+  "case_count": 18,
+  "created_at": 1780231286.886,
+  "disclosures": {
+    "model": "none",
+    "postprocessing": "none",
+    "preprocessing": "none",
+    "prompting": "none",
+    "retrieval": "none",
+    "runtime": "Python example script",
+    "system_description": "Example JSONL submitter that predicts none for every case.",
+    "training_data": "none"
+  },
+  "failure_count": 10,
+  "notes": "Demonstrates the external JSONL submission workflow.",
+  "overall_score": 11.11,
+  "report_path": "example_external_report.json",
+  "report_schema": "marked_bench.contradiction-benchmark-report.v2",
+  "report_sha256": "9028699a80c286fb644d9a7212209d452c5e5e0cbc8303c06599fb4950017c83",
+  "schema": "marked_bench.leaderboard-submission.v1",
+  "submitter": "The Marked Bench Examples",
+  "suite_hash": "07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f",
+  "suite_id": "marked-bench-contradiction-multihop",
+  "suite_version": "0.3.0",
+  "system_name": "ExampleExternalJsonl",
+  "system_version": "demo-1.0",
+  "validation_warnings": []
+}

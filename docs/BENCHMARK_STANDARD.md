@@ -140,7 +140,7 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public benchmark artifacts by SHA-256:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_3_5.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_3_6.json
 ```
 
 Run the harder adversarial track:
@@ -221,6 +221,10 @@ marked-bench --validate-submission-review artifacts/my-detector-review.json
 The standard review rubric is documented in
 `docs/SUBMISSION_REVIEW_RUBRIC.md`.
 
+The checked example under `submissions/example_external_jsonl/` shows the full
+external packet shape: JSONL predictions, scored report, submission metadata,
+bundle manifest, and structured review file.
+
 External prediction records may include `rationale` and `evidence`. `rationale`
 is the system's short explanation for the predicted label. `evidence` is a list
 of quoted or named premise/query spans that support the decision. These fields
@@ -253,5 +257,7 @@ contradictions. Release `0.3.3` upgrades public report and prediction schemas
 for rationale/evidence audit fields and aligns schemas with the default
 multi-hop track. Release `0.3.4` adds structured submission review rubrics for
 leaderboard governance. Release `0.3.5` adds dependency-free schema
-conformance checks for checked public artifacts. The next step toward a larger
-public standard is third-party submissions and human review evidence.
+conformance checks for checked public artifacts. Release `0.3.6` adds a
+checked external-style submission packet and validates it as part of the normal
+artifact gate. The next step toward a larger public standard is real
+third-party submissions and human review evidence.

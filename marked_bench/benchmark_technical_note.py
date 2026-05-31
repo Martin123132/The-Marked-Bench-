@@ -104,7 +104,7 @@ def build_technical_note(root: str | Path = ".") -> str:
             "- Public reports must pass `marked-bench --validate-report REPORT`.",
             "- Leaderboard submissions must pass `marked-bench --validate-submission SUBMISSION`.",
             "- Accepted entries should pass `marked-bench --validate-submission-review REVIEW`.",
-            "- Public release artifacts are pinned by `releases/marked_bench_release_v0_3_5.json`.",
+            "- Public release artifacts are pinned by `releases/marked_bench_release_v0_3_6.json`.",
             "- Repository artifact drift is checked by `python scripts/validate_benchmark_artifacts.py`.",
             "",
             "## Current Limitations",

@@ -26,11 +26,13 @@ This roadmap keeps the benchmark moving toward a credible public standard.
   scored reports.
 - Structured submission review rubric for leaderboard governance.
 - Dependency-free schema conformance validation for public JSON artifacts.
+- Checked external-style submission packet with report, bundle, review, and
+  prediction evidence.
 
 ## Next
 
 - Add more non-contradiction distractor controls.
-- Add third-party report submissions and review evidence.
+- Add real third-party report submissions and review evidence.
 - Draft an external announcement package around the release notes and generated
   technical note.
 

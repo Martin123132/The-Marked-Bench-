@@ -11,7 +11,7 @@ from marked_bench.benchmark_registry import REGISTRY_SCHEMA, build_benchmark_reg
 
 
 RELEASE_MANIFEST_SCHEMA = "marked_bench.benchmark-release-manifest.v1"
-RELEASE_ID = "marked-bench-contradiction-standard-release-0.3.5"
+RELEASE_ID = "marked-bench-contradiction-standard-release-0.3.6"
 
 ROOT_PUBLIC_ARTIFACTS = (
     "README.md",
@@ -50,6 +50,14 @@ SUPPORT_ARTIFACTS = (
     ".github/ISSUE_TEMPLATE/benchmark_case.yml",
     ".github/ISSUE_TEMPLATE/config.yml",
     ".github/ISSUE_TEMPLATE/leaderboard_submission.yml",
+)
+
+SUBMISSION_EXAMPLE_ARTIFACTS = (
+    "submissions/example_external_jsonl/predictions.jsonl",
+    "submissions/example_external_jsonl/example_external_report.json",
+    "submissions/example_external_jsonl/example_external_submission.json",
+    "submissions/example_external_jsonl/example_external_submission_bundle.json",
+    "submissions/example_external_jsonl/example_external_submission_review.json",
 )
 
 
@@ -117,6 +125,7 @@ def _collect_artifacts(registry: dict[str, Any]) -> list[tuple[str, str]]:
     artifacts.extend((path, "root") for path in ROOT_PUBLIC_ARTIFACTS)
     artifacts.extend((path, "source") for path in BENCHMARK_SOURCE_ARTIFACTS)
     artifacts.extend((path, "support") for path in SUPPORT_ARTIFACTS)
+    artifacts.extend((path, "submission-example") for path in SUBMISSION_EXAMPLE_ARTIFACTS)
     artifacts.extend((path, "schema") for path in registry["schemas"].values())
     artifacts.extend((path, "governance") for path in registry["governance_docs"])
 

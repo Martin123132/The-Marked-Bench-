@@ -1,0 +1,44 @@
+{
+  "created_at": 1780231286.914,
+  "files": [
+    {
+      "bytes": 1050,
+      "path": "example_external_submission.json",
+      "role": "submission",
+      "sha256": "a05818fb18f47b528b0403018330946e53052888881bf93ac00e8cfb347da87b"
+    },
+    {
+      "bytes": 51186,
+      "path": "example_external_report.json",
+      "role": "report",
+      "sha256": "9028699a80c286fb644d9a7212209d452c5e5e0cbc8303c06599fb4950017c83"
+    },
+    {
+      "bytes": 7705,
+      "path": "predictions.jsonl",
+      "role": "predictions",
+      "sha256": "e6ccdf33f7104b261ac52005881786cdbb25496a695410724e3a7001328261ce"
+    }
+  ],
+  "notes": "Demo bundle for reviewer workflow validation.",
+  "overall_score": 11.11,
+  "prediction_path": "predictions.jsonl",
+  "report_path": "example_external_report.json",
+  "report_sha256": "9028699a80c286fb644d9a7212209d452c5e5e0cbc8303c06599fb4950017c83",
+  "review_checklist": {
+    "disclosures_complete": true,
+    "file_hashes_current": true,
+    "paths_are_relative": true,
+    "ready_for_leaderboard_review": true,
+    "report_valid": true,
+    "submission_valid": true
+  },
+  "schema": "marked_bench.leaderboard-submission-bundle.v1",
+  "submission_path": "example_external_submission.json",
+  "submitter": "The Marked Bench Examples",
+  "suite_hash": "07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f",
+  "suite_id": "marked-bench-contradiction-multihop",
+  "suite_version": "0.3.0",
+  "system_name": "ExampleExternalJsonl",
+  "system_version": "demo-1.0"
+}

@@ -15,11 +15,14 @@ sys.path.insert(0, str(ROOT))
 from marked_bench.benchmark_leaderboard import build_leaderboard  # noqa: E402
 from marked_bench.benchmark_release import build_release_manifest  # noqa: E402
 from marked_bench.benchmark_registry import build_benchmark_registry  # noqa: E402
+from marked_bench.benchmark_review import load_submission_review, validate_submission_review  # noqa: E402
+from marked_bench.benchmark_submission import load_submission_bundle, validate_submission_bundle  # noqa: E402
 from marked_bench.benchmark_technical_note import build_technical_note  # noqa: E402
 from marked_bench.schema_validation import validate_json_file, validate_json_schema  # noqa: E402
 from marked_bench.contradiction.benchmark_suite import (  # noqa: E402
     build_prediction_template,
     build_suite_manifest,
+    evaluate_prediction_file,
     validate_benchmark_report,
 )
 
@@ -54,8 +57,20 @@ LEADERBOARDS = {
     ],
 }
 
+CHECKED_SUBMISSION_PACKETS = [
+    {
+        "base_dir": Path("submissions/example_external_jsonl"),
+        "bundle": Path("example_external_submission_bundle.json"),
+        "predictions": Path("predictions.jsonl"),
+        "report": Path("example_external_report.json"),
+        "review": Path("example_external_submission_review.json"),
+        "suite": "contradiction-multihop",
+        "system_name": "ExampleExternalJsonl",
+    },
+]
+
 BENCHMARK_REGISTRY = Path("benchmark_registry.json")
-RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_5.json")
+RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_3_6.json")
 
 REQUIRED_PUBLIC_FILES = [
     Path("README.md"),
@@ -76,6 +91,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("docs/RELEASE_NOTES_v0_3_3.md"),
     Path("docs/RELEASE_NOTES_v0_3_4.md"),
     Path("docs/RELEASE_NOTES_v0_3_5.md"),
+    Path("docs/RELEASE_NOTES_v0_3_6.md"),
     Path("docs/ROADMAP.md"),
     Path("docs/SUBMISSION_GUIDE.md"),
     Path("schemas/benchmark_registry.schema.json"),
@@ -89,6 +105,11 @@ REQUIRED_PUBLIC_FILES = [
     Path("schemas/release_manifest.schema.json"),
     Path("releases/README.md"),
     Path("submissions/README.md"),
+    Path("submissions/example_external_jsonl/predictions.jsonl"),
+    Path("submissions/example_external_jsonl/example_external_report.json"),
+    Path("submissions/example_external_jsonl/example_external_submission.json"),
+    Path("submissions/example_external_jsonl/example_external_submission_bundle.json"),
+    Path("submissions/example_external_jsonl/example_external_submission_review.json"),
     Path(".github/PULL_REQUEST_TEMPLATE.md"),
     Path(".github/workflows/benchmark-ci.yml"),
 ]
@@ -99,6 +120,12 @@ SCHEMA_CONFORMANCE_FILES = {
     Path("leaderboard/leaderboard_v0_1_0.json"): Path("schemas/leaderboard.schema.json"),
     Path("leaderboard/leaderboard_adversarial_v0_2_0.json"): Path("schemas/leaderboard.schema.json"),
     Path("leaderboard/leaderboard_multihop_v0_3_0.json"): Path("schemas/leaderboard.schema.json"),
+    Path("submissions/example_external_jsonl/example_external_report.json"): Path(
+        "schemas/contradiction_benchmark_report.schema.json"
+    ),
+    Path("submissions/example_external_jsonl/example_external_submission.json"): Path("schemas/leaderboard_submission.schema.json"),
+    Path("submissions/example_external_jsonl/example_external_submission_bundle.json"): Path("schemas/submission_bundle.schema.json"),
+    Path("submissions/example_external_jsonl/example_external_submission_review.json"): Path("schemas/submission_review.schema.json"),
 }
 
 
@@ -114,6 +141,7 @@ def main() -> int:
         _validate_suite_manifests(errors)
         _validate_baseline_reports(errors)
         _validate_leaderboards(errors)
+        _validate_checked_submission_packets(errors)
         _validate_schema_conformance(errors)
     finally:
         os.chdir(previous_cwd)
@@ -266,6 +294,65 @@ def _validate_baseline_reports(errors: list[str]) -> None:
         validation = validate_benchmark_report(report)
         if not validation["valid"]:
             errors.append(f"{path}: report validation failed: {validation['errors']}")
+
+
+def _validate_checked_submission_packets(errors: list[str]) -> None:
+    for packet in CHECKED_SUBMISSION_PACKETS:
+        base_dir = packet["base_dir"]
+        bundle_path = base_dir / packet["bundle"]
+        predictions_path = base_dir / packet["predictions"]
+        report_path = base_dir / packet["report"]
+        review_path = base_dir / packet["review"]
+        if not bundle_path.exists():
+            errors.append(f"{bundle_path}: checked submission bundle is missing")
+            continue
+        if not predictions_path.exists():
+            errors.append(f"{predictions_path}: checked submission predictions are missing")
+            continue
+        if not report_path.exists():
+            errors.append(f"{report_path}: checked submission report is missing")
+            continue
+        if not review_path.exists():
+            errors.append(f"{review_path}: checked submission review is missing")
+            continue
+
+        report = _read_json(report_path, errors)
+        if report is not None:
+            validation = validate_benchmark_report(report)
+            if not validation["valid"]:
+                errors.append(f"{report_path}: checked submission report validation failed: {validation['errors']}")
+
+        try:
+            scored_report = evaluate_prediction_file(
+                predictions_path,
+                system_name=str(packet["system_name"]),
+                suite=str(packet["suite"]),
+            )
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            errors.append(f"{predictions_path}: could not score checked submission predictions: {exc}")
+        else:
+            if report is not None:
+                for key in ["suite_id", "suite_version", "suite_hash", "case_count", "overall_score"]:
+                    if scored_report.get(key) != report.get(key):
+                        errors.append(f"{report_path}: {key} does not match checked submission predictions")
+
+        try:
+            bundle = load_submission_bundle(bundle_path)
+        except (OSError, json.JSONDecodeError) as exc:
+            errors.append(f"{bundle_path}: could not load checked submission bundle: {exc}")
+        else:
+            validation = validate_submission_bundle(bundle, base_dir=base_dir)
+            if not validation["valid"]:
+                errors.append(f"{bundle_path}: checked submission bundle validation failed: {validation['errors']}")
+
+        try:
+            review = load_submission_review(review_path)
+        except (OSError, json.JSONDecodeError) as exc:
+            errors.append(f"{review_path}: could not load checked submission review: {exc}")
+        else:
+            validation = validate_submission_review(review, base_dir=base_dir)
+            if not validation["valid"]:
+                errors.append(f"{review_path}: checked submission review validation failed: {validation['errors']}")
 
 
 def _validate_leaderboards(errors: list[str]) -> None:
