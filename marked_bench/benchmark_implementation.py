@@ -13,9 +13,9 @@ from marked_bench.schema_validation import load_json_schema, validate_json_schem
 
 IMPLEMENTATION_KIT_SCHEMA = "marked_bench.implementation-kit.v1"
 IMPLEMENTATION_KIT_VALIDATION_SCHEMA = "marked_bench.implementation-kit-validation.v1"
-DEFAULT_IMPLEMENTATION_KIT = Path("adoption/marked_bench_implementation_kit_v0_4_3.json")
+DEFAULT_IMPLEMENTATION_KIT = Path("adoption/marked_bench_implementation_kit_v0_4_4.json")
 REPOSITORY_URL = "https://github.com/Martin123132/The-Marked-Bench-"
-RELEASE_URL = "https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.4.3"
+RELEASE_URL = "https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.4.4"
 
 
 def build_implementation_kit(root: str | Path = ".") -> dict[str, Any]:
@@ -33,10 +33,11 @@ def build_implementation_kit(root: str | Path = ".") -> dict[str, Any]:
         "purpose": "Help external teams run, validate, cite, and submit Marked Bench results in their own repositories.",
         "release_artifacts": {
             "registry": "benchmark_registry.json",
-            "release_manifest": "releases/marked_bench_release_v0_4_3.json",
-            "conformance_report": "conformance/marked_bench_conformance_v0_4_3.json",
-            "adoption_packet": "adoption/marked_bench_adoption_packet_v0_4_3.json",
-            "third_party_evidence_ledger": "adoption/third_party_evidence_ledger_v0_4_3.json",
+            "release_manifest": "releases/marked_bench_release_v0_4_4.json",
+            "conformance_report": "conformance/marked_bench_conformance_v0_4_4.json",
+            "standard_profile": "standard/marked_bench_standard_profile_v0_4_4.json",
+            "adoption_packet": "adoption/marked_bench_adoption_packet_v0_4_4.json",
+            "third_party_evidence_ledger": "adoption/third_party_evidence_ledger_v0_4_4.json",
             "implementation_kit": DEFAULT_IMPLEMENTATION_KIT.as_posix(),
         },
         "default_track": registry["default_track"],
@@ -54,6 +55,7 @@ def build_implementation_kit(root: str | Path = ".") -> dict[str, Any]:
             "publication_packet": "schemas/publication_packet.schema.json",
             "result_claim": "schemas/result_claim.schema.json",
             "implementation_kit": "schemas/implementation_kit.schema.json",
+            "standard_profile": "schemas/standard_profile.schema.json",
         },
         "kit_files": [
             _kit_file(
@@ -77,7 +79,7 @@ def build_implementation_kit(root: str | Path = ".") -> dict[str, Any]:
             _artifact("result_claim", "marked-bench-result/result_claim.json"),
         ],
         "external_ci_commands": [
-            _command("install", "python -m pip install git+https://github.com/Martin123132/The-Marked-Bench-.git@v0.4.3"),
+            _command("install", "python -m pip install git+https://github.com/Martin123132/The-Marked-Bench-.git@v0.4.4"),
             _command(
                 "validate_publication_packet",
                 "marked-bench --validate-publication-packet marked-bench-result/publication_packet.json",
@@ -87,19 +89,23 @@ def build_implementation_kit(root: str | Path = ".") -> dict[str, Any]:
         "release_validation_commands": [
             _command(
                 "release_conformance",
-                "marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_3.json",
+                "marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_4.json",
             ),
             _command(
                 "adoption_packet",
-                "marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_3.json",
+                "marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_4.json",
             ),
             _command(
                 "evidence_ledger",
-                "marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_3.json",
+                "marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_4.json",
             ),
             _command(
                 "implementation_kit",
-                "marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_3.json",
+                "marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_4.json",
+            ),
+            _command(
+                "standard_profile",
+                "marked-bench --validate-standard-profile standard/marked_bench_standard_profile_v0_4_4.json",
             ),
         ],
         "submission_requirements": {
@@ -111,8 +117,8 @@ def build_implementation_kit(root: str | Path = ".") -> dict[str, Any]:
             "not_safety_certification": True,
         },
         "version_pinning": {
-            "release_tag": "v0.4.3",
-            "install_reference": "git+https://github.com/Martin123132/The-Marked-Bench-.git@v0.4.3",
+            "release_tag": "v0.4.4",
+            "install_reference": "git+https://github.com/Martin123132/The-Marked-Bench-.git@v0.4.4",
             "compare_only_same_suite_hash": True,
         },
     }

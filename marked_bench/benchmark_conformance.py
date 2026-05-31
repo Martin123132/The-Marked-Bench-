@@ -30,6 +30,11 @@ from marked_bench.benchmark_release import build_release_manifest
 from marked_bench.benchmark_result_card import load_result_card, validate_result_card
 from marked_bench.benchmark_review import load_submission_review, validate_submission_review
 from marked_bench.benchmark_submission import load_submission_bundle, validate_submission_bundle
+from marked_bench.benchmark_standard_profile import (
+    DEFAULT_STANDARD_PROFILE,
+    load_standard_profile,
+    validate_standard_profile,
+)
 from marked_bench.contradiction.benchmark_suite import (
     build_prediction_template,
     build_suite_manifest,
@@ -40,8 +45,8 @@ from marked_bench.schema_validation import load_json_schema, validate_json_file,
 
 
 CONFORMANCE_REPORT_SCHEMA = "marked_bench.conformance-report.v1"
-DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_3.json")
-DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_3.json")
+DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_4.json")
+DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_4.json")
 
 SUITE_MANIFESTS = {
     Path("suites/marked_bench_contradiction_standard_v0_1_0.json"): "contradiction",
@@ -134,6 +139,7 @@ SCHEMA_CONFORMANCE_FILES = {
     DEFAULT_ADOPTION_PACKET: Path("schemas/adoption_packet.schema.json"),
     DEFAULT_EVIDENCE_LEDGER: Path("schemas/third_party_evidence_ledger.schema.json"),
     DEFAULT_IMPLEMENTATION_KIT: Path("schemas/implementation_kit.schema.json"),
+    DEFAULT_STANDARD_PROFILE: Path("schemas/standard_profile.schema.json"),
 }
 
 
@@ -163,6 +169,7 @@ def build_conformance_report(
         _check_adoption_packet(root_path),
         _check_evidence_ledger(root_path),
         _check_implementation_kit(root_path),
+        _check_standard_profile(root_path),
     ]
     failures = [f"{check['name']}: {error}" for check in checks for error in check["errors"]]
     track_count = len(registry.get("tracks", [])) if isinstance(registry, dict) else 0
@@ -489,6 +496,19 @@ def _check_implementation_kit(root: Path) -> dict[str, Any]:
         if not validation["valid"]:
             errors.append(f"{DEFAULT_IMPLEMENTATION_KIT}: implementation kit validation failed: {validation['errors']}")
     return _check("implementation_kit_valid", errors, {"path": DEFAULT_IMPLEMENTATION_KIT.as_posix()})
+
+
+def _check_standard_profile(root: Path) -> dict[str, Any]:
+    errors: list[str] = []
+    try:
+        profile = load_standard_profile(root / DEFAULT_STANDARD_PROFILE)
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        errors.append(f"{DEFAULT_STANDARD_PROFILE}: could not load standard profile: {exc}")
+    else:
+        validation = validate_standard_profile(profile, root=root)
+        if not validation["valid"]:
+            errors.append(f"{DEFAULT_STANDARD_PROFILE}: standard profile validation failed: {validation['errors']}")
+    return _check("standard_profile_valid", errors, {"path": DEFAULT_STANDARD_PROFILE.as_posix()})
 
 
 def _schema_file_errors(root: Path, path: Path, schema_path: Path) -> list[str]:

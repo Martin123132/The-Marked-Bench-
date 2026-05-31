@@ -29,6 +29,8 @@ rubric. Short public score statements should use a validated result claim so
 the wording stays tied to the publication packet hash and benchmark boundaries.
 External repositories should use the implementation kit workflow before making
 public result claims.
+Release maintainers should keep the standard profile current so benchmark
+requirements stay tied to inspectable evidence, not informal promises.
 
 ## Review Priorities
 

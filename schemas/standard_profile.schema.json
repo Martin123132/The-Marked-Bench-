@@ -1,0 +1,263 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://marked-bench.local/schemas/standard_profile.schema.json",
+  "title": "The Marked Bench Standard Profile",
+  "type": "object",
+  "required": [
+    "schema",
+    "project",
+    "benchmark_family",
+    "standardization_status",
+    "release_id",
+    "repository_url",
+    "release_url",
+    "default_track",
+    "tracks",
+    "release_artifacts",
+    "standard_requirements",
+    "requirement_summary",
+    "minimum_external_result_evidence",
+    "comparability_rules",
+    "claim_boundaries",
+    "validation_commands"
+  ],
+  "properties": {
+    "schema": {
+      "const": "marked_bench.standard-profile.v1"
+    },
+    "project": {
+      "type": "string",
+      "minLength": 1
+    },
+    "benchmark_family": {
+      "type": "string",
+      "minLength": 1
+    },
+    "standardization_status": {
+      "type": "string",
+      "minLength": 1
+    },
+    "release_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "repository_url": {
+      "type": "string",
+      "minLength": 1
+    },
+    "release_url": {
+      "type": "string",
+      "minLength": 1
+    },
+    "default_track": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tracks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/track"
+      }
+    },
+    "release_artifacts": {
+      "$ref": "#/$defs/string_map"
+    },
+    "standard_requirements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/requirement"
+      }
+    },
+    "requirement_summary": {
+      "$ref": "#/$defs/requirement_summary"
+    },
+    "minimum_external_result_evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "comparability_rules": {
+      "$ref": "#/$defs/comparability_rules"
+    },
+    "claim_boundaries": {
+      "$ref": "#/$defs/claim_boundaries"
+    },
+    "validation_commands": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/command"
+      }
+    }
+  },
+  "$defs": {
+    "string_map": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "track": {
+      "type": "object",
+      "required": [
+        "name",
+        "suite_id",
+        "suite_version",
+        "suite_hash",
+        "case_count"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "suite_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "suite_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "suite_hash": {
+          "type": "string",
+          "minLength": 1
+        },
+        "case_count": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "requirement": {
+      "type": "object",
+      "required": [
+        "id",
+        "statement",
+        "status",
+        "evidence_paths",
+        "validation_commands"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "const": "satisfied"
+        },
+        "evidence_paths": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "validation_commands": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "requirement_summary": {
+      "type": "object",
+      "required": [
+        "total",
+        "satisfied",
+        "unsatisfied"
+      ],
+      "properties": {
+        "total": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "satisfied": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "unsatisfied": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "comparability_rules": {
+      "type": "object",
+      "required": [
+        "compare_only_same_suite_id",
+        "compare_only_same_suite_version",
+        "compare_only_same_suite_hash",
+        "suite_hash_mismatch_invalidates_direct_comparison"
+      ],
+      "properties": {
+        "compare_only_same_suite_id": {
+          "const": true
+        },
+        "compare_only_same_suite_version": {
+          "const": true
+        },
+        "compare_only_same_suite_hash": {
+          "const": true
+        },
+        "suite_hash_mismatch_invalidates_direct_comparison": {
+          "const": true
+        }
+      }
+    },
+    "claim_boundaries": {
+      "type": "object",
+      "required": [
+        "not_safety_certification",
+        "not_general_intelligence_claim",
+        "not_third_party_adoption_without_verified_evidence",
+        "public_suite_can_be_overfit"
+      ],
+      "properties": {
+        "not_safety_certification": {
+          "const": true
+        },
+        "not_general_intelligence_claim": {
+          "const": true
+        },
+        "not_third_party_adoption_without_verified_evidence": {
+          "const": true
+        },
+        "public_suite_can_be_overfit": {
+          "const": true
+        }
+      }
+    },
+    "command": {
+      "type": "object",
+      "required": [
+        "name",
+        "command"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "command": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

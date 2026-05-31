@@ -11,7 +11,7 @@ from marked_bench.benchmark_registry import REGISTRY_SCHEMA, build_benchmark_reg
 
 
 RELEASE_MANIFEST_SCHEMA = "marked_bench.benchmark-release-manifest.v1"
-RELEASE_ID = "marked-bench-contradiction-standard-release-0.4.3"
+RELEASE_ID = "marked-bench-contradiction-standard-release-0.4.4"
 
 ROOT_PUBLIC_ARTIFACTS = (
     "README.md",
@@ -35,6 +35,7 @@ BENCHMARK_SOURCE_ARTIFACTS = (
     "marked_bench/benchmark_release.py",
     "marked_bench/benchmark_review.py",
     "marked_bench/benchmark_result_card.py",
+    "marked_bench/benchmark_standard_profile.py",
     "marked_bench/benchmark_submission.py",
     "marked_bench/benchmark_technical_note.py",
     "marked_bench/schema_validation.py",
@@ -56,6 +57,7 @@ SUPPORT_ARTIFACTS = (
     "conformance/README.md",
     "leaderboard/README.md",
     "releases/README.md",
+    "standard/README.md",
     "submissions/README.md",
     ".github/PULL_REQUEST_TEMPLATE.md",
     ".github/workflows/benchmark-ci.yml",
@@ -83,13 +85,17 @@ SUBMISSION_EXAMPLE_ARTIFACTS = (
 )
 
 CONFORMANCE_ARTIFACTS = (
-    "conformance/marked_bench_conformance_v0_4_3.json",
+    "conformance/marked_bench_conformance_v0_4_4.json",
 )
 
 ADOPTION_ARTIFACTS = (
-    "adoption/marked_bench_adoption_packet_v0_4_3.json",
-    "adoption/third_party_evidence_ledger_v0_4_3.json",
-    "adoption/marked_bench_implementation_kit_v0_4_3.json",
+    "adoption/marked_bench_adoption_packet_v0_4_4.json",
+    "adoption/third_party_evidence_ledger_v0_4_4.json",
+    "adoption/marked_bench_implementation_kit_v0_4_4.json",
+)
+
+STANDARD_ARTIFACTS = (
+    "standard/marked_bench_standard_profile_v0_4_4.json",
 )
 
 
@@ -159,6 +165,7 @@ def _collect_artifacts(registry: dict[str, Any]) -> list[tuple[str, str]]:
     artifacts.extend((path, "support") for path in SUPPORT_ARTIFACTS)
     artifacts.extend((path, "conformance") for path in CONFORMANCE_ARTIFACTS)
     artifacts.extend((path, "adoption") for path in ADOPTION_ARTIFACTS)
+    artifacts.extend((path, "standard") for path in STANDARD_ARTIFACTS)
     artifacts.extend((path, "submission-example") for path in SUBMISSION_EXAMPLE_ARTIFACTS)
     artifacts.extend((path, "schema") for path in registry["schemas"].values())
     artifacts.extend((path, "governance") for path in registry["governance_docs"])

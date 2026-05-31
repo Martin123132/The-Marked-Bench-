@@ -45,6 +45,7 @@
         "publication_packet",
         "result_claim",
         "implementation_kit",
+        "standard_profile",
         "conformance_report",
         "result_card",
         "adoption_packet",

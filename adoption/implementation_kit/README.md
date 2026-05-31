@@ -10,7 +10,7 @@ machine-checkable.
   as `.github/workflows/marked-bench-result.yml`.
 - `result_claim_badge.md`: copy the snippet into a README, model card, or
   release note after replacing the placeholders.
-- `adoption/marked_bench_implementation_kit_v0_4_3.json`: machine-readable
+- `adoption/marked_bench_implementation_kit_v0_4_4.json`: machine-readable
   descriptor for this kit.
 
 ## Expected External Layout
@@ -39,7 +39,7 @@ External CI should install the exact release tag and validate both public
 artifacts:
 
 ```bash
-python -m pip install git+https://github.com/Martin123132/The-Marked-Bench-.git@v0.4.3
+python -m pip install git+https://github.com/Martin123132/The-Marked-Bench-.git@v0.4.4
 marked-bench --validate-publication-packet marked-bench-result/publication_packet.json
 marked-bench --validate-result-claim marked-bench-result/result_claim.json
 ```

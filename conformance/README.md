@@ -10,8 +10,8 @@ kits are internally consistent.
 Generate and validate the current report with:
 
 ```bash
-marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_4_3.json
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_3.json
+marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_4_4.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_4.json
 ```
 
 Do not edit conformance reports by hand; regenerate them after changing any

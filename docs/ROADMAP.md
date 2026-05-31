@@ -36,6 +36,7 @@ This roadmap keeps the benchmark moving toward a credible public standard.
 - One-command publication packets for self-contained public result evidence.
 - Hash-pinned result claims for citeable benchmark score statements.
 - Third-party implementation kit for external CI validation.
+- Machine-readable standard profile for release requirement evidence.
 
 ## Next
 

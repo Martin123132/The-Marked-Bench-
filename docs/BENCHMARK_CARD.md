@@ -93,6 +93,7 @@ All public reports must include:
 - failures
 - result card for cited or ranked results
 - result claim for short public score statements
+- standard profile for benchmark-standard requirements
 - implementation kit for external CI validation
 
 Reports are validated with:
@@ -121,3 +122,6 @@ and pin citeable score wording to a publication packet hash.
 The implementation kit is validated with
 `marked-bench --validate-implementation-kit PATH` and pins external CI
 templates to the current release evidence.
+The standard profile is validated with
+`marked-bench --validate-standard-profile PATH` and maps release requirements
+to checked evidence files and validation commands.

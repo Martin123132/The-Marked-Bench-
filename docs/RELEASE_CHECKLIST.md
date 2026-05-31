@@ -16,15 +16,17 @@ git diff --check
 - Baseline reports are updated under `baselines/`.
 - Leaderboard snapshots are updated under `leaderboard/`.
 - `benchmark_registry.json` matches the code-generated registry.
-- `releases/marked_bench_release_v0_4_3.json` matches the current public
+- `releases/marked_bench_release_v0_4_4.json` matches the current public
   artifact hashes.
-- `conformance/marked_bench_conformance_v0_4_3.json` validates against the
+- `conformance/marked_bench_conformance_v0_4_4.json` validates against the
   current release evidence.
-- `adoption/marked_bench_adoption_packet_v0_4_3.json` validates against the
+- `standard/marked_bench_standard_profile_v0_4_4.json` validates against the
   current release evidence.
-- `adoption/third_party_evidence_ledger_v0_4_3.json` validates against the
+- `adoption/marked_bench_adoption_packet_v0_4_4.json` validates against the
   current release evidence.
-- `adoption/marked_bench_implementation_kit_v0_4_3.json` validates against the
+- `adoption/third_party_evidence_ledger_v0_4_4.json` validates against the
+  current release evidence.
+- `adoption/marked_bench_implementation_kit_v0_4_4.json` validates against the
   current release evidence.
 - `docs/TECHNICAL_NOTE.md` matches generated benchmark evidence.
 - JSON schemas still match the public report shapes.
@@ -47,6 +49,8 @@ git diff --check
   current release.
 - Implementation kit export and validate commands run against the current
   release.
+- Standard profile export and validate commands run against the current
+  release.
 - Checked submission packets under `submissions/` validate end-to-end.
 - Documentation mentions every public track and suite version.
 - `docs/BENCHMARK_CARD.md` reflects current scope and limitations.
@@ -66,6 +70,7 @@ git diff --check
 - `docs/RELEASE_NOTES_v0_4_1.md` summarizes the public release.
 - `docs/RELEASE_NOTES_v0_4_2.md` summarizes the public release.
 - `docs/RELEASE_NOTES_v0_4_3.md` summarizes the public release.
+- `docs/RELEASE_NOTES_v0_4_4.md` summarizes the public release.
 - `docs/ADOPTION_GUIDE.md` explains how external systems should submit results.
 - `docs/ANNOUNCEMENT_PACKAGE.md` explains how external users should cite,
   mirror, announce, and validate the release.
@@ -93,5 +98,6 @@ Record:
 - Confirm GitHub Actions pass.
 - Create a version tag.
 - Attach or link suite manifests, baseline reports, leaderboard snapshots,
-  conformance report, adoption packet, evidence ledger, implementation kit,
-  and checked result-card, publication-packet, and result-claim examples.
+  conformance report, standard profile, adoption packet, evidence ledger,
+  implementation kit, and checked result-card, publication-packet, and
+  result-claim examples.

@@ -154,6 +154,7 @@
         "leaderboard_review_required",
         "public_result_claim_required",
         "implementation_kit_required",
+        "standard_profile_required",
         "not_safety_certification",
         "third_party_evidence_required_for_adoption_claims",
         "third_party_evidence_ledger_required"
@@ -175,6 +176,9 @@
           "type": "boolean"
         },
         "implementation_kit_required": {
+          "type": "boolean"
+        },
+        "standard_profile_required": {
           "type": "boolean"
         },
         "not_safety_certification": {

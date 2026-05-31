@@ -65,6 +65,11 @@ from marked_bench.benchmark_submission import (
     write_leaderboard_submission,
     write_submission_bundle,
 )
+from marked_bench.benchmark_standard_profile import (
+    load_standard_profile,
+    validate_standard_profile,
+    write_standard_profile,
+)
 from marked_bench.benchmark_technical_note import write_technical_note
 from marked_bench.contradiction.benchmark_suite import (
     evaluate_prediction_file,
@@ -243,6 +248,18 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         metavar="PATH",
         help="Validate a third-party implementation kit.",
+    )
+    parser.add_argument(
+        "--export-standard-profile",
+        default=None,
+        metavar="PATH",
+        help="Write a machine-readable benchmark standard profile and exit.",
+    )
+    parser.add_argument(
+        "--validate-standard-profile",
+        default=None,
+        metavar="PATH",
+        help="Validate a benchmark standard profile.",
     )
     parser.add_argument(
         "--bundle-submission",
@@ -614,6 +631,25 @@ def main(argv: list[str] | None = None) -> None:
             raise SystemExit(1)
         return
 
+    if args.validate_standard_profile:
+        validation = validate_standard_profile(load_standard_profile(args.validate_standard_profile))
+        if args.json:
+            print(json.dumps(validation, indent=2, sort_keys=True))
+        else:
+            print(f"Standard profile validation: {'pass' if validation['valid'] else 'fail'}")
+            print(f"Release: {validation['summary']['release_id']}")
+            print(f"Status: {validation['summary']['standardization_status']}")
+            print(
+                "Requirements: "
+                f"{validation['summary']['satisfied_requirement_count']}/"
+                f"{validation['summary']['requirement_count']}"
+            )
+            print(f"Errors: {len(validation['errors'])}")
+            print(f"Warnings: {len(validation['warnings'])}")
+        if not validation["valid"]:
+            raise SystemExit(1)
+        return
+
     if args.create_submission:
         if not args.submission_report:
             parser.error("--create-submission requires --submission-report")
@@ -786,6 +822,11 @@ def main(argv: list[str] | None = None) -> None:
     if args.export_implementation_kit:
         write_implementation_kit(args.export_implementation_kit)
         print(f"Implementation kit: {args.export_implementation_kit}")
+        return
+
+    if args.export_standard_profile:
+        write_standard_profile(args.export_standard_profile)
+        print(f"Standard profile: {args.export_standard_profile}")
         return
 
     if args.export_prediction_template:

@@ -23,6 +23,7 @@ from marked_bench.benchmark_release import build_release_manifest  # noqa: E402
 from marked_bench.benchmark_registry import build_benchmark_registry  # noqa: E402
 from marked_bench.benchmark_result_card import load_result_card, validate_result_card  # noqa: E402
 from marked_bench.benchmark_review import load_submission_review, validate_submission_review  # noqa: E402
+from marked_bench.benchmark_standard_profile import load_standard_profile, validate_standard_profile  # noqa: E402
 from marked_bench.benchmark_submission import load_submission_bundle, validate_submission_bundle  # noqa: E402
 from marked_bench.benchmark_technical_note import build_technical_note  # noqa: E402
 from marked_bench.schema_validation import validate_json_file, validate_json_schema  # noqa: E402
@@ -84,17 +85,19 @@ CHECKED_SUBMISSION_PACKETS = [
 ]
 
 BENCHMARK_REGISTRY = Path("benchmark_registry.json")
-RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_3.json")
-CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_3.json")
-ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_3.json")
-EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_3.json")
-IMPLEMENTATION_KIT = Path("adoption/marked_bench_implementation_kit_v0_4_3.json")
+RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_4.json")
+CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_4.json")
+ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_4.json")
+EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_4.json")
+IMPLEMENTATION_KIT = Path("adoption/marked_bench_implementation_kit_v0_4_4.json")
+STANDARD_PROFILE = Path("standard/marked_bench_standard_profile_v0_4_4.json")
 
 REQUIRED_PUBLIC_FILES = [
     Path("adoption/README.md"),
     ADOPTION_PACKET,
     EVIDENCE_LEDGER,
     IMPLEMENTATION_KIT,
+    STANDARD_PROFILE,
     Path("adoption/implementation_kit/README.md"),
     Path("adoption/implementation_kit/github_actions_validate_result.yml"),
     Path("adoption/implementation_kit/result_claim_badge.md"),
@@ -127,6 +130,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("docs/RELEASE_NOTES_v0_4_1.md"),
     Path("docs/RELEASE_NOTES_v0_4_2.md"),
     Path("docs/RELEASE_NOTES_v0_4_3.md"),
+    Path("docs/RELEASE_NOTES_v0_4_4.md"),
     Path("docs/ROADMAP.md"),
     Path("docs/SUBMISSION_GUIDE.md"),
     Path("docs/THIRD_PARTY_EVIDENCE.md"),
@@ -141,6 +145,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("schemas/publication_packet.schema.json"),
     Path("schemas/result_claim.schema.json"),
     Path("schemas/implementation_kit.schema.json"),
+    Path("schemas/standard_profile.schema.json"),
     Path("schemas/release_manifest.schema.json"),
     Path("schemas/conformance_report.schema.json"),
     Path("schemas/result_card.schema.json"),
@@ -148,6 +153,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("schemas/third_party_evidence_ledger.schema.json"),
     Path("conformance/README.md"),
     Path("releases/README.md"),
+    Path("standard/README.md"),
     Path("submissions/README.md"),
     Path("submissions/example_external_jsonl/predictions.jsonl"),
     Path("submissions/example_external_jsonl/example_external_report.json"),
@@ -188,6 +194,7 @@ SCHEMA_CONFORMANCE_FILES = {
     ADOPTION_PACKET: Path("schemas/adoption_packet.schema.json"),
     EVIDENCE_LEDGER: Path("schemas/third_party_evidence_ledger.schema.json"),
     IMPLEMENTATION_KIT: Path("schemas/implementation_kit.schema.json"),
+    STANDARD_PROFILE: Path("schemas/standard_profile.schema.json"),
 }
 
 
@@ -204,6 +211,7 @@ def main() -> int:
         _validate_adoption_packet(errors)
         _validate_evidence_ledger(errors)
         _validate_implementation_kit(errors)
+        _validate_standard_profile(errors)
         _validate_suite_manifests(errors)
         _validate_baseline_reports(errors)
         _validate_leaderboards(errors)
@@ -397,6 +405,17 @@ def _validate_implementation_kit(errors: list[str]) -> None:
     validation = validate_implementation_kit(kit, root=ROOT)
     if not validation["valid"]:
         errors.append(f"{IMPLEMENTATION_KIT}: implementation kit validation failed: {validation['errors']}")
+
+
+def _validate_standard_profile(errors: list[str]) -> None:
+    try:
+        profile = load_standard_profile(STANDARD_PROFILE)
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        errors.append(f"{STANDARD_PROFILE}: could not load standard profile: {exc}")
+        return
+    validation = validate_standard_profile(profile, root=ROOT)
+    if not validation["valid"]:
+        errors.append(f"{STANDARD_PROFILE}: standard profile validation failed: {validation['errors']}")
 
 
 def _validate_baseline_reports(errors: list[str]) -> None:

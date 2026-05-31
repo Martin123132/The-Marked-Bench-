@@ -15,6 +15,8 @@ hash, so scores are not detached from their evidence or overstated.
 Implementation kits provide copy-ready external CI guidance and a
 machine-readable contract for validating public result packets outside this
 repository.
+The standard profile maps the benchmark's own standardization requirements to
+evidence files and validation commands.
 
 ## Suite Identity
 
@@ -84,6 +86,7 @@ The source tree also includes JSON schemas for public infrastructure:
 - `schemas/publication_packet.schema.json`
 - `schemas/result_claim.schema.json`
 - `schemas/implementation_kit.schema.json`
+- `schemas/standard_profile.schema.json`
 - `schemas/release_manifest.schema.json`
 - `schemas/result_card.schema.json`
 - `schemas/conformance_report.schema.json`
@@ -158,29 +161,36 @@ marked-bench --export-registry benchmark_registry.json
 Export the release manifest that pins public benchmark artifacts by SHA-256:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_4_3.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_4_4.json
 ```
 
 Export and validate the release conformance report:
 
 ```bash
-marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_4_3.json
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_3.json
+marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_4_4.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_4.json
+```
+
+Export and validate the benchmark standard profile:
+
+```bash
+marked-bench --export-standard-profile standard/marked_bench_standard_profile_v0_4_4.json
+marked-bench --validate-standard-profile standard/marked_bench_standard_profile_v0_4_4.json
 ```
 
 Export and validate the external adoption packet:
 
 ```bash
-marked-bench --export-adoption-packet adoption/marked_bench_adoption_packet_v0_4_3.json
-marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_3.json
-marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_3.json
+marked-bench --export-adoption-packet adoption/marked_bench_adoption_packet_v0_4_4.json
+marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_4.json
+marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_4.json
 ```
 
 Export and validate the third-party implementation kit:
 
 ```bash
-marked-bench --export-implementation-kit adoption/marked_bench_implementation_kit_v0_4_3.json
-marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_3.json
+marked-bench --export-implementation-kit adoption/marked_bench_implementation_kit_v0_4_4.json
+marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_4.json
 ```
 
 Run the harder adversarial track:
@@ -331,6 +341,8 @@ inspectable submissions.
   statement or badge.
 - Keep the implementation kit current when release paths, schemas, or public
   result-validation commands change.
+- Keep the standard profile current when benchmark-standard requirements,
+  evidence paths, or validation commands change.
 - Keep `python scripts/validate_benchmark_artifacts.py` passing after any
   baseline, suite, or leaderboard change.
 - Keep checked public JSON artifacts conformant with the schemas under
@@ -358,6 +370,7 @@ and harmless elaborations. Release `0.4.1` adds one-command publication packets
 for self-contained public result evidence. Release `0.4.2` adds result claims
 so public score statements are hash-pinned and bounded. Release `0.4.3` adds
 the third-party implementation kit so external repositories can validate
-publication packets and result claims in their own CI. The next step toward a
-larger public standard is real third-party submissions and human review
-evidence.
+publication packets and result claims in their own CI. Release `0.4.4` adds a
+standard profile that turns benchmark-standard requirements into a checked
+evidence matrix. The next step toward a larger public standard is real
+third-party submissions and human review evidence.

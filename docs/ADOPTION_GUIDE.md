@@ -14,6 +14,7 @@ Every published result should pin:
 - exact report JSON
 - result card JSON
 - result claim JSON for short public score statements
+- standard profile version for benchmark-standard requirements
 - implementation kit version when using the external CI workflow
 - explanation-audit coverage, when rationale/evidence fields are submitted
 
@@ -103,7 +104,7 @@ marked-bench-result/
 The machine-readable kit descriptor is:
 
 ```bash
-marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_3.json
+marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_4.json
 ```
 
 ## Check Release Conformance
@@ -112,15 +113,20 @@ Before adopting or mirroring a release package, validate the checked
 conformance report:
 
 ```bash
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_3.json
-marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_3.json
-marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_3.json
-marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_3.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_4.json
+marked-bench --validate-standard-profile standard/marked_bench_standard_profile_v0_4_4.json
+marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_4.json
+marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_4.json
+marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_4.json
 ```
 
 The conformance report is the single machine-readable pass/fail artifact for
 registry, manifest, schema, leaderboard, baseline, prediction-template, and
 checked-submission consistency.
+The standard profile is the machine-readable requirement matrix for the
+benchmark standard itself: it names the evidence files and validation commands
+that make a release reproducible, comparable, externally adoptable, and
+bounded.
 The adoption packet is the machine-readable handoff file for external users:
 it names the release, default track, public artifacts, validation commands,
 submission channels, and citation requirements.
