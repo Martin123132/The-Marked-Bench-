@@ -1,5 +1,5 @@
 {
-  "artifact_count": 140,
+  "artifact_count": 141,
   "artifacts": [
     {
       "bytes": 1252,
@@ -38,10 +38,10 @@
       "sha256": "f4f9c671310bcba0466ea6ff68dbf4801634cc5564dc419b3508c3d96b7af4ab"
     },
     {
-      "bytes": 431,
+      "bytes": 548,
       "category": "support",
       "path": ".github/workflows/benchmark-ci.yml",
-      "sha256": "eb9cc50cf7df2067bb87cc7f3627eac792bafcf8f905123c73eafe2457d7d53a"
+      "sha256": "d24c3f2742b11f46cb7e2676a0cb1d18e961339647aa4264f7c754c4f4d28b57"
     },
     {
       "bytes": 581,
@@ -62,10 +62,10 @@
       "sha256": "fe70234e152ad5faadd9d3e8dad33988186edba5ac618f3ce2b69be893fdf205"
     },
     {
-      "bytes": 15028,
+      "bytes": 15336,
       "category": "root",
       "path": "README.md",
-      "sha256": "74ce0426c33eb01a1f656eb9e54fe947faaa1f6f4f471f84a49d5829f5760c6e"
+      "sha256": "898ad804908cb99c23b2fc436d5786eabc24976fdd26905f83f4b2939aab0d28"
     },
     {
       "bytes": 2150,
@@ -164,10 +164,10 @@
       "sha256": "63892e8732090bdd27ac95cb63882e10f59b47bed3c03aed4a43d4b488c7b834"
     },
     {
-      "bytes": 24466,
+      "bytes": 24504,
       "category": "root",
       "path": "benchmark_registry.json",
-      "sha256": "3ec8d796fa9c06bdd192a886202830f2a31fcd395f8c209321e95311d30ec792"
+      "sha256": "ed71832d2fa320bc6623fd3cae143374b642c5a6b7511224744c62d48138cec2"
     },
     {
       "bytes": 847,
@@ -179,13 +179,13 @@
       "bytes": 3651,
       "category": "conformance",
       "path": "conformance/marked_bench_conformance_v0_4_8.json",
-      "sha256": "26cc94ef3c2bb38e9eb4773a3fd34cc32a1194b73c2830f6951adf439762a678"
+      "sha256": "156c953af37d0f6e290d36403542011f63cd20058cc3a56e7e3c4fcd8e9fee67"
     },
     {
-      "bytes": 6893,
+      "bytes": 7082,
       "category": "governance",
       "path": "docs/ADOPTION_GUIDE.md",
-      "sha256": "6cd6730c0503b2fe7e8eb616c712ed351df284227b6765e03a0f22bbc7d467fa"
+      "sha256": "c1bb9c785b4cc6197684c5bd88bb5aa1fe985da41ac040053655abbed93a13f9"
     },
     {
       "bytes": 7607,
@@ -212,16 +212,16 @@
       "sha256": "56fe53e7b77f9f124964fb13fb16c621bbd407e10a71e94530b9e83f5e2d3427"
     },
     {
-      "bytes": 2446,
+      "bytes": 3285,
       "category": "governance",
       "path": "docs/GOVERNANCE.md",
-      "sha256": "e2057a566400a5601d13219064c9811e6008223d349cd6b2defa69f78961aa0b"
+      "sha256": "ffc3d097abba71e5036dea3db1874b5861145c099c015c855eb2571b81c45537"
     },
     {
-      "bytes": 5523,
+      "bytes": 5584,
       "category": "governance",
       "path": "docs/RELEASE_CHECKLIST.md",
-      "sha256": "7329b71dfcb5b7d100416092eeee87b6b3f6671c957b08c6a7deaec77cb70fa8"
+      "sha256": "b94c9b04c26039811fb60a613c1b7936e4a3bd54ccc0080154639df6e41e0911"
     },
     {
       "bytes": 1596,
@@ -356,6 +356,12 @@
       "sha256": "0423b3be9b3d3b25de709eca4c93ec60707e2daa9cc5dd8bda4287fee1090639"
     },
     {
+      "bytes": 3565,
+      "category": "governance",
+      "path": "docs/STANDARDIZATION_STATUS.md",
+      "sha256": "4a6fcfab099b240e97fb479a50d5b09455f2b12aa340a2fc4c02f7f35a61e4e4"
+    },
+    {
       "bytes": 8751,
       "category": "governance",
       "path": "docs/SUBMISSION_GUIDE.md",
@@ -374,10 +380,10 @@
       "sha256": "fb6a1993705a44a2351e20001330e385db6473b3ec4100063a0fd8911460d14b"
     },
     {
-      "bytes": 2248,
+      "bytes": 2388,
       "category": "governance",
       "path": "docs/THIRD_PARTY_EVIDENCE.md",
-      "sha256": "9d95c101c5b496c88368633d77ba0c40baf700779e0585fb3aa14e7e15f2c586"
+      "sha256": "83365cfc04ace88294f4693760fefbc4e43454496dcff55f49bcee05a0ebf11d"
     },
     {
       "bytes": 3649,
@@ -428,10 +434,10 @@
       "sha256": "96b670f20552ac72f1780c7f9c2235cdf6567d58e060126e3bc62be1767b4a12"
     },
     {
-      "bytes": 40269,
+      "bytes": 46778,
       "category": "source",
       "path": "marked_bench/benchmark_cli.py",
-      "sha256": "23a820039d4c19ee10ff9ad73b9c517c5fb4e248f97396261506bd42b8bedb71"
+      "sha256": "d9d92f8347d7c47cccbad1ae651af414902814b70b9d859f8f68f84d841d8501"
     },
     {
       "bytes": 27333,
@@ -464,10 +470,10 @@
       "sha256": "2caaadbf58f7683e37af253c05e30720708d0e1fa3ee4635cdd415d4ee5675bb"
     },
     {
-      "bytes": 13746,
+      "bytes": 13792,
       "category": "source",
       "path": "marked_bench/benchmark_registry.py",
-      "sha256": "0dcf0b559a3651d30584c126e5809c03ab1d98aa0a5d88b03b00b158f9c5bc13"
+      "sha256": "9e9c9297b79921f4c3db6f3d076af6ec63940ab74e937f5718bbc940b710975c"
     },
     {
       "bytes": 8185,
@@ -847,7 +853,7 @@
   "project": "The Marked Bench",
   "registry_path": "benchmark_registry.json",
   "registry_schema": "marked_bench.benchmark-registry.v1",
-  "registry_sha256": "3ec8d796fa9c06bdd192a886202830f2a31fcd395f8c209321e95311d30ec792",
+  "registry_sha256": "ed71832d2fa320bc6623fd3cae143374b642c5a6b7511224744c62d48138cec2",
   "release_id": "marked-bench-contradiction-standard-release-0.4.8",
   "schema": "marked_bench.benchmark-release-manifest.v1",
   "tracks": [
