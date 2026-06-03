@@ -8,6 +8,7 @@ Use this before tagging or publishing a benchmark release.
 python -m unittest discover -s tests
 python scripts/validate_benchmark_artifacts.py
 git diff --check
+python -m marked_bench.benchmark_cli --check-standard-status
 ```
 
 ## Artifact Checks

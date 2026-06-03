@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 
 from marked_bench.benchmark_adoption import (
@@ -97,6 +98,17 @@ from marked_bench.contradiction.benchmark_suite import (
     write_suite_manifest,
 )
 from marked_bench.contradiction.engine import Claim
+
+_STANDARD_STATUS_ARTIFACTS = (
+    ("conformance_report", "conformance", "conformance/marked_bench_conformance_"),
+    ("standard_profile", "standard", "standard/marked_bench_standard_profile_"),
+    ("change_control", "standard", "standard/marked_bench_change_control_"),
+    ("scoring_compatibility", "standard", "standard/marked_bench_scoring_compatibility_"),
+    ("scoring_spec", "standard", "standard/marked_bench_scoring_spec_"),
+    ("adoption_packet", "adoption", "adoption/marked_bench_adoption_packet_"),
+    ("implementation_kit", "adoption", "adoption/marked_bench_implementation_kit_"),
+    ("evidence_ledger", "adoption", "adoption/third_party_evidence_ledger_"),
+)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -318,6 +330,11 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         metavar="PATH",
         help="Validate a standard change-control profile.",
+    )
+    parser.add_argument(
+        "--check-standard-status",
+        action="store_true",
+        help="Run the standard status checkset and report the current conformance tier.",
     )
     parser.add_argument(
         "--bundle-submission",
@@ -756,6 +773,41 @@ def main(argv: list[str] | None = None) -> None:
             raise SystemExit(1)
         return
 
+    if args.check_standard_status:
+        status_result = _run_standard_status_checks()
+        checks = status_result["checks"]
+        failed_checks = [check for check in checks if not check["valid"]]
+        evidence_summary = status_result.get("evidence_summary", {})
+        verified_entries = evidence_summary.get("verified_entry_count", 0)
+        if verified_entries > 0:
+            tier = "tier-2 external-verified"
+        else:
+            tier = "tier-1 standard-profile conformance"
+        if failed_checks:
+            tier = "fail"
+        output = {
+            "status": "fail" if failed_checks else "pass",
+            "tier": tier,
+            "release_manifest": status_result["release_manifest_path"],
+            "checks": checks,
+        }
+        if args.json:
+            print(json.dumps(output, indent=2, sort_keys=True))
+        else:
+            print(f"Release manifest: {status_result['release_manifest_path']}")
+            for check in checks:
+                status = "pass" if check["valid"] else "fail"
+                msg = f"{check['name']}: {status}"
+                if check.get("path"):
+                    msg += f" ({check['path']})"
+                print(msg)
+                if check.get("error"):
+                    print(f"  error: {check['error']}")
+            print(f"Standard status: {tier}")
+        if failed_checks:
+            raise SystemExit(1)
+        return
+
     if args.create_submission:
         if not args.submission_report:
             parser.error("--create-submission requires --submission-report")
@@ -1016,6 +1068,134 @@ def _detector_from_name(name: str):
 
 def _always_none_detector(_claim: Claim):
     return None
+
+
+def _run_standard_status_checks() -> dict[str, object]:
+    release_manifest_path = _latest_release_manifest_path()
+    with release_manifest_path.open(encoding="utf-8") as handle:
+        manifest = json.load(handle)
+    artifacts = manifest.get("artifacts", [])
+    if not isinstance(artifacts, list):
+        raise ValueError(f"release manifest artifacts is invalid in {release_manifest_path}")
+
+    release_paths = {
+        name: _resolve_artifact_path(artifacts, category=category, path_fragment=fragment)
+        for name, category, fragment in _STANDARD_STATUS_ARTIFACTS
+    }
+
+    checks = []
+    check_specs = [
+        (
+            "Conformance report",
+            release_paths["conformance_report"],
+            load_conformance_report,
+            validate_conformance_report,
+        ),
+        (
+            "Standard profile",
+            release_paths["standard_profile"],
+            load_standard_profile,
+            validate_standard_profile,
+        ),
+        (
+            "Change-control profile",
+            release_paths["change_control"],
+            load_change_control,
+            validate_change_control,
+        ),
+        (
+            "Scoring compatibility",
+            release_paths["scoring_compatibility"],
+            load_scoring_compatibility_profile,
+            validate_scoring_compatibility_profile,
+        ),
+        (
+            "Scoring specification",
+            release_paths["scoring_spec"],
+            load_scoring_spec,
+            validate_scoring_spec,
+        ),
+        (
+            "Adoption packet",
+            release_paths["adoption_packet"],
+            load_adoption_packet,
+            validate_adoption_packet,
+        ),
+        (
+            "Implementation kit",
+            release_paths["implementation_kit"],
+            load_implementation_kit,
+            validate_implementation_kit,
+        ),
+        (
+            "Evidence ledger",
+            release_paths["evidence_ledger"],
+            load_evidence_ledger,
+            validate_evidence_ledger,
+        ),
+    ]
+
+    for name, path, loader, validator in check_specs:
+        path_text = str(path)
+        try:
+            validation = validator(loader(path_text))
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            checks.append({"name": name, "path": path_text, "valid": False, "error": str(exc)})
+        else:
+            checks.append(
+                {
+                    "name": name,
+                    "path": path_text,
+                    "valid": bool(validation.get("valid")),
+                    "validation": validation,
+                }
+            )
+    evidence_summary = {}
+    if checks and checks[-1].get("validation"):
+        evidence_summary = checks[-1]["validation"]["summary"]
+    return {
+        "release_manifest_path": str(release_manifest_path),
+        "checks": checks,
+        "evidence_summary": evidence_summary,
+    }
+
+
+def _latest_release_manifest_path() -> Path:
+    release_files = list(Path("releases").glob("marked_bench_release_*.json"))
+    if not release_files:
+        raise FileNotFoundError("No release manifest found under releases/")
+    release_files.sort(key=lambda path: _release_sort_key(path), reverse=True)
+    return release_files[0]
+
+
+def _release_sort_key(path: Path) -> tuple[int, int, int, str]:
+    version_match = re.search(r"_v(\d+)_(\d+)_(\d+)", path.name)
+    if version_match:
+        return tuple(int(part) for part in version_match.groups()) + (path.name,)
+    return (0, 0, 0, path.name)
+
+
+def _resolve_artifact_path(
+    artifacts: list[dict[str, object]],
+    *,
+    category: str,
+    path_fragment: str,
+) -> Path:
+    matches = []
+    for artifact in artifacts:
+        artifact_path = artifact.get("path")
+        if not isinstance(artifact_path, str):
+            continue
+        if artifact.get("category") != category:
+            continue
+        if path_fragment not in artifact_path:
+            continue
+        matches.append(artifact_path)
+    if len(matches) != 1:
+        raise ValueError(
+            f"expected one artifact for category {category!r} and fragment {path_fragment!r}; found {len(matches)}"
+        )
+    return Path(matches[0])
 
 
 def _parse_disclosures(items: list[str]) -> dict[str, str]:

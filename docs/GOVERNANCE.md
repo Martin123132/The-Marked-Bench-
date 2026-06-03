@@ -2,6 +2,24 @@
 
 The benchmark should remain reproducible, versioned, and evidence-first.
 
+## Standardization Track
+
+This repository follows a three-tier standardization track:
+
+1. public baseline (versioned tracks and stable artifacts),
+2. standard profile conformance (all required machine-readable profiles and
+   validators), and
+3. external-verified adoption (public, inspected ledger entries).
+
+For an external result to be considered standard-adopter evidence, the
+following must be complete:
+
+- generated report, submission bundle, and result card are present;
+- ledger entry references are public and include suite identity, hashes, and review
+  links;
+- the reviewer confirms the claim is consistent with the referenced score
+  boundaries and scope.
+
 ## Case Stability
 
 Published case IDs are stable. Do not change the meaning of an existing case ID.
@@ -42,6 +60,9 @@ result-claim evidence with current hashes.
 Release maintainers should keep the change-control profile current so suite,
 schema, scoring, evidence-policy, and governance changes have a public proposal
 path before they become release artifacts.
+
+Release maintainers should keep [docs/STANDARDIZATION_STATUS.md](docs/STANDARDIZATION_STATUS.md)
+updated whenever the public claim about external verification changes.
 
 ## Review Priorities
 

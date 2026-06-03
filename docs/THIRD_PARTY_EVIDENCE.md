@@ -65,3 +65,6 @@ for leaderboard claims, add or link the accepted review file and set
 The ledger is an evidence record, not a marketing counter. It should stay
 boringly honest: no inferred adoption, no private claims, and no entries that
 cannot be inspected by someone outside the project.
+
+For the meaning of each verification state in public communications, see
+[docs/STANDARDIZATION_STATUS.md](docs/STANDARDIZATION_STATUS.md).

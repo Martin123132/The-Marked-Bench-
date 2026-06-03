@@ -43,9 +43,13 @@ This roadmap keeps the benchmark moving toward a credible public standard.
   optional result claims.
 - Checked standard change-control profile for suite, schema, scoring, evidence,
   and governance changes.
+- Explicit standardization status charter with tiers for public baseline,
+  standard profile conformance, and external-verified adoption.
 
 ## Next
 
+- Publish and enforce third-party verified status in the charter before naming the
+  benchmark as an industry-standard baseline.
 - Add real third-party report submissions and review evidence.
 - Add signed or independently mirrored release evidence once external adopters
   exist.

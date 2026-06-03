@@ -146,6 +146,10 @@ has been accepted yet.
 The implementation kit is the copy-ready contract for external CI checks,
 result-claim snippets, and version-pinned installation commands.
 
+Official adoption requests should also follow
+[docs/STANDARDIZATION_STATUS.md](docs/STANDARDIZATION_STATUS.md), which defines
+what claim level is justified for public score communication.
+
 ## Cite The Benchmark
 
 Use `CITATION.cff` and include the release tag, suite ID, suite version, and

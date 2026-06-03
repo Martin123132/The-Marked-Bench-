@@ -18,3 +18,5 @@ jobs:
         run: python -m unittest discover -s tests
       - name: Validate benchmark artifacts
         run: python scripts/validate_benchmark_artifacts.py
+      - name: Check standardization status
+        run: python -m marked_bench.benchmark_cli --check-standard-status

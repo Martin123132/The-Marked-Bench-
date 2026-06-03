@@ -11,6 +11,10 @@ slice metrics, result card, result claim, standard profile, implementation
 kit, scoring compatibility vectors, scoring specification, and leaderboard
 entry.
 
+Current standardization status is tracked in:
+
+- [Standardization status](docs/STANDARDIZATION_STATUS.md)
+
 ## Current Tracks
 
 | Track | Suite ID | Version | Purpose | Baseline |
@@ -104,6 +108,13 @@ Export and validate the checked standard change-control profile:
 ```bash
 marked-bench --export-change-control standard/marked_bench_change_control_v0_4_8.json
 marked-bench --validate-change-control standard/marked_bench_change_control_v0_4_8.json
+```
+
+Quickly verify current standardization status:
+
+```bash
+marked-bench --check-standard-status
+marked-bench --check-standard-status --json
 ```
 
 Export and validate deterministic scoring compatibility vectors:
@@ -270,6 +281,7 @@ marked-bench --build-leaderboard baselines/always_none_controls_v0_4_0.json base
 - Announcement package: `docs/ANNOUNCEMENT_PACKAGE.md`
 - Third-party evidence protocol: `docs/THIRD_PARTY_EVIDENCE.md`
 - Standard change-control protocol: `docs/CHANGE_CONTROL.md`
+- Standardization status: `docs/STANDARDIZATION_STATUS.md`
 - Submission review rubric: `docs/SUBMISSION_REVIEW_RUBRIC.md`
 - Release notes: `docs/RELEASE_NOTES_v0_2_0.md`
 - Current release notes: `docs/RELEASE_NOTES_v0_4_8.md`
