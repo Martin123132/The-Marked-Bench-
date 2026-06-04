@@ -20,6 +20,13 @@ or submission quality.
 - Document any detector, model, prompt, rule, or preprocessing configuration
   used to create a report.
 
+## Duplication Guard
+
+Only benchmark artifacts in this repository are in scope for this project.
+Do not add or mirror benchmark files in unrelated repositories, and do not direct
+contributors there. Use issues, pull requests, and releases in this canonical
+repository only.
+
 ## Local Checks
 
 ```bash

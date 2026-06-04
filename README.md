@@ -1,5 +1,8 @@
 # The Marked Bench
 
+**Canonical source:** This is the public benchmark-only repository for The Marked Bench.
+Use this repository for all pulls, issues, and contributions related to benchmarks.
+
 The Marked Bench is versioned benchmark infrastructure for testing whether AI
 systems can detect and classify contradictions between a premise and a query.
 

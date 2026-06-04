@@ -50,10 +50,10 @@
       "sha256": "354b019e5ed28bb15d374f7bf672f5838158e69a1edc27724020ef3f334e30f1"
     },
     {
-      "bytes": 1839,
+      "bytes": 2114,
       "category": "root",
       "path": "CONTRIBUTING.md",
-      "sha256": "691199753f651e78e1d9f05989c4c85541d2ea7cac21c02f88970e66a20704cd"
+      "sha256": "afab0c40bb621dd348e24c7b3edf617a96d223af4299878965cde62acbd3a614"
     },
     {
       "bytes": 2350,
@@ -62,10 +62,10 @@
       "sha256": "fe70234e152ad5faadd9d3e8dad33988186edba5ac618f3ce2b69be893fdf205"
     },
     {
-      "bytes": 15336,
+      "bytes": 15510,
       "category": "root",
       "path": "README.md",
-      "sha256": "898ad804908cb99c23b2fc436d5786eabc24976fdd26905f83f4b2939aab0d28"
+      "sha256": "09945ce3bfd418def4cc0939c8631b882074f0c567f215cb8dc29eaf5674f21b"
     },
     {
       "bytes": 2150,
