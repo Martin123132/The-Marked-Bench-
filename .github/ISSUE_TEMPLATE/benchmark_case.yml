@@ -3,6 +3,7 @@ description: Propose a new benchmark case or dispute an existing case.
 title: "Benchmark case: "
 labels:
   - benchmark-case
+  - triage-ready
 body:
   - type: input
     id: track

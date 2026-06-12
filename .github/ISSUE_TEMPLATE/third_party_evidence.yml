@@ -4,6 +4,7 @@ title: "Third-party evidence: "
 labels:
   - adoption
   - evidence
+  - triage-ready
 body:
   - type: input
     id: submitter

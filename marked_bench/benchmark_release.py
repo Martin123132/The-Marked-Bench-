@@ -18,6 +18,7 @@ ROOT_PUBLIC_ARTIFACTS = (
     "CONTRIBUTING.md",
     "CITATION.cff",
     "LICENSE",
+    "DEVELOPMENT_TARGETS.md",
     "benchmark_registry.json",
 )
 
@@ -47,8 +48,10 @@ BENCHMARK_SOURCE_ARTIFACTS = (
     "marked_bench/contradiction/engine.py",
     "marked_bench/examples/external_submission_demo.py",
     "marked_bench/examples/benchmark_standard_demo.py",
+    "scripts/check_scoring_sanity.py",
     "scripts/validate_benchmark_artifacts.py",
     "tests/test_benchmark_suite.py",
+    "tests/test_scoring_sanity.py",
 )
 
 SUPPORT_ARTIFACTS = (
@@ -59,7 +62,9 @@ SUPPORT_ARTIFACTS = (
     "baselines/README.md",
     "conformance/README.md",
     "docs/SCORING_SPEC.md",
+    "docs/SCORING_SANITY.md",
     "docs/CHANGE_CONTROL.md",
+    "docs/DEVELOPMENT_TARGET_PROGRESS.md",
     "leaderboard/README.md",
     "releases/README.md",
     "standard/README.md",

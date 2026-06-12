@@ -19,7 +19,8 @@ from .engine import Claim, Contradiction, ContradictionEngine, ContradictionType
 
 
 SUITE_ID = "marked-bench-contradiction-standard"
-SUITE_VERSION = "0.1.0"
+SUITE_VERSION = "0.1.1"
+STANDARD_SUITE_V0_1_0_VERSION = "0.1.0"
 ADVERSARIAL_SUITE_ID = "marked-bench-contradiction-adversarial"
 ADVERSARIAL_SUITE_VERSION = "0.2.0"
 MULTIHOP_SUITE_ID = "marked-bench-contradiction-multihop"
@@ -70,8 +71,8 @@ class BenchmarkCase:
         return record
 
 
-def build_standard_suite() -> list[BenchmarkCase]:
-    """Return the canonical contradiction cases for The Marked Bench."""
+def build_standard_suite_v0_1_0() -> list[BenchmarkCase]:
+    """Return the published v0.1.0 foundation contradiction cases."""
 
     return [
         BenchmarkCase(
@@ -262,6 +263,86 @@ def build_standard_suite() -> list[BenchmarkCase]:
             "Near-paraphrase control case.",
         ),
     ]
+
+
+def build_standard_suite_v0_1_1() -> list[BenchmarkCase]:
+    """Return the expanded v0.1.1 foundation contradiction cases."""
+
+    return [
+        *build_standard_suite_v0_1_0(),
+        BenchmarkCase(
+            "marked-v011-direct-001",
+            "The export is approved",
+            "The export is rejected",
+            ContradictionType.DIRECT_NEGATION,
+            "governance",
+            "easy",
+            "review_status_antonym",
+            ("negation", "status", "v0.1.1"),
+            "Approved/rejected polarity expands direct-negation status coverage.",
+        ),
+        BenchmarkCase(
+            "marked-v011-property-001",
+            "The crate mass is 12 kg",
+            "The crate mass is 12 lb",
+            ContradictionType.PROPERTY_MISMATCH,
+            "measurement",
+            "medium",
+            "compact_unit_conflict",
+            ("unit", "property", "v0.1.1"),
+            "Compact kg/lb mismatch broadens unit-conflict coverage.",
+        ),
+        BenchmarkCase(
+            "marked-v011-definition-001",
+            "Triangles have three sides",
+            "Triangle false three sides in this record",
+            ContradictionType.DEFINITIONAL_VIOLATION,
+            "geometry",
+            "easy",
+            "explicit_definition_denial",
+            ("definition", "geometry", "v0.1.1"),
+            "Direct definition denial expands explicit malformed-query coverage.",
+        ),
+        BenchmarkCase(
+            "marked-v011-universal-001",
+            "All submitted reports include evidence",
+            "A counterexample exists: one submitted report lacks evidence",
+            ContradictionType.UNIVERSAL_COUNTEREXAMPLE,
+            "benchmarking",
+            "medium",
+            "evidence_counterexample",
+            ("universal", "counterexample", "v0.1.1"),
+            "Evidence-related counterexample adds benchmark governance coverage.",
+        ),
+        BenchmarkCase(
+            "marked-v011-temporal-001",
+            "Always in 2021 the queue used manual review",
+            "In 2024 the queue used automated review",
+            ContradictionType.TEMPORAL_CONFLICT,
+            "operations",
+            "medium",
+            "review_mode_drift",
+            ("temporal", "scope", "v0.1.1"),
+            "Reviewer workflow drift expands temporal policy coverage.",
+        ),
+        BenchmarkCase(
+            "marked-v011-control-001",
+            "The report includes rationale",
+            "The report includes rationale and evidence",
+            ContradictionType.NONE,
+            "benchmarking",
+            "easy",
+            "evidence_elaboration_control",
+            ("control", "evidence", "v0.1.1"),
+            "Added evidence detail should not be treated as a contradiction.",
+        ),
+    ]
+
+
+def build_standard_suite() -> list[BenchmarkCase]:
+    """Return the latest foundation contradiction cases for The Marked Bench."""
+
+    return build_standard_suite_v0_1_1()
 
 
 def build_adversarial_suite() -> list[BenchmarkCase]:
@@ -947,6 +1028,8 @@ def build_suite(suite: str = DEFAULT_SUITE) -> list[BenchmarkCase]:
         return build_multihop_suite()
     if key == "adversarial":
         return build_adversarial_suite()
+    if key == "standard-v0.1.0":
+        return build_standard_suite_v0_1_0()
     return build_standard_suite()
 
 
@@ -1575,6 +1658,8 @@ def _suite_identity(suite: str) -> tuple[str, str]:
         return MULTIHOP_SUITE_ID, MULTIHOP_SUITE_VERSION
     if key == "adversarial":
         return ADVERSARIAL_SUITE_ID, ADVERSARIAL_SUITE_VERSION
+    if key == "standard-v0.1.0":
+        return SUITE_ID, STANDARD_SUITE_V0_1_0_VERSION
     return SUITE_ID, SUITE_VERSION
 
 
@@ -1582,9 +1667,14 @@ def _suite_key(suite: str) -> str:
     normalized = str(suite or DEFAULT_SUITE).strip().lower().replace("_", "-")
     aliases = {
         "contradiction": "standard",
+        "contradiction-v0.1.1": "standard",
         "standard": "standard",
+        "standard-v0.1.1": "standard",
         SUITE_ID: "standard",
         f"{SUITE_ID}:{SUITE_VERSION}": "standard",
+        "contradiction-v0.1.0": "standard-v0.1.0",
+        "standard-v0.1.0": "standard-v0.1.0",
+        f"{SUITE_ID}:{STANDARD_SUITE_V0_1_0_VERSION}": "standard-v0.1.0",
         "contradiction-adversarial": "adversarial",
         "adversarial": "adversarial",
         ADVERSARIAL_SUITE_ID: "adversarial",
@@ -1887,6 +1977,7 @@ __all__ = [
     "MULTIHOP_SUITE_VERSION",
     "PREDICTION_SCHEMA",
     "REPORT_SCHEMA",
+    "STANDARD_SUITE_V0_1_0_VERSION",
     "SUITE_ID",
     "SUITE_MANIFEST_SCHEMA",
     "SUITE_VERSION",
@@ -1900,6 +1991,8 @@ __all__ = [
     "build_suite_manifest",
     "build_suite_profile",
     "build_standard_suite",
+    "build_standard_suite_v0_1_0",
+    "build_standard_suite_v0_1_1",
     "evaluate_prediction_file",
     "evaluate_prediction_records",
     "evaluate_standard_suite",

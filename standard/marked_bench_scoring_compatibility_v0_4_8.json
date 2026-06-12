@@ -21,11 +21,11 @@
   },
   "tracks": [
     {
-      "case_count": 17,
+      "case_count": 23,
       "name": "contradiction",
-      "suite_hash": "8c1f80ff67874af54869bab2e361b3cc7416ce1d86f80ff583636a55e3462765",
+      "suite_hash": "b47ffc31bef81c2643b6a405e4e511994ba59099eb6637470b6dc4c534aa6baf",
       "suite_id": "marked-bench-contradiction-standard",
-      "suite_version": "0.1.0"
+      "suite_version": "0.1.1"
     },
     {
       "case_count": 17,
@@ -56,10 +56,10 @@
         "binary_detection_f1": 1.0,
         "calibration_brier_score": 0.0,
         "calibration_ece": 0.0,
-        "case_count": 17,
+        "case_count": 23,
         "confusion_matrix": {
           "definitional_violation": {
-            "definitional_violation": 2,
+            "definitional_violation": 3,
             "direct_negation": 0,
             "none": 0,
             "property_mismatch": 0,
@@ -68,7 +68,7 @@
           },
           "direct_negation": {
             "definitional_violation": 0,
-            "direct_negation": 3,
+            "direct_negation": 4,
             "none": 0,
             "property_mismatch": 0,
             "temporal_conflict": 0,
@@ -77,7 +77,7 @@
           "none": {
             "definitional_violation": 0,
             "direct_negation": 0,
-            "none": 6,
+            "none": 7,
             "property_mismatch": 0,
             "temporal_conflict": 0,
             "universal_counterexample": 0
@@ -86,7 +86,7 @@
             "definitional_violation": 0,
             "direct_negation": 0,
             "none": 0,
-            "property_mismatch": 2,
+            "property_mismatch": 3,
             "temporal_conflict": 0,
             "universal_counterexample": 0
           },
@@ -95,7 +95,7 @@
             "direct_negation": 0,
             "none": 0,
             "property_mismatch": 0,
-            "temporal_conflict": 2,
+            "temporal_conflict": 3,
             "universal_counterexample": 0
           },
           "universal_counterexample": {
@@ -104,7 +104,7 @@
             "none": 0,
             "property_mismatch": 0,
             "temporal_conflict": 0,
-            "universal_counterexample": 2
+            "universal_counterexample": 3
           }
         },
         "contradiction_macro_f1": 1.0,
@@ -112,9 +112,9 @@
         "failure_case_ids": [],
         "failure_count": 0,
         "overall_score": 100.0,
-        "suite_hash": "8c1f80ff67874af54869bab2e361b3cc7416ce1d86f80ff583636a55e3462765",
+        "suite_hash": "b47ffc31bef81c2643b6a405e4e511994ba59099eb6637470b6dc4c534aa6baf",
         "suite_id": "marked-bench-contradiction-standard",
-        "suite_version": "0.1.0",
+        "suite_version": "0.1.1",
         "type_accuracy": 1.0
       },
       "input_predictions": [
@@ -270,6 +270,60 @@
           ],
           "predicted": "none",
           "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-v011-direct-001",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-v011-direct-001"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-v011-property-001",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-v011-property-001"
+          ],
+          "predicted": "property_mismatch",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-v011-definition-001",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-v011-definition-001"
+          ],
+          "predicted": "definitional_violation",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-v011-universal-001",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-v011-universal-001"
+          ],
+          "predicted": "universal_counterexample",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-v011-temporal-001",
+          "detector_score": 1.0,
+          "evidence": [
+            "marked-v011-temporal-001"
+          ],
+          "predicted": "temporal_conflict",
+          "rationale": "Scoring compatibility vector: perfect."
+        },
+        {
+          "case_id": "marked-v011-control-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-v011-control-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: perfect."
         }
       ],
       "name": "perfect",
@@ -278,19 +332,11 @@
     {
       "expected_summary": {
         "binary_detection_f1": 0.0,
-        "calibration_brier_score": 0.647059,
-        "calibration_ece": 0.647059,
-        "case_count": 17,
+        "calibration_brier_score": 0.695652,
+        "calibration_ece": 0.695652,
+        "case_count": 23,
         "confusion_matrix": {
           "definitional_violation": {
-            "definitional_violation": 0,
-            "direct_negation": 0,
-            "none": 2,
-            "property_mismatch": 0,
-            "temporal_conflict": 0,
-            "universal_counterexample": 0
-          },
-          "direct_negation": {
             "definitional_violation": 0,
             "direct_negation": 0,
             "none": 3,
@@ -298,10 +344,18 @@
             "temporal_conflict": 0,
             "universal_counterexample": 0
           },
+          "direct_negation": {
+            "definitional_violation": 0,
+            "direct_negation": 0,
+            "none": 4,
+            "property_mismatch": 0,
+            "temporal_conflict": 0,
+            "universal_counterexample": 0
+          },
           "none": {
             "definitional_violation": 0,
             "direct_negation": 0,
-            "none": 6,
+            "none": 7,
             "property_mismatch": 0,
             "temporal_conflict": 0,
             "universal_counterexample": 0
@@ -309,7 +363,7 @@
           "property_mismatch": {
             "definitional_violation": 0,
             "direct_negation": 0,
-            "none": 2,
+            "none": 3,
             "property_mismatch": 0,
             "temporal_conflict": 0,
             "universal_counterexample": 0
@@ -317,7 +371,7 @@
           "temporal_conflict": {
             "definitional_violation": 0,
             "direct_negation": 0,
-            "none": 2,
+            "none": 3,
             "property_mismatch": 0,
             "temporal_conflict": 0,
             "universal_counterexample": 0
@@ -325,7 +379,7 @@
           "universal_counterexample": {
             "definitional_violation": 0,
             "direct_negation": 0,
-            "none": 2,
+            "none": 3,
             "property_mismatch": 0,
             "temporal_conflict": 0,
             "universal_counterexample": 0
@@ -344,14 +398,19 @@
           "marked-universal-001",
           "marked-universal-002",
           "marked-temporal-001",
-          "marked-temporal-002"
+          "marked-temporal-002",
+          "marked-v011-direct-001",
+          "marked-v011-property-001",
+          "marked-v011-definition-001",
+          "marked-v011-universal-001",
+          "marked-v011-temporal-001"
         ],
-        "failure_count": 11,
-        "overall_score": 8.82,
-        "suite_hash": "8c1f80ff67874af54869bab2e361b3cc7416ce1d86f80ff583636a55e3462765",
+        "failure_count": 16,
+        "overall_score": 7.61,
+        "suite_hash": "b47ffc31bef81c2643b6a405e4e511994ba59099eb6637470b6dc4c534aa6baf",
         "suite_id": "marked-bench-contradiction-standard",
-        "suite_version": "0.1.0",
-        "type_accuracy": 0.352941
+        "suite_version": "0.1.1",
+        "type_accuracy": 0.304348
       },
       "input_predictions": [
         {
@@ -506,6 +565,60 @@
           ],
           "predicted": "none",
           "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-v011-direct-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-v011-direct-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-v011-property-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-v011-property-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-v011-definition-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-v011-definition-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-v011-universal-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-v011-universal-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-v011-temporal-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-v011-temporal-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
+        },
+        {
+          "case_id": "marked-v011-control-001",
+          "detector_score": 0.0,
+          "evidence": [
+            "marked-v011-control-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: always_none."
         }
       ],
       "name": "always_none",
@@ -513,10 +626,10 @@
     },
     {
       "expected_summary": {
-        "binary_detection_f1": 0.692308,
+        "binary_detection_f1": 0.722222,
         "calibration_brier_score": 0.25,
-        "calibration_ece": 0.147059,
-        "case_count": 17,
+        "calibration_ece": 0.195652,
+        "case_count": 23,
         "confusion_matrix": {
           "definitional_violation": {
             "definitional_violation": 0,
@@ -524,26 +637,26 @@
             "none": 0,
             "property_mismatch": 0,
             "temporal_conflict": 0,
-            "universal_counterexample": 2
+            "universal_counterexample": 3
           },
           "direct_negation": {
             "definitional_violation": 0,
             "direct_negation": 0,
             "none": 0,
-            "property_mismatch": 3,
+            "property_mismatch": 4,
             "temporal_conflict": 0,
             "universal_counterexample": 0
           },
           "none": {
             "definitional_violation": 0,
-            "direct_negation": 6,
+            "direct_negation": 7,
             "none": 0,
             "property_mismatch": 0,
             "temporal_conflict": 0,
             "universal_counterexample": 0
           },
           "property_mismatch": {
-            "definitional_violation": 2,
+            "definitional_violation": 3,
             "direct_negation": 0,
             "none": 0,
             "property_mismatch": 0,
@@ -553,7 +666,7 @@
           "temporal_conflict": {
             "definitional_violation": 0,
             "direct_negation": 0,
-            "none": 2,
+            "none": 3,
             "property_mismatch": 0,
             "temporal_conflict": 0,
             "universal_counterexample": 0
@@ -563,7 +676,7 @@
             "direct_negation": 0,
             "none": 0,
             "property_mismatch": 0,
-            "temporal_conflict": 2,
+            "temporal_conflict": 3,
             "universal_counterexample": 0
           }
         },
@@ -586,13 +699,19 @@
           "marked-temporal-002",
           "marked-temporal-003",
           "marked-control-001",
-          "marked-control-002"
+          "marked-control-002",
+          "marked-v011-direct-001",
+          "marked-v011-property-001",
+          "marked-v011-definition-001",
+          "marked-v011-universal-001",
+          "marked-v011-temporal-001",
+          "marked-v011-control-001"
         ],
-        "failure_count": 17,
-        "overall_score": 13.85,
-        "suite_hash": "8c1f80ff67874af54869bab2e361b3cc7416ce1d86f80ff583636a55e3462765",
+        "failure_count": 23,
+        "overall_score": 14.44,
+        "suite_hash": "b47ffc31bef81c2643b6a405e4e511994ba59099eb6637470b6dc4c534aa6baf",
         "suite_id": "marked-bench-contradiction-standard",
-        "suite_version": "0.1.0",
+        "suite_version": "0.1.1",
         "type_accuracy": 0.0
       },
       "input_predictions": [
@@ -745,6 +864,60 @@
           "detector_score": 0.5,
           "evidence": [
             "marked-control-002"
+          ],
+          "predicted": "direct_negation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-v011-direct-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-v011-direct-001"
+          ],
+          "predicted": "property_mismatch",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-v011-property-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-v011-property-001"
+          ],
+          "predicted": "definitional_violation",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-v011-definition-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-v011-definition-001"
+          ],
+          "predicted": "universal_counterexample",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-v011-universal-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-v011-universal-001"
+          ],
+          "predicted": "temporal_conflict",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-v011-temporal-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-v011-temporal-001"
+          ],
+          "predicted": "none",
+          "rationale": "Scoring compatibility vector: rotated_labels."
+        },
+        {
+          "case_id": "marked-v011-control-001",
+          "detector_score": 0.5,
+          "evidence": [
+            "marked-v011-control-001"
           ],
           "predicted": "direct_negation",
           "rationale": "Scoring compatibility vector: rotated_labels."

@@ -8,7 +8,7 @@ This note summarizes the checked benchmark release artifacts for `contradiction-
 
 | Track | Suite ID | Version | Cases | Suite Hash | Baseline Best |
 | --- | --- | ---: | ---: | --- | ---: |
-| contradiction | `marked-bench-contradiction-standard` | `0.1.0` | 17 | `8c1f80ff67874af54869bab2e361b3cc7416ce1d86f80ff583636a55e3462765` | 100.00 |
+| contradiction | `marked-bench-contradiction-standard` | `0.1.1` | 23 | `b47ffc31bef81c2643b6a405e4e511994ba59099eb6637470b6dc4c534aa6baf` | 100.00 |
 | contradiction-adversarial | `marked-bench-contradiction-adversarial` | `0.2.0` | 17 | `454c1aff69d5028224549dfc14fd8e6c10818251d0abf8becf36f0856b2dbd67` | 52.37 |
 | contradiction-multihop | `marked-bench-contradiction-multihop` | `0.3.0` | 18 | `07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f` | 24.14 |
 | contradiction-controls | `marked-bench-contradiction-controls` | `0.4.0` | 18 | `33a0777f6f93504bde517d922f46c24c1d93992256bfe95b32287695babfb08a` | 100.00 |
@@ -17,12 +17,12 @@ This note summarizes the checked benchmark release artifacts for `contradiction-
 
 ### contradiction
 
-- Cases: 17
-- Contradiction cases: 11
-- Control cases: 6
-- Difficulties: easy=9, medium=8
-- Domains: biology=1, geometry=2, governance=4, language=1, math=1, measurement=2, operations=2, safety=3, science=1
-- Labels: definitional_violation=2, direct_negation=3, none=6, property_mismatch=2, temporal_conflict=2, universal_counterexample=2
+- Cases: 23
+- Contradiction cases: 16
+- Control cases: 7
+- Difficulties: easy=12, medium=11
+- Domains: benchmarking=2, biology=1, geometry=3, governance=5, language=1, math=1, measurement=3, operations=3, safety=3, science=1
+- Labels: definitional_violation=3, direct_negation=4, none=7, property_mismatch=3, temporal_conflict=3, universal_counterexample=3
 - Quality gates: min_cases=15, requires_all_contradiction_labels=True, requires_control_cases=True, requires_multiple_difficulties=True, requires_multiple_domains=True
 
 ### contradiction-adversarial
@@ -59,8 +59,8 @@ This note summarizes the checked benchmark release artifacts for `contradiction-
 
 | Track | System | Overall | Type Acc. | Detection F1 | Brier | ECE | Failures |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| contradiction | ContradictionEngine | 100.00 | 1.0000 | 1.0000 | 0.0340 | 0.1282 | 0 |
-| contradiction | AlwaysNoneDetector | 8.82 | 0.3529 | 0.0000 | 0.6471 | 0.6471 | 11 |
+| contradiction | ContradictionEngine | 100.00 | 1.0000 | 1.0000 | 0.0388 | 0.1422 | 0 |
+| contradiction | AlwaysNoneDetector | 7.61 | 0.3043 | 0.0000 | 0.6957 | 0.6957 | 16 |
 | contradiction-adversarial | ContradictionEngine | 52.37 | 0.5882 | 0.5333 | 0.4367 | 0.4835 | 7 |
 | contradiction-adversarial | AlwaysNoneDetector | 8.82 | 0.3529 | 0.0000 | 0.6471 | 0.6471 | 11 |
 | contradiction-multihop | ContradictionEngine | 24.14 | 0.5000 | 0.1818 | 0.5050 | 0.5167 | 9 |

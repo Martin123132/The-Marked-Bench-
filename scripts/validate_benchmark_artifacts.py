@@ -46,7 +46,8 @@ from marked_bench.contradiction.benchmark_suite import (  # noqa: E402
 
 
 SUITE_MANIFESTS = {
-    Path("suites/marked_bench_contradiction_standard_v0_1_0.json"): "contradiction",
+    Path("suites/marked_bench_contradiction_standard_v0_1_0.json"): "contradiction-v0.1.0",
+    Path("suites/marked_bench_contradiction_standard_v0_1_1.json"): "contradiction",
     Path("suites/marked_bench_contradiction_adversarial_v0_2_0.json"): "contradiction-adversarial",
     Path("suites/marked_bench_contradiction_multihop_v0_3_0.json"): "contradiction-multihop",
     Path("suites/marked_bench_contradiction_controls_v0_4_0.json"): "contradiction-controls",
@@ -55,6 +56,8 @@ SUITE_MANIFESTS = {
 BASELINE_REPORTS = [
     Path("baselines/contradiction_engine_v0_1_0.json"),
     Path("baselines/always_none_v0_1_0.json"),
+    Path("baselines/contradiction_engine_v0_1_1.json"),
+    Path("baselines/always_none_v0_1_1.json"),
     Path("baselines/contradiction_engine_adversarial_v0_2_0.json"),
     Path("baselines/always_none_adversarial_v0_2_0.json"),
     Path("baselines/contradiction_engine_multihop_v0_3_0.json"),
@@ -67,6 +70,10 @@ LEADERBOARDS = {
     Path("leaderboard/leaderboard_v0_1_0.json"): [
         Path("baselines/always_none_v0_1_0.json"),
         Path("baselines/contradiction_engine_v0_1_0.json"),
+    ],
+    Path("leaderboard/leaderboard_v0_1_1.json"): [
+        Path("baselines/always_none_v0_1_1.json"),
+        Path("baselines/contradiction_engine_v0_1_1.json"),
     ],
     Path("leaderboard/leaderboard_adversarial_v0_2_0.json"): [
         Path("baselines/always_none_adversarial_v0_2_0.json"),
@@ -118,6 +125,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("adoption/implementation_kit/github_actions_validate_result.yml"),
     Path("adoption/implementation_kit/result_claim_badge.md"),
     Path("README.md"),
+    Path("DEVELOPMENT_TARGETS.md"),
     BENCHMARK_REGISTRY,
     RELEASE_MANIFEST,
     CONFORMANCE_REPORT,
@@ -125,6 +133,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("CITATION.cff"),
     Path("docs/BENCHMARK_CARD.md"),
     Path("docs/CHANGE_CONTROL.md"),
+    Path("docs/DEVELOPMENT_TARGET_PROGRESS.md"),
     Path("docs/ADOPTION_GUIDE.md"),
     Path("docs/ANNOUNCEMENT_PACKAGE.md"),
     Path("docs/BENCHMARK_STANDARD.md"),
@@ -154,6 +163,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("docs/RELEASE_NOTES_v0_4_8.md"),
     Path("docs/ROADMAP.md"),
     Path("docs/SCORING_SPEC.md"),
+    Path("docs/SCORING_SANITY.md"),
     Path("docs/SUBMISSION_GUIDE.md"),
     Path("docs/THIRD_PARTY_EVIDENCE.md"),
     Path("schemas/benchmark_registry.schema.json"),
@@ -194,6 +204,8 @@ REQUIRED_PUBLIC_FILES = [
     Path("submissions/example_publication_packet/result_card.json"),
     Path("submissions/example_publication_packet/publication_packet.json"),
     Path("submissions/example_publication_packet/result_claim.json"),
+    Path("scripts/check_scoring_sanity.py"),
+    Path("tests/test_scoring_sanity.py"),
     Path(".github/PULL_REQUEST_TEMPLATE.md"),
     Path(".github/workflows/benchmark-ci.yml"),
     Path(".github/ISSUE_TEMPLATE/third_party_evidence.yml"),
@@ -205,6 +217,7 @@ SCHEMA_CONFORMANCE_FILES = {
     RELEASE_MANIFEST: Path("schemas/release_manifest.schema.json"),
     CONFORMANCE_REPORT: Path("schemas/conformance_report.schema.json"),
     Path("leaderboard/leaderboard_v0_1_0.json"): Path("schemas/leaderboard.schema.json"),
+    Path("leaderboard/leaderboard_v0_1_1.json"): Path("schemas/leaderboard.schema.json"),
     Path("leaderboard/leaderboard_adversarial_v0_2_0.json"): Path("schemas/leaderboard.schema.json"),
     Path("leaderboard/leaderboard_multihop_v0_3_0.json"): Path("schemas/leaderboard.schema.json"),
     Path("leaderboard/leaderboard_controls_v0_4_0.json"): Path("schemas/leaderboard.schema.json"),

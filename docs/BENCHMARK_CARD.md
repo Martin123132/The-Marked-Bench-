@@ -15,7 +15,7 @@ pipelines.
 
 | Track | Suite ID | Version | Cases | Description |
 | --- | --- | ---: | ---: | --- |
-| Foundation | `marked-bench-contradiction-standard` | `0.1.0` | 17 | Compact canonical cases across five contradiction classes and controls. |
+| Foundation | `marked-bench-contradiction-standard` | `0.1.1` | 23 | Expanded canonical cases across five contradiction classes and controls. |
 | Adversarial | `marked-bench-contradiction-adversarial` | `0.2.0` | 17 | Longer-context and adversarial cases with implicit contradictions and distractors. |
 | Multi-hop | `marked-bench-contradiction-multihop` | `0.3.0` | 18 | Linked-evidence cases requiring entity, policy, temporal, or definition chaining. |
 | Controls | `marked-bench-contradiction-controls` | `0.4.0` | 18 | False-positive distractors with anchor cases for every contradiction label. |

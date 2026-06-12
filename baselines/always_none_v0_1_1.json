@@ -1,0 +1,1717 @@
+{
+  "case_count": 23,
+  "case_results": [
+    {
+      "capability": "negation_scope",
+      "case_id": "marked-direct-001",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "safety",
+      "evidence": [],
+      "expected": "direct_negation",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "negation",
+        "surface"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "predicate_negation",
+      "case_id": "marked-direct-002",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "safety",
+      "evidence": [],
+      "expected": "direct_negation",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "negation",
+        "predicate"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "lexical_antonym",
+      "case_id": "marked-direct-003",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "governance",
+      "evidence": [],
+      "expected": "direct_negation",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "negation",
+        "adversarial"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "numeric_property",
+      "case_id": "marked-property-001",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "science",
+      "evidence": [],
+      "expected": "property_mismatch",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "numeric",
+        "property"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "unit_consistency",
+      "case_id": "marked-property-002",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "measurement",
+      "evidence": [],
+      "expected": "property_mismatch",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "unit",
+        "property"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "numeric_control",
+      "case_id": "marked-property-003",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "measurement",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "control",
+        "numeric"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "definition_check",
+      "case_id": "marked-definition-001",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "geometry",
+      "evidence": [],
+      "expected": "definitional_violation",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "definition",
+        "geometry"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "exception_sensitive_definition",
+      "case_id": "marked-definition-002",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "math",
+      "evidence": [],
+      "expected": "definitional_violation",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "definition",
+        "math"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "definition_control",
+      "case_id": "marked-definition-003",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "geometry",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "control",
+        "definition"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "counterexample_detection",
+      "case_id": "marked-universal-001",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "biology",
+      "evidence": [],
+      "expected": "universal_counterexample",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "universal",
+        "counterexample"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "explicit_counterexample",
+      "case_id": "marked-universal-002",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "governance",
+      "evidence": [],
+      "expected": "universal_counterexample",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "universal",
+        "policy"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "quantifier_control",
+      "case_id": "marked-universal-003",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "governance",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "control",
+        "quantifier"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "temporal_scope",
+      "case_id": "marked-temporal-001",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "operations",
+      "evidence": [],
+      "expected": "temporal_conflict",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "temporal",
+        "scope"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "policy_drift",
+      "case_id": "marked-temporal-002",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "governance",
+      "evidence": [],
+      "expected": "temporal_conflict",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "temporal",
+        "policy"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "temporal_control",
+      "case_id": "marked-temporal-003",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "operations",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "control",
+        "temporal"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "non_contradiction",
+      "case_id": "marked-control-001",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "language",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "control",
+        "language"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "semantic_paraphrase",
+      "case_id": "marked-control-002",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "safety",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "control",
+        "paraphrase"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "review_status_antonym",
+      "case_id": "marked-v011-direct-001",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "governance",
+      "evidence": [],
+      "expected": "direct_negation",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "negation",
+        "status",
+        "v0.1.1"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "compact_unit_conflict",
+      "case_id": "marked-v011-property-001",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "measurement",
+      "evidence": [],
+      "expected": "property_mismatch",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "unit",
+        "property",
+        "v0.1.1"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "explicit_definition_denial",
+      "case_id": "marked-v011-definition-001",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "geometry",
+      "evidence": [],
+      "expected": "definitional_violation",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "definition",
+        "geometry",
+        "v0.1.1"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "evidence_counterexample",
+      "case_id": "marked-v011-universal-001",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "benchmarking",
+      "evidence": [],
+      "expected": "universal_counterexample",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "universal",
+        "counterexample",
+        "v0.1.1"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "review_mode_drift",
+      "case_id": "marked-v011-temporal-001",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "operations",
+      "evidence": [],
+      "expected": "temporal_conflict",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "temporal",
+        "scope",
+        "v0.1.1"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "evidence_elaboration_control",
+      "case_id": "marked-v011-control-001",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "benchmarking",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "control",
+        "evidence",
+        "v0.1.1"
+      ],
+      "type_correct": true
+    }
+  ],
+  "confusion_matrix": {
+    "definitional_violation": {
+      "definitional_violation": 0,
+      "direct_negation": 0,
+      "none": 3,
+      "property_mismatch": 0,
+      "temporal_conflict": 0,
+      "universal_counterexample": 0
+    },
+    "direct_negation": {
+      "definitional_violation": 0,
+      "direct_negation": 0,
+      "none": 4,
+      "property_mismatch": 0,
+      "temporal_conflict": 0,
+      "universal_counterexample": 0
+    },
+    "none": {
+      "definitional_violation": 0,
+      "direct_negation": 0,
+      "none": 7,
+      "property_mismatch": 0,
+      "temporal_conflict": 0,
+      "universal_counterexample": 0
+    },
+    "property_mismatch": {
+      "definitional_violation": 0,
+      "direct_negation": 0,
+      "none": 3,
+      "property_mismatch": 0,
+      "temporal_conflict": 0,
+      "universal_counterexample": 0
+    },
+    "temporal_conflict": {
+      "definitional_violation": 0,
+      "direct_negation": 0,
+      "none": 3,
+      "property_mismatch": 0,
+      "temporal_conflict": 0,
+      "universal_counterexample": 0
+    },
+    "universal_counterexample": {
+      "definitional_violation": 0,
+      "direct_negation": 0,
+      "none": 3,
+      "property_mismatch": 0,
+      "temporal_conflict": 0,
+      "universal_counterexample": 0
+    }
+  },
+  "created_at": 1781303992.378,
+  "duration_seconds": 0.000698,
+  "explanation_audit": {
+    "case_count": 23,
+    "correct_explanation_ready_rate": 0.0,
+    "evidence_count": 0,
+    "evidence_coverage": 0.0,
+    "explanation_ready_count": 0,
+    "explanation_ready_rate": 0.0,
+    "rationale_count": 0,
+    "rationale_coverage": 0.0
+  },
+  "failures": [
+    {
+      "capability": "negation_scope",
+      "case_id": "marked-direct-001",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "safety",
+      "evidence": [],
+      "expected": "direct_negation",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "negation",
+        "surface"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "predicate_negation",
+      "case_id": "marked-direct-002",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "safety",
+      "evidence": [],
+      "expected": "direct_negation",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "negation",
+        "predicate"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "lexical_antonym",
+      "case_id": "marked-direct-003",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "governance",
+      "evidence": [],
+      "expected": "direct_negation",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "negation",
+        "adversarial"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "numeric_property",
+      "case_id": "marked-property-001",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "science",
+      "evidence": [],
+      "expected": "property_mismatch",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "numeric",
+        "property"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "unit_consistency",
+      "case_id": "marked-property-002",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "measurement",
+      "evidence": [],
+      "expected": "property_mismatch",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "unit",
+        "property"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "definition_check",
+      "case_id": "marked-definition-001",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "geometry",
+      "evidence": [],
+      "expected": "definitional_violation",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "definition",
+        "geometry"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "exception_sensitive_definition",
+      "case_id": "marked-definition-002",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "math",
+      "evidence": [],
+      "expected": "definitional_violation",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "definition",
+        "math"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "counterexample_detection",
+      "case_id": "marked-universal-001",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "biology",
+      "evidence": [],
+      "expected": "universal_counterexample",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "universal",
+        "counterexample"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "explicit_counterexample",
+      "case_id": "marked-universal-002",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "governance",
+      "evidence": [],
+      "expected": "universal_counterexample",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "universal",
+        "policy"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "temporal_scope",
+      "case_id": "marked-temporal-001",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "operations",
+      "evidence": [],
+      "expected": "temporal_conflict",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "temporal",
+        "scope"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "policy_drift",
+      "case_id": "marked-temporal-002",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "governance",
+      "evidence": [],
+      "expected": "temporal_conflict",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "temporal",
+        "policy"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "review_status_antonym",
+      "case_id": "marked-v011-direct-001",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "governance",
+      "evidence": [],
+      "expected": "direct_negation",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "negation",
+        "status",
+        "v0.1.1"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "compact_unit_conflict",
+      "case_id": "marked-v011-property-001",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "measurement",
+      "evidence": [],
+      "expected": "property_mismatch",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "unit",
+        "property",
+        "v0.1.1"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "explicit_definition_denial",
+      "case_id": "marked-v011-definition-001",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "easy",
+      "domain": "geometry",
+      "evidence": [],
+      "expected": "definitional_violation",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "definition",
+        "geometry",
+        "v0.1.1"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "evidence_counterexample",
+      "case_id": "marked-v011-universal-001",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "benchmarking",
+      "evidence": [],
+      "expected": "universal_counterexample",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "universal",
+        "counterexample",
+        "v0.1.1"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "review_mode_drift",
+      "case_id": "marked-v011-temporal-001",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "operations",
+      "evidence": [],
+      "expected": "temporal_conflict",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "temporal",
+        "scope",
+        "v0.1.1"
+      ],
+      "type_correct": false
+    }
+  ],
+  "metrics": {
+    "calibration": {
+      "bin_count": 10,
+      "bins": [
+        {
+          "case_count": 23,
+          "empirical_positive_rate": 0.695652,
+          "lower": 0.0,
+          "mean_confidence": 0.0,
+          "upper": 0.1
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.1,
+          "mean_confidence": 0.0,
+          "upper": 0.2
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.2,
+          "mean_confidence": 0.0,
+          "upper": 0.3
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.3,
+          "mean_confidence": 0.0,
+          "upper": 0.4
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.4,
+          "mean_confidence": 0.0,
+          "upper": 0.5
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.5,
+          "mean_confidence": 0.0,
+          "upper": 0.6
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.6,
+          "mean_confidence": 0.0,
+          "upper": 0.7
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.7,
+          "mean_confidence": 0.0,
+          "upper": 0.8
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.8,
+          "mean_confidence": 0.0,
+          "upper": 0.9
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.9,
+          "mean_confidence": 0.0,
+          "upper": 1.0
+        }
+      ],
+      "brier_score": 0.695652,
+      "expected_calibration_error": 0.695652,
+      "mean_confidence": 0.0,
+      "positive_rate": 0.695652
+    },
+    "contradiction_macro_f1": 0.0,
+    "contradiction_type_accuracy": 0.0,
+    "coverage_index": 0.0,
+    "detection": {
+      "accuracy": 0.304348,
+      "f1": 0.0,
+      "false_negative": 16,
+      "false_positive": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "true_negative": 7,
+      "true_positive": 0
+    },
+    "per_class": {
+      "definitional_violation": {
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "support": 3
+      },
+      "direct_negation": {
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "support": 4
+      },
+      "none": {
+        "f1": 0.466667,
+        "precision": 0.304348,
+        "recall": 1.0,
+        "support": 7
+      },
+      "property_mismatch": {
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "support": 3
+      },
+      "temporal_conflict": {
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "support": 3
+      },
+      "universal_counterexample": {
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "support": 3
+      }
+    },
+    "slices": {
+      "capability": {
+        "compact_unit_conflict": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "counterexample_detection": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "definition_check": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "definition_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "evidence_counterexample": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "evidence_elaboration_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "exception_sensitive_definition": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "explicit_counterexample": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "explicit_definition_denial": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "lexical_antonym": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "negation_scope": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "non_contradiction": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "numeric_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "numeric_property": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "policy_drift": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "predicate_negation": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "quantifier_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "review_mode_drift": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "review_status_antonym": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "semantic_paraphrase": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "temporal_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "temporal_scope": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "unit_consistency": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        }
+      },
+      "difficulty": {
+        "easy": {
+          "case_count": 12,
+          "contradiction_case_count": 8,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 8,
+          "type_accuracy": 0.333333
+        },
+        "medium": {
+          "case_count": 11,
+          "contradiction_case_count": 8,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 8,
+          "type_accuracy": 0.272727
+        }
+      },
+      "domain": {
+        "benchmarking": {
+          "case_count": 2,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.5
+        },
+        "biology": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "geometry": {
+          "case_count": 3,
+          "contradiction_case_count": 2,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 2,
+          "type_accuracy": 0.333333
+        },
+        "governance": {
+          "case_count": 5,
+          "contradiction_case_count": 4,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 4,
+          "type_accuracy": 0.2
+        },
+        "language": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "math": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "measurement": {
+          "case_count": 3,
+          "contradiction_case_count": 2,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 2,
+          "type_accuracy": 0.333333
+        },
+        "operations": {
+          "case_count": 3,
+          "contradiction_case_count": 2,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 2,
+          "type_accuracy": 0.333333
+        },
+        "safety": {
+          "case_count": 3,
+          "contradiction_case_count": 2,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 2,
+          "type_accuracy": 0.333333
+        },
+        "science": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        }
+      },
+      "tag": {
+        "adversarial": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "control": {
+          "case_count": 7,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "counterexample": {
+          "case_count": 2,
+          "contradiction_case_count": 2,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 2,
+          "type_accuracy": 0.0
+        },
+        "definition": {
+          "case_count": 4,
+          "contradiction_case_count": 3,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 3,
+          "type_accuracy": 0.25
+        },
+        "evidence": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "geometry": {
+          "case_count": 2,
+          "contradiction_case_count": 2,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 2,
+          "type_accuracy": 0.0
+        },
+        "language": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "math": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "negation": {
+          "case_count": 4,
+          "contradiction_case_count": 4,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 4,
+          "type_accuracy": 0.0
+        },
+        "numeric": {
+          "case_count": 2,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.5
+        },
+        "paraphrase": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "policy": {
+          "case_count": 2,
+          "contradiction_case_count": 2,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 2,
+          "type_accuracy": 0.0
+        },
+        "predicate": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "property": {
+          "case_count": 3,
+          "contradiction_case_count": 3,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 3,
+          "type_accuracy": 0.0
+        },
+        "quantifier": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "scope": {
+          "case_count": 2,
+          "contradiction_case_count": 2,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 2,
+          "type_accuracy": 0.0
+        },
+        "status": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "surface": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "temporal": {
+          "case_count": 4,
+          "contradiction_case_count": 3,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 3,
+          "type_accuracy": 0.25
+        },
+        "unit": {
+          "case_count": 2,
+          "contradiction_case_count": 2,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 2,
+          "type_accuracy": 0.0
+        },
+        "universal": {
+          "case_count": 3,
+          "contradiction_case_count": 3,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 3,
+          "type_accuracy": 0.0
+        },
+        "v0.1.1": {
+          "case_count": 6,
+          "contradiction_case_count": 5,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 5,
+          "type_accuracy": 0.166667
+        }
+      }
+    },
+    "type_accuracy": 0.304348
+  },
+  "overall_score": 7.61,
+  "schema": "marked_bench.contradiction-benchmark-report.v2",
+  "suite_cases": [
+    {
+      "capability": "negation_scope",
+      "difficulty": "easy",
+      "domain": "safety",
+      "expected": "direct_negation",
+      "id": "marked-direct-001",
+      "note": "Query affirms a premise-level negation.",
+      "premise": "Not all safety checks passed",
+      "query": "All safety checks passed",
+      "tags": [
+        "negation",
+        "surface"
+      ]
+    },
+    {
+      "capability": "predicate_negation",
+      "difficulty": "easy",
+      "domain": "safety",
+      "expected": "direct_negation",
+      "id": "marked-direct-002",
+      "note": "Query inserts a direct predicate negation.",
+      "premise": "The reactor is stable",
+      "query": "The reactor is not stable",
+      "tags": [
+        "negation",
+        "predicate"
+      ]
+    },
+    {
+      "capability": "lexical_antonym",
+      "difficulty": "medium",
+      "domain": "governance",
+      "expected": "direct_negation",
+      "id": "marked-direct-003",
+      "note": "Lexical antonym contradiction without an explicit 'not'.",
+      "premise": "The audit log is complete",
+      "query": "The audit log is incomplete",
+      "tags": [
+        "negation",
+        "adversarial"
+      ]
+    },
+    {
+      "capability": "numeric_property",
+      "difficulty": "easy",
+      "domain": "science",
+      "expected": "property_mismatch",
+      "id": "marked-property-001",
+      "note": "Same property, different numeric value.",
+      "premise": "Water boils at 100C",
+      "query": "Water boils at 95C",
+      "tags": [
+        "numeric",
+        "property"
+      ]
+    },
+    {
+      "capability": "unit_consistency",
+      "difficulty": "medium",
+      "domain": "measurement",
+      "expected": "property_mismatch",
+      "id": "marked-property-002",
+      "note": "Same raw number under incompatible unit systems.",
+      "premise": "The package mass is 5 kilograms",
+      "query": "The package mass is 5 pounds",
+      "tags": [
+        "unit",
+        "property"
+      ]
+    },
+    {
+      "capability": "numeric_control",
+      "difficulty": "easy",
+      "domain": "measurement",
+      "expected": "none",
+      "id": "marked-property-003",
+      "note": "Same numeric property with added context, not a contradiction.",
+      "premise": "The threshold is 0.80",
+      "query": "The threshold is 0.80 after calibration",
+      "tags": [
+        "control",
+        "numeric"
+      ]
+    },
+    {
+      "capability": "definition_check",
+      "difficulty": "easy",
+      "domain": "geometry",
+      "expected": "definitional_violation",
+      "id": "marked-definition-001",
+      "note": "Query denies a definitional triangle property.",
+      "premise": "Triangles have three sides",
+      "query": "Triangle false three sides",
+      "tags": [
+        "definition",
+        "geometry"
+      ]
+    },
+    {
+      "capability": "exception_sensitive_definition",
+      "difficulty": "medium",
+      "domain": "math",
+      "expected": "definitional_violation",
+      "id": "marked-definition-002",
+      "note": "Tests prime-definition handling around the even-number exception.",
+      "premise": "A prime number has exactly two positive divisors",
+      "query": "Prime number even false for 2",
+      "tags": [
+        "definition",
+        "math"
+      ]
+    },
+    {
+      "capability": "definition_control",
+      "difficulty": "easy",
+      "domain": "geometry",
+      "expected": "none",
+      "id": "marked-definition-003",
+      "note": "Definition is affirmed rather than denied.",
+      "premise": "Squares have four equal sides",
+      "query": "This square has four equal sides",
+      "tags": [
+        "control",
+        "definition"
+      ]
+    },
+    {
+      "capability": "counterexample_detection",
+      "difficulty": "medium",
+      "domain": "biology",
+      "expected": "universal_counterexample",
+      "id": "marked-universal-001",
+      "note": "Known counterexample challenges a universal claim.",
+      "premise": "All mammals give live birth",
+      "query": "Platypus is a mammal that lays eggs",
+      "tags": [
+        "universal",
+        "counterexample"
+      ]
+    },
+    {
+      "capability": "explicit_counterexample",
+      "difficulty": "easy",
+      "domain": "governance",
+      "expected": "universal_counterexample",
+      "id": "marked-universal-002",
+      "note": "Explicit counterexample language challenges a universal rule.",
+      "premise": "All deployed agents require approval",
+      "query": "A counterexample exists: test agents are deployed automatically",
+      "tags": [
+        "universal",
+        "policy"
+      ]
+    },
+    {
+      "capability": "quantifier_control",
+      "difficulty": "medium",
+      "domain": "governance",
+      "expected": "none",
+      "id": "marked-universal-003",
+      "note": "Non-universal quantifier allows exceptions.",
+      "premise": "Most deployed agents require approval",
+      "query": "Some test agents are deployed automatically",
+      "tags": [
+        "control",
+        "quantifier"
+      ]
+    },
+    {
+      "capability": "temporal_scope",
+      "difficulty": "easy",
+      "domain": "operations",
+      "expected": "temporal_conflict",
+      "id": "marked-temporal-001",
+      "note": "Time-dependent claim conflicts with an 'always' quantifier.",
+      "premise": "Always in 1950 the system used manual routing",
+      "query": "In 2020 the system used automated routing",
+      "tags": [
+        "temporal",
+        "scope"
+      ]
+    },
+    {
+      "capability": "policy_drift",
+      "difficulty": "medium",
+      "domain": "governance",
+      "expected": "temporal_conflict",
+      "id": "marked-temporal-002",
+      "note": "Policy statement changed across dated contexts.",
+      "premise": "Always in 2019 the policy required review",
+      "query": "In 2024 the policy no longer required review",
+      "tags": [
+        "temporal",
+        "policy"
+      ]
+    },
+    {
+      "capability": "temporal_control",
+      "difficulty": "medium",
+      "domain": "operations",
+      "expected": "none",
+      "id": "marked-temporal-003",
+      "note": "Different dates without universal scope can both be true.",
+      "premise": "In 1950 the system used manual routing",
+      "query": "In 2020 the system used automated routing",
+      "tags": [
+        "control",
+        "temporal"
+      ]
+    },
+    {
+      "capability": "non_contradiction",
+      "difficulty": "easy",
+      "domain": "language",
+      "expected": "none",
+      "id": "marked-control-001",
+      "note": "Added detail should not be treated as a contradiction.",
+      "premise": "The model answered in English",
+      "query": "The model answered in English with citations",
+      "tags": [
+        "control",
+        "language"
+      ]
+    },
+    {
+      "capability": "semantic_paraphrase",
+      "difficulty": "medium",
+      "domain": "safety",
+      "expected": "none",
+      "id": "marked-control-002",
+      "note": "Near-paraphrase control case.",
+      "premise": "The safety review is pending",
+      "query": "The safety review is waiting for approval",
+      "tags": [
+        "control",
+        "paraphrase"
+      ]
+    },
+    {
+      "capability": "review_status_antonym",
+      "difficulty": "easy",
+      "domain": "governance",
+      "expected": "direct_negation",
+      "id": "marked-v011-direct-001",
+      "note": "Approved/rejected polarity expands direct-negation status coverage.",
+      "premise": "The export is approved",
+      "query": "The export is rejected",
+      "tags": [
+        "negation",
+        "status",
+        "v0.1.1"
+      ]
+    },
+    {
+      "capability": "compact_unit_conflict",
+      "difficulty": "medium",
+      "domain": "measurement",
+      "expected": "property_mismatch",
+      "id": "marked-v011-property-001",
+      "note": "Compact kg/lb mismatch broadens unit-conflict coverage.",
+      "premise": "The crate mass is 12 kg",
+      "query": "The crate mass is 12 lb",
+      "tags": [
+        "unit",
+        "property",
+        "v0.1.1"
+      ]
+    },
+    {
+      "capability": "explicit_definition_denial",
+      "difficulty": "easy",
+      "domain": "geometry",
+      "expected": "definitional_violation",
+      "id": "marked-v011-definition-001",
+      "note": "Direct definition denial expands explicit malformed-query coverage.",
+      "premise": "Triangles have three sides",
+      "query": "Triangle false three sides in this record",
+      "tags": [
+        "definition",
+        "geometry",
+        "v0.1.1"
+      ]
+    },
+    {
+      "capability": "evidence_counterexample",
+      "difficulty": "medium",
+      "domain": "benchmarking",
+      "expected": "universal_counterexample",
+      "id": "marked-v011-universal-001",
+      "note": "Evidence-related counterexample adds benchmark governance coverage.",
+      "premise": "All submitted reports include evidence",
+      "query": "A counterexample exists: one submitted report lacks evidence",
+      "tags": [
+        "universal",
+        "counterexample",
+        "v0.1.1"
+      ]
+    },
+    {
+      "capability": "review_mode_drift",
+      "difficulty": "medium",
+      "domain": "operations",
+      "expected": "temporal_conflict",
+      "id": "marked-v011-temporal-001",
+      "note": "Reviewer workflow drift expands temporal policy coverage.",
+      "premise": "Always in 2021 the queue used manual review",
+      "query": "In 2024 the queue used automated review",
+      "tags": [
+        "temporal",
+        "scope",
+        "v0.1.1"
+      ]
+    },
+    {
+      "capability": "evidence_elaboration_control",
+      "difficulty": "easy",
+      "domain": "benchmarking",
+      "expected": "none",
+      "id": "marked-v011-control-001",
+      "note": "Added evidence detail should not be treated as a contradiction.",
+      "premise": "The report includes rationale",
+      "query": "The report includes rationale and evidence",
+      "tags": [
+        "control",
+        "evidence",
+        "v0.1.1"
+      ]
+    }
+  ],
+  "suite_hash": "b47ffc31bef81c2643b6a405e4e511994ba59099eb6637470b6dc4c534aa6baf",
+  "suite_id": "marked-bench-contradiction-standard",
+  "suite_version": "0.1.1",
+  "system_name": "AlwaysNoneDetector"
+}

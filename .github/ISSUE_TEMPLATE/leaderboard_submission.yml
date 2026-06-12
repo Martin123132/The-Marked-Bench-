@@ -3,6 +3,8 @@ description: Submit a benchmark report for leaderboard consideration.
 title: "Leaderboard submission: "
 labels:
   - leaderboard
+  - triage-ready
+  - scoring-review
 body:
   - type: input
     id: system_name

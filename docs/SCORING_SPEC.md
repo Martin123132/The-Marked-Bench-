@@ -79,7 +79,7 @@ marked-bench --validate-scoring-compatibility standard/marked_bench_scoring_comp
 
 | Track | Suite ID | Version | Cases | Suite Hash |
 | --- | --- | ---: | ---: | --- |
-| contradiction | `marked-bench-contradiction-standard` | `0.1.0` | 17 | `8c1f80ff67874af54869bab2e361b3cc7416ce1d86f80ff583636a55e3462765` |
+| contradiction | `marked-bench-contradiction-standard` | `0.1.1` | 23 | `b47ffc31bef81c2643b6a405e4e511994ba59099eb6637470b6dc4c534aa6baf` |
 | contradiction-adversarial | `marked-bench-contradiction-adversarial` | `0.2.0` | 17 | `454c1aff69d5028224549dfc14fd8e6c10818251d0abf8becf36f0856b2dbd67` |
 | contradiction-multihop | `marked-bench-contradiction-multihop` | `0.3.0` | 18 | `07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f` |
 | contradiction-controls | `marked-bench-contradiction-controls` | `0.4.0` | 18 | `33a0777f6f93504bde517d922f46c24c1d93992256bfe95b32287695babfb08a` |
