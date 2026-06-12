@@ -118,6 +118,8 @@ def build_parser() -> argparse.ArgumentParser:
         default="contradiction",
         choices=[
             "contradiction",
+            "contradiction-v0.1.0",
+            "contradiction-v0.1.1",
             "contradiction-adversarial",
             "contradiction-multihop",
             "contradiction-controls",

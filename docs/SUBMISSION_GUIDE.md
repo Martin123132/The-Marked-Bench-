@@ -7,7 +7,7 @@ leaderboard.
 
 Current tracks:
 
-- `contradiction`: foundation suite, `marked-bench-contradiction-standard` v0.1.0.
+- `contradiction`: foundation suite, `marked-bench-contradiction-standard` v0.1.1.
 - `contradiction-adversarial`: harder suite, `marked-bench-contradiction-adversarial`
   v0.2.0.
 - `contradiction-multihop`: default linked-evidence suite,
@@ -200,7 +200,7 @@ Result claims use `schemas/result_claim.schema.json`.
 For foundation entries:
 
 ```bash
-marked-bench --build-leaderboard baselines/*.json --leaderboard-output leaderboard/leaderboard_v0_1_0.json
+marked-bench --build-leaderboard baselines/always_none_v0_1_1.json baselines/contradiction_engine_v0_1_1.json --leaderboard-output leaderboard/leaderboard_v0_1_1.json
 ```
 
 For adversarial entries:
@@ -226,6 +226,8 @@ marked-bench --build-leaderboard baselines/*controls*.json --leaderboard-output 
 ```bash
 python -m unittest discover -s tests
 python scripts/validate_benchmark_artifacts.py
+python -m marked_bench.benchmark_cli --check-standard-status
+python scripts/check_scoring_sanity.py
 ```
 
 Both commands must pass before a submission is ready for review.

@@ -84,12 +84,12 @@
   "tracks": [
     {
       "baseline_reports": [
-        "baselines/contradiction_engine_v0_1_0.json",
-        "baselines/always_none_v0_1_0.json"
+        "baselines/contradiction_engine_v0_1_1.json",
+        "baselines/always_none_v0_1_1.json"
       ],
-      "case_count": 17,
+      "case_count": 23,
       "commands": {
-        "build_leaderboard": "marked-bench --build-leaderboard REPORT... --leaderboard-output leaderboard/leaderboard_v0_1_0.json",
+        "build_leaderboard": "marked-bench --build-leaderboard REPORT... --leaderboard-output leaderboard/leaderboard_v0_1_1.json",
         "create_publication_packet": "marked-bench --create-publication-packet PACKET_DIR --publication-report REPORT --system-version VERSION --submitter SUBMITTER",
         "create_result_card": "marked-bench --create-result-card CARD --result-report REPORT --result-bundle BUNDLE",
         "create_result_claim": "marked-bench --create-result-claim PACKET_DIR/result_claim.json --claim-publication-packet PACKET_DIR/publication_packet.json",
@@ -113,16 +113,20 @@
         "temporal_conflict",
         "none"
       ],
-      "leaderboard": "leaderboard/leaderboard_v0_1_0.json",
+      "leaderboard": "leaderboard/leaderboard_v0_1_1.json",
       "name": "contradiction",
       "prediction_schema": "marked_bench.contradiction-predictions.v2",
       "profile": {
         "capability_counts": {
+          "compact_unit_conflict": 1,
           "counterexample_detection": 1,
           "definition_check": 1,
           "definition_control": 1,
+          "evidence_counterexample": 1,
+          "evidence_elaboration_control": 1,
           "exception_sensitive_definition": 1,
           "explicit_counterexample": 1,
+          "explicit_definition_denial": 1,
           "lexical_antonym": 1,
           "negation_scope": 1,
           "non_contradiction": 1,
@@ -131,36 +135,39 @@
           "policy_drift": 1,
           "predicate_negation": 1,
           "quantifier_control": 1,
+          "review_mode_drift": 1,
+          "review_status_antonym": 1,
           "semantic_paraphrase": 1,
           "temporal_control": 1,
           "temporal_scope": 1,
           "unit_consistency": 1
         },
-        "case_count": 17,
-        "contradiction_case_count": 11,
-        "control_case_count": 6,
+        "case_count": 23,
+        "contradiction_case_count": 16,
+        "control_case_count": 7,
         "difficulty_counts": {
-          "easy": 9,
-          "medium": 8
+          "easy": 12,
+          "medium": 11
         },
         "domain_counts": {
+          "benchmarking": 2,
           "biology": 1,
-          "geometry": 2,
-          "governance": 4,
+          "geometry": 3,
+          "governance": 5,
           "language": 1,
           "math": 1,
-          "measurement": 2,
-          "operations": 2,
+          "measurement": 3,
+          "operations": 3,
           "safety": 3,
           "science": 1
         },
         "label_counts": {
-          "definitional_violation": 2,
-          "direct_negation": 3,
-          "none": 6,
-          "property_mismatch": 2,
-          "temporal_conflict": 2,
-          "universal_counterexample": 2
+          "definitional_violation": 3,
+          "direct_negation": 4,
+          "none": 7,
+          "property_mismatch": 3,
+          "temporal_conflict": 3,
+          "universal_counterexample": 3
         },
         "quality_gates": {
           "min_cases": 15,
@@ -171,32 +178,35 @@
         },
         "tag_counts": {
           "adversarial": 1,
-          "control": 6,
-          "counterexample": 1,
-          "definition": 3,
-          "geometry": 1,
+          "control": 7,
+          "counterexample": 2,
+          "definition": 4,
+          "evidence": 1,
+          "geometry": 2,
           "language": 1,
           "math": 1,
-          "negation": 3,
+          "negation": 4,
           "numeric": 2,
           "paraphrase": 1,
           "policy": 2,
           "predicate": 1,
-          "property": 2,
+          "property": 3,
           "quantifier": 1,
-          "scope": 1,
+          "scope": 2,
+          "status": 1,
           "surface": 1,
-          "temporal": 3,
-          "unit": 1,
-          "universal": 2
+          "temporal": 4,
+          "unit": 2,
+          "universal": 3,
+          "v0.1.1": 6
         }
       },
       "report_schema": "marked_bench.contradiction-benchmark-report.v2",
       "status": "foundation",
-      "suite_hash": "8c1f80ff67874af54869bab2e361b3cc7416ce1d86f80ff583636a55e3462765",
+      "suite_hash": "b47ffc31bef81c2643b6a405e4e511994ba59099eb6637470b6dc4c534aa6baf",
       "suite_id": "marked-bench-contradiction-standard",
-      "suite_manifest": "suites/marked_bench_contradiction_standard_v0_1_0.json",
-      "suite_version": "0.1.0",
+      "suite_manifest": "suites/marked_bench_contradiction_standard_v0_1_1.json",
+      "suite_version": "0.1.1",
       "title": "Foundation contradiction detection"
     },
     {

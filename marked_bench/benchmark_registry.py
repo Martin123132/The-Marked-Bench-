@@ -25,11 +25,11 @@ _TRACKS: tuple[Mapping[str, Any], ...] = (
         "title": "Foundation contradiction detection",
         "status": "foundation",
         "suite": "contradiction",
-        "suite_manifest": "suites/marked_bench_contradiction_standard_v0_1_0.json",
-        "leaderboard": "leaderboard/leaderboard_v0_1_0.json",
+        "suite_manifest": "suites/marked_bench_contradiction_standard_v0_1_1.json",
+        "leaderboard": "leaderboard/leaderboard_v0_1_1.json",
         "baseline_reports": [
-            "baselines/contradiction_engine_v0_1_0.json",
-            "baselines/always_none_v0_1_0.json",
+            "baselines/contradiction_engine_v0_1_1.json",
+            "baselines/always_none_v0_1_1.json",
         ],
         "commands": {
             "run_baseline": "marked-bench --suite contradiction --report artifacts/foundation-report.json",

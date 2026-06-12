@@ -1,7 +1,7 @@
 {
   "benchmark_family": "contradiction-detection",
-  "checked_artifact_count": 141,
-  "checked_schema_file_count": 33,
+  "checked_artifact_count": 146,
+  "checked_schema_file_count": 37,
   "checks": [
     {
       "details": {
@@ -13,7 +13,7 @@
     },
     {
       "details": {
-        "artifact_count": 141,
+        "artifact_count": 146,
         "path": "releases/marked_bench_release_v0_4_8.json"
       },
       "errors": [],
@@ -22,7 +22,7 @@
     },
     {
       "details": {
-        "suite_count": 4
+        "suite_count": 5
       },
       "errors": [],
       "name": "suite_manifests_current",
@@ -30,7 +30,7 @@
     },
     {
       "details": {
-        "report_count": 8
+        "report_count": 10
       },
       "errors": [],
       "name": "baseline_reports_valid",
@@ -38,7 +38,7 @@
     },
     {
       "details": {
-        "leaderboard_count": 4
+        "leaderboard_count": 5
       },
       "errors": [],
       "name": "leaderboards_match_reports",
@@ -46,7 +46,7 @@
     },
     {
       "details": {
-        "file_count": 33
+        "file_count": 37
       },
       "errors": [],
       "name": "public_json_schema_conformance",
@@ -54,7 +54,7 @@
     },
     {
       "details": {
-        "suite_count": 4
+        "suite_count": 5
       },
       "errors": [],
       "name": "prediction_templates_conform",

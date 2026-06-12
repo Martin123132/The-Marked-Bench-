@@ -271,11 +271,11 @@
   "standardization_status": "public-standard-candidate",
   "tracks": [
     {
-      "case_count": 17,
+      "case_count": 23,
       "name": "contradiction",
-      "suite_hash": "8c1f80ff67874af54869bab2e361b3cc7416ce1d86f80ff583636a55e3462765",
+      "suite_hash": "b47ffc31bef81c2643b6a405e4e511994ba59099eb6637470b6dc4c534aa6baf",
       "suite_id": "marked-bench-contradiction-standard",
-      "suite_version": "0.1.0"
+      "suite_version": "0.1.1"
     },
     {
       "case_count": 17,

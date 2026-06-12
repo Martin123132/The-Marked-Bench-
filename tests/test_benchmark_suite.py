@@ -59,6 +59,7 @@ from marked_bench.contradiction.benchmark_suite import (
     MULTIHOP_SUITE_ID,
     PREDICTION_SCHEMA,
     REPORT_SCHEMA,
+    STANDARD_SUITE_V0_1_0_VERSION,
     SUITE_ID,
     build_adversarial_suite,
     build_control_suite,
@@ -68,6 +69,8 @@ from marked_bench.contradiction.benchmark_suite import (
     build_suite_manifest,
     build_suite_profile,
     build_standard_suite,
+    build_standard_suite_v0_1_0,
+    build_standard_suite_v0_1_1,
     evaluate_prediction_file,
     evaluate_prediction_records,
     evaluate_standard_suite,
@@ -207,17 +210,34 @@ class BenchmarkSuiteTests(unittest.TestCase):
             {case.expected for case in cases if case.expected != ContradictionType.NONE},
         )
 
-    def test_checked_in_suite_manifest_matches_code(self) -> None:
+    def test_checked_in_legacy_standard_suite_manifest_matches_code(self) -> None:
         root = Path(__file__).resolve().parent.parent
         path = root / "suites" / "marked_bench_contradiction_standard_v0_1_0.json"
 
         manifest = json.loads(path.read_text(encoding="utf-8"))
 
+        self.assertEqual(manifest, build_suite_manifest(suite="contradiction-v0.1.0"))
+        self.assertEqual(manifest["suite_version"], STANDARD_SUITE_V0_1_0_VERSION)
+        self.assertEqual(manifest["suite_hash"], build_suite_hash(suite="contradiction-v0.1.0"))
+        self.assertEqual(manifest["profile"], build_suite_profile(suite="contradiction-v0.1.0"))
+        self.assertEqual(manifest["profile"]["case_count"], len(build_standard_suite_v0_1_0()))
+        self.assertEqual(manifest["profile"]["label_counts"]["none"], 6)
+        self.assertTrue(manifest["profile"]["quality_gates"]["requires_all_contradiction_labels"])
+
+    def test_checked_in_suite_manifest_matches_code(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        path = root / "suites" / "marked_bench_contradiction_standard_v0_1_1.json"
+
+        manifest = json.loads(path.read_text(encoding="utf-8"))
+
         self.assertEqual(manifest, build_suite_manifest())
+        self.assertEqual(manifest["suite_id"], SUITE_ID)
+        self.assertEqual(manifest["suite_version"], "0.1.1")
         self.assertEqual(manifest["suite_hash"], build_suite_hash())
         self.assertEqual(manifest["profile"], build_suite_profile())
+        self.assertEqual(manifest["profile"]["case_count"], len(build_standard_suite_v0_1_1()))
         self.assertEqual(manifest["profile"]["case_count"], len(build_standard_suite()))
-        self.assertEqual(manifest["profile"]["label_counts"]["none"], 6)
+        self.assertEqual(manifest["profile"]["label_counts"]["none"], 7)
         self.assertTrue(manifest["profile"]["quality_gates"]["requires_all_contradiction_labels"])
 
     def test_checked_in_adversarial_suite_manifest_matches_code(self) -> None:
@@ -292,6 +312,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
         )
         self.assertIn(MULTIHOP_SUITE_ID, prediction_schema["oneOf"][1]["properties"]["suite_id"]["enum"])
         self.assertIn(CONTROL_SUITE_ID, prediction_schema["oneOf"][1]["properties"]["suite_id"]["enum"])
+        self.assertIn("0.1.1", prediction_schema["oneOf"][1]["properties"]["suite_version"]["enum"])
         self.assertIn("0.3.0", prediction_schema["oneOf"][1]["properties"]["suite_version"]["enum"])
         self.assertIn("0.4.0", prediction_schema["oneOf"][1]["properties"]["suite_version"]["enum"])
         self.assertIn("rationale", prediction_schema["$defs"]["prediction"]["properties"])
@@ -299,6 +320,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertEqual(report_schema["properties"]["schema"]["const"], REPORT_SCHEMA)
         self.assertIn(MULTIHOP_SUITE_ID, report_schema["properties"]["suite_id"]["enum"])
         self.assertIn(CONTROL_SUITE_ID, report_schema["properties"]["suite_id"]["enum"])
+        self.assertIn("0.1.1", report_schema["properties"]["suite_version"]["enum"])
         self.assertIn("0.3.0", report_schema["properties"]["suite_version"]["enum"])
         self.assertIn("0.4.0", report_schema["properties"]["suite_version"]["enum"])
         self.assertIn("explanation_audit", report_schema["required"])
@@ -306,6 +328,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertIn("evidence", report_schema["$defs"]["case_result"]["required"])
         self.assertIn(MULTIHOP_SUITE_ID, suite_schema["properties"]["suite_id"]["enum"])
         self.assertIn(CONTROL_SUITE_ID, suite_schema["properties"]["suite_id"]["enum"])
+        self.assertIn("0.1.1", suite_schema["properties"]["suite_version"]["enum"])
         self.assertIn("0.3.0", suite_schema["properties"]["suite_version"]["enum"])
         self.assertIn("0.4.0", suite_schema["properties"]["suite_version"]["enum"])
 
@@ -323,11 +346,14 @@ class BenchmarkSuiteTests(unittest.TestCase):
             ("standard/marked_bench_scoring_compatibility_v0_4_8.json", "schemas/scoring_compatibility.schema.json"),
             ("standard/marked_bench_scoring_spec_v0_4_8.json", "schemas/scoring_spec.schema.json"),
             ("suites/marked_bench_contradiction_standard_v0_1_0.json", "schemas/contradiction_suite_manifest.schema.json"),
+            ("suites/marked_bench_contradiction_standard_v0_1_1.json", "schemas/contradiction_suite_manifest.schema.json"),
             ("suites/marked_bench_contradiction_adversarial_v0_2_0.json", "schemas/contradiction_suite_manifest.schema.json"),
             ("suites/marked_bench_contradiction_multihop_v0_3_0.json", "schemas/contradiction_suite_manifest.schema.json"),
             ("suites/marked_bench_contradiction_controls_v0_4_0.json", "schemas/contradiction_suite_manifest.schema.json"),
+            ("baselines/contradiction_engine_v0_1_1.json", "schemas/contradiction_benchmark_report.schema.json"),
             ("baselines/contradiction_engine_multihop_v0_3_0.json", "schemas/contradiction_benchmark_report.schema.json"),
             ("baselines/contradiction_engine_controls_v0_4_0.json", "schemas/contradiction_benchmark_report.schema.json"),
+            ("leaderboard/leaderboard_v0_1_1.json", "schemas/leaderboard.schema.json"),
             ("leaderboard/leaderboard_multihop_v0_3_0.json", "schemas/leaderboard.schema.json"),
             ("leaderboard/leaderboard_controls_v0_4_0.json", "schemas/leaderboard.schema.json"),
             ("submissions/example_external_jsonl/example_external_result_card.json", "schemas/result_card.schema.json"),
@@ -1989,6 +2015,23 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertEqual(report["system_name"], "AlwaysNoneDetector")
         self.assertEqual(report["overall_score"], 8.82)
 
+    def test_checked_in_standard_v0_1_1_baseline_reports_validate(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        strong_path = root / "baselines" / "contradiction_engine_v0_1_1.json"
+        weak_path = root / "baselines" / "always_none_v0_1_1.json"
+
+        strong = json.loads(strong_path.read_text(encoding="utf-8"))
+        weak = json.loads(weak_path.read_text(encoding="utf-8"))
+
+        self.assertTrue(validate_benchmark_report(strong)["valid"])
+        self.assertTrue(validate_benchmark_report(weak)["valid"])
+        self.assertEqual(strong["suite_id"], SUITE_ID)
+        self.assertEqual(strong["suite_version"], "0.1.1")
+        self.assertEqual(strong["case_count"], len(build_standard_suite()))
+        self.assertEqual(strong["overall_score"], 100.0)
+        self.assertEqual(weak["system_name"], "AlwaysNoneDetector")
+        self.assertLess(weak["overall_score"], 10.0)
+
     def test_checked_in_adversarial_baseline_reports_validate(self) -> None:
         root = Path(__file__).resolve().parent.parent
         strong_path = root / "baselines" / "contradiction_engine_adversarial_v0_2_0.json"
@@ -2045,6 +2088,26 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertEqual(leaderboard["rejected_count"], 0)
         self.assertEqual(leaderboard["entries"][0]["system_name"], "ContradictionEngine")
         self.assertEqual(leaderboard["entries"][0]["rank"], 1)
+        self.assertEqual(leaderboard["entries"][0]["report_sha256"], report_sha256(strong_path))
+        self.assertEqual(leaderboard["entries"][1]["system_name"], "AlwaysNoneDetector")
+        self.assertEqual(leaderboard["entries"][1]["rank"], 2)
+        self.assertEqual(leaderboard["entries"][1]["report_sha256"], report_sha256(weak_path))
+
+    def test_checked_in_standard_v0_1_1_leaderboard_matches_baseline_reports(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        weak_path = root / "baselines" / "always_none_v0_1_1.json"
+        strong_path = root / "baselines" / "contradiction_engine_v0_1_1.json"
+        leaderboard_path = root / "leaderboard" / "leaderboard_v0_1_1.json"
+
+        leaderboard = json.loads(leaderboard_path.read_text(encoding="utf-8"))
+
+        self.assertEqual(leaderboard["schema"], LEADERBOARD_SCHEMA)
+        self.assertEqual(leaderboard["entry_count"], 2)
+        self.assertEqual(leaderboard["rejected_count"], 0)
+        self.assertEqual(leaderboard["entries"][0]["system_name"], "ContradictionEngine")
+        self.assertEqual(leaderboard["entries"][0]["rank"], 1)
+        self.assertEqual(leaderboard["entries"][0]["suite_id"], SUITE_ID)
+        self.assertEqual(leaderboard["entries"][0]["suite_version"], "0.1.1")
         self.assertEqual(leaderboard["entries"][0]["report_sha256"], report_sha256(strong_path))
         self.assertEqual(leaderboard["entries"][1]["system_name"], "AlwaysNoneDetector")
         self.assertEqual(leaderboard["entries"][1]["rank"], 2)

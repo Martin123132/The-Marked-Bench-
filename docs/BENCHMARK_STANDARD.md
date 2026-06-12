@@ -21,7 +21,7 @@ evidence files and validation commands.
 ## Suite Identity
 
 - Foundation suite ID: `marked-bench-contradiction-standard`
-- Foundation suite version: `0.1.0`
+- Foundation suite version: `0.1.1`
 - Adversarial suite ID: `marked-bench-contradiction-adversarial`
 - Adversarial suite version: `0.2.0`
 - Multi-hop suite ID: `marked-bench-contradiction-multihop`
@@ -148,7 +148,7 @@ marked-bench --validate-report artifacts/marked_bench_contradiction_benchmark_re
 Build a leaderboard from valid reports:
 
 ```bash
-marked-bench --build-leaderboard baselines/always_none_v0_1_0.json baselines/contradiction_engine_v0_1_0.json --leaderboard-output leaderboard/leaderboard_v0_1_0.json
+marked-bench --build-leaderboard baselines/always_none_v0_1_1.json baselines/contradiction_engine_v0_1_1.json --leaderboard-output leaderboard/leaderboard_v0_1_1.json
 ```
 
 Export the registry that points to every public track, schema, suite manifest,
@@ -233,13 +233,25 @@ Run the false-positive controls track:
 marked-bench --suite contradiction-controls --report artifacts/marked_bench_contradiction_controls_report.json
 ```
 
-The checked-in symbolic baseline lives at:
+The active checked-in foundation symbolic baseline lives at:
+
+```text
+baselines/contradiction_engine_v0_1_1.json
+```
+
+The legacy foundation symbolic baseline remains available at:
 
 ```text
 baselines/contradiction_engine_v0_1_0.json
 ```
 
-The checked-in suite manifest lives at:
+The active checked-in foundation suite manifest lives at:
+
+```text
+suites/marked_bench_contradiction_standard_v0_1_1.json
+```
+
+The legacy foundation suite manifest remains available at:
 
 ```text
 suites/marked_bench_contradiction_standard_v0_1_0.json
@@ -378,9 +390,11 @@ inspectable submissions.
 
 ## Current Status
 
-Version `0.1.0` is a foundation suite. Version `0.2.0` adds an adversarial
-track with longer context, implicit contradictions, paraphrase traps, and
-distractor controls. Version `0.3.0` adds a multi-hop track for linked-evidence
+Version `0.1.0` is the original foundation suite. Version `0.1.1` expands the
+foundation suite with additional status, unit, definition, evidence, temporal,
+and elaboration cases while preserving existing published case IDs. Version
+`0.2.0` adds an adversarial track with longer context, implicit contradictions,
+paraphrase traps, and distractor controls. Version `0.3.0` adds a multi-hop track for linked-evidence
 contradictions. Release `0.3.3` upgrades public report and prediction schemas
 for rationale/evidence audit fields and aligns schemas with the default
 multi-hop track. Release `0.3.4` adds structured submission review rubrics for

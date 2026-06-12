@@ -3,6 +3,7 @@ description: Propose a change to benchmark suites, schemas, scoring, evidence po
 title: "Standard change: "
 labels:
   - standard-change
+  - triage-ready
 body:
   - type: dropdown
     id: change_type

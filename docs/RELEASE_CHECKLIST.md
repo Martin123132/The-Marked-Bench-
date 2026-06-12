@@ -9,6 +9,7 @@ python -m unittest discover -s tests
 python scripts/validate_benchmark_artifacts.py
 git diff --check
 python -m marked_bench.benchmark_cli --check-standard-status
+python scripts/check_scoring_sanity.py
 ```
 
 ## Artifact Checks
@@ -95,6 +96,8 @@ python -m marked_bench.benchmark_cli --check-standard-status
   accepted, rejected, or verified.
 - `docs/SUBMISSION_REVIEW_RUBRIC.md` explains how reviewers should score
   submissions before leaderboard acceptance.
+- `docs/SCORING_SANITY.md` includes the latest scoring sanity summary for the
+  release change set (update when scoring logic changes).
 
 ## Release Notes
 

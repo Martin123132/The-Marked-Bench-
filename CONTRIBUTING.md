@@ -32,7 +32,19 @@ repository only.
 ```bash
 python -m unittest discover -s tests
 python scripts/validate_benchmark_artifacts.py
+python -m marked_bench.benchmark_cli --check-standard-status
 ```
+
+### Scoring change checks
+
+If scoring logic changed in this PR, also run:
+
+```bash
+python scripts/check_scoring_sanity.py --artifact docs/SCORING_SANITY.md
+```
+
+Commit the generated `docs/SCORING_SANITY.md` artifact and include the command
+output summary in your PR description.
 
 ## Submission Types
 

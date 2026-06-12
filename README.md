@@ -22,7 +22,7 @@ Current standardization status is tracked in:
 
 | Track | Suite ID | Version | Purpose | Baseline |
 | --- | --- | ---: | --- | ---: |
-| Foundation | `marked-bench-contradiction-standard` | `0.1.0` | Compact canonical contradiction suite | `100.00` |
+| Foundation | `marked-bench-contradiction-standard` | `0.1.1` | Expanded canonical contradiction suite | `100.00` |
 | Adversarial | `marked-bench-contradiction-adversarial` | `0.2.0` | Longer-context, implicit, and trap cases | `52.37` |
 | Multi-hop | `marked-bench-contradiction-multihop` | `0.3.0` | Linked-evidence contradiction cases | `24.14` |
 | Controls | `marked-bench-contradiction-controls` | `0.4.0` | False-positive distractor controls with contradiction anchors | `100.00` |
@@ -220,7 +220,13 @@ A checked one-command publication packet is committed under
 
 ## Build Leaderboards
 
-Foundation leaderboard:
+Active foundation leaderboard:
+
+```bash
+marked-bench --build-leaderboard baselines/always_none_v0_1_1.json baselines/contradiction_engine_v0_1_1.json --leaderboard-output leaderboard/leaderboard_v0_1_1.json
+```
+
+Legacy foundation leaderboard:
 
 ```bash
 marked-bench --build-leaderboard baselines/always_none_v0_1_0.json baselines/contradiction_engine_v0_1_0.json --leaderboard-output leaderboard/leaderboard_v0_1_0.json

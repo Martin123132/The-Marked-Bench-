@@ -66,7 +66,8 @@ DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_8.j
 DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_8.json")
 
 SUITE_MANIFESTS = {
-    Path("suites/marked_bench_contradiction_standard_v0_1_0.json"): "contradiction",
+    Path("suites/marked_bench_contradiction_standard_v0_1_0.json"): "contradiction-v0.1.0",
+    Path("suites/marked_bench_contradiction_standard_v0_1_1.json"): "contradiction",
     Path("suites/marked_bench_contradiction_adversarial_v0_2_0.json"): "contradiction-adversarial",
     Path("suites/marked_bench_contradiction_multihop_v0_3_0.json"): "contradiction-multihop",
     Path("suites/marked_bench_contradiction_controls_v0_4_0.json"): "contradiction-controls",
@@ -75,6 +76,8 @@ SUITE_MANIFESTS = {
 BASELINE_REPORTS = [
     Path("baselines/contradiction_engine_v0_1_0.json"),
     Path("baselines/always_none_v0_1_0.json"),
+    Path("baselines/contradiction_engine_v0_1_1.json"),
+    Path("baselines/always_none_v0_1_1.json"),
     Path("baselines/contradiction_engine_adversarial_v0_2_0.json"),
     Path("baselines/always_none_adversarial_v0_2_0.json"),
     Path("baselines/contradiction_engine_multihop_v0_3_0.json"),
@@ -87,6 +90,10 @@ LEADERBOARDS = {
     Path("leaderboard/leaderboard_v0_1_0.json"): [
         Path("baselines/always_none_v0_1_0.json"),
         Path("baselines/contradiction_engine_v0_1_0.json"),
+    ],
+    Path("leaderboard/leaderboard_v0_1_1.json"): [
+        Path("baselines/always_none_v0_1_1.json"),
+        Path("baselines/contradiction_engine_v0_1_1.json"),
     ],
     Path("leaderboard/leaderboard_adversarial_v0_2_0.json"): [
         Path("baselines/always_none_adversarial_v0_2_0.json"),
@@ -131,6 +138,7 @@ SCHEMA_CONFORMANCE_FILES = {
     DEFAULT_RELEASE_MANIFEST: Path("schemas/release_manifest.schema.json"),
     DEFAULT_CONFORMANCE_REPORT: Path("schemas/conformance_report.schema.json"),
     Path("leaderboard/leaderboard_v0_1_0.json"): Path("schemas/leaderboard.schema.json"),
+    Path("leaderboard/leaderboard_v0_1_1.json"): Path("schemas/leaderboard.schema.json"),
     Path("leaderboard/leaderboard_adversarial_v0_2_0.json"): Path("schemas/leaderboard.schema.json"),
     Path("leaderboard/leaderboard_multihop_v0_3_0.json"): Path("schemas/leaderboard.schema.json"),
     Path("leaderboard/leaderboard_controls_v0_4_0.json"): Path("schemas/leaderboard.schema.json"),
