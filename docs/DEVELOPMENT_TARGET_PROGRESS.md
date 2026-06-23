@@ -54,6 +54,43 @@ Use this file to check off completed targets.
 - [x] Checked by:
   - Codex
 
+## Completed cycle 2
+
+- [x] Completed target: Target H through Target N
+- [x] Scope:
+  - `marked_bench/benchmark_cli.py`
+  - `marked_bench/benchmark_registry.py`
+  - `marked_bench/benchmark_release.py`
+  - `marked_bench/benchmark_conformance.py`
+  - `scripts/check_case_quality.py`
+  - `scripts/regenerate_release_artifacts.py`
+  - `scripts/validate_benchmark_artifacts.py`
+  - `tests/test_benchmark_suite.py`
+  - `tests/test_scoring_sanity.py`
+  - `baselines/hash_prior_v0_1_1.json`
+  - `leaderboard/leaderboard_v0_1_1.json`
+  - `docs/CASE_QUALITY.md`
+  - `docs/EXTERNAL_SUBMISSION_WALKTHROUGH.md`
+  - `docs/RELEASE_NOTES_v0_1_1.md`
+  - `docs/REVIEW_WORKFLOW.md`
+  - `.github/labels.yml`
+- [x] Validation run:
+  - `python -m unittest discover -s tests`
+  - `python scripts/validate_benchmark_artifacts.py`
+  - `python -m marked_bench.benchmark_cli --check-standard-status`
+  - `python scripts/check_scoring_sanity.py --artifact docs/SCORING_SANITY.md`
+  - `python scripts/check_case_quality.py --artifact docs/CASE_QUALITY.md`
+  - `python scripts/regenerate_release_artifacts.py`
+  - `python -m marked_bench.benchmark_cli --validate-report baselines/hash_prior_v0_1_1.json`
+  - `git diff --check`
+- [x] Evidence/notes:
+  - Added `HashPriorBaseline` as a deterministic reference baseline and included it in the active foundation leaderboard.
+  - Added `--list-suites` and `--suite-info` for CLI suite discovery.
+  - Added case-quality diagnostics and release-regeneration helper scripts.
+  - Added external submission walkthrough, reviewer workflow, labels, and `0.1.1` release notes.
+- [x] Checked by:
+  - Codex
+
 ## Completion template
 
 - [ ] Completed target: `<target text>`

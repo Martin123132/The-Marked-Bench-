@@ -19,6 +19,13 @@ The machine-readable track registry is `benchmark_registry.json`. It lists the
 canonical suite manifests, report schemas, prediction schema, baseline reports,
 leaderboard snapshots, suite hashes, and commands for each public track.
 
+You can inspect available suites locally:
+
+```bash
+marked-bench --list-suites
+marked-bench --suite-info contradiction
+```
+
 ## 2. Generate A Report
 
 For the packaged symbolic baseline:
@@ -200,7 +207,7 @@ Result claims use `schemas/result_claim.schema.json`.
 For foundation entries:
 
 ```bash
-marked-bench --build-leaderboard baselines/always_none_v0_1_1.json baselines/contradiction_engine_v0_1_1.json --leaderboard-output leaderboard/leaderboard_v0_1_1.json
+marked-bench --build-leaderboard baselines/always_none_v0_1_1.json baselines/hash_prior_v0_1_1.json baselines/contradiction_engine_v0_1_1.json --leaderboard-output leaderboard/leaderboard_v0_1_1.json
 ```
 
 For adversarial entries:

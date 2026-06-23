@@ -1,0 +1,73 @@
+from __future__ import annotations
+
+"""Regenerate deterministic public release artifacts in dependency order."""
+
+from pathlib import Path
+import sys
+
+ROOT_PATH = Path(__file__).resolve().parent.parent
+SCRIPT_PATH = ROOT_PATH / "scripts"
+sys.path.insert(0, str(ROOT_PATH))
+sys.path.insert(0, str(SCRIPT_PATH))
+
+from check_case_quality import build_case_quality_artifact, run_case_quality
+from check_scoring_sanity import build_scoring_sanity_artifact, run_scoring_sanity
+from marked_bench.benchmark_adoption import write_adoption_packet
+from marked_bench.benchmark_change_control import write_change_control
+from marked_bench.benchmark_conformance import write_conformance_report
+from marked_bench.benchmark_evidence import write_evidence_ledger
+from marked_bench.benchmark_implementation import write_implementation_kit
+from marked_bench.benchmark_registry import write_benchmark_registry
+from marked_bench.benchmark_release import write_release_manifest
+from marked_bench.benchmark_scoring_compatibility import write_scoring_compatibility_profile
+from marked_bench.benchmark_scoring_spec import write_scoring_spec, write_scoring_spec_markdown
+from marked_bench.benchmark_standard_profile import write_standard_profile
+from marked_bench.benchmark_technical_note import write_technical_note
+from marked_bench.contradiction.benchmark_suite import write_suite_manifest
+
+
+def regenerate_release_artifacts(root: Path = ROOT_PATH) -> None:
+    write_suite_manifest(root / "suites" / "marked_bench_contradiction_standard_v0_1_1.json", suite="contradiction")
+    write_benchmark_registry(root / "benchmark_registry.json")
+    write_technical_note(root / "docs" / "TECHNICAL_NOTE.md")
+    write_standard_profile(root / "standard" / "marked_bench_standard_profile_v0_4_8.json")
+    write_scoring_compatibility_profile(root / "standard" / "marked_bench_scoring_compatibility_v0_4_8.json")
+    write_scoring_spec(root / "standard" / "marked_bench_scoring_spec_v0_4_8.json")
+    write_scoring_spec_markdown(root / "docs" / "SCORING_SPEC.md")
+    write_adoption_packet(root / "adoption" / "marked_bench_adoption_packet_v0_4_8.json")
+    write_implementation_kit(root / "adoption" / "marked_bench_implementation_kit_v0_4_8.json")
+    write_evidence_ledger(root / "adoption" / "third_party_evidence_ledger_v0_4_8.json")
+    write_change_control(root / "standard" / "marked_bench_change_control_v0_4_8.json")
+
+    scoring_results, scoring_failures = run_scoring_sanity()
+    (root / "docs" / "SCORING_SANITY.md").write_text(
+        build_scoring_sanity_artifact(scoring_results, scoring_failures),
+        encoding="utf-8",
+    )
+    if scoring_failures:
+        raise ValueError("scoring sanity failed: " + "; ".join(scoring_failures))
+
+    quality_results, quality_failures = run_case_quality()
+    (root / "docs" / "CASE_QUALITY.md").write_text(
+        build_case_quality_artifact(quality_results, quality_failures),
+        encoding="utf-8",
+    )
+    if quality_failures:
+        raise ValueError("case quality failed: " + "; ".join(quality_failures))
+
+    for _pass in range(2):
+        write_release_manifest(root / "releases" / "marked_bench_release_v0_4_8.json", root=root)
+        write_conformance_report(
+            root / "conformance" / "marked_bench_conformance_v0_4_8.json",
+            root=root,
+        )
+
+
+def main() -> int:
+    regenerate_release_artifacts()
+    print("Release artifacts regenerated.")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

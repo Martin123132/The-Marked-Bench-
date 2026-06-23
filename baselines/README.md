@@ -16,6 +16,8 @@ The current baseline is:
   for every legacy foundation case.
 - `contradiction_engine_v0_1_1.json`: packaged symbolic `ContradictionEngine`
   on the active foundation suite version `0.1.1`.
+- `hash_prior_v0_1_1.json`: deterministic hash-prior reference baseline on
+  the active foundation suite.
 - `always_none_v0_1_1.json`: intentionally weak detector on the active
   foundation suite.
 - `contradiction_engine_adversarial_v0_2_0.json`: packaged symbolic

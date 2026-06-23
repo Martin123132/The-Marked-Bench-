@@ -10,6 +10,7 @@ python scripts/validate_benchmark_artifacts.py
 git diff --check
 python -m marked_bench.benchmark_cli --check-standard-status
 python scripts/check_scoring_sanity.py
+python scripts/check_case_quality.py
 ```
 
 ## Artifact Checks
@@ -98,6 +99,18 @@ python scripts/check_scoring_sanity.py
   submissions before leaderboard acceptance.
 - `docs/SCORING_SANITY.md` includes the latest scoring sanity summary for the
   release change set (update when scoring logic changes).
+- `docs/CASE_QUALITY.md` includes the latest suite composition and
+  near-duplicate diagnostic summary (update when cases change).
+
+## Regeneration Helper
+
+```bash
+python scripts/regenerate_release_artifacts.py
+```
+
+Use this helper after changing deterministic release artifacts such as suite
+manifests, registry metadata, technical notes, scoring docs, standard/adoption
+evidence, scoring sanity, or case-quality summaries.
 
 ## Release Notes
 

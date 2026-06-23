@@ -40,12 +40,14 @@
 - System name/version:
 - Detector/model/prompt/rule configuration:
 - Scoring sanity artifact path:
+- Case quality artifact path:
 
 ## Checks
 
 - [ ] `python -m unittest discover -s tests`
 - [ ] `python scripts/validate_benchmark_artifacts.py`
 - [ ] `python -m marked_bench.benchmark_cli --check-standard-status`
+- [ ] `python scripts/check_case_quality.py --artifact docs/CASE_QUALITY.md`
 - [ ] All new reports pass `marked-bench --validate-report PATH`
 - [ ] All leaderboard submissions pass `marked-bench --validate-submission PATH`
 - [ ] All result cards pass `marked-bench --validate-result-card PATH`
@@ -56,6 +58,11 @@
 
 - [ ] `python scripts/check_scoring_sanity.py --artifact docs/SCORING_SANITY.md`
 - [ ] Scoring artifact updated and reviewed in PR narrative
+
+### Case-quality checklist
+
+- [ ] `python scripts/check_case_quality.py --artifact docs/CASE_QUALITY.md`
+- [ ] Case-quality artifact updated when suite cases change
 
 ## Optional reviewer-facing notes
 

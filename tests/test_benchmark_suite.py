@@ -351,6 +351,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
             ("suites/marked_bench_contradiction_multihop_v0_3_0.json", "schemas/contradiction_suite_manifest.schema.json"),
             ("suites/marked_bench_contradiction_controls_v0_4_0.json", "schemas/contradiction_suite_manifest.schema.json"),
             ("baselines/contradiction_engine_v0_1_1.json", "schemas/contradiction_benchmark_report.schema.json"),
+            ("baselines/hash_prior_v0_1_1.json", "schemas/contradiction_benchmark_report.schema.json"),
             ("baselines/contradiction_engine_multihop_v0_3_0.json", "schemas/contradiction_benchmark_report.schema.json"),
             ("baselines/contradiction_engine_controls_v0_4_0.json", "schemas/contradiction_benchmark_report.schema.json"),
             ("leaderboard/leaderboard_v0_1_1.json", "schemas/leaderboard.schema.json"),
@@ -1483,6 +1484,48 @@ class BenchmarkSuiteTests(unittest.TestCase):
         finally:
             shutil.rmtree(output_root, ignore_errors=True)
 
+    def test_cli_writes_hash_prior_baseline_report(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        path = output_root / "hash-prior.json"
+
+        try:
+            with redirect_stdout(StringIO()):
+                benchmark_main(
+                    [
+                        "--detector",
+                        "hash-prior",
+                        "--system-name",
+                        "HashPriorBaseline",
+                        "--report",
+                        str(path),
+                    ]
+                )
+
+            report = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(report["system_name"], "HashPriorBaseline")
+            self.assertGreaterEqual(report["overall_score"], 0.0)
+            self.assertLessEqual(report["overall_score"], 100.0)
+            self.assertTrue(validate_benchmark_report(report)["valid"])
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_cli_lists_suites(self) -> None:
+        with redirect_stdout(StringIO()) as captured:
+            benchmark_main(["--list-suites"])
+
+        output = captured.getvalue()
+        self.assertIn("contradiction:", output)
+        self.assertIn("contradiction-v0.1.0:", output)
+        self.assertIn("contradiction-multihop:", output)
+
+    def test_cli_prints_suite_info(self) -> None:
+        with redirect_stdout(StringIO()) as captured:
+            benchmark_main(["--suite-info", "contradiction"])
+
+        output = captured.getvalue()
+        self.assertIn("Suite: marked-bench-contradiction-standard v0.1.1", output)
+        self.assertIn("Suite hash:", output)
+
     def test_cli_exports_suite_manifest_inside_repo(self) -> None:
         output_root = Path(__file__).resolve().parent.parent / ".test-output"
         path = output_root / "suite.json"
@@ -2018,17 +2061,23 @@ class BenchmarkSuiteTests(unittest.TestCase):
     def test_checked_in_standard_v0_1_1_baseline_reports_validate(self) -> None:
         root = Path(__file__).resolve().parent.parent
         strong_path = root / "baselines" / "contradiction_engine_v0_1_1.json"
+        hash_prior_path = root / "baselines" / "hash_prior_v0_1_1.json"
         weak_path = root / "baselines" / "always_none_v0_1_1.json"
 
         strong = json.loads(strong_path.read_text(encoding="utf-8"))
+        hash_prior = json.loads(hash_prior_path.read_text(encoding="utf-8"))
         weak = json.loads(weak_path.read_text(encoding="utf-8"))
 
         self.assertTrue(validate_benchmark_report(strong)["valid"])
+        self.assertTrue(validate_benchmark_report(hash_prior)["valid"])
         self.assertTrue(validate_benchmark_report(weak)["valid"])
         self.assertEqual(strong["suite_id"], SUITE_ID)
         self.assertEqual(strong["suite_version"], "0.1.1")
         self.assertEqual(strong["case_count"], len(build_standard_suite()))
         self.assertEqual(strong["overall_score"], 100.0)
+        self.assertEqual(hash_prior["system_name"], "HashPriorBaseline")
+        self.assertGreaterEqual(hash_prior["overall_score"], 0.0)
+        self.assertLess(hash_prior["overall_score"], strong["overall_score"])
         self.assertEqual(weak["system_name"], "AlwaysNoneDetector")
         self.assertLess(weak["overall_score"], 10.0)
 
@@ -2096,22 +2145,23 @@ class BenchmarkSuiteTests(unittest.TestCase):
     def test_checked_in_standard_v0_1_1_leaderboard_matches_baseline_reports(self) -> None:
         root = Path(__file__).resolve().parent.parent
         weak_path = root / "baselines" / "always_none_v0_1_1.json"
+        hash_prior_path = root / "baselines" / "hash_prior_v0_1_1.json"
         strong_path = root / "baselines" / "contradiction_engine_v0_1_1.json"
         leaderboard_path = root / "leaderboard" / "leaderboard_v0_1_1.json"
 
         leaderboard = json.loads(leaderboard_path.read_text(encoding="utf-8"))
 
         self.assertEqual(leaderboard["schema"], LEADERBOARD_SCHEMA)
-        self.assertEqual(leaderboard["entry_count"], 2)
+        self.assertEqual(leaderboard["entry_count"], 3)
         self.assertEqual(leaderboard["rejected_count"], 0)
         self.assertEqual(leaderboard["entries"][0]["system_name"], "ContradictionEngine")
         self.assertEqual(leaderboard["entries"][0]["rank"], 1)
         self.assertEqual(leaderboard["entries"][0]["suite_id"], SUITE_ID)
         self.assertEqual(leaderboard["entries"][0]["suite_version"], "0.1.1")
         self.assertEqual(leaderboard["entries"][0]["report_sha256"], report_sha256(strong_path))
-        self.assertEqual(leaderboard["entries"][1]["system_name"], "AlwaysNoneDetector")
-        self.assertEqual(leaderboard["entries"][1]["rank"], 2)
-        self.assertEqual(leaderboard["entries"][1]["report_sha256"], report_sha256(weak_path))
+        entries_by_system = {entry["system_name"]: entry for entry in leaderboard["entries"]}
+        self.assertEqual(entries_by_system["HashPriorBaseline"]["report_sha256"], report_sha256(hash_prior_path))
+        self.assertEqual(entries_by_system["AlwaysNoneDetector"]["report_sha256"], report_sha256(weak_path))
 
     def test_checked_in_adversarial_leaderboard_matches_baseline_reports(self) -> None:
         root = Path(__file__).resolve().parent.parent

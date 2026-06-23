@@ -1,0 +1,21 @@
+- name: triage-ready
+  color: "0E8A16"
+  description: Ready for maintainer triage.
+- name: needs-evidence
+  color: "D93F0B"
+  description: Needs report, prediction, hash, or provenance evidence before review.
+- name: needs-repro
+  color: "B60205"
+  description: Needs a reproducible command, artifact, or environment note.
+- name: scoring-review
+  color: "1D76DB"
+  description: Requires scoring, leaderboard, or metric review.
+- name: accepted-baseline
+  color: "5319E7"
+  description: Accepted as a checked baseline/reference result.
+- name: blocked-by-validation
+  color: "FBCA04"
+  description: Blocked until the required validator passes.
+- name: ready-for-review
+  color: "0052CC"
+  description: Complete enough for reviewer decision.

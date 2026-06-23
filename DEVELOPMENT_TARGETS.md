@@ -25,6 +25,27 @@ We are tracking progress with target-based checkpoints only (no deadlines).
 - [x] **Target G: Improve scoring trust**
   - Add at least one extra scoring sanity check and one reviewer-facing explanation artifact for scoring-related changes.
 
+- [x] **Target H: Add baseline diversity**
+  - Add a deterministic low-information reference baseline and include it in the active foundation leaderboard.
+
+- [x] **Target I: Improve external submission readiness**
+  - Add an end-to-end external submission walkthrough from prediction template through result claim.
+
+- [x] **Target J: Add release notes for the 0.1.1 standard suite**
+  - Document the active foundation suite expansion, compatibility boundaries, and validation commands.
+
+- [x] **Target K: Strengthen reviewer workflow**
+  - Add reviewer workflow guidance and label definitions for evidence, reproducibility, validation, and review state.
+
+- [x] **Target L: Add case-quality diagnostics**
+  - Add a case-quality check and reviewer-facing artifact for suite composition and near-duplicate diagnostics.
+
+- [x] **Target M: Improve CLI discoverability**
+  - Add suite listing and suite-info commands for public suite inspection.
+
+- [x] **Target N: Add release automation guardrails**
+  - Add a release artifact regeneration helper that writes deterministic generated evidence in dependency order.
+
 ## Checkoff Rules
 
 1. A target is checked only after code/docs are committed and validations listed in the target are complete.
@@ -34,3 +55,4 @@ We are tracking progress with target-based checkpoints only (no deadlines).
 ## Progress Log
 
 - Completed: Target A, Target B, Target C, Target D, Target E, Target F, Target G
+- Completed: Target H, Target I, Target J, Target K, Target L, Target M, Target N

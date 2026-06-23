@@ -148,7 +148,7 @@ marked-bench --validate-report artifacts/marked_bench_contradiction_benchmark_re
 Build a leaderboard from valid reports:
 
 ```bash
-marked-bench --build-leaderboard baselines/always_none_v0_1_1.json baselines/contradiction_engine_v0_1_1.json --leaderboard-output leaderboard/leaderboard_v0_1_1.json
+marked-bench --build-leaderboard baselines/always_none_v0_1_1.json baselines/hash_prior_v0_1_1.json baselines/contradiction_engine_v0_1_1.json --leaderboard-output leaderboard/leaderboard_v0_1_1.json
 ```
 
 Export the registry that points to every public track, schema, suite manifest,
@@ -237,6 +237,12 @@ The active checked-in foundation symbolic baseline lives at:
 
 ```text
 baselines/contradiction_engine_v0_1_1.json
+```
+
+The active checked-in foundation reference baseline lives at:
+
+```text
+baselines/hash_prior_v0_1_1.json
 ```
 
 The legacy foundation symbolic baseline remains available at:
