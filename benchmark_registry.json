@@ -7,11 +7,14 @@
     "docs/BENCHMARK_STANDARD.md",
     "docs/BENCHMARK_CARD.md",
     "docs/CHANGE_CONTROL.md",
+    "docs/EXTERNAL_SUBMISSION_WALKTHROUGH.md",
     "docs/TECHNICAL_NOTE.md",
     "docs/GOVERNANCE.md",
+    "docs/REVIEW_WORKFLOW.md",
     "docs/SUBMISSION_REVIEW_RUBRIC.md",
     "docs/THIRD_PARTY_EVIDENCE.md",
     "docs/STANDARDIZATION_STATUS.md",
+    "docs/RELEASE_NOTES_v0_1_1.md",
     "docs/RELEASE_NOTES_v0_2_0.md",
     "docs/RELEASE_NOTES_v0_3_0.md",
     "docs/RELEASE_NOTES_v0_3_1.md",
@@ -85,6 +88,7 @@
     {
       "baseline_reports": [
         "baselines/contradiction_engine_v0_1_1.json",
+        "baselines/hash_prior_v0_1_1.json",
         "baselines/always_none_v0_1_1.json"
       ],
       "case_count": 23,

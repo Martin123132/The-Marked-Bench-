@@ -77,6 +77,7 @@ BASELINE_REPORTS = [
     Path("baselines/contradiction_engine_v0_1_0.json"),
     Path("baselines/always_none_v0_1_0.json"),
     Path("baselines/contradiction_engine_v0_1_1.json"),
+    Path("baselines/hash_prior_v0_1_1.json"),
     Path("baselines/always_none_v0_1_1.json"),
     Path("baselines/contradiction_engine_adversarial_v0_2_0.json"),
     Path("baselines/always_none_adversarial_v0_2_0.json"),
@@ -93,6 +94,7 @@ LEADERBOARDS = {
     ],
     Path("leaderboard/leaderboard_v0_1_1.json"): [
         Path("baselines/always_none_v0_1_1.json"),
+        Path("baselines/hash_prior_v0_1_1.json"),
         Path("baselines/contradiction_engine_v0_1_1.json"),
     ],
     Path("leaderboard/leaderboard_adversarial_v0_2_0.json"): [

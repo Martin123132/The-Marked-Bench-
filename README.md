@@ -80,6 +80,13 @@ Export the machine-readable registry of public tracks and artifacts:
 marked-bench --export-registry benchmark_registry.json
 ```
 
+List and inspect public suites:
+
+```bash
+marked-bench --list-suites
+marked-bench --suite-info contradiction
+```
+
 Export the release manifest that pins public artifact SHA-256 digests:
 
 ```bash
@@ -223,7 +230,7 @@ A checked one-command publication packet is committed under
 Active foundation leaderboard:
 
 ```bash
-marked-bench --build-leaderboard baselines/always_none_v0_1_1.json baselines/contradiction_engine_v0_1_1.json --leaderboard-output leaderboard/leaderboard_v0_1_1.json
+marked-bench --build-leaderboard baselines/always_none_v0_1_1.json baselines/hash_prior_v0_1_1.json baselines/contradiction_engine_v0_1_1.json --leaderboard-output leaderboard/leaderboard_v0_1_1.json
 ```
 
 Legacy foundation leaderboard:

@@ -33,6 +33,7 @@ repository only.
 python -m unittest discover -s tests
 python scripts/validate_benchmark_artifacts.py
 python -m marked_bench.benchmark_cli --check-standard-status
+python scripts/check_case_quality.py
 ```
 
 ### Scoring change checks
@@ -45,6 +46,16 @@ python scripts/check_scoring_sanity.py --artifact docs/SCORING_SANITY.md
 
 Commit the generated `docs/SCORING_SANITY.md` artifact and include the command
 output summary in your PR description.
+
+### Suite quality checks
+
+If suite cases changed in this PR, also run:
+
+```bash
+python scripts/check_case_quality.py --artifact docs/CASE_QUALITY.md
+```
+
+Commit the generated `docs/CASE_QUALITY.md` artifact with the case change.
 
 ## Submission Types
 

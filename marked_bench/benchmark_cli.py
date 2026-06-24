@@ -3,6 +3,7 @@ from __future__ import annotations
 """Command line runner for The Marked Bench standards."""
 
 import argparse
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -46,7 +47,7 @@ from marked_bench.benchmark_publication import (
     validate_publication_packet,
 )
 from marked_bench.benchmark_release import write_release_manifest
-from marked_bench.benchmark_registry import write_benchmark_registry
+from marked_bench.benchmark_registry import build_benchmark_registry, write_benchmark_registry
 from marked_bench.benchmark_review import (
     REVIEW_DECISIONS,
     build_submission_review,
@@ -89,6 +90,7 @@ from marked_bench.benchmark_scoring_spec import (
 )
 from marked_bench.benchmark_technical_note import write_technical_note
 from marked_bench.contradiction.benchmark_suite import (
+    build_suite_manifest,
     evaluate_prediction_file,
     evaluate_standard_suite,
     load_benchmark_report,
@@ -98,6 +100,16 @@ from marked_bench.contradiction.benchmark_suite import (
     write_suite_manifest,
 )
 from marked_bench.contradiction.engine import Claim
+from marked_bench.contradiction.engine import Contradiction, ContradictionType
+
+SUITE_CHOICES = [
+    "contradiction",
+    "contradiction-v0.1.0",
+    "contradiction-v0.1.1",
+    "contradiction-adversarial",
+    "contradiction-multihop",
+    "contradiction-controls",
+]
 
 _STANDARD_STATUS_ARTIFACTS = (
     ("conformance_report", "conformance", "conformance/marked_bench_conformance_"),
@@ -116,15 +128,19 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--suite",
         default="contradiction",
-        choices=[
-            "contradiction",
-            "contradiction-v0.1.0",
-            "contradiction-v0.1.1",
-            "contradiction-adversarial",
-            "contradiction-multihop",
-            "contradiction-controls",
-        ],
+        choices=SUITE_CHOICES,
         help="Benchmark suite to run.",
+    )
+    parser.add_argument(
+        "--list-suites",
+        action="store_true",
+        help="List public benchmark suites and exit.",
+    )
+    parser.add_argument(
+        "--suite-info",
+        choices=SUITE_CHOICES,
+        default=None,
+        help="Print suite manifest summary for a suite and exit.",
     )
     parser.add_argument(
         "--system-name",
@@ -134,7 +150,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--detector",
         default="contradiction-engine",
-        choices=["contradiction-engine", "always-none"],
+        choices=["contradiction-engine", "always-none", "hash-prior"],
         help="Built-in detector to benchmark.",
     )
     parser.add_argument(
@@ -513,6 +529,14 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> None:
     parser = build_parser()
     args = parser.parse_args(argv)
+
+    if args.list_suites:
+        _print_suite_list(as_json=args.json)
+        return
+
+    if args.suite_info:
+        _print_suite_info(args.suite_info, as_json=args.json)
+        return
 
     if args.validate_report:
         validation = validate_benchmark_report(load_benchmark_report(args.validate_report))
@@ -1065,11 +1089,83 @@ def main(argv: list[str] | None = None) -> None:
 def _detector_from_name(name: str):
     if name == "always-none":
         return _always_none_detector
+    if name == "hash-prior":
+        return _hash_prior_detector
     return None
 
 
 def _always_none_detector(_claim: Claim):
     return None
+
+
+def _hash_prior_detector(claim: Claim):
+    labels = [
+        ContradictionType.NONE,
+        ContradictionType.DIRECT_NEGATION,
+        ContradictionType.PROPERTY_MISMATCH,
+        ContradictionType.DEFINITIONAL_VIOLATION,
+        ContradictionType.UNIVERSAL_COUNTEREXAMPLE,
+        ContradictionType.TEMPORAL_CONFLICT,
+    ]
+    digest = hashlib.sha256(claim.id.encode("utf-8")).hexdigest()
+    predicted = labels[int(digest[:8], 16) % len(labels)]
+    if predicted == ContradictionType.NONE:
+        return None
+    return Contradiction(
+        claim_id=claim.id,
+        type=predicted,
+        note="Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+        repair_suggestion="Use this only as a low-information reference baseline.",
+        score=0.2,
+    )
+
+
+def _print_suite_list(*, as_json: bool = False) -> None:
+    suites = [_suite_list_record(track["name"]) for track in build_benchmark_registry()["tracks"]]
+    suites.insert(0, _suite_list_record("contradiction-v0.1.0", status="legacy"))
+    if as_json:
+        print(json.dumps({"suites": suites}, indent=2, sort_keys=True))
+        return
+    for suite in suites:
+        print(
+            f"{suite['name']}: {suite['suite_id']} v{suite['suite_version']} "
+            f"cases={suite['case_count']} status={suite['status']}"
+        )
+
+
+def _print_suite_info(suite: str, *, as_json: bool = False) -> None:
+    info = _suite_list_record(suite)
+    manifest = build_suite_manifest(suite=suite)
+    info["profile"] = manifest["profile"]
+    info["labels"] = manifest["labels"]
+    if as_json:
+        print(json.dumps(info, indent=2, sort_keys=True))
+        return
+    print(f"Suite: {info['suite_id']} v{info['suite_version']}")
+    print(f"Alias: {suite}")
+    print(f"Cases: {info['case_count']}")
+    print(f"Suite hash: {info['suite_hash']}")
+    print(f"Labels: {', '.join(info['labels'])}")
+    print(f"Quality gates: {_quality_gate_summary(info['profile']['quality_gates'])}")
+
+
+def _suite_list_record(suite: str, *, status: str | None = None) -> dict[str, object]:
+    manifest = build_suite_manifest(suite=suite)
+    registry_tracks = {track["name"]: track for track in build_benchmark_registry()["tracks"]}
+    track = registry_tracks.get(suite, {})
+    return {
+        "name": suite,
+        "title": track.get("title", "Legacy foundation contradiction detection"),
+        "status": status or track.get("status", "active"),
+        "suite_id": manifest["suite_id"],
+        "suite_version": manifest["suite_version"],
+        "suite_hash": manifest["suite_hash"],
+        "case_count": manifest["case_count"],
+    }
+
+
+def _quality_gate_summary(quality_gates: dict[str, object]) -> str:
+    return ", ".join(f"{key}={value}" for key, value in sorted(quality_gates.items()))
 
 
 def _run_standard_status_checks() -> dict[str, object]:

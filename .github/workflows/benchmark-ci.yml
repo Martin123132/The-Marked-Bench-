@@ -22,3 +22,5 @@ jobs:
         run: python -m marked_bench.benchmark_cli --check-standard-status
       - name: Run scoring sanity check
         run: python scripts/check_scoring_sanity.py
+      - name: Run case quality check
+        run: python scripts/check_case_quality.py

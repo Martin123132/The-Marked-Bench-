@@ -60,6 +60,7 @@ This note summarizes the checked benchmark release artifacts for `contradiction-
 | Track | System | Overall | Type Acc. | Detection F1 | Brier | ECE | Failures |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | contradiction | ContradictionEngine | 100.00 | 1.0000 | 1.0000 | 0.0388 | 0.1422 | 0 |
+| contradiction | HashPriorBaseline | 24.11 | 0.1739 | 0.7879 | 0.4991 | 0.5478 | 19 |
 | contradiction | AlwaysNoneDetector | 7.61 | 0.3043 | 0.0000 | 0.6957 | 0.6957 | 16 |
 | contradiction-adversarial | ContradictionEngine | 52.37 | 0.5882 | 0.5333 | 0.4367 | 0.4835 | 7 |
 | contradiction-adversarial | AlwaysNoneDetector | 8.82 | 0.3529 | 0.0000 | 0.6471 | 0.6471 | 11 |

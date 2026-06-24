@@ -1,7 +1,7 @@
 {
   "benchmark_family": "contradiction-detection",
-  "checked_artifact_count": 146,
-  "checked_schema_file_count": 37,
+  "checked_artifact_count": 154,
+  "checked_schema_file_count": 38,
   "checks": [
     {
       "details": {
@@ -13,7 +13,7 @@
     },
     {
       "details": {
-        "artifact_count": 146,
+        "artifact_count": 154,
         "path": "releases/marked_bench_release_v0_4_8.json"
       },
       "errors": [],
@@ -30,7 +30,7 @@
     },
     {
       "details": {
-        "report_count": 10
+        "report_count": 11
       },
       "errors": [],
       "name": "baseline_reports_valid",
@@ -46,7 +46,7 @@
     },
     {
       "details": {
-        "file_count": 37
+        "file_count": 38
       },
       "errors": [],
       "name": "public_json_schema_conformance",

@@ -50,7 +50,7 @@ marked-bench --system-name "my-system" --report my-system-report.json
 Build a leaderboard from validated reports:
 
 ```bash
-marked-bench --build-leaderboard baselines/always_none_v0_1_1.json baselines/contradiction_engine_v0_1_1.json --leaderboard-output leaderboard/leaderboard_v0_1_1.json
+marked-bench --build-leaderboard baselines/always_none_v0_1_1.json baselines/hash_prior_v0_1_1.json baselines/contradiction_engine_v0_1_1.json --leaderboard-output leaderboard/leaderboard_v0_1_1.json
 ```
 
 For the adversarial track:
@@ -80,6 +80,10 @@ for future submissions.
 The `AlwaysNoneDetector` baseline is intentionally weak. It exists as a sanity
 check that the benchmark rewards actual contradiction classification over
 always predicting `none`.
+
+The `HashPriorBaseline` is a deterministic low-information reference. It helps
+reviewers spot whether a future system is doing more than exploiting case-ID
+or label-prior quirks.
 
 The adversarial leaderboard intentionally starts with the symbolic baseline
 below a perfect score. That leaves room for stronger neural, symbolic, and
