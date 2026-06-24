@@ -56,19 +56,19 @@ marked-bench --build-leaderboard baselines/always_none_v0_1_1.json baselines/has
 For the adversarial track:
 
 ```bash
-marked-bench --build-leaderboard baselines/always_none_adversarial_v0_2_0.json baselines/contradiction_engine_adversarial_v0_2_0.json --leaderboard-output leaderboard/leaderboard_adversarial_v0_2_0.json
+marked-bench --build-leaderboard baselines/always_none_adversarial_v0_2_0.json baselines/hash_prior_adversarial_v0_2_0.json baselines/contradiction_engine_adversarial_v0_2_0.json --leaderboard-output leaderboard/leaderboard_adversarial_v0_2_0.json
 ```
 
 For the multi-hop track:
 
 ```bash
-marked-bench --build-leaderboard baselines/always_none_multihop_v0_3_0.json baselines/contradiction_engine_multihop_v0_3_0.json --leaderboard-output leaderboard/leaderboard_multihop_v0_3_0.json
+marked-bench --build-leaderboard baselines/always_none_multihop_v0_3_0.json baselines/hash_prior_multihop_v0_3_0.json baselines/contradiction_engine_multihop_v0_3_0.json --leaderboard-output leaderboard/leaderboard_multihop_v0_3_0.json
 ```
 
 For the controls track:
 
 ```bash
-marked-bench --build-leaderboard baselines/always_none_controls_v0_4_0.json baselines/contradiction_engine_controls_v0_4_0.json --leaderboard-output leaderboard/leaderboard_controls_v0_4_0.json
+marked-bench --build-leaderboard baselines/always_none_controls_v0_4_0.json baselines/hash_prior_controls_v0_4_0.json baselines/contradiction_engine_controls_v0_4_0.json --leaderboard-output leaderboard/leaderboard_controls_v0_4_0.json
 ```
 
 ## Baseline

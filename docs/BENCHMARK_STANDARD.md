@@ -245,6 +245,14 @@ The active checked-in foundation reference baseline lives at:
 baselines/hash_prior_v0_1_1.json
 ```
 
+The checked-in adversarial, multi-hop, and controls reference baselines live at:
+
+```text
+baselines/hash_prior_adversarial_v0_2_0.json
+baselines/hash_prior_multihop_v0_3_0.json
+baselines/hash_prior_controls_v0_4_0.json
+```
+
 The legacy foundation symbolic baseline remains available at:
 
 ```text
@@ -391,6 +399,10 @@ inspectable submissions.
   calibration, or report semantics change.
 - Keep `python scripts/validate_benchmark_artifacts.py` passing after any
   baseline, suite, or leaderboard change.
+- Keep `python scripts/regenerate_release_artifacts.py --check` passing after
+  generated release evidence changes.
+- Keep `python scripts/check_license_notice.py` passing after license,
+  citation, notice, or README licensing text changes.
 - Keep checked public JSON artifacts conformant with the schemas under
   `schemas/`.
 

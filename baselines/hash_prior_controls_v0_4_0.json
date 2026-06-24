@@ -1,0 +1,1515 @@
+{
+  "case_count": 18,
+  "case_results": [
+    {
+      "capability": "anchor_negation",
+      "case_id": "marked-ctrl-direct-001",
+      "detection_correct": true,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "easy",
+      "domain": "governance",
+      "evidence": [],
+      "expected": "direct_negation",
+      "predicted": "property_mismatch",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "anchor",
+        "negation"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "anchor_numeric_property",
+      "case_id": "marked-ctrl-property-001",
+      "detection_correct": true,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "easy",
+      "domain": "science",
+      "evidence": [],
+      "expected": "property_mismatch",
+      "predicted": "direct_negation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "anchor",
+        "numeric"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "anchor_definition",
+      "case_id": "marked-ctrl-definition-001",
+      "detection_correct": true,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "easy",
+      "domain": "geometry",
+      "evidence": [],
+      "expected": "definitional_violation",
+      "predicted": "direct_negation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "anchor",
+        "definition"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "anchor_universal",
+      "case_id": "marked-ctrl-universal-001",
+      "detection_correct": true,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "medium",
+      "domain": "ai_safety",
+      "evidence": [],
+      "expected": "universal_counterexample",
+      "predicted": "temporal_conflict",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "anchor",
+        "universal"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "anchor_temporal",
+      "case_id": "marked-ctrl-temporal-001",
+      "detection_correct": true,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "medium",
+      "domain": "operations",
+      "evidence": [],
+      "expected": "temporal_conflict",
+      "predicted": "temporal_conflict",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "anchor",
+        "temporal"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "elaboration_control",
+      "case_id": "marked-ctrl-control-001",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "easy",
+      "domain": "operations",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "direct_negation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "control",
+        "elaboration"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "negation_scope_control",
+      "case_id": "marked-ctrl-control-002",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "hard",
+      "domain": "security",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "temporal_conflict",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "control",
+        "negation_scope"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "quantifier_control",
+      "case_id": "marked-ctrl-control-003",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "medium",
+      "domain": "ai_safety",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "property_mismatch",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "control",
+        "quantifier"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "temporal_change_control",
+      "case_id": "marked-ctrl-control-004",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "medium",
+      "domain": "operations",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "property_mismatch",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "control",
+        "temporal"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "same_value_context_control",
+      "case_id": "marked-ctrl-control-005",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "medium",
+      "domain": "measurement",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "direct_negation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "control",
+        "numeric"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "same_unit_control",
+      "case_id": "marked-ctrl-control-006",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "easy",
+      "domain": "measurement",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "definitional_violation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "control",
+        "unit"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "paraphrase_control",
+      "case_id": "marked-ctrl-control-007",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "medium",
+      "domain": "ai_safety",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "direct_negation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "control",
+        "paraphrase"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "state_paraphrase_control",
+      "case_id": "marked-ctrl-control-008",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "easy",
+      "domain": "governance",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "temporal_conflict",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "control",
+        "paraphrase"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "definition_elaboration_control",
+      "case_id": "marked-ctrl-control-009",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "easy",
+      "domain": "geometry",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "property_mismatch",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "control",
+        "definition"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "entity_elaboration_control",
+      "case_id": "marked-ctrl-control-010",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "easy",
+      "domain": "data_governance",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "direct_negation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "control",
+        "dataset"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "numeric_scope_control",
+      "case_id": "marked-ctrl-control-011",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "medium",
+      "domain": "finance",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "definitional_violation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "control",
+        "numeric"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "causal_paraphrase_control",
+      "case_id": "marked-ctrl-control-012",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "easy",
+      "domain": "operations",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "definitional_violation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "control",
+        "operations"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "event_paraphrase_control",
+      "case_id": "marked-ctrl-control-013",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "easy",
+      "domain": "operations",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "definitional_violation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "control",
+        "operations"
+      ],
+      "type_correct": false
+    }
+  ],
+  "confusion_matrix": {
+    "definitional_violation": {
+      "definitional_violation": 0,
+      "direct_negation": 1,
+      "none": 0,
+      "property_mismatch": 0,
+      "temporal_conflict": 0,
+      "universal_counterexample": 0
+    },
+    "direct_negation": {
+      "definitional_violation": 0,
+      "direct_negation": 0,
+      "none": 0,
+      "property_mismatch": 1,
+      "temporal_conflict": 0,
+      "universal_counterexample": 0
+    },
+    "none": {
+      "definitional_violation": 4,
+      "direct_negation": 4,
+      "none": 0,
+      "property_mismatch": 3,
+      "temporal_conflict": 2,
+      "universal_counterexample": 0
+    },
+    "property_mismatch": {
+      "definitional_violation": 0,
+      "direct_negation": 1,
+      "none": 0,
+      "property_mismatch": 0,
+      "temporal_conflict": 0,
+      "universal_counterexample": 0
+    },
+    "temporal_conflict": {
+      "definitional_violation": 0,
+      "direct_negation": 0,
+      "none": 0,
+      "property_mismatch": 0,
+      "temporal_conflict": 1,
+      "universal_counterexample": 0
+    },
+    "universal_counterexample": {
+      "definitional_violation": 0,
+      "direct_negation": 0,
+      "none": 0,
+      "property_mismatch": 0,
+      "temporal_conflict": 1,
+      "universal_counterexample": 0
+    }
+  },
+  "created_at": 1782329469.835,
+  "duration_seconds": 0.00164,
+  "explanation_audit": {
+    "case_count": 18,
+    "correct_explanation_ready_rate": 0.0,
+    "evidence_count": 0,
+    "evidence_coverage": 0.0,
+    "explanation_ready_count": 0,
+    "explanation_ready_rate": 0.0,
+    "rationale_count": 18,
+    "rationale_coverage": 1.0
+  },
+  "failures": [
+    {
+      "capability": "anchor_negation",
+      "case_id": "marked-ctrl-direct-001",
+      "detection_correct": true,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "easy",
+      "domain": "governance",
+      "evidence": [],
+      "expected": "direct_negation",
+      "predicted": "property_mismatch",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "anchor",
+        "negation"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "anchor_numeric_property",
+      "case_id": "marked-ctrl-property-001",
+      "detection_correct": true,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "easy",
+      "domain": "science",
+      "evidence": [],
+      "expected": "property_mismatch",
+      "predicted": "direct_negation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "anchor",
+        "numeric"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "anchor_definition",
+      "case_id": "marked-ctrl-definition-001",
+      "detection_correct": true,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "easy",
+      "domain": "geometry",
+      "evidence": [],
+      "expected": "definitional_violation",
+      "predicted": "direct_negation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "anchor",
+        "definition"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "anchor_universal",
+      "case_id": "marked-ctrl-universal-001",
+      "detection_correct": true,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "medium",
+      "domain": "ai_safety",
+      "evidence": [],
+      "expected": "universal_counterexample",
+      "predicted": "temporal_conflict",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "anchor",
+        "universal"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "elaboration_control",
+      "case_id": "marked-ctrl-control-001",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "easy",
+      "domain": "operations",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "direct_negation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "control",
+        "elaboration"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "negation_scope_control",
+      "case_id": "marked-ctrl-control-002",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "hard",
+      "domain": "security",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "temporal_conflict",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "control",
+        "negation_scope"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "quantifier_control",
+      "case_id": "marked-ctrl-control-003",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "medium",
+      "domain": "ai_safety",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "property_mismatch",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "control",
+        "quantifier"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "temporal_change_control",
+      "case_id": "marked-ctrl-control-004",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "medium",
+      "domain": "operations",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "property_mismatch",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "control",
+        "temporal"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "same_value_context_control",
+      "case_id": "marked-ctrl-control-005",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "medium",
+      "domain": "measurement",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "direct_negation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "control",
+        "numeric"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "same_unit_control",
+      "case_id": "marked-ctrl-control-006",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "easy",
+      "domain": "measurement",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "definitional_violation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "control",
+        "unit"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "paraphrase_control",
+      "case_id": "marked-ctrl-control-007",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "medium",
+      "domain": "ai_safety",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "direct_negation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "control",
+        "paraphrase"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "state_paraphrase_control",
+      "case_id": "marked-ctrl-control-008",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "easy",
+      "domain": "governance",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "temporal_conflict",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "control",
+        "paraphrase"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "definition_elaboration_control",
+      "case_id": "marked-ctrl-control-009",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "easy",
+      "domain": "geometry",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "property_mismatch",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "control",
+        "definition"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "entity_elaboration_control",
+      "case_id": "marked-ctrl-control-010",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "easy",
+      "domain": "data_governance",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "direct_negation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "control",
+        "dataset"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "numeric_scope_control",
+      "case_id": "marked-ctrl-control-011",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "medium",
+      "domain": "finance",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "definitional_violation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "control",
+        "numeric"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "causal_paraphrase_control",
+      "case_id": "marked-ctrl-control-012",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "easy",
+      "domain": "operations",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "definitional_violation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "control",
+        "operations"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "event_paraphrase_control",
+      "case_id": "marked-ctrl-control-013",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "easy",
+      "domain": "operations",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "definitional_violation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control-track",
+        "control",
+        "operations"
+      ],
+      "type_correct": false
+    }
+  ],
+  "metrics": {
+    "calibration": {
+      "bin_count": 10,
+      "bins": [
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.0,
+          "mean_confidence": 0.0,
+          "upper": 0.1
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.1,
+          "mean_confidence": 0.0,
+          "upper": 0.2
+        },
+        {
+          "case_count": 18,
+          "empirical_positive_rate": 0.277778,
+          "lower": 0.2,
+          "mean_confidence": 0.2,
+          "upper": 0.3
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.3,
+          "mean_confidence": 0.0,
+          "upper": 0.4
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.4,
+          "mean_confidence": 0.0,
+          "upper": 0.5
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.5,
+          "mean_confidence": 0.0,
+          "upper": 0.6
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.6,
+          "mean_confidence": 0.0,
+          "upper": 0.7
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.7,
+          "mean_confidence": 0.0,
+          "upper": 0.8
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.8,
+          "mean_confidence": 0.0,
+          "upper": 0.9
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.9,
+          "mean_confidence": 0.0,
+          "upper": 1.0
+        }
+      ],
+      "brier_score": 0.206667,
+      "expected_calibration_error": 0.077778,
+      "mean_confidence": 0.2,
+      "positive_rate": 0.277778
+    },
+    "contradiction_macro_f1": 0.08,
+    "contradiction_type_accuracy": 0.2,
+    "coverage_index": 0.2,
+    "detection": {
+      "accuracy": 0.277778,
+      "f1": 0.434783,
+      "false_negative": 0,
+      "false_positive": 13,
+      "precision": 0.277778,
+      "recall": 1.0,
+      "true_negative": 0,
+      "true_positive": 5
+    },
+    "per_class": {
+      "definitional_violation": {
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "support": 1
+      },
+      "direct_negation": {
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "support": 1
+      },
+      "none": {
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "support": 13
+      },
+      "property_mismatch": {
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "support": 1
+      },
+      "temporal_conflict": {
+        "f1": 0.4,
+        "precision": 0.25,
+        "recall": 1.0,
+        "support": 1
+      },
+      "universal_counterexample": {
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "support": 1
+      }
+    },
+    "slices": {
+      "capability": {
+        "anchor_definition": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "anchor_negation": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "anchor_numeric_property": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "anchor_temporal": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "anchor_universal": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "causal_paraphrase_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "definition_elaboration_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "elaboration_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "entity_elaboration_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "event_paraphrase_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "negation_scope_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "numeric_scope_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "paraphrase_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "quantifier_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "same_unit_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "same_value_context_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "state_paraphrase_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "temporal_change_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        }
+      },
+      "difficulty": {
+        "easy": {
+          "case_count": 10,
+          "contradiction_case_count": 3,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.461538,
+          "failure_count": 10,
+          "type_accuracy": 0.0
+        },
+        "hard": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "medium": {
+          "case_count": 7,
+          "contradiction_case_count": 2,
+          "contradiction_type_accuracy": 0.5,
+          "detection_f1": 0.444444,
+          "failure_count": 6,
+          "type_accuracy": 0.142857
+        }
+      },
+      "domain": {
+        "ai_safety": {
+          "case_count": 3,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.5,
+          "failure_count": 3,
+          "type_accuracy": 0.0
+        },
+        "data_governance": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "finance": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "geometry": {
+          "case_count": 2,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.666667,
+          "failure_count": 2,
+          "type_accuracy": 0.0
+        },
+        "governance": {
+          "case_count": 2,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.666667,
+          "failure_count": 2,
+          "type_accuracy": 0.0
+        },
+        "measurement": {
+          "case_count": 2,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 2,
+          "type_accuracy": 0.0
+        },
+        "operations": {
+          "case_count": 5,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 0.333333,
+          "failure_count": 4,
+          "type_accuracy": 0.2
+        },
+        "science": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "security": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        }
+      },
+      "tag": {
+        "anchor": {
+          "case_count": 5,
+          "contradiction_case_count": 5,
+          "contradiction_type_accuracy": 0.2,
+          "detection_f1": 1.0,
+          "failure_count": 4,
+          "type_accuracy": 0.2
+        },
+        "control": {
+          "case_count": 13,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 13,
+          "type_accuracy": 0.0
+        },
+        "control-track": {
+          "case_count": 18,
+          "contradiction_case_count": 5,
+          "contradiction_type_accuracy": 0.2,
+          "detection_f1": 0.434783,
+          "failure_count": 17,
+          "type_accuracy": 0.055556
+        },
+        "dataset": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "definition": {
+          "case_count": 2,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.666667,
+          "failure_count": 2,
+          "type_accuracy": 0.0
+        },
+        "elaboration": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "negation": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "negation_scope": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "numeric": {
+          "case_count": 3,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.5,
+          "failure_count": 3,
+          "type_accuracy": 0.0
+        },
+        "operations": {
+          "case_count": 2,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 2,
+          "type_accuracy": 0.0
+        },
+        "paraphrase": {
+          "case_count": 2,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 2,
+          "type_accuracy": 0.0
+        },
+        "quantifier": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "temporal": {
+          "case_count": 2,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 0.666667,
+          "failure_count": 1,
+          "type_accuracy": 0.5
+        },
+        "unit": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "universal": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        }
+      }
+    },
+    "type_accuracy": 0.055556
+  },
+  "overall_score": 15.68,
+  "schema": "marked_bench.contradiction-benchmark-report.v2",
+  "suite_cases": [
+    {
+      "capability": "anchor_negation",
+      "difficulty": "easy",
+      "domain": "governance",
+      "expected": "direct_negation",
+      "id": "marked-ctrl-direct-001",
+      "note": "Anchor direct-negation case to keep contradiction detection visible.",
+      "premise": "The audit packet is complete",
+      "query": "The audit packet is incomplete",
+      "tags": [
+        "control-track",
+        "anchor",
+        "negation"
+      ]
+    },
+    {
+      "capability": "anchor_numeric_property",
+      "difficulty": "easy",
+      "domain": "science",
+      "expected": "property_mismatch",
+      "id": "marked-ctrl-property-001",
+      "note": "Anchor numeric property mismatch.",
+      "premise": "Water boils at 100C in the reference note",
+      "query": "Water boils at 95C in the reference note",
+      "tags": [
+        "control-track",
+        "anchor",
+        "numeric"
+      ]
+    },
+    {
+      "capability": "anchor_definition",
+      "difficulty": "easy",
+      "domain": "geometry",
+      "expected": "definitional_violation",
+      "id": "marked-ctrl-definition-001",
+      "note": "Anchor definitional violation.",
+      "premise": "Triangles have three sides",
+      "query": "Triangle false three sides in this glossary",
+      "tags": [
+        "control-track",
+        "anchor",
+        "definition"
+      ]
+    },
+    {
+      "capability": "anchor_universal",
+      "difficulty": "medium",
+      "domain": "ai_safety",
+      "expected": "universal_counterexample",
+      "id": "marked-ctrl-universal-001",
+      "note": "Anchor universal-counterexample case.",
+      "premise": "All sandbox agents require approval before launch",
+      "query": "A counterexample exists: sandbox agent S9 launched without approval",
+      "tags": [
+        "control-track",
+        "anchor",
+        "universal"
+      ]
+    },
+    {
+      "capability": "anchor_temporal",
+      "difficulty": "medium",
+      "domain": "operations",
+      "expected": "temporal_conflict",
+      "id": "marked-ctrl-temporal-001",
+      "note": "Anchor temporal conflict.",
+      "premise": "Always in 2021 the service used manual approval",
+      "query": "In 2024 the service used automated approval",
+      "tags": [
+        "control-track",
+        "anchor",
+        "temporal"
+      ]
+    },
+    {
+      "capability": "elaboration_control",
+      "difficulty": "easy",
+      "domain": "operations",
+      "expected": "none",
+      "id": "marked-ctrl-control-001",
+      "note": "Added temporal context does not reverse the staging gate state.",
+      "premise": "The deployment gate is enabled for staging",
+      "query": "The deployment gate is enabled for staging after the policy update",
+      "tags": [
+        "control-track",
+        "control",
+        "elaboration"
+      ]
+    },
+    {
+      "capability": "negation_scope_control",
+      "difficulty": "hard",
+      "domain": "security",
+      "expected": "none",
+      "id": "marked-ctrl-control-002",
+      "note": "Two cautious negative claims are compatible.",
+      "premise": "The audit found no evidence that keys left the vault",
+      "query": "The audit did not prove that keys left the vault",
+      "tags": [
+        "control-track",
+        "control",
+        "negation_scope"
+      ]
+    },
+    {
+      "capability": "quantifier_control",
+      "difficulty": "medium",
+      "domain": "ai_safety",
+      "expected": "none",
+      "id": "marked-ctrl-control-003",
+      "note": "A non-universal quantifier allows exceptions.",
+      "premise": "Most sandbox agents require review before launch",
+      "query": "Some sandbox agents launch automatically during tests",
+      "tags": [
+        "control-track",
+        "control",
+        "quantifier"
+      ]
+    },
+    {
+      "capability": "temporal_change_control",
+      "difficulty": "medium",
+      "domain": "operations",
+      "expected": "none",
+      "id": "marked-ctrl-control-004",
+      "note": "A system can change across years without contradiction.",
+      "premise": "The service used manual approval in 2021",
+      "query": "The service used automated approval in 2024",
+      "tags": [
+        "control-track",
+        "control",
+        "temporal"
+      ]
+    },
+    {
+      "capability": "same_value_context_control",
+      "difficulty": "medium",
+      "domain": "measurement",
+      "expected": "none",
+      "id": "marked-ctrl-control-005",
+      "note": "Same numeric value under a changed condition is not a mismatch.",
+      "premise": "The threshold is 0.80 before calibration",
+      "query": "The threshold is 0.80 after calibration",
+      "tags": [
+        "control-track",
+        "control",
+        "numeric"
+      ]
+    },
+    {
+      "capability": "same_unit_control",
+      "difficulty": "easy",
+      "domain": "measurement",
+      "expected": "none",
+      "id": "marked-ctrl-control-006",
+      "note": "Same value and unit should not trigger the unit-conflict rule.",
+      "premise": "The crate mass is 12 kg before repacking",
+      "query": "The crate mass is 12 kg after repacking",
+      "tags": [
+        "control-track",
+        "control",
+        "unit"
+      ]
+    },
+    {
+      "capability": "paraphrase_control",
+      "difficulty": "medium",
+      "domain": "ai_safety",
+      "expected": "none",
+      "id": "marked-ctrl-control-007",
+      "note": "Near-paraphrase should remain non-contradictory.",
+      "premise": "The model declined the unsafe request and offered a safe alternative",
+      "query": "The model refused the unsafe request while offering a safe alternative",
+      "tags": [
+        "control-track",
+        "control",
+        "paraphrase"
+      ]
+    },
+    {
+      "capability": "state_paraphrase_control",
+      "difficulty": "easy",
+      "domain": "governance",
+      "expected": "none",
+      "id": "marked-ctrl-control-008",
+      "note": "Pending and awaiting approval are compatible states.",
+      "premise": "The policy is pending approval",
+      "query": "The policy is awaiting approval",
+      "tags": [
+        "control-track",
+        "control",
+        "paraphrase"
+      ]
+    },
+    {
+      "capability": "definition_elaboration_control",
+      "difficulty": "easy",
+      "domain": "geometry",
+      "expected": "none",
+      "id": "marked-ctrl-control-009",
+      "note": "Additional visual detail does not violate the definition.",
+      "premise": "Triangles have three sides",
+      "query": "The shape is a triangle with three sides and a red outline",
+      "tags": [
+        "control-track",
+        "control",
+        "definition"
+      ]
+    },
+    {
+      "capability": "entity_elaboration_control",
+      "difficulty": "easy",
+      "domain": "data_governance",
+      "expected": "none",
+      "id": "marked-ctrl-control-010",
+      "note": "The query elaborates the same dataset classification.",
+      "premise": "Dataset Echo is synthetic",
+      "query": "Dataset Echo is a synthetic dataset used for testing",
+      "tags": [
+        "control-track",
+        "control",
+        "dataset"
+      ]
+    },
+    {
+      "capability": "numeric_scope_control",
+      "difficulty": "medium",
+      "domain": "finance",
+      "expected": "none",
+      "id": "marked-ctrl-control-011",
+      "note": "The same scoped amount is repeated with extra accounting context.",
+      "premise": "The invoice total is 95 dollars before tax",
+      "query": "The invoice total is 95 dollars before tax and fees",
+      "tags": [
+        "control-track",
+        "control",
+        "numeric"
+      ]
+    },
+    {
+      "capability": "causal_paraphrase_control",
+      "difficulty": "easy",
+      "domain": "operations",
+      "expected": "none",
+      "id": "marked-ctrl-control-012",
+      "note": "The query restates the same resolution path.",
+      "premise": "The incident was resolved by rollback",
+      "query": "The incident was resolved after rollback completed",
+      "tags": [
+        "control-track",
+        "control",
+        "operations"
+      ]
+    },
+    {
+      "capability": "event_paraphrase_control",
+      "difficulty": "easy",
+      "domain": "operations",
+      "expected": "none",
+      "id": "marked-ctrl-control-013",
+      "note": "Equivalent event order with different wording.",
+      "premise": "The cache refresh happened after deploy",
+      "query": "The cache refresh happened after the deployment completed",
+      "tags": [
+        "control-track",
+        "control",
+        "operations"
+      ]
+    }
+  ],
+  "suite_hash": "33a0777f6f93504bde517d922f46c24c1d93992256bfe95b32287695babfb08a",
+  "suite_id": "marked-bench-contradiction-controls",
+  "suite_version": "0.4.0",
+  "system_name": "HashPriorBaseline"
+}

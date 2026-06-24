@@ -1,5 +1,5 @@
 {
-  "created_at": 1780240432.881,
+  "created_at": 1782329470.947,
   "entries": [
     {
       "calibration_brier_score": 0.014739,
@@ -40,9 +40,29 @@
       "system_name": "AlwaysNoneDetector",
       "type_accuracy": 0.722222,
       "validation_warnings": []
+    },
+    {
+      "calibration_brier_score": 0.206667,
+      "calibration_ece": 0.077778,
+      "case_count": 18,
+      "contradiction_macro_f1": 0.08,
+      "coverage_index": 0.2,
+      "detection_f1": 0.434783,
+      "failure_count": 17,
+      "overall_score": 15.68,
+      "rank": 3,
+      "report_path": "baselines/hash_prior_controls_v0_4_0.json",
+      "report_schema": "marked_bench.contradiction-benchmark-report.v2",
+      "report_sha256": "1e79210e5aeabd8cc7dc7f871112c3c2f83cf61e5a9217a19b4b913a166f6a89",
+      "suite_hash": "33a0777f6f93504bde517d922f46c24c1d93992256bfe95b32287695babfb08a",
+      "suite_id": "marked-bench-contradiction-controls",
+      "suite_version": "0.4.0",
+      "system_name": "HashPriorBaseline",
+      "type_accuracy": 0.055556,
+      "validation_warnings": []
     }
   ],
-  "entry_count": 2,
+  "entry_count": 3,
   "rejected": [],
   "rejected_count": 0,
   "schema": "marked_bench.benchmark-leaderboard.v1"

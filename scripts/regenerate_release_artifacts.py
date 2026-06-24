@@ -2,6 +2,7 @@ from __future__ import annotations
 
 """Regenerate deterministic public release artifacts in dependency order."""
 
+import argparse
 from pathlib import Path
 import sys
 
@@ -24,6 +25,25 @@ from marked_bench.benchmark_scoring_spec import write_scoring_spec, write_scorin
 from marked_bench.benchmark_standard_profile import write_standard_profile
 from marked_bench.benchmark_technical_note import write_technical_note
 from marked_bench.contradiction.benchmark_suite import write_suite_manifest
+
+
+GENERATED_PATHS = (
+    "suites/marked_bench_contradiction_standard_v0_1_1.json",
+    "benchmark_registry.json",
+    "docs/TECHNICAL_NOTE.md",
+    "standard/marked_bench_standard_profile_v0_4_8.json",
+    "standard/marked_bench_scoring_compatibility_v0_4_8.json",
+    "standard/marked_bench_scoring_spec_v0_4_8.json",
+    "docs/SCORING_SPEC.md",
+    "adoption/marked_bench_adoption_packet_v0_4_8.json",
+    "adoption/marked_bench_implementation_kit_v0_4_8.json",
+    "adoption/third_party_evidence_ledger_v0_4_8.json",
+    "standard/marked_bench_change_control_v0_4_8.json",
+    "docs/SCORING_SANITY.md",
+    "docs/CASE_QUALITY.md",
+    "releases/marked_bench_release_v0_4_8.json",
+    "conformance/marked_bench_conformance_v0_4_8.json",
+)
 
 
 def regenerate_release_artifacts(root: Path = ROOT_PATH) -> None:
@@ -63,10 +83,63 @@ def regenerate_release_artifacts(root: Path = ROOT_PATH) -> None:
         )
 
 
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Regenerate deterministic release artifacts.")
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="Fail if regenerated artifacts would differ, without leaving rewrites in the working tree.",
+    )
+    return parser.parse_args()
+
+
 def main() -> int:
+    args = parse_args()
+    if args.check:
+        return _check_current()
     regenerate_release_artifacts()
     print("Release artifacts regenerated.")
     return 0
+
+
+def _check_current() -> int:
+    before = _snapshot(ROOT_PATH)
+    try:
+        regenerate_release_artifacts()
+        after = _snapshot(ROOT_PATH)
+    finally:
+        _restore(ROOT_PATH, before)
+
+    changed = [
+        relative_path
+        for relative_path in GENERATED_PATHS
+        if before.get(relative_path) != after.get(relative_path)
+    ]
+    if changed:
+        for path in changed:
+            print(f"ERROR: generated artifact is stale: {path}")
+        return 1
+    print("Release artifacts are current.")
+    return 0
+
+
+def _snapshot(root: Path) -> dict[str, bytes | None]:
+    snapshot: dict[str, bytes | None] = {}
+    for relative_path in GENERATED_PATHS:
+        path = root / relative_path
+        snapshot[relative_path] = path.read_bytes() if path.exists() else None
+    return snapshot
+
+
+def _restore(root: Path, snapshot: dict[str, bytes | None]) -> None:
+    for relative_path, data in snapshot.items():
+        path = root / relative_path
+        if data is None:
+            if path.exists():
+                path.unlink()
+            continue
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(data)
 
 
 if __name__ == "__main__":

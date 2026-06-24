@@ -10,7 +10,7 @@ This note summarizes the checked benchmark release artifacts for `contradiction-
 | --- | --- | ---: | ---: | --- | ---: |
 | contradiction | `marked-bench-contradiction-standard` | `0.1.1` | 23 | `b47ffc31bef81c2643b6a405e4e511994ba59099eb6637470b6dc4c534aa6baf` | 100.00 |
 | contradiction-adversarial | `marked-bench-contradiction-adversarial` | `0.2.0` | 17 | `454c1aff69d5028224549dfc14fd8e6c10818251d0abf8becf36f0856b2dbd67` | 52.37 |
-| contradiction-multihop | `marked-bench-contradiction-multihop` | `0.3.0` | 18 | `07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f` | 24.14 |
+| contradiction-multihop | `marked-bench-contradiction-multihop` | `0.3.0` | 18 | `07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f` | 45.93 |
 | contradiction-controls | `marked-bench-contradiction-controls` | `0.4.0` | 18 | `33a0777f6f93504bde517d922f46c24c1d93992256bfe95b32287695babfb08a` | 100.00 |
 
 ## Suite Composition
@@ -63,11 +63,14 @@ This note summarizes the checked benchmark release artifacts for `contradiction-
 | contradiction | HashPriorBaseline | 24.11 | 0.1739 | 0.7879 | 0.4991 | 0.5478 | 19 |
 | contradiction | AlwaysNoneDetector | 7.61 | 0.3043 | 0.0000 | 0.6957 | 0.6957 | 16 |
 | contradiction-adversarial | ContradictionEngine | 52.37 | 0.5882 | 0.5333 | 0.4367 | 0.4835 | 7 |
+| contradiction-adversarial | HashPriorBaseline | 25.78 | 0.2353 | 0.7826 | 0.4635 | 0.5059 | 13 |
 | contradiction-adversarial | AlwaysNoneDetector | 8.82 | 0.3529 | 0.0000 | 0.6471 | 0.6471 | 11 |
+| contradiction-multihop | HashPriorBaseline | 45.93 | 0.3333 | 0.7200 | 0.3889 | 0.3889 | 12 |
 | contradiction-multihop | ContradictionEngine | 24.14 | 0.5000 | 0.1818 | 0.5050 | 0.5167 | 9 |
 | contradiction-multihop | AlwaysNoneDetector | 11.11 | 0.4444 | 0.0000 | 0.5556 | 0.5556 | 10 |
 | contradiction-controls | ContradictionEngine | 100.00 | 1.0000 | 1.0000 | 0.0147 | 0.0550 | 0 |
 | contradiction-controls | AlwaysNoneDetector | 18.06 | 0.7222 | 0.0000 | 0.2778 | 0.2778 | 5 |
+| contradiction-controls | HashPriorBaseline | 15.68 | 0.0556 | 0.4348 | 0.2067 | 0.0778 | 17 |
 
 ## Reproducibility Contract
 

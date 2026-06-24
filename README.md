@@ -242,19 +242,19 @@ marked-bench --build-leaderboard baselines/always_none_v0_1_0.json baselines/con
 Adversarial leaderboard:
 
 ```bash
-marked-bench --build-leaderboard baselines/always_none_adversarial_v0_2_0.json baselines/contradiction_engine_adversarial_v0_2_0.json --leaderboard-output leaderboard/leaderboard_adversarial_v0_2_0.json
+marked-bench --build-leaderboard baselines/always_none_adversarial_v0_2_0.json baselines/hash_prior_adversarial_v0_2_0.json baselines/contradiction_engine_adversarial_v0_2_0.json --leaderboard-output leaderboard/leaderboard_adversarial_v0_2_0.json
 ```
 
 Multi-hop leaderboard:
 
 ```bash
-marked-bench --build-leaderboard baselines/always_none_multihop_v0_3_0.json baselines/contradiction_engine_multihop_v0_3_0.json --leaderboard-output leaderboard/leaderboard_multihop_v0_3_0.json
+marked-bench --build-leaderboard baselines/always_none_multihop_v0_3_0.json baselines/hash_prior_multihop_v0_3_0.json baselines/contradiction_engine_multihop_v0_3_0.json --leaderboard-output leaderboard/leaderboard_multihop_v0_3_0.json
 ```
 
 Controls leaderboard:
 
 ```bash
-marked-bench --build-leaderboard baselines/always_none_controls_v0_4_0.json baselines/contradiction_engine_controls_v0_4_0.json --leaderboard-output leaderboard/leaderboard_controls_v0_4_0.json
+marked-bench --build-leaderboard baselines/always_none_controls_v0_4_0.json baselines/hash_prior_controls_v0_4_0.json baselines/contradiction_engine_controls_v0_4_0.json --leaderboard-output leaderboard/leaderboard_controls_v0_4_0.json
 ```
 
 ## Checked-In Evidence
@@ -309,6 +309,12 @@ Run these before publishing or submitting results:
 ```bash
 python -m unittest discover -s tests
 python scripts/validate_benchmark_artifacts.py
+python -m marked_bench.benchmark_cli --check-standard-status
+python scripts/check_scoring_sanity.py
+python scripts/check_case_quality.py
+python scripts/regenerate_release_artifacts.py --check
+python scripts/check_review_workflow.py
+python scripts/check_license_notice.py
 ```
 
 The artifact validator checks that suite manifests match code, baseline reports
@@ -372,5 +378,7 @@ edited after publication; add new coverage through a new suite version or track.
 
 ## License
 
-This repository currently uses The Marked Bench Non-Commercial License.
-Commercial use requires a separate written license from the copyright holder.
+This repository uses the PolyForm Noncommercial License 1.0.0. Personal and
+non-commercial use is permitted under that license. Commercial use requires a
+separate written commercial license; contact the Chief Operating Officer (COO)
+of TWO HANDS NETWORK LTD to discuss commercial licensing.

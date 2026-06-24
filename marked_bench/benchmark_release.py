@@ -18,6 +18,8 @@ ROOT_PUBLIC_ARTIFACTS = (
     "CONTRIBUTING.md",
     "CITATION.cff",
     "LICENSE",
+    "COMMERCIAL-LICENSE.md",
+    "NOTICE.md",
     "DEVELOPMENT_TARGETS.md",
     "benchmark_registry.json",
 )
@@ -49,6 +51,8 @@ BENCHMARK_SOURCE_ARTIFACTS = (
     "marked_bench/examples/external_submission_demo.py",
     "marked_bench/examples/benchmark_standard_demo.py",
     "scripts/check_case_quality.py",
+    "scripts/check_license_notice.py",
+    "scripts/check_review_workflow.py",
     "scripts/check_scoring_sanity.py",
     "scripts/regenerate_release_artifacts.py",
     "scripts/validate_benchmark_artifacts.py",

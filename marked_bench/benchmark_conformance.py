@@ -80,10 +80,13 @@ BASELINE_REPORTS = [
     Path("baselines/hash_prior_v0_1_1.json"),
     Path("baselines/always_none_v0_1_1.json"),
     Path("baselines/contradiction_engine_adversarial_v0_2_0.json"),
+    Path("baselines/hash_prior_adversarial_v0_2_0.json"),
     Path("baselines/always_none_adversarial_v0_2_0.json"),
     Path("baselines/contradiction_engine_multihop_v0_3_0.json"),
+    Path("baselines/hash_prior_multihop_v0_3_0.json"),
     Path("baselines/always_none_multihop_v0_3_0.json"),
     Path("baselines/contradiction_engine_controls_v0_4_0.json"),
+    Path("baselines/hash_prior_controls_v0_4_0.json"),
     Path("baselines/always_none_controls_v0_4_0.json"),
 ]
 
@@ -99,14 +102,17 @@ LEADERBOARDS = {
     ],
     Path("leaderboard/leaderboard_adversarial_v0_2_0.json"): [
         Path("baselines/always_none_adversarial_v0_2_0.json"),
+        Path("baselines/hash_prior_adversarial_v0_2_0.json"),
         Path("baselines/contradiction_engine_adversarial_v0_2_0.json"),
     ],
     Path("leaderboard/leaderboard_multihop_v0_3_0.json"): [
         Path("baselines/always_none_multihop_v0_3_0.json"),
+        Path("baselines/hash_prior_multihop_v0_3_0.json"),
         Path("baselines/contradiction_engine_multihop_v0_3_0.json"),
     ],
     Path("leaderboard/leaderboard_controls_v0_4_0.json"): [
         Path("baselines/always_none_controls_v0_4_0.json"),
+        Path("baselines/hash_prior_controls_v0_4_0.json"),
         Path("baselines/contradiction_engine_controls_v0_4_0.json"),
     ],
 }

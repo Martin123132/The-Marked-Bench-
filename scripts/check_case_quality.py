@@ -22,6 +22,15 @@ SUITE_CHECKS: tuple[str, ...] = (
     "contradiction-controls",
 )
 
+KNOWN_NEAR_DUPLICATE_NOTES = {
+    frozenset({"marked-hop-property-002", "marked-hop-property-003"}): (
+        "intentional contrast between an inherited unit conflict and a same-unit context control"
+    ),
+    frozenset({"marked-hop-universal-001", "marked-hop-universal-003"}): (
+        "intentional contrast between a universal counterexample and a non-universal control"
+    ),
+}
+
 
 def run_case_quality() -> tuple[list[dict[str, Any]], list[str]]:
     results: list[dict[str, Any]] = []
@@ -97,7 +106,7 @@ def build_case_quality_artifact(results: list[dict[str, Any]], failures: list[st
         lines.extend(["", "## Near-duplicate watchlist", ""])
         for suite, pair in duplicate_items:
             lines.append(
-                "- {suite}: `{left}` and `{right}` similarity={similarity:.3f}".format(
+                "- {suite}: `{left}` and `{right}` similarity={similarity:.3f}; note={note}".format(
                     suite=suite,
                     **pair,
                 )
@@ -122,6 +131,10 @@ def _near_duplicate_pairs(cases: list[dict[str, Any]], threshold: float = 0.96) 
                         "left": str(left["id"]),
                         "right": str(right["id"]),
                         "similarity": round(similarity, 3),
+                        "note": KNOWN_NEAR_DUPLICATE_NOTES.get(
+                            frozenset({str(left["id"]), str(right["id"])}),
+                            "review required",
+                        ),
                     }
                 )
     return pairs
