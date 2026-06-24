@@ -33,7 +33,11 @@ repository only.
 python -m unittest discover -s tests
 python scripts/validate_benchmark_artifacts.py
 python -m marked_bench.benchmark_cli --check-standard-status
+python scripts/check_scoring_sanity.py
 python scripts/check_case_quality.py
+python scripts/regenerate_release_artifacts.py --check
+python scripts/check_review_workflow.py
+python scripts/check_license_notice.py
 ```
 
 ### Scoring change checks

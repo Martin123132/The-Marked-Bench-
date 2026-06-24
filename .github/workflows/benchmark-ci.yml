@@ -24,3 +24,9 @@ jobs:
         run: python scripts/check_scoring_sanity.py
       - name: Run case quality check
         run: python scripts/check_case_quality.py
+      - name: Check release artifact drift
+        run: python scripts/regenerate_release_artifacts.py --check
+      - name: Check review workflow
+        run: python scripts/check_review_workflow.py
+      - name: Check license notices
+        run: python scripts/check_license_notice.py

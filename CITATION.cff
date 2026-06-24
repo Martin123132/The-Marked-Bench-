@@ -9,7 +9,7 @@ version: "0.4.8"
 date-released: "2026-05-31"
 repository-code: "https://github.com/Martin123132/The-Marked-Bench-"
 abstract: "A versioned benchmark suite for evaluating contradiction detection and classification in AI systems."
-license: "LicenseRef-The-Marked-Bench-Non-Commercial"
+license: "PolyForm-Noncommercial-1.0.0"
 keywords:
   - AI evaluation
   - benchmark

@@ -13,7 +13,7 @@ Use this file to check off completed targets.
 ## Cycle notes (no timelines)
 
 - [x] Current in-progress target: `none`
-- [x] Next target after current: `none`
+- [x] Next target after current: `identify Target T onward`
 - [x] Completed targets:
   - Target A: release-ready checks completed.
   - Target B: contributor PR/checklist guidance updated.
@@ -51,6 +51,48 @@ Use this file to check off completed targets.
   - Foundation suite `0.1.1` adds six new cases while legacy `0.1.0` remains validated.
   - Active foundation artifacts now point to `suites/marked_bench_contradiction_standard_v0_1_1.json`, `baselines/*_v0_1_1.json`, and `leaderboard/leaderboard_v0_1_1.json`.
   - `docs/SCORING_SANITY.md` records both legacy `0.1.0` and active `0.1.1` scoring checks.
+- [x] Checked by:
+  - Codex
+
+## Current cycle 3
+
+- [x] Completed target: Target O through Target S
+- [x] Implementation scope prepared:
+  - `scripts/regenerate_release_artifacts.py`
+  - `scripts/check_case_quality.py`
+  - `scripts/check_review_workflow.py`
+  - `scripts/check_license_notice.py`
+  - `marked_bench/benchmark_registry.py`
+  - `marked_bench/benchmark_conformance.py`
+  - `marked_bench/benchmark_release.py`
+  - `scripts/validate_benchmark_artifacts.py`
+  - `tests/test_benchmark_suite.py`
+  - `tests/test_scoring_sanity.py`
+  - `baselines/hash_prior_adversarial_v0_2_0.json`
+  - `baselines/hash_prior_multihop_v0_3_0.json`
+  - `baselines/hash_prior_controls_v0_4_0.json`
+  - `leaderboard/leaderboard_adversarial_v0_2_0.json`
+  - `leaderboard/leaderboard_multihop_v0_3_0.json`
+  - `leaderboard/leaderboard_controls_v0_4_0.json`
+  - `.github/`, `README.md`, `CONTRIBUTING.md`, `docs/*`
+  - `COMMERCIAL-LICENSE.md`, `NOTICE.md`, `CITATION.cff`
+- [x] Validation run:
+  - `python -m unittest discover -s tests`
+  - `python scripts/validate_benchmark_artifacts.py`
+  - `python -m marked_bench.benchmark_cli --check-standard-status`
+  - `python scripts/check_scoring_sanity.py --artifact docs/SCORING_SANITY.md`
+  - `python scripts/check_case_quality.py --artifact docs/CASE_QUALITY.md`
+  - `python scripts/regenerate_release_artifacts.py --check`
+  - `python scripts/check_review_workflow.py`
+  - `python scripts/check_license_notice.py`
+  - `python -m marked_bench.benchmark_cli --validate-report baselines/hash_prior_adversarial_v0_2_0.json`
+  - `python -m marked_bench.benchmark_cli --validate-report baselines/hash_prior_multihop_v0_3_0.json`
+  - `python -m marked_bench.benchmark_cli --validate-report baselines/hash_prior_controls_v0_4_0.json`
+- [x] Evidence/notes:
+  - Prepared artifact drift checking as a CI/contributor guard.
+  - Extended the deterministic hash-prior baseline plan across every public track.
+  - Added reviewer notes for intentional near-duplicate case-quality pairs.
+  - Added review workflow and license notice guard scripts.
 - [x] Checked by:
   - Codex
 

@@ -12,7 +12,8 @@ Examples that require a commercial license:
 - using The-Marked-Bench- materials to train, fine-tune, distill, evaluate, benchmark, or improve a commercial AI model or commercial AI system;
 - distributing a modified commercial version of The-Marked-Bench-.
 
-Commercial license requests should include:
+Commercial license requests should be directed to the Chief Operating Officer
+(COO) of TWO HANDS NETWORK LTD and include:
 
 - who will use The-Marked-Bench-;
 - whether the use is internal, distributed, hosted, or embedded;

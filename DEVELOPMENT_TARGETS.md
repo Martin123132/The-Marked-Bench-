@@ -46,6 +46,21 @@ We are tracking progress with target-based checkpoints only (no deadlines).
 - [x] **Target N: Add release automation guardrails**
   - Add a release artifact regeneration helper that writes deterministic generated evidence in dependency order.
 
+- [x] **Target O: Add artifact drift checking**
+  - Add a `--check` mode for deterministic release regeneration and wire it into CI and contributor checks.
+
+- [x] **Target P: Extend baseline diversity across all tracks**
+  - Add `HashPriorBaseline` reports and leaderboard entries for adversarial, multi-hop, and controls tracks.
+
+- [x] **Target Q: Explain known case-quality watchlist pairs**
+  - Add reviewer-facing notes for intentional near-duplicate case pairs so diagnostics separate useful contrasts from review-required drift.
+
+- [x] **Target R: Add reviewer workflow automation**
+  - Add a dependency-free check that keeps labels, review workflow docs, and PR validation commands synchronized.
+
+- [x] **Target S: Guard company non-commercial license notices**
+  - Add a licensing notice check and update public docs to direct commercial licensing discussions to the COO of TWO HANDS NETWORK LTD.
+
 ## Checkoff Rules
 
 1. A target is checked only after code/docs are committed and validations listed in the target are complete.
@@ -56,3 +71,4 @@ We are tracking progress with target-based checkpoints only (no deadlines).
 
 - Completed: Target A, Target B, Target C, Target D, Target E, Target F, Target G
 - Completed: Target H, Target I, Target J, Target K, Target L, Target M, Target N
+- Completed: Target O, Target P, Target Q, Target R, Target S

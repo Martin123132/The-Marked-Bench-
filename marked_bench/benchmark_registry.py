@@ -59,6 +59,7 @@ _TRACKS: tuple[Mapping[str, Any], ...] = (
         "leaderboard": "leaderboard/leaderboard_adversarial_v0_2_0.json",
         "baseline_reports": [
             "baselines/contradiction_engine_adversarial_v0_2_0.json",
+            "baselines/hash_prior_adversarial_v0_2_0.json",
             "baselines/always_none_adversarial_v0_2_0.json",
         ],
         "commands": {
@@ -91,6 +92,7 @@ _TRACKS: tuple[Mapping[str, Any], ...] = (
         "leaderboard": "leaderboard/leaderboard_multihop_v0_3_0.json",
         "baseline_reports": [
             "baselines/contradiction_engine_multihop_v0_3_0.json",
+            "baselines/hash_prior_multihop_v0_3_0.json",
             "baselines/always_none_multihop_v0_3_0.json",
         ],
         "commands": {
@@ -123,6 +125,7 @@ _TRACKS: tuple[Mapping[str, Any], ...] = (
         "leaderboard": "leaderboard/leaderboard_controls_v0_4_0.json",
         "baseline_reports": [
             "baselines/contradiction_engine_controls_v0_4_0.json",
+            "baselines/hash_prior_controls_v0_4_0.json",
             "baselines/always_none_controls_v0_4_0.json",
         ],
         "commands": {

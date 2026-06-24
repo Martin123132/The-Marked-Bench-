@@ -60,10 +60,13 @@ BASELINE_REPORTS = [
     Path("baselines/hash_prior_v0_1_1.json"),
     Path("baselines/always_none_v0_1_1.json"),
     Path("baselines/contradiction_engine_adversarial_v0_2_0.json"),
+    Path("baselines/hash_prior_adversarial_v0_2_0.json"),
     Path("baselines/always_none_adversarial_v0_2_0.json"),
     Path("baselines/contradiction_engine_multihop_v0_3_0.json"),
+    Path("baselines/hash_prior_multihop_v0_3_0.json"),
     Path("baselines/always_none_multihop_v0_3_0.json"),
     Path("baselines/contradiction_engine_controls_v0_4_0.json"),
+    Path("baselines/hash_prior_controls_v0_4_0.json"),
     Path("baselines/always_none_controls_v0_4_0.json"),
 ]
 
@@ -79,14 +82,17 @@ LEADERBOARDS = {
     ],
     Path("leaderboard/leaderboard_adversarial_v0_2_0.json"): [
         Path("baselines/always_none_adversarial_v0_2_0.json"),
+        Path("baselines/hash_prior_adversarial_v0_2_0.json"),
         Path("baselines/contradiction_engine_adversarial_v0_2_0.json"),
     ],
     Path("leaderboard/leaderboard_multihop_v0_3_0.json"): [
         Path("baselines/always_none_multihop_v0_3_0.json"),
+        Path("baselines/hash_prior_multihop_v0_3_0.json"),
         Path("baselines/contradiction_engine_multihop_v0_3_0.json"),
     ],
     Path("leaderboard/leaderboard_controls_v0_4_0.json"): [
         Path("baselines/always_none_controls_v0_4_0.json"),
+        Path("baselines/hash_prior_controls_v0_4_0.json"),
         Path("baselines/contradiction_engine_controls_v0_4_0.json"),
     ],
 }
@@ -133,6 +139,9 @@ REQUIRED_PUBLIC_FILES = [
     CONFORMANCE_REPORT,
     Path("CONTRIBUTING.md"),
     Path("CITATION.cff"),
+    Path("LICENSE"),
+    Path("COMMERCIAL-LICENSE.md"),
+    Path("NOTICE.md"),
     Path("docs/BENCHMARK_CARD.md"),
     Path("docs/CHANGE_CONTROL.md"),
     Path("docs/DEVELOPMENT_TARGET_PROGRESS.md"),
@@ -211,6 +220,8 @@ REQUIRED_PUBLIC_FILES = [
     Path("submissions/example_publication_packet/publication_packet.json"),
     Path("submissions/example_publication_packet/result_claim.json"),
     Path("scripts/check_case_quality.py"),
+    Path("scripts/check_license_notice.py"),
+    Path("scripts/check_review_workflow.py"),
     Path("scripts/check_scoring_sanity.py"),
     Path("scripts/regenerate_release_artifacts.py"),
     Path("tests/test_scoring_sanity.py"),

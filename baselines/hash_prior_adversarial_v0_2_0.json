@@ -1,0 +1,1477 @@
+{
+  "case_count": 17,
+  "case_results": [
+    {
+      "capability": "implicit_polarity",
+      "case_id": "marked-adv-direct-001",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "hard",
+      "domain": "security",
+      "evidence": [],
+      "expected": "direct_negation",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "adversarial",
+        "negation",
+        "long_context"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "policy_antonym",
+      "case_id": "marked-adv-direct-002",
+      "detection_correct": true,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "hard",
+      "domain": "governance",
+      "evidence": [],
+      "expected": "direct_negation",
+      "predicted": "definitional_violation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "adversarial",
+        "negation",
+        "policy"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "modal_antonym",
+      "case_id": "marked-adv-direct-003",
+      "detection_correct": true,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "hard",
+      "domain": "operations",
+      "evidence": [],
+      "expected": "direct_negation",
+      "predicted": "definitional_violation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "adversarial",
+        "negation",
+        "modal"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "numeric_same_condition",
+      "case_id": "marked-adv-property-001",
+      "detection_correct": true,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "hard",
+      "domain": "benchmarking",
+      "evidence": [],
+      "expected": "property_mismatch",
+      "predicted": "direct_negation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "adversarial",
+        "numeric",
+        "same_entity"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "unit_conflict_with_context",
+      "case_id": "marked-adv-property-002",
+      "detection_correct": true,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "medium",
+      "domain": "measurement",
+      "evidence": [],
+      "expected": "property_mismatch",
+      "predicted": "direct_negation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "adversarial",
+        "unit",
+        "property"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "condition_shift_control",
+      "case_id": "marked-adv-property-003",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "measurement",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "control",
+        "property",
+        "context_shift"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "definition_paraphrase",
+      "case_id": "marked-adv-definition-001",
+      "detection_correct": true,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "hard",
+      "domain": "geometry",
+      "evidence": [],
+      "expected": "definitional_violation",
+      "predicted": "definitional_violation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "adversarial",
+        "definition",
+        "geometry"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "definition_application",
+      "case_id": "marked-adv-definition-002",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "hard",
+      "domain": "math",
+      "evidence": [],
+      "expected": "definitional_violation",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "adversarial",
+        "definition",
+        "math"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "definition_elaboration_control",
+      "case_id": "marked-adv-definition-003",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "medium",
+      "domain": "geometry",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "property_mismatch",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control",
+        "definition",
+        "elaboration"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "implicit_counterexample",
+      "case_id": "marked-adv-universal-001",
+      "detection_correct": true,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "hard",
+      "domain": "ai_safety",
+      "evidence": [],
+      "expected": "universal_counterexample",
+      "predicted": "definitional_violation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "adversarial",
+        "universal",
+        "approval"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "instance_counterexample",
+      "case_id": "marked-adv-universal-002",
+      "detection_correct": true,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "hard",
+      "domain": "data_governance",
+      "evidence": [],
+      "expected": "universal_counterexample",
+      "predicted": "property_mismatch",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "adversarial",
+        "universal",
+        "data"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "non_universal_control",
+      "case_id": "marked-adv-universal-003",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "medium",
+      "domain": "data_governance",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "temporal_conflict",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control",
+        "universal",
+        "quantifier"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "temporal_always_since",
+      "case_id": "marked-adv-temporal-001",
+      "detection_correct": true,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "hard",
+      "domain": "security",
+      "evidence": [],
+      "expected": "temporal_conflict",
+      "predicted": "definitional_violation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "adversarial",
+        "temporal",
+        "security"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "temporal_scope_drift",
+      "case_id": "marked-adv-temporal-002",
+      "detection_correct": true,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "medium",
+      "domain": "operations",
+      "evidence": [],
+      "expected": "temporal_conflict",
+      "predicted": "property_mismatch",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "adversarial",
+        "temporal",
+        "operations"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "temporal_change_control",
+      "case_id": "marked-adv-temporal-003",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "operations",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "control",
+        "temporal",
+        "state_change"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "paraphrase_control",
+      "case_id": "marked-adv-control-001",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "ai_safety",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "control",
+        "paraphrase",
+        "safety"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "negation_scope_control",
+      "case_id": "marked-adv-control-002",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "hard",
+      "domain": "security",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "definitional_violation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control",
+        "negation",
+        "scope"
+      ],
+      "type_correct": false
+    }
+  ],
+  "confusion_matrix": {
+    "definitional_violation": {
+      "definitional_violation": 1,
+      "direct_negation": 0,
+      "none": 1,
+      "property_mismatch": 0,
+      "temporal_conflict": 0,
+      "universal_counterexample": 0
+    },
+    "direct_negation": {
+      "definitional_violation": 2,
+      "direct_negation": 0,
+      "none": 1,
+      "property_mismatch": 0,
+      "temporal_conflict": 0,
+      "universal_counterexample": 0
+    },
+    "none": {
+      "definitional_violation": 1,
+      "direct_negation": 0,
+      "none": 3,
+      "property_mismatch": 1,
+      "temporal_conflict": 1,
+      "universal_counterexample": 0
+    },
+    "property_mismatch": {
+      "definitional_violation": 0,
+      "direct_negation": 2,
+      "none": 0,
+      "property_mismatch": 0,
+      "temporal_conflict": 0,
+      "universal_counterexample": 0
+    },
+    "temporal_conflict": {
+      "definitional_violation": 1,
+      "direct_negation": 0,
+      "none": 0,
+      "property_mismatch": 1,
+      "temporal_conflict": 0,
+      "universal_counterexample": 0
+    },
+    "universal_counterexample": {
+      "definitional_violation": 1,
+      "direct_negation": 0,
+      "none": 0,
+      "property_mismatch": 1,
+      "temporal_conflict": 0,
+      "universal_counterexample": 0
+    }
+  },
+  "created_at": 1782329469.154,
+  "duration_seconds": 0.002553,
+  "explanation_audit": {
+    "case_count": 17,
+    "correct_explanation_ready_rate": 0.0,
+    "evidence_count": 0,
+    "evidence_coverage": 0.0,
+    "explanation_ready_count": 0,
+    "explanation_ready_rate": 0.0,
+    "rationale_count": 12,
+    "rationale_coverage": 0.705882
+  },
+  "failures": [
+    {
+      "capability": "implicit_polarity",
+      "case_id": "marked-adv-direct-001",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "hard",
+      "domain": "security",
+      "evidence": [],
+      "expected": "direct_negation",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "adversarial",
+        "negation",
+        "long_context"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "policy_antonym",
+      "case_id": "marked-adv-direct-002",
+      "detection_correct": true,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "hard",
+      "domain": "governance",
+      "evidence": [],
+      "expected": "direct_negation",
+      "predicted": "definitional_violation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "adversarial",
+        "negation",
+        "policy"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "modal_antonym",
+      "case_id": "marked-adv-direct-003",
+      "detection_correct": true,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "hard",
+      "domain": "operations",
+      "evidence": [],
+      "expected": "direct_negation",
+      "predicted": "definitional_violation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "adversarial",
+        "negation",
+        "modal"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "numeric_same_condition",
+      "case_id": "marked-adv-property-001",
+      "detection_correct": true,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "hard",
+      "domain": "benchmarking",
+      "evidence": [],
+      "expected": "property_mismatch",
+      "predicted": "direct_negation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "adversarial",
+        "numeric",
+        "same_entity"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "unit_conflict_with_context",
+      "case_id": "marked-adv-property-002",
+      "detection_correct": true,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "medium",
+      "domain": "measurement",
+      "evidence": [],
+      "expected": "property_mismatch",
+      "predicted": "direct_negation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "adversarial",
+        "unit",
+        "property"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "definition_application",
+      "case_id": "marked-adv-definition-002",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "hard",
+      "domain": "math",
+      "evidence": [],
+      "expected": "definitional_violation",
+      "predicted": "none",
+      "rationale": null,
+      "tags": [
+        "adversarial",
+        "definition",
+        "math"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "definition_elaboration_control",
+      "case_id": "marked-adv-definition-003",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "medium",
+      "domain": "geometry",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "property_mismatch",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control",
+        "definition",
+        "elaboration"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "implicit_counterexample",
+      "case_id": "marked-adv-universal-001",
+      "detection_correct": true,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "hard",
+      "domain": "ai_safety",
+      "evidence": [],
+      "expected": "universal_counterexample",
+      "predicted": "definitional_violation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "adversarial",
+        "universal",
+        "approval"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "instance_counterexample",
+      "case_id": "marked-adv-universal-002",
+      "detection_correct": true,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "hard",
+      "domain": "data_governance",
+      "evidence": [],
+      "expected": "universal_counterexample",
+      "predicted": "property_mismatch",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "adversarial",
+        "universal",
+        "data"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "non_universal_control",
+      "case_id": "marked-adv-universal-003",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "medium",
+      "domain": "data_governance",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "temporal_conflict",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control",
+        "universal",
+        "quantifier"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "temporal_always_since",
+      "case_id": "marked-adv-temporal-001",
+      "detection_correct": true,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "hard",
+      "domain": "security",
+      "evidence": [],
+      "expected": "temporal_conflict",
+      "predicted": "definitional_violation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "adversarial",
+        "temporal",
+        "security"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "temporal_scope_drift",
+      "case_id": "marked-adv-temporal-002",
+      "detection_correct": true,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "medium",
+      "domain": "operations",
+      "evidence": [],
+      "expected": "temporal_conflict",
+      "predicted": "property_mismatch",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "adversarial",
+        "temporal",
+        "operations"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "negation_scope_control",
+      "case_id": "marked-adv-control-002",
+      "detection_correct": false,
+      "detector_note": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "detector_score": 0.2,
+      "difficulty": "hard",
+      "domain": "security",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "definitional_violation",
+      "rationale": "Deterministic hash-prior reference baseline; ignores premise/query semantics.",
+      "tags": [
+        "control",
+        "negation",
+        "scope"
+      ],
+      "type_correct": false
+    }
+  ],
+  "metrics": {
+    "calibration": {
+      "bin_count": 10,
+      "bins": [
+        {
+          "case_count": 5,
+          "empirical_positive_rate": 0.4,
+          "lower": 0.0,
+          "mean_confidence": 0.0,
+          "upper": 0.1
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.1,
+          "mean_confidence": 0.0,
+          "upper": 0.2
+        },
+        {
+          "case_count": 12,
+          "empirical_positive_rate": 0.75,
+          "lower": 0.2,
+          "mean_confidence": 0.2,
+          "upper": 0.3
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.3,
+          "mean_confidence": 0.0,
+          "upper": 0.4
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.4,
+          "mean_confidence": 0.0,
+          "upper": 0.5
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.5,
+          "mean_confidence": 0.0,
+          "upper": 0.6
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.6,
+          "mean_confidence": 0.0,
+          "upper": 0.7
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.7,
+          "mean_confidence": 0.0,
+          "upper": 0.8
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.8,
+          "mean_confidence": 0.0,
+          "upper": 0.9
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.9,
+          "mean_confidence": 0.0,
+          "upper": 1.0
+        }
+      ],
+      "brier_score": 0.463529,
+      "expected_calibration_error": 0.505882,
+      "mean_confidence": 0.141176,
+      "positive_rate": 0.647059
+    },
+    "contradiction_macro_f1": 0.05,
+    "contradiction_type_accuracy": 0.090909,
+    "coverage_index": 0.2,
+    "detection": {
+      "accuracy": 0.705882,
+      "f1": 0.782609,
+      "false_negative": 2,
+      "false_positive": 3,
+      "precision": 0.75,
+      "recall": 0.818182,
+      "true_negative": 3,
+      "true_positive": 9
+    },
+    "per_class": {
+      "definitional_violation": {
+        "f1": 0.25,
+        "precision": 0.166667,
+        "recall": 0.5,
+        "support": 2
+      },
+      "direct_negation": {
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "support": 3
+      },
+      "none": {
+        "f1": 0.545455,
+        "precision": 0.6,
+        "recall": 0.5,
+        "support": 6
+      },
+      "property_mismatch": {
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "support": 2
+      },
+      "temporal_conflict": {
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "support": 2
+      },
+      "universal_counterexample": {
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "support": 2
+      }
+    },
+    "slices": {
+      "capability": {
+        "condition_shift_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "definition_application": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "definition_elaboration_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "definition_paraphrase": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "implicit_counterexample": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "implicit_polarity": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "instance_counterexample": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "modal_antonym": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "negation_scope_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "non_universal_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "numeric_same_condition": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "paraphrase_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "policy_antonym": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "temporal_always_since": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "temporal_change_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "temporal_scope_drift": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "unit_conflict_with_context": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        }
+      },
+      "difficulty": {
+        "hard": {
+          "case_count": 10,
+          "contradiction_case_count": 9,
+          "contradiction_type_accuracy": 0.111111,
+          "detection_f1": 0.823529,
+          "failure_count": 9,
+          "type_accuracy": 0.1
+        },
+        "medium": {
+          "case_count": 7,
+          "contradiction_case_count": 2,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.666667,
+          "failure_count": 4,
+          "type_accuracy": 0.428571
+        }
+      },
+      "domain": {
+        "ai_safety": {
+          "case_count": 2,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.5
+        },
+        "benchmarking": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "data_governance": {
+          "case_count": 2,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.666667,
+          "failure_count": 2,
+          "type_accuracy": 0.0
+        },
+        "geometry": {
+          "case_count": 2,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 0.666667,
+          "failure_count": 1,
+          "type_accuracy": 0.5
+        },
+        "governance": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "math": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "measurement": {
+          "case_count": 2,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.5
+        },
+        "operations": {
+          "case_count": 3,
+          "contradiction_case_count": 2,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 2,
+          "type_accuracy": 0.333333
+        },
+        "security": {
+          "case_count": 3,
+          "contradiction_case_count": 2,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.5,
+          "failure_count": 3,
+          "type_accuracy": 0.0
+        }
+      },
+      "tag": {
+        "adversarial": {
+          "case_count": 11,
+          "contradiction_case_count": 11,
+          "contradiction_type_accuracy": 0.090909,
+          "detection_f1": 0.9,
+          "failure_count": 10,
+          "type_accuracy": 0.090909
+        },
+        "approval": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "context_shift": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "control": {
+          "case_count": 6,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 3,
+          "type_accuracy": 0.5
+        },
+        "data": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "definition": {
+          "case_count": 3,
+          "contradiction_case_count": 2,
+          "contradiction_type_accuracy": 0.5,
+          "detection_f1": 0.5,
+          "failure_count": 2,
+          "type_accuracy": 0.333333
+        },
+        "elaboration": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "geometry": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "long_context": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "math": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "modal": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "negation": {
+          "case_count": 4,
+          "contradiction_case_count": 3,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.666667,
+          "failure_count": 4,
+          "type_accuracy": 0.0
+        },
+        "numeric": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "operations": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "paraphrase": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "policy": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "property": {
+          "case_count": 2,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.5
+        },
+        "quantifier": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "safety": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "same_entity": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "scope": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "security": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "state_change": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "temporal": {
+          "case_count": 3,
+          "contradiction_case_count": 2,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 2,
+          "type_accuracy": 0.333333
+        },
+        "unit": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 1.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "universal": {
+          "case_count": 3,
+          "contradiction_case_count": 2,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.8,
+          "failure_count": 3,
+          "type_accuracy": 0.0
+        }
+      }
+    },
+    "type_accuracy": 0.235294
+  },
+  "overall_score": 25.78,
+  "schema": "marked_bench.contradiction-benchmark-report.v2",
+  "suite_cases": [
+    {
+      "capability": "implicit_polarity",
+      "difficulty": "hard",
+      "domain": "security",
+      "expected": "direct_negation",
+      "id": "marked-adv-direct-001",
+      "note": "Contradiction is expressed through valid/invalid paraphrase in longer context.",
+      "premise": "The incident report says the access token remained valid through the review window.",
+      "query": "The same review summary later states the access token was invalid during the review window.",
+      "tags": [
+        "adversarial",
+        "negation",
+        "long_context"
+      ]
+    },
+    {
+      "capability": "policy_antonym",
+      "difficulty": "hard",
+      "domain": "governance",
+      "expected": "direct_negation",
+      "id": "marked-adv-direct-002",
+      "note": "Permitted/forbidden conflict without an explicit negation marker.",
+      "premise": "A policy note records the export as permitted for research users.",
+      "query": "The compliance memo describes the same export as forbidden for research users.",
+      "tags": [
+        "adversarial",
+        "negation",
+        "policy"
+      ]
+    },
+    {
+      "capability": "modal_antonym",
+      "difficulty": "hard",
+      "domain": "operations",
+      "expected": "direct_negation",
+      "id": "marked-adv-direct-003",
+      "note": "Possible/impossible modal contradiction.",
+      "premise": "The deployment checklist marks rollback as possible after the migration.",
+      "query": "The final release note says rollback is impossible after the migration.",
+      "tags": [
+        "adversarial",
+        "negation",
+        "modal"
+      ]
+    },
+    {
+      "capability": "numeric_same_condition",
+      "difficulty": "hard",
+      "domain": "benchmarking",
+      "expected": "property_mismatch",
+      "id": "marked-adv-property-001",
+      "note": "Same metric and condition, different numeric values.",
+      "premise": "The benchmark card reports median latency of 240 ms for model A under load.",
+      "query": "The comparison paragraph reports median latency of 410 ms for model A under the same load.",
+      "tags": [
+        "adversarial",
+        "numeric",
+        "same_entity"
+      ]
+    },
+    {
+      "capability": "unit_conflict_with_context",
+      "difficulty": "medium",
+      "domain": "measurement",
+      "expected": "property_mismatch",
+      "id": "marked-adv-property-002",
+      "note": "Same quantity and raw value under incompatible units.",
+      "premise": "The shipping manifest lists the crate mass as 12 kg after calibration.",
+      "query": "The audit copy lists the crate mass as 12 lb after calibration.",
+      "tags": [
+        "adversarial",
+        "unit",
+        "property"
+      ]
+    },
+    {
+      "capability": "condition_shift_control",
+      "difficulty": "medium",
+      "domain": "measurement",
+      "expected": "none",
+      "id": "marked-adv-property-003",
+      "note": "Context changed; the value and unit agree, so this is not a contradiction.",
+      "premise": "The shipping manifest lists the crate mass as 12 kg before calibration.",
+      "query": "The audit copy lists the crate mass as 12 kg after calibration.",
+      "tags": [
+        "control",
+        "property",
+        "context_shift"
+      ]
+    },
+    {
+      "capability": "definition_paraphrase",
+      "difficulty": "hard",
+      "domain": "geometry",
+      "expected": "definitional_violation",
+      "id": "marked-adv-definition-001",
+      "note": "Query violates a definitional property without using the word false.",
+      "premise": "The glossary defines a triangle as a polygon with exactly three sides.",
+      "query": "The generated explanation says a triangle can have four sides while remaining a triangle.",
+      "tags": [
+        "adversarial",
+        "definition",
+        "geometry"
+      ]
+    },
+    {
+      "capability": "definition_application",
+      "difficulty": "hard",
+      "domain": "math",
+      "expected": "definitional_violation",
+      "id": "marked-adv-definition-002",
+      "note": "The query's own divisor list violates the prime definition.",
+      "premise": "The math note says a prime number has exactly two positive divisors.",
+      "query": "The answer claims 9 is prime because it has divisors 1, 3, and 9.",
+      "tags": [
+        "adversarial",
+        "definition",
+        "math"
+      ]
+    },
+    {
+      "capability": "definition_elaboration_control",
+      "difficulty": "medium",
+      "domain": "geometry",
+      "expected": "none",
+      "id": "marked-adv-definition-003",
+      "note": "Additional visual detail does not violate the definition.",
+      "premise": "The glossary defines a square as a figure with four equal sides.",
+      "query": "The caption describes the tile as a square with four equal sides and a blue border.",
+      "tags": [
+        "control",
+        "definition",
+        "elaboration"
+      ]
+    },
+    {
+      "capability": "implicit_counterexample",
+      "difficulty": "hard",
+      "domain": "ai_safety",
+      "expected": "universal_counterexample",
+      "id": "marked-adv-universal-001",
+      "note": "A bypassing subclass counters the universal approval claim.",
+      "premise": "All production agents must pass human approval before release.",
+      "query": "The exception log says emergency production agents bypass human approval before release.",
+      "tags": [
+        "adversarial",
+        "universal",
+        "approval"
+      ]
+    },
+    {
+      "capability": "instance_counterexample",
+      "difficulty": "hard",
+      "domain": "data_governance",
+      "expected": "universal_counterexample",
+      "id": "marked-adv-universal-002",
+      "note": "Specific edited instance counters an every/immutable universal.",
+      "premise": "Every archived dataset is immutable after publication.",
+      "query": "A correction entry says archived dataset A17 was edited after publication.",
+      "tags": [
+        "adversarial",
+        "universal",
+        "data"
+      ]
+    },
+    {
+      "capability": "non_universal_control",
+      "difficulty": "medium",
+      "domain": "data_governance",
+      "expected": "none",
+      "id": "marked-adv-universal-003",
+      "note": "Most allows exceptions; this should not be scored as a contradiction.",
+      "premise": "Most archived datasets are immutable after publication.",
+      "query": "A correction entry says archived dataset A17 was edited after publication.",
+      "tags": [
+        "control",
+        "universal",
+        "quantifier"
+      ]
+    },
+    {
+      "capability": "temporal_always_since",
+      "difficulty": "hard",
+      "domain": "security",
+      "expected": "temporal_conflict",
+      "id": "marked-adv-temporal-001",
+      "note": "Always-since claim conflicts with a later introduction date.",
+      "premise": "The vendor page says the API has always required token signing since 2018.",
+      "query": "The migration note says token signing was introduced in 2022.",
+      "tags": [
+        "adversarial",
+        "temporal",
+        "security"
+      ]
+    },
+    {
+      "capability": "temporal_scope_drift",
+      "difficulty": "medium",
+      "domain": "operations",
+      "expected": "temporal_conflict",
+      "id": "marked-adv-temporal-002",
+      "note": "A broad always claim conflicts with a later dated state.",
+      "premise": "The runbook says the service always used manual review in 2019.",
+      "query": "The audit says the same service used automated review in 2021.",
+      "tags": [
+        "adversarial",
+        "temporal",
+        "operations"
+      ]
+    },
+    {
+      "capability": "temporal_change_control",
+      "difficulty": "medium",
+      "domain": "operations",
+      "expected": "none",
+      "id": "marked-adv-temporal-003",
+      "note": "A system can change across time without contradiction.",
+      "premise": "The service used manual review in 2019.",
+      "query": "The service used automated review in 2021.",
+      "tags": [
+        "control",
+        "temporal",
+        "state_change"
+      ]
+    },
+    {
+      "capability": "paraphrase_control",
+      "difficulty": "medium",
+      "domain": "ai_safety",
+      "expected": "none",
+      "id": "marked-adv-control-001",
+      "note": "Near-paraphrase should remain non-contradictory.",
+      "premise": "The model declined the unsafe request and offered a safe alternative.",
+      "query": "The model refused the unsafe request while suggesting a safe alternative.",
+      "tags": [
+        "control",
+        "paraphrase",
+        "safety"
+      ]
+    },
+    {
+      "capability": "negation_scope_control",
+      "difficulty": "hard",
+      "domain": "security",
+      "expected": "none",
+      "id": "marked-adv-control-002",
+      "note": "Two cautious negative claims are compatible.",
+      "premise": "The audit found no evidence that private keys left the vault.",
+      "query": "The audit did not prove that private keys left the vault.",
+      "tags": [
+        "control",
+        "negation",
+        "scope"
+      ]
+    }
+  ],
+  "suite_hash": "454c1aff69d5028224549dfc14fd8e6c10818251d0abf8becf36f0856b2dbd67",
+  "suite_id": "marked-bench-contradiction-adversarial",
+  "suite_version": "0.2.0",
+  "system_name": "HashPriorBaseline"
+}

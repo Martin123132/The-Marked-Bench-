@@ -213,19 +213,19 @@ marked-bench --build-leaderboard baselines/always_none_v0_1_1.json baselines/has
 For adversarial entries:
 
 ```bash
-marked-bench --build-leaderboard baselines/*adversarial*.json --leaderboard-output leaderboard/leaderboard_adversarial_v0_2_0.json
+marked-bench --build-leaderboard baselines/always_none_adversarial_v0_2_0.json baselines/hash_prior_adversarial_v0_2_0.json baselines/contradiction_engine_adversarial_v0_2_0.json --leaderboard-output leaderboard/leaderboard_adversarial_v0_2_0.json
 ```
 
 For multi-hop entries:
 
 ```bash
-marked-bench --build-leaderboard baselines/*multihop*.json --leaderboard-output leaderboard/leaderboard_multihop_v0_3_0.json
+marked-bench --build-leaderboard baselines/always_none_multihop_v0_3_0.json baselines/hash_prior_multihop_v0_3_0.json baselines/contradiction_engine_multihop_v0_3_0.json --leaderboard-output leaderboard/leaderboard_multihop_v0_3_0.json
 ```
 
 For controls entries:
 
 ```bash
-marked-bench --build-leaderboard baselines/*controls*.json --leaderboard-output leaderboard/leaderboard_controls_v0_4_0.json
+marked-bench --build-leaderboard baselines/always_none_controls_v0_4_0.json baselines/hash_prior_controls_v0_4_0.json baselines/contradiction_engine_controls_v0_4_0.json --leaderboard-output leaderboard/leaderboard_controls_v0_4_0.json
 ```
 
 ## 10. Run Repository Checks
@@ -235,9 +235,13 @@ python -m unittest discover -s tests
 python scripts/validate_benchmark_artifacts.py
 python -m marked_bench.benchmark_cli --check-standard-status
 python scripts/check_scoring_sanity.py
+python scripts/check_case_quality.py
+python scripts/regenerate_release_artifacts.py --check
+python scripts/check_review_workflow.py
+python scripts/check_license_notice.py
 ```
 
-Both commands must pass before a submission is ready for review.
+All commands must pass before a submission is ready for review.
 
 ## 11. Create A Review Rubric
 

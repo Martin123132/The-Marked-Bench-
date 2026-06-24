@@ -20,5 +20,5 @@ python scripts/check_case_quality.py --artifact docs/CASE_QUALITY.md
 
 ## Near-duplicate watchlist
 
-- contradiction-multihop: `marked-hop-property-002` and `marked-hop-property-003` similarity=0.988
-- contradiction-multihop: `marked-hop-universal-001` and `marked-hop-universal-003` similarity=0.960
+- contradiction-multihop: `marked-hop-property-002` and `marked-hop-property-003` similarity=0.988; note=intentional contrast between an inherited unit conflict and a same-unit context control
+- contradiction-multihop: `marked-hop-universal-001` and `marked-hop-universal-003` similarity=0.960; note=intentional contrast between a universal counterexample and a non-universal control

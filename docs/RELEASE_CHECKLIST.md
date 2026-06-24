@@ -11,6 +11,9 @@ git diff --check
 python -m marked_bench.benchmark_cli --check-standard-status
 python scripts/check_scoring_sanity.py
 python scripts/check_case_quality.py
+python scripts/regenerate_release_artifacts.py --check
+python scripts/check_review_workflow.py
+python scripts/check_license_notice.py
 ```
 
 ## Artifact Checks
@@ -101,6 +104,9 @@ python scripts/check_case_quality.py
   release change set (update when scoring logic changes).
 - `docs/CASE_QUALITY.md` includes the latest suite composition and
   near-duplicate diagnostic summary (update when cases change).
+- Licensing notices match the current source-available, non-commercial policy
+  and direct commercial licensing discussions to the COO of TWO HANDS NETWORK
+  LTD.
 
 ## Regeneration Helper
 
