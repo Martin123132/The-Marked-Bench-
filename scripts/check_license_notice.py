@@ -11,6 +11,8 @@ REQUIRED_FRAGMENTS = {
     Path("LICENSE"): (
         "PolyForm Noncommercial License 1.0.0",
         "TWO HANDS NETWORK LTD",
+        "Contact us",
+        "Glyn : glyn@twohandsnetwork.co.uk",
     ),
     Path("COMMERCIAL-LICENSE.md"): (
         "TWO HANDS NETWORK LTD",

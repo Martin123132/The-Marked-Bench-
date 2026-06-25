@@ -74,10 +74,10 @@
       "sha256": "228aa553afbbe1d7c7ae45c23bc0541807134acc82473a722558d430aa7d374d"
     },
     {
-      "bytes": 4885,
+      "bytes": 5038,
       "category": "root",
       "path": "LICENSE",
-      "sha256": "0f75e197e6c4db8b3460f5711e6785d3912a8e0096e941b8e5c5d8ce93d47ed4"
+      "sha256": "ce7e2e7a683a762467fcd619736fc144620afdad6431448dc89f4beafd7b25dc"
     },
     {
       "bytes": 1634,
@@ -776,10 +776,10 @@
       "sha256": "3648fca78af7b7532fad29264f9a721dc74265cc3ed218eab63e510c6c4bbfd0"
     },
     {
-      "bytes": 2220,
+      "bytes": 2287,
       "category": "source",
       "path": "scripts/check_license_notice.py",
-      "sha256": "46354a63cf9f238d5bca01e2e4558b703dcec0ccc645bd580c68f322ea81e2d6"
+      "sha256": "03275b761eb30872ccadfb31e84105fff95260d6e191dd1e4b0a6e67594a2e37"
     },
     {
       "bytes": 2439,
