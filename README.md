@@ -16,7 +16,22 @@ entry.
 
 Current standardization status is tracked in:
 
+- [Project status](docs/PROJECT_STATUS.md)
 - [Standardization status](docs/STANDARDIZATION_STATUS.md)
+- [Baseline robustness](docs/BASELINE_ROBUSTNESS.md)
+- [Maintainer handoff](docs/MAINTAINER_HANDOFF.md)
+
+## Current Health Snapshot
+
+- `main` is expected to stay green under Benchmark CI.
+- Public release evidence is regenerated deterministically and checked for
+  drift in CI.
+- Licensing, review workflow, scoring sanity, case quality, and baseline
+  robustness each have dedicated guard scripts.
+- The multi-hop track has a documented baseline-robustness watchlist item:
+  `HashPriorBaseline` currently outranks `ContradictionEngine`.
+- The recommended project posture is polish and trust-hardening before adding
+  more benchmark surface.
 
 ## Current Tracks
 
@@ -277,6 +292,9 @@ marked-bench --build-leaderboard baselines/always_none_controls_v0_4_0.json base
 - JSON schemas: `schemas/`
 - Benchmark methodology: `docs/BENCHMARK_STANDARD.md`
 - Benchmark card: `docs/BENCHMARK_CARD.md`
+- Project status: `docs/PROJECT_STATUS.md`
+- Baseline robustness: `docs/BASELINE_ROBUSTNESS.md`
+- Maintainer handoff: `docs/MAINTAINER_HANDOFF.md`
 - Technical note: `docs/TECHNICAL_NOTE.md`
 - Submission guide: `docs/SUBMISSION_GUIDE.md`
 - Submission bundle schema: `schemas/submission_bundle.schema.json`
@@ -312,6 +330,7 @@ python scripts/validate_benchmark_artifacts.py
 python -m marked_bench.benchmark_cli --check-standard-status
 python scripts/check_scoring_sanity.py
 python scripts/check_case_quality.py
+python scripts/check_baseline_robustness.py
 python scripts/regenerate_release_artifacts.py --check
 python scripts/check_review_workflow.py
 python scripts/check_license_notice.py

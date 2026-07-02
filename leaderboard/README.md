@@ -85,6 +85,11 @@ The `HashPriorBaseline` is a deterministic low-information reference. It helps
 reviewers spot whether a future system is doing more than exploiting case-ID
 or label-prior quirks.
 
+The multi-hop leaderboard currently has `HashPriorBaseline` above the packaged
+`ContradictionEngine`. Treat that as a documented robustness watchlist item, not
+as evidence that the hash-prior baseline is a stronger contradiction system.
+See `docs/BASELINE_ROBUSTNESS.md`.
+
 The adversarial leaderboard intentionally starts with the symbolic baseline
 below a perfect score. That leaves room for stronger neural, symbolic, and
 hybrid systems to show measurable improvement.

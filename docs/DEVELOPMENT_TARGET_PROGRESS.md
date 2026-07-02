@@ -13,7 +13,7 @@ Use this file to check off completed targets.
 ## Cycle notes (no timelines)
 
 - [x] Current in-progress target: `none`
-- [x] Next target after current: `identify Target T onward`
+- [x] Next target after current: `identify Target X onward`
 - [x] Completed targets:
   - Target A: release-ready checks completed.
   - Target B: contributor PR/checklist guidance updated.
@@ -51,6 +51,44 @@ Use this file to check off completed targets.
   - Foundation suite `0.1.1` adds six new cases while legacy `0.1.0` remains validated.
   - Active foundation artifacts now point to `suites/marked_bench_contradiction_standard_v0_1_1.json`, `baselines/*_v0_1_1.json`, and `leaderboard/leaderboard_v0_1_1.json`.
   - `docs/SCORING_SANITY.md` records both legacy `0.1.0` and active `0.1.1` scoring checks.
+- [x] Checked by:
+  - Codex
+
+## Completed cycle 4
+
+- [x] Completed target: Target T through Target W
+- [x] Scope:
+  - `scripts/check_baseline_robustness.py`
+  - `scripts/regenerate_release_artifacts.py`
+  - `scripts/check_review_workflow.py`
+  - `marked_bench/benchmark_release.py`
+  - `scripts/validate_benchmark_artifacts.py`
+  - `.github/workflows/benchmark-ci.yml`
+  - `.github/PULL_REQUEST_TEMPLATE.md`
+  - `CONTRIBUTING.md`
+  - `README.md`
+  - `docs/BASELINE_ROBUSTNESS.md`
+  - `docs/PROJECT_STATUS.md`
+  - `docs/MAINTAINER_HANDOFF.md`
+  - `docs/RELEASE_CHECKLIST.md`
+  - `docs/REVIEW_WORKFLOW.md`
+  - `leaderboard/README.md`
+  - `DEVELOPMENT_TARGETS.md`
+- [x] Validation run:
+  - `python -m unittest discover -s tests`
+  - `python scripts/validate_benchmark_artifacts.py`
+  - `python -m marked_bench.benchmark_cli --check-standard-status`
+  - `python scripts/check_scoring_sanity.py --artifact docs/SCORING_SANITY.md`
+  - `python scripts/check_case_quality.py --artifact docs/CASE_QUALITY.md`
+  - `python scripts/check_baseline_robustness.py --artifact docs/BASELINE_ROBUSTNESS.md`
+  - `python scripts/regenerate_release_artifacts.py --check`
+  - `python scripts/check_review_workflow.py`
+  - `python scripts/check_license_notice.py`
+- [x] Evidence/notes:
+  - Added public project status and maintainer handoff docs.
+  - Added baseline robustness artifact generation and CI guard.
+  - Documented the multi-hop hash-prior result as a watchlist item before future expansion.
+  - Kept the cycle focused on polish and trust-hardening rather than new benchmark surface.
 - [x] Checked by:
   - Codex
 
