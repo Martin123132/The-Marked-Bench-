@@ -61,6 +61,18 @@ We are tracking progress with target-based checkpoints only (no deadlines).
 - [x] **Target S: Guard company non-commercial license notices**
   - Add a licensing notice check and update public docs to direct commercial licensing discussions to the COO of TWO HANDS NETWORK LTD.
 
+- [x] **Target T: Polish public readiness**
+  - Add a compact project status surface so new readers can understand current health, posture, and watchlist items quickly.
+
+- [x] **Target U: Document baseline robustness**
+  - Add a baseline robustness check and artifact that explains low-information baseline watchlist items before new benchmark expansion.
+
+- [x] **Target V: Improve release presentation**
+  - Add status and evidence pointers in the README and release package so the current standard is easier to inspect.
+
+- [x] **Target W: Add maintainer handoff**
+  - Add a maintainer-facing handoff for PR preparation, submission review, release hygiene, and required checks.
+
 ## Checkoff Rules
 
 1. A target is checked only after code/docs are committed and validations listed in the target are complete.
@@ -72,3 +84,4 @@ We are tracking progress with target-based checkpoints only (no deadlines).
 - Completed: Target A, Target B, Target C, Target D, Target E, Target F, Target G
 - Completed: Target H, Target I, Target J, Target K, Target L, Target M, Target N
 - Completed: Target O, Target P, Target Q, Target R, Target S
+- Completed: Target T, Target U, Target V, Target W

@@ -1,6 +1,6 @@
 {
   "benchmark_family": "contradiction-detection",
-  "checked_artifact_count": 161,
+  "checked_artifact_count": 165,
   "checked_schema_file_count": 41,
   "checks": [
     {
@@ -13,7 +13,7 @@
     },
     {
       "details": {
-        "artifact_count": 161,
+        "artifact_count": 165,
         "path": "releases/marked_bench_release_v0_4_8.json"
       },
       "errors": [],
