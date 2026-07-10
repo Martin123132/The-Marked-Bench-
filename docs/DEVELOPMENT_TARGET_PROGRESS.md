@@ -92,6 +92,36 @@ Use this file to check off completed targets.
 - [x] Checked by:
   - Codex
 
+## Current cycle 5
+
+- [x] Completed target: Target X
+- [x] Scope:
+  - `scripts/check_baseline_robustness.py`
+  - `tests/test_baseline_robustness.py`
+  - `docs/BASELINE_ROBUSTNESS.md`
+  - `docs/PROJECT_STATUS.md`
+  - `DEVELOPMENT_TARGETS.md`
+  - `docs/DEVELOPMENT_TARGET_PROGRESS.md`
+  - `releases/marked_bench_release_v0_4_8.json`
+- [x] Validation run:
+  - `python -m unittest discover -s tests`
+  - `python scripts/validate_benchmark_artifacts.py`
+  - `python -m marked_bench.benchmark_cli --check-standard-status`
+  - `python scripts/check_scoring_sanity.py --artifact docs/SCORING_SANITY.md`
+  - `python scripts/check_case_quality.py --artifact docs/CASE_QUALITY.md`
+  - `python scripts/check_baseline_robustness.py --artifact docs/BASELINE_ROBUSTNESS.md`
+  - `python scripts/regenerate_release_artifacts.py --check`
+  - `python scripts/check_review_workflow.py`
+  - `python scripts/check_license_notice.py`
+- [x] Evidence/notes:
+  - Reproduced the 45.93 multi-hop hash-prior score from checked-in case predictions.
+  - Reconciled its 21.79-point lead across all four weighted score components.
+  - Added deterministic salted-ID and fixed-label-mix sensitivity checks plus case-level evidence.
+  - Classified the ranking as an explained watchlist caused by both weak task-aware multi-hop coverage and a chance-favorable hash assignment.
+  - Preserved all published suite v0.3.0 cases and IDs unchanged.
+- [x] Checked by:
+  - Codex
+
 ## Current cycle 3
 
 - [x] Completed target: Target O through Target S
