@@ -336,15 +336,15 @@ class BenchmarkSuiteTests(unittest.TestCase):
         root = Path(__file__).resolve().parent.parent
         checked_pairs = [
             ("benchmark_registry.json", "schemas/benchmark_registry.schema.json"),
-            ("releases/marked_bench_release_v0_4_8.json", "schemas/release_manifest.schema.json"),
-            ("conformance/marked_bench_conformance_v0_4_8.json", "schemas/conformance_report.schema.json"),
-            ("adoption/marked_bench_adoption_packet_v0_4_8.json", "schemas/adoption_packet.schema.json"),
-            ("adoption/third_party_evidence_ledger_v0_4_8.json", "schemas/third_party_evidence_ledger.schema.json"),
-            ("adoption/marked_bench_implementation_kit_v0_4_8.json", "schemas/implementation_kit.schema.json"),
-            ("standard/marked_bench_standard_profile_v0_4_8.json", "schemas/standard_profile.schema.json"),
-            ("standard/marked_bench_change_control_v0_4_8.json", "schemas/change_control.schema.json"),
-            ("standard/marked_bench_scoring_compatibility_v0_4_8.json", "schemas/scoring_compatibility.schema.json"),
-            ("standard/marked_bench_scoring_spec_v0_4_8.json", "schemas/scoring_spec.schema.json"),
+            ("releases/marked_bench_release_v0_4_9.json", "schemas/release_manifest.schema.json"),
+            ("conformance/marked_bench_conformance_v0_4_9.json", "schemas/conformance_report.schema.json"),
+            ("adoption/marked_bench_adoption_packet_v0_4_9.json", "schemas/adoption_packet.schema.json"),
+            ("adoption/third_party_evidence_ledger_v0_4_9.json", "schemas/third_party_evidence_ledger.schema.json"),
+            ("adoption/marked_bench_implementation_kit_v0_4_9.json", "schemas/implementation_kit.schema.json"),
+            ("standard/marked_bench_standard_profile_v0_4_9.json", "schemas/standard_profile.schema.json"),
+            ("standard/marked_bench_change_control_v0_4_9.json", "schemas/change_control.schema.json"),
+            ("standard/marked_bench_scoring_compatibility_v0_4_9.json", "schemas/scoring_compatibility.schema.json"),
+            ("standard/marked_bench_scoring_spec_v0_4_9.json", "schemas/scoring_spec.schema.json"),
             ("suites/marked_bench_contradiction_standard_v0_1_0.json", "schemas/contradiction_suite_manifest.schema.json"),
             ("suites/marked_bench_contradiction_standard_v0_1_1.json", "schemas/contradiction_suite_manifest.schema.json"),
             ("suites/marked_bench_contradiction_adversarial_v0_2_0.json", "schemas/contradiction_suite_manifest.schema.json"),
@@ -431,7 +431,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_release_manifest_matches_current_artifacts(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "releases" / "marked_bench_release_v0_4_8.json"
+        path = root / "releases" / "marked_bench_release_v0_4_9.json"
 
         manifest = json.loads(path.read_text(encoding="utf-8"))
         artifact_paths = {entry["path"] for entry in manifest["artifacts"]}
@@ -442,14 +442,14 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertGreater(manifest["artifact_count"], 20)
         self.assertIn("submissions/example_external_jsonl/predictions.jsonl", artifact_paths)
         self.assertIn("submissions/example_external_jsonl/example_external_submission_review.json", artifact_paths)
-        self.assertIn("conformance/marked_bench_conformance_v0_4_8.json", artifact_paths)
-        self.assertIn("standard/marked_bench_standard_profile_v0_4_8.json", artifact_paths)
-        self.assertIn("standard/marked_bench_change_control_v0_4_8.json", artifact_paths)
-        self.assertIn("standard/marked_bench_scoring_compatibility_v0_4_8.json", artifact_paths)
-        self.assertIn("standard/marked_bench_scoring_spec_v0_4_8.json", artifact_paths)
-        self.assertIn("adoption/marked_bench_adoption_packet_v0_4_8.json", artifact_paths)
-        self.assertIn("adoption/third_party_evidence_ledger_v0_4_8.json", artifact_paths)
-        self.assertIn("adoption/marked_bench_implementation_kit_v0_4_8.json", artifact_paths)
+        self.assertIn("conformance/marked_bench_conformance_v0_4_9.json", artifact_paths)
+        self.assertIn("standard/marked_bench_standard_profile_v0_4_9.json", artifact_paths)
+        self.assertIn("standard/marked_bench_change_control_v0_4_9.json", artifact_paths)
+        self.assertIn("standard/marked_bench_scoring_compatibility_v0_4_9.json", artifact_paths)
+        self.assertIn("standard/marked_bench_scoring_spec_v0_4_9.json", artifact_paths)
+        self.assertIn("adoption/marked_bench_adoption_packet_v0_4_9.json", artifact_paths)
+        self.assertIn("adoption/third_party_evidence_ledger_v0_4_9.json", artifact_paths)
+        self.assertIn("adoption/marked_bench_implementation_kit_v0_4_9.json", artifact_paths)
         self.assertIn("adoption/implementation_kit/github_actions_validate_result.yml", artifact_paths)
         self.assertIn("suites/marked_bench_contradiction_controls_v0_4_0.json", artifact_paths)
         self.assertIn("leaderboard/leaderboard_controls_v0_4_0.json", artifact_paths)
@@ -471,7 +471,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_conformance_report_matches_current_evidence(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "conformance" / "marked_bench_conformance_v0_4_8.json"
+        path = root / "conformance" / "marked_bench_conformance_v0_4_9.json"
 
         report = load_conformance_report(path)
         validation = validate_conformance_report(report, root=root)
@@ -492,7 +492,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_adoption_packet_matches_current_evidence(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "adoption" / "marked_bench_adoption_packet_v0_4_8.json"
+        path = root / "adoption" / "marked_bench_adoption_packet_v0_4_9.json"
 
         packet = load_adoption_packet(path)
         validation = validate_adoption_packet(packet, root=root)
@@ -519,7 +519,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_evidence_ledger_matches_current_evidence(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "adoption" / "third_party_evidence_ledger_v0_4_8.json"
+        path = root / "adoption" / "third_party_evidence_ledger_v0_4_9.json"
 
         ledger = load_evidence_ledger(path)
         validation = validate_evidence_ledger(ledger, root=root)
@@ -578,7 +578,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_implementation_kit_matches_current_release(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "adoption" / "marked_bench_implementation_kit_v0_4_8.json"
+        path = root / "adoption" / "marked_bench_implementation_kit_v0_4_9.json"
 
         kit = load_implementation_kit(path)
         validation = validate_implementation_kit(kit, root=root)
@@ -592,7 +592,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_standard_profile_matches_current_release(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "standard" / "marked_bench_standard_profile_v0_4_8.json"
+        path = root / "standard" / "marked_bench_standard_profile_v0_4_9.json"
 
         profile = load_standard_profile(path)
         validation = validate_standard_profile(profile, root=root)
@@ -607,7 +607,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_change_control_matches_current_release(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "standard" / "marked_bench_change_control_v0_4_8.json"
+        path = root / "standard" / "marked_bench_change_control_v0_4_9.json"
 
         profile = load_change_control(path)
         validation = validate_change_control(profile, root=root)
@@ -621,7 +621,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_scoring_compatibility_profile_matches_current_release(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "standard" / "marked_bench_scoring_compatibility_v0_4_8.json"
+        path = root / "standard" / "marked_bench_scoring_compatibility_v0_4_9.json"
 
         profile = load_scoring_compatibility_profile(path)
         validation = validate_scoring_compatibility_profile(profile, root=root)
@@ -637,7 +637,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_scoring_spec_matches_current_release(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "standard" / "marked_bench_scoring_spec_v0_4_8.json"
+        path = root / "standard" / "marked_bench_scoring_spec_v0_4_9.json"
         doc_path = root / "docs" / "SCORING_SPEC.md"
 
         spec = load_scoring_spec(path)

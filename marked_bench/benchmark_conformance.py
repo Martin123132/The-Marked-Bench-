@@ -62,8 +62,8 @@ from marked_bench.schema_validation import load_json_schema, validate_json_file,
 
 
 CONFORMANCE_REPORT_SCHEMA = "marked_bench.conformance-report.v1"
-DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_8.json")
-DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_8.json")
+DEFAULT_CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_9.json")
+DEFAULT_RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_9.json")
 
 SUITE_MANIFESTS = {
     Path("suites/marked_bench_contradiction_standard_v0_1_0.json"): "contradiction-v0.1.0",

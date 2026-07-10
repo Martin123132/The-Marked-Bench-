@@ -237,6 +237,7 @@ def build_benchmark_registry() -> dict[str, Any]:
             "docs/RELEASE_NOTES_v0_4_6.md",
             "docs/RELEASE_NOTES_v0_4_7.md",
             "docs/RELEASE_NOTES_v0_4_8.md",
+            "docs/RELEASE_NOTES_v0_4_9.md",
             "docs/SCORING_SPEC.md",
             "docs/SUBMISSION_GUIDE.md",
             "docs/RELEASE_CHECKLIST.md",

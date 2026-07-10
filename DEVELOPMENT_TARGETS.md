@@ -82,6 +82,9 @@ We are tracking progress with target-based checkpoints only (no deadlines).
 - [x] **Target Z: Add checked submission proof**
   - Complete the example reviewer decision and verify the full report, bundle, review, result-card, publication-packet, result-claim, and evidence-ledger boundary.
 
+- [x] **Target AA: Prepare the v0.4.9 patch release**
+  - Version and regenerate the trust-hardening, evaluator onboarding, submission proof, release evidence, notes, citation metadata, and current GitHub Actions runtime without changing suite semantics.
+
 ## Checkoff Rules
 
 1. A target is checked only after code/docs are committed and validations listed in the target are complete.
@@ -97,3 +100,4 @@ We are tracking progress with target-based checkpoints only (no deadlines).
 - Completed: Target X
 - Completed: Target Y
 - Completed: Target Z
+- Completed: Target AA

@@ -118,7 +118,7 @@ marked-bench --suite-info contradiction
 Export the release manifest that pins public artifact SHA-256 digests:
 
 ```bash
-marked-bench --export-release-manifest releases/marked_bench_release_v0_4_8.json
+marked-bench --export-release-manifest releases/marked_bench_release_v0_4_9.json
 ```
 
 Export the generated technical note:
@@ -130,22 +130,22 @@ marked-bench --export-technical-note docs/TECHNICAL_NOTE.md
 Export and validate the machine-readable conformance report:
 
 ```bash
-marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_4_8.json
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_8.json
+marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_4_9.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_9.json
 ```
 
 Export and validate the machine-readable benchmark standard profile:
 
 ```bash
-marked-bench --export-standard-profile standard/marked_bench_standard_profile_v0_4_8.json
-marked-bench --validate-standard-profile standard/marked_bench_standard_profile_v0_4_8.json
+marked-bench --export-standard-profile standard/marked_bench_standard_profile_v0_4_9.json
+marked-bench --validate-standard-profile standard/marked_bench_standard_profile_v0_4_9.json
 ```
 
 Export and validate the checked standard change-control profile:
 
 ```bash
-marked-bench --export-change-control standard/marked_bench_change_control_v0_4_8.json
-marked-bench --validate-change-control standard/marked_bench_change_control_v0_4_8.json
+marked-bench --export-change-control standard/marked_bench_change_control_v0_4_9.json
+marked-bench --validate-change-control standard/marked_bench_change_control_v0_4_9.json
 ```
 
 Quickly verify current standardization status:
@@ -158,31 +158,31 @@ marked-bench --check-standard-status --json
 Export and validate deterministic scoring compatibility vectors:
 
 ```bash
-marked-bench --export-scoring-compatibility standard/marked_bench_scoring_compatibility_v0_4_8.json
-marked-bench --validate-scoring-compatibility standard/marked_bench_scoring_compatibility_v0_4_8.json
+marked-bench --export-scoring-compatibility standard/marked_bench_scoring_compatibility_v0_4_9.json
+marked-bench --validate-scoring-compatibility standard/marked_bench_scoring_compatibility_v0_4_9.json
 ```
 
 Export and validate the language-neutral scoring specification:
 
 ```bash
-marked-bench --export-scoring-spec standard/marked_bench_scoring_spec_v0_4_8.json
-marked-bench --validate-scoring-spec standard/marked_bench_scoring_spec_v0_4_8.json
+marked-bench --export-scoring-spec standard/marked_bench_scoring_spec_v0_4_9.json
+marked-bench --validate-scoring-spec standard/marked_bench_scoring_spec_v0_4_9.json
 marked-bench --export-scoring-spec-doc docs/SCORING_SPEC.md
 ```
 
 Export and validate the machine-readable adoption packet for external users:
 
 ```bash
-marked-bench --export-adoption-packet adoption/marked_bench_adoption_packet_v0_4_8.json
-marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_8.json
-marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_8.json
+marked-bench --export-adoption-packet adoption/marked_bench_adoption_packet_v0_4_9.json
+marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_9.json
+marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_9.json
 ```
 
 Export and validate the external implementation kit:
 
 ```bash
-marked-bench --export-implementation-kit adoption/marked_bench_implementation_kit_v0_4_8.json
-marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_8.json
+marked-bench --export-implementation-kit adoption/marked_bench_implementation_kit_v0_4_9.json
+marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_9.json
 ```
 
 ## Score External Systems
@@ -291,15 +291,15 @@ marked-bench --build-leaderboard baselines/always_none_controls_v0_4_0.json base
 
 - Benchmark registry: `benchmark_registry.json`
 - Release manifest: `releases/`
-- Conformance report: `conformance/marked_bench_conformance_v0_4_8.json`
-- Standard profile: `standard/marked_bench_standard_profile_v0_4_8.json`
-- Change-control profile: `standard/marked_bench_change_control_v0_4_8.json`
-- Scoring compatibility profile: `standard/marked_bench_scoring_compatibility_v0_4_8.json`
-- Scoring specification: `standard/marked_bench_scoring_spec_v0_4_8.json`
+- Conformance report: `conformance/marked_bench_conformance_v0_4_9.json`
+- Standard profile: `standard/marked_bench_standard_profile_v0_4_9.json`
+- Change-control profile: `standard/marked_bench_change_control_v0_4_9.json`
+- Scoring compatibility profile: `standard/marked_bench_scoring_compatibility_v0_4_9.json`
+- Scoring specification: `standard/marked_bench_scoring_spec_v0_4_9.json`
 - Scoring specification document: `docs/SCORING_SPEC.md`
-- Adoption packet: `adoption/marked_bench_adoption_packet_v0_4_8.json`
-- Third-party evidence ledger: `adoption/third_party_evidence_ledger_v0_4_8.json`
-- Implementation kit: `adoption/marked_bench_implementation_kit_v0_4_8.json`
+- Adoption packet: `adoption/marked_bench_adoption_packet_v0_4_9.json`
+- Third-party evidence ledger: `adoption/third_party_evidence_ledger_v0_4_9.json`
+- Implementation kit: `adoption/marked_bench_implementation_kit_v0_4_9.json`
 - Implementation kit templates: `adoption/implementation_kit/`
 - Suite manifests and coverage profiles: `suites/`
 - Baseline reports: `baselines/`
@@ -335,7 +335,7 @@ marked-bench --build-leaderboard baselines/always_none_controls_v0_4_0.json base
 - Standardization status: `docs/STANDARDIZATION_STATUS.md`
 - Submission review rubric: `docs/SUBMISSION_REVIEW_RUBRIC.md`
 - Release notes: `docs/RELEASE_NOTES_v0_2_0.md`
-- Current release notes: `docs/RELEASE_NOTES_v0_4_8.md`
+- Current release notes: `docs/RELEASE_NOTES_v0_4_9.md`
 
 ## Quality Gates
 
