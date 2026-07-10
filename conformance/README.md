@@ -11,8 +11,8 @@ internally consistent.
 Generate and validate the current report with:
 
 ```bash
-marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_4_8.json
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_8.json
+marked-bench --export-conformance-report conformance/marked_bench_conformance_v0_4_9.json
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_9.json
 ```
 
 Do not edit conformance reports by hand; regenerate them after changing any

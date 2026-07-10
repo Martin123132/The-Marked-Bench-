@@ -11,7 +11,7 @@ from marked_bench.benchmark_registry import REGISTRY_SCHEMA, build_benchmark_reg
 
 
 RELEASE_MANIFEST_SCHEMA = "marked_bench.benchmark-release-manifest.v1"
-RELEASE_ID = "marked-bench-contradiction-standard-release-0.4.8"
+RELEASE_ID = "marked-bench-contradiction-standard-release-0.4.9"
 
 ROOT_PUBLIC_ARTIFACTS = (
     "README.md",
@@ -112,20 +112,20 @@ SUBMISSION_EXAMPLE_ARTIFACTS = (
 )
 
 CONFORMANCE_ARTIFACTS = (
-    "conformance/marked_bench_conformance_v0_4_8.json",
+    "conformance/marked_bench_conformance_v0_4_9.json",
 )
 
 ADOPTION_ARTIFACTS = (
-    "adoption/marked_bench_adoption_packet_v0_4_8.json",
-    "adoption/third_party_evidence_ledger_v0_4_8.json",
-    "adoption/marked_bench_implementation_kit_v0_4_8.json",
+    "adoption/marked_bench_adoption_packet_v0_4_9.json",
+    "adoption/third_party_evidence_ledger_v0_4_9.json",
+    "adoption/marked_bench_implementation_kit_v0_4_9.json",
 )
 
 STANDARD_ARTIFACTS = (
-    "standard/marked_bench_standard_profile_v0_4_8.json",
-    "standard/marked_bench_change_control_v0_4_8.json",
-    "standard/marked_bench_scoring_compatibility_v0_4_8.json",
-    "standard/marked_bench_scoring_spec_v0_4_8.json",
+    "standard/marked_bench_standard_profile_v0_4_9.json",
+    "standard/marked_bench_change_control_v0_4_9.json",
+    "standard/marked_bench_scoring_compatibility_v0_4_9.json",
+    "standard/marked_bench_scoring_spec_v0_4_9.json",
 )
 
 

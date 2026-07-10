@@ -43,7 +43,7 @@
   "notes": "Checked example publication packet for the current public release.",
   "overall_score": 11.11,
   "ready_for_publication": true,
-  "release_id": "marked-bench-contradiction-standard-release-0.4.8",
+  "release_id": "marked-bench-contradiction-standard-release-0.4.9",
   "report_sha256": "9028699a80c286fb644d9a7212209d452c5e5e0cbc8303c06599fb4950017c83",
   "result_card_sha256": "e726577943559f5fcbef4eae2b1124664651af556f8e7fcb57e1413cfe4cd67c",
   "schema": "marked_bench.publication-packet.v1",

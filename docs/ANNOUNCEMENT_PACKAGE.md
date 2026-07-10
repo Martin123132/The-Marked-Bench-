@@ -6,14 +6,12 @@ instructions.
 
 ## Release Summary
 
-The Marked Bench v0.4.8 is a reproducible contradiction-detection benchmark
-release with versioned suites, pinned suite hashes, public JSON schemas,
-baseline reports, leaderboard snapshots, release manifest hashing,
-machine-readable conformance, checked external submission evidence, standard
-result cards, a machine-readable adoption packet, and a checked third-party
-evidence ledger. This release adds a checked standard change-control profile so
-suite, schema, scoring, evidence-policy, and governance changes have a public
-proposal path and a machine-readable validation gate.
+The Marked Bench v0.4.9 is a trust-hardening and onboarding patch release for
+the reproducible contradiction-detection benchmark. It keeps every v0.4.8
+suite, case, suite hash, score formula, and leaderboard comparison boundary
+unchanged while adding a deterministic explanation of the multi-hop baseline
+watchlist, a checked five-minute evaluator path, and a completed example review
+with an explicit non-adoption boundary.
 
 Default track:
 
@@ -38,18 +36,18 @@ New controls track:
 ## Public Link Set
 
 - Repository: `https://github.com/Martin123132/The-Marked-Bench-`
-- Current release: `https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.4.8`
+- Current release: `https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.4.9`
 - Registry: `benchmark_registry.json`
-- Release manifest: `releases/marked_bench_release_v0_4_8.json`
-- Conformance report: `conformance/marked_bench_conformance_v0_4_8.json`
-- Standard profile: `standard/marked_bench_standard_profile_v0_4_8.json`
-- Change-control profile: `standard/marked_bench_change_control_v0_4_8.json`
-- Scoring compatibility profile: `standard/marked_bench_scoring_compatibility_v0_4_8.json`
-- Scoring specification: `standard/marked_bench_scoring_spec_v0_4_8.json`
+- Release manifest: `releases/marked_bench_release_v0_4_9.json`
+- Conformance report: `conformance/marked_bench_conformance_v0_4_9.json`
+- Standard profile: `standard/marked_bench_standard_profile_v0_4_9.json`
+- Change-control profile: `standard/marked_bench_change_control_v0_4_9.json`
+- Scoring compatibility profile: `standard/marked_bench_scoring_compatibility_v0_4_9.json`
+- Scoring specification: `standard/marked_bench_scoring_spec_v0_4_9.json`
 - Scoring specification document: `docs/SCORING_SPEC.md`
-- Adoption packet: `adoption/marked_bench_adoption_packet_v0_4_8.json`
-- Third-party evidence ledger: `adoption/third_party_evidence_ledger_v0_4_8.json`
-- Implementation kit: `adoption/marked_bench_implementation_kit_v0_4_8.json`
+- Adoption packet: `adoption/marked_bench_adoption_packet_v0_4_9.json`
+- Third-party evidence ledger: `adoption/third_party_evidence_ledger_v0_4_9.json`
+- Implementation kit: `adoption/marked_bench_implementation_kit_v0_4_9.json`
 - Implementation kit templates: `adoption/implementation_kit/`
 - Checked publication packet: `submissions/example_publication_packet/publication_packet.json`
 - Checked result claim: `submissions/example_publication_packet/result_claim.json`
@@ -58,19 +56,18 @@ New controls track:
 - Submission review rubric: `docs/SUBMISSION_REVIEW_RUBRIC.md`
 - Third-party evidence protocol: `docs/THIRD_PARTY_EVIDENCE.md`
 - Standard change-control protocol: `docs/CHANGE_CONTROL.md`
+- Baseline robustness diagnostic: `docs/BASELINE_ROBUSTNESS.md`
+- Five-minute evaluator walkthrough: `docs/FIVE_MINUTE_EVALUATOR_WALKTHROUGH.md`
+- Checked submission proof: `docs/SUBMISSION_PROOF.md`
 
 ## Suggested Announcement Text
 
-The Marked Bench v0.4.8 is now available as a public, reproducible benchmark
-package for contradiction detection and classification. The release pins every
-public track by suite ID, suite version, and deterministic suite hash, and it
-ships validation commands for reports, submissions, result cards, publication
-packets, result claims, release manifests, conformance reports, the adoption
-packet, the third-party evidence ledger, the implementation kit, the standard
-profile, the change-control profile, the scoring compatibility profile, and the
-scoring specification. The new change-control gate makes proposed suite, schema,
-scoring, evidence-policy, and governance changes public and checkable before
-they become release artifacts.
+The Marked Bench v0.4.9 is now available as a public, reproducible benchmark
+package for contradiction detection and classification. This patch release
+adds reviewer-facing baseline diagnostics, a five-minute evaluator walkthrough,
+and a complete checked publication example whose `needs_revision` decision
+demonstrates that valid evidence does not imply leaderboard acceptance. The
+third-party evidence ledger remains empty, so no external adoption is claimed.
 
 External systems can participate without importing the Python package: export a
 JSONL prediction template, fill predicted labels, score it into a standard JSON
@@ -82,14 +79,17 @@ packet, generate a citeable result claim, and validate both in their own CI.
 ```bash
 python -m unittest discover -s tests
 python scripts/validate_benchmark_artifacts.py
-marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_8.json
-marked-bench --validate-standard-profile standard/marked_bench_standard_profile_v0_4_8.json
-marked-bench --validate-change-control standard/marked_bench_change_control_v0_4_8.json
-marked-bench --validate-scoring-compatibility standard/marked_bench_scoring_compatibility_v0_4_8.json
-marked-bench --validate-scoring-spec standard/marked_bench_scoring_spec_v0_4_8.json
-marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_8.json
-marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_8.json
-marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_8.json
+python scripts/check_baseline_robustness.py --artifact docs/BASELINE_ROBUSTNESS.md
+python scripts/check_evaluator_walkthrough.py
+python scripts/check_submission_proof.py --artifact docs/SUBMISSION_PROOF.md
+marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_9.json
+marked-bench --validate-standard-profile standard/marked_bench_standard_profile_v0_4_9.json
+marked-bench --validate-change-control standard/marked_bench_change_control_v0_4_9.json
+marked-bench --validate-scoring-compatibility standard/marked_bench_scoring_compatibility_v0_4_9.json
+marked-bench --validate-scoring-spec standard/marked_bench_scoring_spec_v0_4_9.json
+marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_9.json
+marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_9.json
+marked-bench --validate-implementation-kit adoption/marked_bench_implementation_kit_v0_4_9.json
 marked-bench --validate-publication-packet submissions/example_publication_packet/publication_packet.json
 marked-bench --validate-result-claim submissions/example_publication_packet/result_claim.json
 ```

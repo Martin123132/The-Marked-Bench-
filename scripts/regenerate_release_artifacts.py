@@ -37,14 +37,14 @@ GENERATED_PATHS = (
     "suites/marked_bench_contradiction_standard_v0_1_1.json",
     "benchmark_registry.json",
     "docs/TECHNICAL_NOTE.md",
-    "standard/marked_bench_standard_profile_v0_4_8.json",
-    "standard/marked_bench_scoring_compatibility_v0_4_8.json",
-    "standard/marked_bench_scoring_spec_v0_4_8.json",
+    "standard/marked_bench_standard_profile_v0_4_9.json",
+    "standard/marked_bench_scoring_compatibility_v0_4_9.json",
+    "standard/marked_bench_scoring_spec_v0_4_9.json",
     "docs/SCORING_SPEC.md",
-    "adoption/marked_bench_adoption_packet_v0_4_8.json",
-    "adoption/marked_bench_implementation_kit_v0_4_8.json",
-    "adoption/third_party_evidence_ledger_v0_4_8.json",
-    "standard/marked_bench_change_control_v0_4_8.json",
+    "adoption/marked_bench_adoption_packet_v0_4_9.json",
+    "adoption/marked_bench_implementation_kit_v0_4_9.json",
+    "adoption/third_party_evidence_ledger_v0_4_9.json",
+    "standard/marked_bench_change_control_v0_4_9.json",
     "docs/SCORING_SANITY.md",
     "docs/CASE_QUALITY.md",
     "docs/BASELINE_ROBUSTNESS.md",
@@ -52,8 +52,8 @@ GENERATED_PATHS = (
     "submissions/example_publication_packet/publication_packet.json",
     "submissions/example_publication_packet/result_claim.json",
     "docs/SUBMISSION_PROOF.md",
-    "releases/marked_bench_release_v0_4_8.json",
-    "conformance/marked_bench_conformance_v0_4_8.json",
+    "releases/marked_bench_release_v0_4_9.json",
+    "conformance/marked_bench_conformance_v0_4_9.json",
 )
 
 
@@ -61,14 +61,14 @@ def regenerate_release_artifacts(root: Path = ROOT_PATH) -> None:
     write_suite_manifest(root / "suites" / "marked_bench_contradiction_standard_v0_1_1.json", suite="contradiction")
     write_benchmark_registry(root / "benchmark_registry.json")
     write_technical_note(root / "docs" / "TECHNICAL_NOTE.md")
-    write_standard_profile(root / "standard" / "marked_bench_standard_profile_v0_4_8.json")
-    write_scoring_compatibility_profile(root / "standard" / "marked_bench_scoring_compatibility_v0_4_8.json")
-    write_scoring_spec(root / "standard" / "marked_bench_scoring_spec_v0_4_8.json")
+    write_standard_profile(root / "standard" / "marked_bench_standard_profile_v0_4_9.json")
+    write_scoring_compatibility_profile(root / "standard" / "marked_bench_scoring_compatibility_v0_4_9.json")
+    write_scoring_spec(root / "standard" / "marked_bench_scoring_spec_v0_4_9.json")
     write_scoring_spec_markdown(root / "docs" / "SCORING_SPEC.md")
-    write_adoption_packet(root / "adoption" / "marked_bench_adoption_packet_v0_4_8.json")
-    write_implementation_kit(root / "adoption" / "marked_bench_implementation_kit_v0_4_8.json")
-    write_evidence_ledger(root / "adoption" / "third_party_evidence_ledger_v0_4_8.json")
-    write_change_control(root / "standard" / "marked_bench_change_control_v0_4_8.json")
+    write_adoption_packet(root / "adoption" / "marked_bench_adoption_packet_v0_4_9.json")
+    write_implementation_kit(root / "adoption" / "marked_bench_implementation_kit_v0_4_9.json")
+    write_evidence_ledger(root / "adoption" / "third_party_evidence_ledger_v0_4_9.json")
+    write_change_control(root / "standard" / "marked_bench_change_control_v0_4_9.json")
 
     scoring_results, scoring_failures = run_scoring_sanity()
     (root / "docs" / "SCORING_SANITY.md").write_text(
@@ -103,10 +103,17 @@ def regenerate_release_artifacts(root: Path = ROOT_PATH) -> None:
     if proof_failures:
         raise ValueError("checked submission proof failed: " + "; ".join(proof_failures))
 
-    for _pass in range(2):
-        write_release_manifest(root / "releases" / "marked_bench_release_v0_4_8.json", root=root)
+    conformance_path = root / "conformance" / "marked_bench_conformance_v0_4_9.json"
+    if not conformance_path.exists():
+        conformance_path.parent.mkdir(parents=True, exist_ok=True)
+        conformance_path.write_text("{}\n", encoding="utf-8")
+
+    # The release manifest hashes conformance, and conformance verifies the
+    # manifest. Three passes let a newly seeded version reach a stable pair.
+    for _pass in range(3):
+        write_release_manifest(root / "releases" / "marked_bench_release_v0_4_9.json", root=root)
         write_conformance_report(
-            root / "conformance" / "marked_bench_conformance_v0_4_8.json",
+            conformance_path,
             root=root,
         )
 

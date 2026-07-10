@@ -7,7 +7,7 @@ aggressively.
 ## Current Health
 
 - GitHub Benchmark CI is the required public health gate.
-- Public artifacts are pinned by `releases/marked_bench_release_v0_4_8.json`.
+- Public artifacts are pinned by `releases/marked_bench_release_v0_4_9.json`.
 - Conformance, standard profile, scoring compatibility, scoring specification,
   adoption packet, implementation kit, and evidence ledger checks are wired
   into validation.
@@ -35,8 +35,8 @@ aggressively.
 
 ## Best Next Work
 
-- Prepare the next release from the completed trust-hardening and onboarding
-  targets before adding more benchmark surface.
+- Collect real external evaluator and submission feedback before adding more
+  benchmark surface.
 - Keep docs focused on reproducibility, claims, licensing, and submission
   review.
 - Prefer onboarding and real third-party submission evidence over new tracks.

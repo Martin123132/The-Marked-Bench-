@@ -41,7 +41,7 @@ from marked_bench.contradiction.benchmark_suite import load_benchmark_report, va
 
 
 PACKET_DIR = Path("submissions/example_publication_packet")
-EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_8.json")
+EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_9.json")
 
 RESULT_CARD_NOTES = "Checked example result card for the publication packet workflow."
 PUBLICATION_PACKET_NOTES = "Checked example publication packet for the current public release."

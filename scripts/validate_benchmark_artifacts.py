@@ -110,15 +110,15 @@ CHECKED_SUBMISSION_PACKETS = [
 ]
 
 BENCHMARK_REGISTRY = Path("benchmark_registry.json")
-RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_8.json")
-CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_8.json")
-ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_8.json")
-EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_8.json")
-IMPLEMENTATION_KIT = Path("adoption/marked_bench_implementation_kit_v0_4_8.json")
-STANDARD_PROFILE = Path("standard/marked_bench_standard_profile_v0_4_8.json")
-CHANGE_CONTROL = Path("standard/marked_bench_change_control_v0_4_8.json")
-SCORING_COMPATIBILITY_PROFILE = Path("standard/marked_bench_scoring_compatibility_v0_4_8.json")
-SCORING_SPEC = Path("standard/marked_bench_scoring_spec_v0_4_8.json")
+RELEASE_MANIFEST = Path("releases/marked_bench_release_v0_4_9.json")
+CONFORMANCE_REPORT = Path("conformance/marked_bench_conformance_v0_4_9.json")
+ADOPTION_PACKET = Path("adoption/marked_bench_adoption_packet_v0_4_9.json")
+EVIDENCE_LEDGER = Path("adoption/third_party_evidence_ledger_v0_4_9.json")
+IMPLEMENTATION_KIT = Path("adoption/marked_bench_implementation_kit_v0_4_9.json")
+STANDARD_PROFILE = Path("standard/marked_bench_standard_profile_v0_4_9.json")
+CHANGE_CONTROL = Path("standard/marked_bench_change_control_v0_4_9.json")
+SCORING_COMPATIBILITY_PROFILE = Path("standard/marked_bench_scoring_compatibility_v0_4_9.json")
+SCORING_SPEC = Path("standard/marked_bench_scoring_spec_v0_4_9.json")
 
 REQUIRED_PUBLIC_FILES = [
     Path("adoption/README.md"),
@@ -175,6 +175,7 @@ REQUIRED_PUBLIC_FILES = [
     Path("docs/RELEASE_NOTES_v0_4_6.md"),
     Path("docs/RELEASE_NOTES_v0_4_7.md"),
     Path("docs/RELEASE_NOTES_v0_4_8.md"),
+    Path("docs/RELEASE_NOTES_v0_4_9.md"),
     Path("docs/ROADMAP.md"),
     Path("docs/CASE_QUALITY.md"),
     Path("docs/BASELINE_ROBUSTNESS.md"),

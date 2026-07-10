@@ -13,9 +13,9 @@ from marked_bench.schema_validation import load_json_schema, validate_json_schem
 
 CHANGE_CONTROL_SCHEMA = "marked_bench.change-control.v1"
 CHANGE_CONTROL_VALIDATION_SCHEMA = "marked_bench.change-control-validation.v1"
-DEFAULT_CHANGE_CONTROL = Path("standard/marked_bench_change_control_v0_4_8.json")
+DEFAULT_CHANGE_CONTROL = Path("standard/marked_bench_change_control_v0_4_9.json")
 REPOSITORY_URL = "https://github.com/Martin123132/The-Marked-Bench-"
-RELEASE_URL = "https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.4.8"
+RELEASE_URL = "https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.4.9"
 
 
 def build_change_control(root: str | Path = ".") -> dict[str, Any]:
@@ -87,14 +87,14 @@ def build_change_control(root: str | Path = ".") -> dict[str, Any]:
                 "Scoring changes update the scoring specification and deterministic compatibility vectors.",
                 [
                     "docs/SCORING_SPEC.md",
-                    "standard/marked_bench_scoring_spec_v0_4_8.json",
-                    "standard/marked_bench_scoring_compatibility_v0_4_8.json",
+                    "standard/marked_bench_scoring_spec_v0_4_9.json",
+                    "standard/marked_bench_scoring_compatibility_v0_4_9.json",
                 ],
                 [
-                    "marked-bench --validate-scoring-spec standard/marked_bench_scoring_spec_v0_4_8.json",
+                    "marked-bench --validate-scoring-spec standard/marked_bench_scoring_spec_v0_4_9.json",
                     (
                         "marked-bench --validate-scoring-compatibility "
-                        "standard/marked_bench_scoring_compatibility_v0_4_8.json"
+                        "standard/marked_bench_scoring_compatibility_v0_4_9.json"
                     ),
                 ],
             ),
@@ -102,18 +102,18 @@ def build_change_control(root: str | Path = ".") -> dict[str, Any]:
                 "evidence_gate",
                 "Evidence-policy changes update adoption, implementation-kit, standard-profile, and evidence-ledger checks.",
                 [
-                    "adoption/marked_bench_adoption_packet_v0_4_8.json",
-                    "adoption/marked_bench_implementation_kit_v0_4_8.json",
-                    "standard/marked_bench_standard_profile_v0_4_8.json",
-                    "adoption/third_party_evidence_ledger_v0_4_8.json",
+                    "adoption/marked_bench_adoption_packet_v0_4_9.json",
+                    "adoption/marked_bench_implementation_kit_v0_4_9.json",
+                    "standard/marked_bench_standard_profile_v0_4_9.json",
+                    "adoption/third_party_evidence_ledger_v0_4_9.json",
                 ],
                 [
-                    "marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_8.json",
+                    "marked-bench --validate-adoption-packet adoption/marked_bench_adoption_packet_v0_4_9.json",
                     (
                         "marked-bench --validate-implementation-kit "
-                        "adoption/marked_bench_implementation_kit_v0_4_8.json"
+                        "adoption/marked_bench_implementation_kit_v0_4_9.json"
                     ),
-                    "marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_8.json",
+                    "marked-bench --validate-evidence-ledger adoption/third_party_evidence_ledger_v0_4_9.json",
                 ],
             ),
         ],
@@ -158,10 +158,10 @@ def build_change_control(root: str | Path = ".") -> dict[str, Any]:
             ),
         ],
         "validation_commands": [
-            _command("change_control", "marked-bench --validate-change-control standard/marked_bench_change_control_v0_4_8.json"),
+            _command("change_control", "marked-bench --validate-change-control standard/marked_bench_change_control_v0_4_9.json"),
             _command("artifact_gate", "python scripts/validate_benchmark_artifacts.py"),
             _command("unit_tests", "python -m unittest discover -s tests"),
-            _command("conformance", "marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_8.json"),
+            _command("conformance", "marked-bench --validate-conformance-report conformance/marked_bench_conformance_v0_4_9.json"),
         ],
     }
 

@@ -92,6 +92,37 @@ Use this file to check off completed targets.
 - [x] Checked by:
   - Codex
 
+## Current cycle 8
+
+- [x] Completed target: Target AA
+- [x] Scope:
+  - Current version references in `setup.py`, `CITATION.cff`, package release builders, registries, documentation, and tests.
+  - Parallel `v0.4.9` artifacts under `releases/`, `conformance/`, `adoption/`, and `standard/`.
+  - `docs/RELEASE_NOTES_v0_4_9.md`, release checklist, announcement package, and project status.
+  - Current generated technical note, scoring specification, submission proof, registry, and example publication packet.
+  - Maintained GitHub Actions workflow and implementation-kit example.
+  - Release regeneration and artifact validation paths.
+- [x] Validation:
+  - `python -m unittest discover -s tests`
+  - `python scripts/validate_benchmark_artifacts.py`
+  - `python -m marked_bench.benchmark_cli --check-standard-status`
+  - `python scripts/check_scoring_sanity.py --artifact docs/SCORING_SANITY.md`
+  - `python scripts/check_case_quality.py --artifact docs/CASE_QUALITY.md`
+  - `python scripts/check_baseline_robustness.py --artifact docs/BASELINE_ROBUSTNESS.md`
+  - `python scripts/check_evaluator_walkthrough.py`
+  - `python scripts/check_submission_proof.py`
+  - `python scripts/check_review_workflow.py`
+  - `python scripts/check_license_notice.py`
+  - `python scripts/regenerate_release_artifacts.py --check`
+- [x] Evidence/notes:
+  - Classified `v0.4.9` as a patch release because benchmark suites, case hashes, scoring semantics, and compatibility claims are unchanged.
+  - Preserved all `v0.4.8` artifacts while adding the parallel `v0.4.9` release set.
+  - Documented the baseline diagnostic, evaluator walkthrough, and checked submission proof without claiming external adoption.
+  - Upgraded maintained Actions references to `actions/checkout@v7` and `actions/setup-python@v6`.
+  - Kept the noncommercial licensing terms and commercial licensing contact unchanged.
+- [x] Checked by:
+  - Codex
+
 ## Current cycle 7
 
 - [x] Completed target: Target Z
