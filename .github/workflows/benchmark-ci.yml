@@ -26,6 +26,8 @@ jobs:
         run: python scripts/check_case_quality.py
       - name: Run baseline robustness check
         run: python scripts/check_baseline_robustness.py
+      - name: Check evaluator walkthrough
+        run: python scripts/check_evaluator_walkthrough.py
       - name: Check release artifact drift
         run: python scripts/regenerate_release_artifacts.py --check
       - name: Check review workflow

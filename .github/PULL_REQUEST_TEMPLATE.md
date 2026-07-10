@@ -33,6 +33,8 @@
 - [ ] Target U
 - [ ] Target V
 - [ ] Target W
+- [ ] Target X
+- [ ] Target Y
 
 ## Track
 
@@ -58,6 +60,7 @@
 - Scoring sanity artifact path:
 - Case quality artifact path:
 - Baseline robustness artifact path:
+- Evaluator walkthrough path:
 
 ## Checks
 
@@ -67,6 +70,7 @@
 - [ ] `python scripts/check_scoring_sanity.py --artifact docs/SCORING_SANITY.md`
 - [ ] `python scripts/check_case_quality.py --artifact docs/CASE_QUALITY.md`
 - [ ] `python scripts/check_baseline_robustness.py --artifact docs/BASELINE_ROBUSTNESS.md`
+- [ ] `python scripts/check_evaluator_walkthrough.py`
 - [ ] `python scripts/regenerate_release_artifacts.py --check`
 - [ ] `python scripts/check_review_workflow.py`
 - [ ] `python scripts/check_license_notice.py`

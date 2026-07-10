@@ -92,6 +92,46 @@ Use this file to check off completed targets.
 - [x] Checked by:
   - Codex
 
+## Current cycle 6
+
+- [x] Completed target: Target Y
+- [x] Scope:
+  - `docs/FIVE_MINUTE_EVALUATOR_WALKTHROUGH.md`
+  - `scripts/check_evaluator_walkthrough.py`
+  - `README.md`
+  - `docs/EXTERNAL_SUBMISSION_WALKTHROUGH.md`
+  - `.github/workflows/benchmark-ci.yml`
+  - `.github/PULL_REQUEST_TEMPLATE.md`
+  - `CONTRIBUTING.md`
+  - `docs/RELEASE_CHECKLIST.md`
+  - `docs/REVIEW_WORKFLOW.md`
+  - `scripts/check_review_workflow.py`
+  - `docs/MAINTAINER_HANDOFF.md`
+  - `marked_bench/benchmark_release.py`
+  - `DEVELOPMENT_TARGETS.md`
+  - `docs/PROJECT_STATUS.md`
+  - `docs/DEVELOPMENT_TARGET_PROGRESS.md`
+  - `releases/marked_bench_release_v0_4_8.json`
+  - `conformance/marked_bench_conformance_v0_4_8.json`
+- [x] Validation run:
+  - `python -m unittest discover -s tests`
+  - `python scripts/validate_benchmark_artifacts.py`
+  - `python -m marked_bench.benchmark_cli --check-standard-status`
+  - `python scripts/check_scoring_sanity.py --artifact docs/SCORING_SANITY.md`
+  - `python scripts/check_case_quality.py --artifact docs/CASE_QUALITY.md`
+  - `python scripts/check_baseline_robustness.py --artifact docs/BASELINE_ROBUSTNESS.md`
+  - `python scripts/check_evaluator_walkthrough.py`
+  - `python scripts/regenerate_release_artifacts.py --check`
+  - `python scripts/check_review_workflow.py`
+  - `python scripts/check_license_notice.py`
+- [x] Evidence/notes:
+  - Added a five-minute path from installation and suite discovery through checked-example scoring, report validation, and prediction-template export.
+  - Exercised every evaluator step in a temporary directory so CI does not write disposable artifacts into the repository.
+  - Kept the longer submission walkthrough as the next path for metadata, review, result-card, and publication packaging.
+  - Added the walkthrough and its checker to public release evidence and maintainer/reviewer health gates.
+- [x] Checked by:
+  - Codex
+
 ## Current cycle 5
 
 - [x] Completed target: Target X
