@@ -73,6 +73,9 @@ We are tracking progress with target-based checkpoints only (no deadlines).
 - [x] **Target W: Add maintainer handoff**
   - Add a maintainer-facing handoff for PR preparation, submission review, release hygiene, and required checks.
 
+- [x] **Target X: Explain the multi-hop baseline signal**
+  - Add deterministic score decomposition, identifier-sensitivity analysis, case-level evidence, and regression checks without changing published suite IDs.
+
 ## Checkoff Rules
 
 1. A target is checked only after code/docs are committed and validations listed in the target are complete.
@@ -85,3 +88,4 @@ We are tracking progress with target-based checkpoints only (no deadlines).
 - Completed: Target H, Target I, Target J, Target K, Target L, Target M, Target N
 - Completed: Target O, Target P, Target Q, Target R, Target S
 - Completed: Target T, Target U, Target V, Target W
+- Completed: Target X

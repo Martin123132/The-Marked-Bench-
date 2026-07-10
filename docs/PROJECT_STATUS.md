@@ -15,21 +15,25 @@ aggressively.
 - Reviewer labels, workflow docs, and PR checks are guarded by
   `scripts/check_review_workflow.py`.
 - Generated release artifacts are guarded by `scripts/regenerate_release_artifacts.py --check`.
+- Multi-hop baseline interpretation is guarded by deterministic score decomposition and identifier-sensitivity checks in `scripts/check_baseline_robustness.py`.
 
 ## Current Watchlist
 
 - The `HashPriorBaseline` currently outranks `ContradictionEngine` on the
   multi-hop track.
-- This is documented in `docs/BASELINE_ROBUSTNESS.md` and should be treated as
-  a baseline-robustness signal, not as evidence that the hash-prior baseline is
-  a stronger contradiction system.
-- Avoid expanding the multi-hop track until that signal is explained, reduced,
-  or intentionally accepted with stronger public notes.
+- Target X explains the ranking as two combined effects: the engine finds only
+  one of ten multi-hop contradictions, and the checked-in hash assignment is an
+  unusually favorable identifier-to-label alignment.
+- The detailed evidence in `docs/BASELINE_ROBUSTNESS.md` treats this as an
+  explained watchlist, not evidence that the hash-prior baseline is a stronger
+  contradiction system.
+- Preserve suite v0.3.0 unchanged. Before expanding the track, add a genuinely
+  multi-hop task-aware reference; use a held-out evaluation path if future
+  ranking claims need resistance to answer lookup.
 
 ## Best Next Work
 
-- Polish public onboarding before adding more benchmark surface.
+- Add a five-minute evaluator walkthrough before adding more benchmark surface.
 - Keep docs focused on reproducibility, claims, licensing, and submission
   review.
-- Prefer small guardrail improvements over new tracks until real third-party
-  submissions arrive.
+- Prefer onboarding and real third-party submission evidence over new tracks.
