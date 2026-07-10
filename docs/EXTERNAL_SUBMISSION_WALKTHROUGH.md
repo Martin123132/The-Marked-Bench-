@@ -72,3 +72,8 @@ marked-bench --validate-result-claim publication_packet/result_claim.json
   postprocessing, training data, and runtime where applicable.
 - Results are comparable only within the same `suite_id`, `suite_version`, and
   `suite_hash`.
+
+Inspect [the checked submission proof](SUBMISSION_PROOF.md) for a complete
+example whose evidence validates but whose reviewer decision remains
+`needs_revision`. It demonstrates that publication readiness does not imply
+leaderboard acceptance.

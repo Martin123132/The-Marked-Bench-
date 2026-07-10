@@ -20,6 +20,7 @@ Current standardization status is tracked in:
 - [Standardization status](docs/STANDARDIZATION_STATUS.md)
 - [Baseline robustness](docs/BASELINE_ROBUSTNESS.md)
 - [Five-minute evaluator walkthrough](docs/FIVE_MINUTE_EVALUATOR_WALKTHROUGH.md)
+- [Checked submission proof](docs/SUBMISSION_PROOF.md)
 - [Maintainer handoff](docs/MAINTAINER_HANDOFF.md)
 
 ## Current Health Snapshot
@@ -34,6 +35,8 @@ Current standardization status is tracked in:
   `HashPriorBaseline` currently outranks `ContradictionEngine`.
 - The recommended project posture is polish and trust-hardening before adding
   more benchmark surface.
+- The checked publication packet now includes a completed `needs_revision`
+  reviewer decision while the third-party evidence ledger remains empty.
 
 ## Current Tracks
 
@@ -249,6 +252,8 @@ report, submission, bundle, review, and result-card packet without generating
 one first.
 A checked one-command publication packet is committed under
 `submissions/example_publication_packet/`.
+Its complete validation and review boundary are summarized in
+`docs/SUBMISSION_PROOF.md`; this internal example is not third-party adoption.
 
 ## Build Leaderboards
 
@@ -305,6 +310,7 @@ marked-bench --build-leaderboard baselines/always_none_controls_v0_4_0.json base
 - Project status: `docs/PROJECT_STATUS.md`
 - Baseline robustness: `docs/BASELINE_ROBUSTNESS.md`
 - Five-minute evaluator walkthrough: `docs/FIVE_MINUTE_EVALUATOR_WALKTHROUGH.md`
+- Checked submission proof: `docs/SUBMISSION_PROOF.md`
 - Maintainer handoff: `docs/MAINTAINER_HANDOFF.md`
 - Technical note: `docs/TECHNICAL_NOTE.md`
 - Submission guide: `docs/SUBMISSION_GUIDE.md`
@@ -343,6 +349,7 @@ python scripts/check_scoring_sanity.py
 python scripts/check_case_quality.py
 python scripts/check_baseline_robustness.py
 python scripts/check_evaluator_walkthrough.py
+python scripts/check_submission_proof.py
 python scripts/regenerate_release_artifacts.py --check
 python scripts/check_review_workflow.py
 python scripts/check_license_notice.py

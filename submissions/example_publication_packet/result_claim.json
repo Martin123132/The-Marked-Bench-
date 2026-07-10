@@ -16,9 +16,9 @@
     "claim_url": "",
     "evidence_url": "",
     "publication_packet_path": "publication_packet.json",
-    "publication_packet_sha256": "4a31596399135ceac0aaf6f3417e7ab09f9ea30e12502032364d7fbb1f763d0e",
+    "publication_packet_sha256": "51863e64a69b5fbe6346c7cb54c818854bd62e2db6de099181ebe8666f635624",
     "report_sha256": "9028699a80c286fb644d9a7212209d452c5e5e0cbc8303c06599fb4950017c83",
-    "result_card_sha256": "0414aebb7e9ef854cb6ba33f9b58f43a7e802e7f42d5750e9d91107a9bce3b1a"
+    "result_card_sha256": "e726577943559f5fcbef4eae2b1124664651af556f8e7fcb57e1413cfe4cd67c"
   },
   "failure_count": 10,
   "notes": "Checked example result claim for the publication packet workflow.",

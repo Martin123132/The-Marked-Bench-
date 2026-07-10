@@ -79,6 +79,9 @@ We are tracking progress with target-based checkpoints only (no deadlines).
 - [x] **Target Y: Add a five-minute evaluator walkthrough**
   - Give new evaluators one checked path from installation and suite inspection through example scoring, report validation, and prediction-template export.
 
+- [x] **Target Z: Add checked submission proof**
+  - Complete the example reviewer decision and verify the full report, bundle, review, result-card, publication-packet, result-claim, and evidence-ledger boundary.
+
 ## Checkoff Rules
 
 1. A target is checked only after code/docs are committed and validations listed in the target are complete.
@@ -93,3 +96,4 @@ We are tracking progress with target-based checkpoints only (no deadlines).
 - Completed: Target T, Target U, Target V, Target W
 - Completed: Target X
 - Completed: Target Y
+- Completed: Target Z

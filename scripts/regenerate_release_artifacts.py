@@ -14,6 +14,11 @@ sys.path.insert(0, str(SCRIPT_PATH))
 from check_case_quality import build_case_quality_artifact, run_case_quality
 from check_baseline_robustness import build_baseline_robustness_artifact, run_baseline_robustness
 from check_scoring_sanity import build_scoring_sanity_artifact, run_scoring_sanity
+from check_submission_proof import (
+    build_submission_proof_artifact,
+    regenerate_submission_proof_dependents,
+    run_submission_proof,
+)
 from marked_bench.benchmark_adoption import write_adoption_packet
 from marked_bench.benchmark_change_control import write_change_control
 from marked_bench.benchmark_conformance import write_conformance_report
@@ -43,6 +48,10 @@ GENERATED_PATHS = (
     "docs/SCORING_SANITY.md",
     "docs/CASE_QUALITY.md",
     "docs/BASELINE_ROBUSTNESS.md",
+    "submissions/example_publication_packet/result_card.json",
+    "submissions/example_publication_packet/publication_packet.json",
+    "submissions/example_publication_packet/result_claim.json",
+    "docs/SUBMISSION_PROOF.md",
     "releases/marked_bench_release_v0_4_8.json",
     "conformance/marked_bench_conformance_v0_4_8.json",
 )
@@ -84,6 +93,15 @@ def regenerate_release_artifacts(root: Path = ROOT_PATH) -> None:
     )
     if robustness_failures:
         raise ValueError("baseline robustness failed: " + "; ".join(robustness_failures))
+
+    regenerate_submission_proof_dependents(root)
+    proof_result, proof_failures = run_submission_proof(root)
+    (root / "docs" / "SUBMISSION_PROOF.md").write_text(
+        build_submission_proof_artifact(proof_result, proof_failures),
+        encoding="utf-8",
+    )
+    if proof_failures:
+        raise ValueError("checked submission proof failed: " + "; ".join(proof_failures))
 
     for _pass in range(2):
         write_release_manifest(root / "releases" / "marked_bench_release_v0_4_8.json", root=root)

@@ -44,6 +44,7 @@ python scripts/check_scoring_sanity.py --artifact docs/SCORING_SANITY.md
 python scripts/check_case_quality.py --artifact docs/CASE_QUALITY.md
 python scripts/check_baseline_robustness.py --artifact docs/BASELINE_ROBUSTNESS.md
 python scripts/check_evaluator_walkthrough.py
+python scripts/check_submission_proof.py --artifact docs/SUBMISSION_PROOF.md
 python scripts/regenerate_release_artifacts.py --check
 python scripts/check_review_workflow.py
 python scripts/check_license_notice.py

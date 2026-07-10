@@ -13,6 +13,7 @@ python scripts/check_scoring_sanity.py
 python scripts/check_case_quality.py
 python scripts/check_baseline_robustness.py
 python scripts/check_evaluator_walkthrough.py
+python scripts/check_submission_proof.py
 python scripts/regenerate_release_artifacts.py --check
 python scripts/check_review_workflow.py
 python scripts/check_license_notice.py
@@ -110,6 +111,8 @@ python scripts/check_license_notice.py
   watchlist items before publication claims are expanded.
 - `docs/FIVE_MINUTE_EVALUATOR_WALKTHROUGH.md` completes successfully through
   `scripts/check_evaluator_walkthrough.py`.
+- `docs/SUBMISSION_PROOF.md` verifies the complete checked publication chain,
+  reviewer decision, claim boundary, and empty third-party evidence ledger.
 - Licensing notices match the current source-available, non-commercial policy
   and direct commercial licensing discussions to the COO of TWO HANDS NETWORK
   LTD.
