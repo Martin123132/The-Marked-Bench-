@@ -66,5 +66,9 @@ The ledger is an evidence record, not a marketing counter. It should stay
 boringly honest: no inferred adoption, no private claims, and no entries that
 cannot be inspected by someone outside the project.
 
+The [checked submission proof](SUBMISSION_PROOF.md) is an internally maintained
+workflow example. It must not be added to the ledger or described as external
+adoption.
+
 For the meaning of each verification state in public communications, see
 [docs/STANDARDIZATION_STATUS.md](docs/STANDARDIZATION_STATUS.md).

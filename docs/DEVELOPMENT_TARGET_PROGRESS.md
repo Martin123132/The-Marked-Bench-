@@ -92,6 +92,55 @@ Use this file to check off completed targets.
 - [x] Checked by:
   - Codex
 
+## Current cycle 7
+
+- [x] Completed target: Target Z
+- [x] Scope:
+  - `submissions/example_publication_packet/submission_review.json`
+  - `submissions/example_publication_packet/result_card.json`
+  - `submissions/example_publication_packet/publication_packet.json`
+  - `submissions/example_publication_packet/result_claim.json`
+  - `docs/SUBMISSION_PROOF.md`
+  - `scripts/check_submission_proof.py`
+  - `scripts/regenerate_release_artifacts.py`
+  - `marked_bench/benchmark_release.py`
+  - `tests/test_benchmark_suite.py`
+  - `submissions/README.md`
+  - `docs/THIRD_PARTY_EVIDENCE.md`
+  - `docs/EXTERNAL_SUBMISSION_WALKTHROUGH.md`
+  - `README.md`
+  - `.github/workflows/benchmark-ci.yml`
+  - `.github/PULL_REQUEST_TEMPLATE.md`
+  - `CONTRIBUTING.md`
+  - `docs/RELEASE_CHECKLIST.md`
+  - `docs/REVIEW_WORKFLOW.md`
+  - `scripts/check_review_workflow.py`
+  - `docs/MAINTAINER_HANDOFF.md`
+  - `DEVELOPMENT_TARGETS.md`
+  - `docs/PROJECT_STATUS.md`
+  - `docs/DEVELOPMENT_TARGET_PROGRESS.md`
+  - `releases/marked_bench_release_v0_4_8.json`
+  - `conformance/marked_bench_conformance_v0_4_8.json`
+- [x] Validation run:
+  - `python -m unittest discover -s tests`
+  - `python scripts/validate_benchmark_artifacts.py`
+  - `python -m marked_bench.benchmark_cli --check-standard-status`
+  - `python scripts/check_scoring_sanity.py --artifact docs/SCORING_SANITY.md`
+  - `python scripts/check_case_quality.py --artifact docs/CASE_QUALITY.md`
+  - `python scripts/check_baseline_robustness.py --artifact docs/BASELINE_ROBUSTNESS.md`
+  - `python scripts/check_evaluator_walkthrough.py`
+  - `python scripts/check_submission_proof.py --artifact docs/SUBMISSION_PROOF.md`
+  - `python scripts/regenerate_release_artifacts.py --check`
+  - `python scripts/check_review_workflow.py`
+  - `python scripts/check_license_notice.py`
+- [x] Evidence/notes:
+  - Completed the checked example rubric with an 8/12 `needs_revision` decision rather than presenting a valid packet as an accepted result.
+  - Regenerated the result card, publication packet, and result claim from that human-authored decision.
+  - Verified every schema, canonical file hash, suite identity field, review state, publication boundary, and citation claim.
+  - Kept the third-party evidence ledger empty and explicitly separated internal workflow proof from external adoption evidence.
+- [x] Checked by:
+  - Codex
+
 ## Current cycle 6
 
 - [x] Completed target: Target Y

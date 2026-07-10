@@ -27,12 +27,17 @@ marked-bench --validate-result-card submissions/example_external_jsonl/example_e
 
 `example_publication_packet/` is a checked one-command publication packet. It
 contains a copied report, optional predictions, submission metadata, bundle,
-review file, result card, packet manifest, and result claim. Validate it with:
+completed `needs_revision` review, result card, packet manifest, and result
+claim. Validate it with:
 
 ```bash
 marked-bench --validate-publication-packet submissions/example_publication_packet/publication_packet.json
 marked-bench --validate-result-claim submissions/example_publication_packet/result_claim.json
 ```
+
+See `docs/SUBMISSION_PROOF.md` for the full artifact and hash chain. This is an
+internal process example, not an accepted leaderboard entry or third-party
+adoption evidence.
 
 External repositories can copy the implementation kit workflow from
 `adoption/implementation_kit/github_actions_validate_result.yml` to validate a

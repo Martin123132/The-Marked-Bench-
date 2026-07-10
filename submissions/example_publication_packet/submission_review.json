@@ -8,7 +8,7 @@
   "bundle_path": "submission_bundle.json",
   "bundle_sha256": "ad4e2ff41796e55d2577fd6d056cae589e952c2d023ac1422186af146a72162a",
   "created_at": 1780242707.0,
-  "decision": "needs_review",
+  "decision": "needs_revision",
   "explanation_audit": {
     "case_count": 18,
     "correct_explanation_ready_rate": 1.0,
@@ -19,45 +19,45 @@
     "rationale_count": 18,
     "rationale_coverage": 1.0
   },
-  "notes": "Checked example review template for the publication packet workflow.",
+  "notes": "Completed example review: the evidence chain is valid, but the placeholder all-none system needs substantive disclosure, case-specific reasoning, and limitations before leaderboard acceptance.",
   "overall_score": 11.11,
   "reviewer": "example-reviewer",
   "rubric": {
     "disclosure_quality": {
       "criterion": "Model, prompting, preprocessing, retrieval, postprocessing, training data, and runtime are disclosed.",
       "max_score": 2,
-      "notes": "",
-      "score": null
+      "notes": "All disclosure fields are populated, but they describe a placeholder no-model system rather than a substantive implementation.",
+      "score": 1
     },
     "evidence_quality": {
       "criterion": "Evidence quotes or references support the predicted labels without leaking expected labels.",
       "max_score": 2,
-      "notes": "",
-      "score": null
+      "notes": "Evidence quotes are present, but the generic all-none rationale does not connect that evidence to each prediction.",
+      "score": 1
     },
     "explanation_coverage": {
       "criterion": "Rationale and evidence fields cover enough cases for meaningful review.",
       "max_score": 2,
-      "notes": "",
-      "score": null
+      "notes": "Rationale and evidence fields cover every case, but the rationale is identical rather than case-specific.",
+      "score": 1
     },
     "limitations": {
       "criterion": "Known limitations, failure modes, and benchmark-use caveats are stated clearly.",
       "max_score": 2,
-      "notes": "",
-      "score": null
+      "notes": "The packet identifies itself as an example, but it does not provide a substantive failure-mode analysis.",
+      "score": 1
     },
     "reproducibility": {
       "criterion": "The bundle, report, hashes, suite identity, and commands are reproducible.",
       "max_score": 2,
-      "notes": "",
-      "score": null
+      "notes": "Bundle, report, predictions, hashes, suite identity, and validation commands reproduce deterministically.",
+      "score": 2
     },
     "score_integrity": {
       "criterion": "The reported score is backed by a valid report and no unexplained metric mismatch.",
       "max_score": 2,
-      "notes": "",
-      "score": null
+      "notes": "The 11.11 score reproduces from the checked all-none predictions with no unexplained metric mismatch.",
+      "score": 2
     }
   },
   "schema": "marked_bench.submission-review.v1",
@@ -67,12 +67,12 @@
   "suite_version": "0.3.0",
   "summary": {
     "accept_recommendation_minimum": 9,
-    "completed_dimensions": 0,
+    "completed_dimensions": 6,
     "dimension_count": 6,
-    "ready_for_decision": false,
-    "recommendation": "needs_review",
+    "ready_for_decision": true,
+    "recommendation": "needs_revision",
     "rubric_max": 12,
-    "rubric_total": null
+    "rubric_total": 8
   },
   "system_name": "ExampleExternalJsonl",
   "system_version": "demo-1.0"

@@ -28,18 +28,18 @@
   "publication": {
     "accepted": false,
     "bundle_valid": true,
-    "ready_for_decision": false,
+    "ready_for_decision": true,
     "ready_for_leaderboard_review": true,
     "report_valid": true,
-    "review_decision": "needs_review",
-    "review_recommendation": "needs_review",
+    "review_decision": "needs_revision",
+    "review_recommendation": "needs_revision",
     "review_valid": true
   },
   "report_path": "report.json",
   "report_schema": "marked_bench.contradiction-benchmark-report.v2",
   "report_sha256": "9028699a80c286fb644d9a7212209d452c5e5e0cbc8303c06599fb4950017c83",
   "review_path": "submission_review.json",
-  "review_sha256": "3f156c0a95e2455a8673784b4ab800cb70054986c3ab999fb493fffb7a404caf",
+  "review_sha256": "ecbe2aa60d0f00d428b04046900379f35fe8fecf49cfc57f39f67986c539a3d7",
   "schema": "marked_bench.result-card.v1",
   "standard_claims": {
     "bundle_required_for_leaderboard_review": true,

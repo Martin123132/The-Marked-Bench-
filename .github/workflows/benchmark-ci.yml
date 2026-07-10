@@ -28,6 +28,8 @@ jobs:
         run: python scripts/check_baseline_robustness.py
       - name: Check evaluator walkthrough
         run: python scripts/check_evaluator_walkthrough.py
+      - name: Check submission proof
+        run: python scripts/check_submission_proof.py
       - name: Check release artifact drift
         run: python scripts/regenerate_release_artifacts.py --check
       - name: Check review workflow

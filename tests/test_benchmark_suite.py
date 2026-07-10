@@ -549,7 +549,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
             "submission_bundle_sha256": file_sha256(root / packet_dir / "submission_bundle.json"),
             "review_path": (packet_dir / "submission_review.json").as_posix(),
             "review_sha256": file_sha256(root / packet_dir / "submission_review.json"),
-            "review_decision": "needs_review",
+            "review_decision": "needs_revision",
             "result_claim_path": (packet_dir / "result_claim.json").as_posix(),
             "result_claim_sha256": file_sha256(root / packet_dir / "result_claim.json"),
             "verification_status": "pending",

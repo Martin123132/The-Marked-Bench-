@@ -16,10 +16,10 @@
       "sha256": "9028699a80c286fb644d9a7212209d452c5e5e0cbc8303c06599fb4950017c83"
     },
     {
-      "bytes": 2018,
+      "bytes": 2021,
       "path": "result_card.json",
       "role": "result_card",
-      "sha256": "0414aebb7e9ef854cb6ba33f9b58f43a7e802e7f42d5750e9d91107a9bce3b1a"
+      "sha256": "e726577943559f5fcbef4eae2b1124664651af556f8e7fcb57e1413cfe4cd67c"
     },
     {
       "bytes": 1043,
@@ -34,10 +34,10 @@
       "sha256": "ad4e2ff41796e55d2577fd6d056cae589e952c2d023ac1422186af146a72162a"
     },
     {
-      "bytes": 2552,
+      "bytes": 3314,
       "path": "submission_review.json",
       "role": "submission_review",
-      "sha256": "3f156c0a95e2455a8673784b4ab800cb70054986c3ab999fb493fffb7a404caf"
+      "sha256": "ecbe2aa60d0f00d428b04046900379f35fe8fecf49cfc57f39f67986c539a3d7"
     }
   ],
   "notes": "Checked example publication packet for the current public release.",
@@ -45,7 +45,7 @@
   "ready_for_publication": true,
   "release_id": "marked-bench-contradiction-standard-release-0.4.8",
   "report_sha256": "9028699a80c286fb644d9a7212209d452c5e5e0cbc8303c06599fb4950017c83",
-  "result_card_sha256": "0414aebb7e9ef854cb6ba33f9b58f43a7e802e7f42d5750e9d91107a9bce3b1a",
+  "result_card_sha256": "e726577943559f5fcbef4eae2b1124664651af556f8e7fcb57e1413cfe4cd67c",
   "schema": "marked_bench.publication-packet.v1",
   "standard_claims": {
     "not_safety_certification": true,

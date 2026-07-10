@@ -17,6 +17,7 @@ aggressively.
 - Generated release artifacts are guarded by `scripts/regenerate_release_artifacts.py --check`.
 - Multi-hop baseline interpretation is guarded by deterministic score decomposition and identifier-sensitivity checks in `scripts/check_baseline_robustness.py`.
 - The five-minute evaluator path is exercised end-to-end by `scripts/check_evaluator_walkthrough.py`.
+- The complete checked submission chain and non-adoption boundary are guarded by `scripts/check_submission_proof.py`.
 
 ## Current Watchlist
 
@@ -34,8 +35,8 @@ aggressively.
 
 ## Best Next Work
 
-- Demonstrate a complete third-party submission and reviewer decision before
-  adding more benchmark surface.
+- Prepare the next release from the completed trust-hardening and onboarding
+  targets before adding more benchmark surface.
 - Keep docs focused on reproducibility, claims, licensing, and submission
   review.
 - Prefer onboarding and real third-party submission evidence over new tracks.
