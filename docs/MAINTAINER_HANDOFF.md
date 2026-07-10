@@ -21,6 +21,7 @@ python -m marked_bench.benchmark_cli --check-standard-status
 python scripts/check_scoring_sanity.py --artifact docs/SCORING_SANITY.md
 python scripts/check_case_quality.py --artifact docs/CASE_QUALITY.md
 python scripts/check_baseline_robustness.py --artifact docs/BASELINE_ROBUSTNESS.md
+python scripts/check_evaluator_walkthrough.py
 python scripts/regenerate_release_artifacts.py --check
 python scripts/check_review_workflow.py
 python scripts/check_license_notice.py
@@ -41,6 +42,7 @@ python scripts/check_license_notice.py
 
 - Keep `docs/PROJECT_STATUS.md` current when project posture changes.
 - Keep `docs/BASELINE_ROBUSTNESS.md` current when leaderboard baselines change.
+- Keep `docs/FIVE_MINUTE_EVALUATOR_WALKTHROUGH.md` aligned with executable CLI behavior.
 - Keep `docs/RELEASE_CHECKLIST.md` aligned with CI.
 - Keep license and commercial-use language synchronized across `LICENSE`,
   `COMMERCIAL-LICENSE.md`, `NOTICE.md`, and `README.md`.

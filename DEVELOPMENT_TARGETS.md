@@ -76,6 +76,9 @@ We are tracking progress with target-based checkpoints only (no deadlines).
 - [x] **Target X: Explain the multi-hop baseline signal**
   - Add deterministic score decomposition, identifier-sensitivity analysis, case-level evidence, and regression checks without changing published suite IDs.
 
+- [x] **Target Y: Add a five-minute evaluator walkthrough**
+  - Give new evaluators one checked path from installation and suite inspection through example scoring, report validation, and prediction-template export.
+
 ## Checkoff Rules
 
 1. A target is checked only after code/docs are committed and validations listed in the target are complete.
@@ -89,3 +92,4 @@ We are tracking progress with target-based checkpoints only (no deadlines).
 - Completed: Target O, Target P, Target Q, Target R, Target S
 - Completed: Target T, Target U, Target V, Target W
 - Completed: Target X
+- Completed: Target Y

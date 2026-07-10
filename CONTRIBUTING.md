@@ -36,6 +36,7 @@ python -m marked_bench.benchmark_cli --check-standard-status
 python scripts/check_scoring_sanity.py
 python scripts/check_case_quality.py
 python scripts/check_baseline_robustness.py
+python scripts/check_evaluator_walkthrough.py
 python scripts/regenerate_release_artifacts.py --check
 python scripts/check_review_workflow.py
 python scripts/check_license_notice.py
@@ -63,6 +64,10 @@ python scripts/check_case_quality.py --artifact docs/CASE_QUALITY.md
 Commit the generated `docs/CASE_QUALITY.md` artifact with the case change.
 
 ## Submission Types
+
+New evaluators should complete
+`docs/FIVE_MINUTE_EVALUATOR_WALKTHROUGH.md` before preparing submission
+metadata.
 
 - Benchmark case improvement: add or refine cases in a new suite version.
 - Baseline report: add a report under `baselines/` and update the matching

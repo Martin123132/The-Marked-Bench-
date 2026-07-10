@@ -3,6 +3,11 @@
 This walkthrough shows the intended end-to-end shape for a third-party system
 submitting a Marked Bench result.
 
+If you have not run the evaluator yet, complete the
+[five-minute evaluator walkthrough](FIVE_MINUTE_EVALUATOR_WALKTHROUGH.md)
+first. It verifies installation, suite discovery, prediction scoring, and
+report validation before this packaging workflow begins.
+
 ## Choose A Suite
 
 List public suites:

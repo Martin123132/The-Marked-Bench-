@@ -19,6 +19,7 @@ Current standardization status is tracked in:
 - [Project status](docs/PROJECT_STATUS.md)
 - [Standardization status](docs/STANDARDIZATION_STATUS.md)
 - [Baseline robustness](docs/BASELINE_ROBUSTNESS.md)
+- [Five-minute evaluator walkthrough](docs/FIVE_MINUTE_EVALUATOR_WALKTHROUGH.md)
 - [Maintainer handoff](docs/MAINTAINER_HANDOFF.md)
 
 ## Current Health Snapshot
@@ -28,7 +29,8 @@ Current standardization status is tracked in:
   drift in CI.
 - Licensing, review workflow, scoring sanity, case quality, and baseline
   robustness each have dedicated guard scripts.
-- The multi-hop track has a documented baseline-robustness watchlist item:
+- The multi-hop track has an explained baseline-robustness watchlist item:
+  identifier sensitivity and weak task-aware multi-hop coverage explain why
   `HashPriorBaseline` currently outranks `ContradictionEngine`.
 - The recommended project posture is polish and trust-hardening before adding
   more benchmark surface.
@@ -56,6 +58,14 @@ pip install -e .
 ```
 
 Requires Python 3.10 or newer.
+
+## Five-Minute Evaluator Path
+
+Start with the
+[five-minute evaluator walkthrough](docs/FIVE_MINUTE_EVALUATOR_WALKTHROUGH.md).
+It scores and validates a checked example before asking you to connect your own
+system, so installation, suite identity, prediction shape, and report output
+are confirmed in one short path.
 
 ## Run A Benchmark
 
@@ -294,6 +304,7 @@ marked-bench --build-leaderboard baselines/always_none_controls_v0_4_0.json base
 - Benchmark card: `docs/BENCHMARK_CARD.md`
 - Project status: `docs/PROJECT_STATUS.md`
 - Baseline robustness: `docs/BASELINE_ROBUSTNESS.md`
+- Five-minute evaluator walkthrough: `docs/FIVE_MINUTE_EVALUATOR_WALKTHROUGH.md`
 - Maintainer handoff: `docs/MAINTAINER_HANDOFF.md`
 - Technical note: `docs/TECHNICAL_NOTE.md`
 - Submission guide: `docs/SUBMISSION_GUIDE.md`
@@ -331,6 +342,7 @@ python -m marked_bench.benchmark_cli --check-standard-status
 python scripts/check_scoring_sanity.py
 python scripts/check_case_quality.py
 python scripts/check_baseline_robustness.py
+python scripts/check_evaluator_walkthrough.py
 python scripts/regenerate_release_artifacts.py --check
 python scripts/check_review_workflow.py
 python scripts/check_license_notice.py
