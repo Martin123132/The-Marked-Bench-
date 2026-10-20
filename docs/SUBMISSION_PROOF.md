@@ -43,8 +43,8 @@ The decision is intentionally not `accept`: the packet and score reproduce, but 
 | submission bundle | `submissions/example_publication_packet/submission_bundle.json` | `marked_bench.leaderboard-submission-bundle.v1` | PASS | `ad4e2ff41796e55d2577fd6d056cae589e952c2d023ac1422186af146a72162a` |
 | submission review | `submissions/example_publication_packet/submission_review.json` | `marked_bench.submission-review.v1` | PASS | `ecbe2aa60d0f00d428b04046900379f35fe8fecf49cfc57f39f67986c539a3d7` |
 | result card | `submissions/example_publication_packet/result_card.json` | `marked_bench.result-card.v1` | PASS | `e726577943559f5fcbef4eae2b1124664651af556f8e7fcb57e1413cfe4cd67c` |
-| publication packet | `submissions/example_publication_packet/publication_packet.json` | `marked_bench.publication-packet.v1` | PASS | `0a028b117c1de501644f7888cc98388b04c0f4000a7a89ad5a00dc611cee9f02` |
-| result claim | `submissions/example_publication_packet/result_claim.json` | `marked_bench.result-claim.v1` | PASS | `346d01329ab7589aa3779e35898ab0ceaadc618de61f156855a8c113da8f4f4c` |
+| publication packet | `submissions/example_publication_packet/publication_packet.json` | `marked_bench.publication-packet.v1` | PASS | `cafc55bd0c0070cb2a0325030e9e28f7001bd417b72cf5b6f26104a3e94f825a` |
+| result claim | `submissions/example_publication_packet/result_claim.json` | `marked_bench.result-claim.v1` | PASS | `7bbb10506ee1afce909ce4dd785d628a79de22b63b8b54a3f98bca92302b228d` |
 
 ## Publication outcome
 

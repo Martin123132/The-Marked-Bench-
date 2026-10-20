@@ -8,6 +8,7 @@ third-party packages in CI.
 """
 
 import json
+import math
 import re
 from pathlib import Path
 from typing import Any, Mapping
@@ -86,12 +87,12 @@ class _SchemaValidator:
                 if len(matches) != 1:
                     errors.append(f"{path}: expected exactly one oneOf option to match, got {len(matches)}")
 
-        if "const" in schema and instance != schema["const"]:
+        if "const" in schema and not self._json_equal(instance, schema["const"]):
             errors.append(f"{path}: expected constant {schema['const']!r}, got {instance!r}")
 
         if "enum" in schema:
             allowed = schema["enum"]
-            if isinstance(allowed, list) and instance not in allowed:
+            if isinstance(allowed, list) and not any(self._json_equal(instance, item) for item in allowed):
                 errors.append(f"{path}: value {instance!r} is not in enum {allowed!r}")
 
         if "type" in schema:
@@ -174,9 +175,35 @@ class _SchemaValidator:
         min_items = schema.get("minItems")
         if isinstance(min_items, int) and len(instance) < min_items:
             errors.append(f"{path}: expected at least {min_items} items, got {len(instance)}")
+
+        max_items = schema.get("maxItems")
+        if isinstance(max_items, int) and len(instance) > max_items:
+            errors.append(f"{path}: expected at most {max_items} items, got {len(instance)}")
+
+        prefix_items = schema.get("prefixItems")
+        prefix_count = 0
+        if prefix_items is not None:
+            if not isinstance(prefix_items, list):
+                errors.append(f"{path}: prefixItems must be a list")
+            else:
+                prefix_count = len(prefix_items)
+                for index, prefix_schema in enumerate(prefix_items[: len(instance)]):
+                    if not isinstance(prefix_schema, Mapping):
+                        errors.append(f"{path}: prefixItems[{index}] must be a schema object")
+                        continue
+                    errors.extend(
+                        self._validate(
+                            instance[index],
+                            prefix_schema,
+                            path=f"{path}[{index}]",
+                            root_schema=root_schema,
+                            schema_path=schema_path,
+                        )
+                    )
+
         item_schema = schema.get("items")
         if isinstance(item_schema, Mapping):
-            for index, item in enumerate(instance):
+            for index, item in enumerate(instance[prefix_count:], start=prefix_count):
                 errors.extend(
                     self._validate(
                         item,
@@ -200,6 +227,8 @@ class _SchemaValidator:
 
     def _validate_number(self, instance: int | float, schema: Mapping[str, Any], path: str) -> list[str]:
         errors: list[str] = []
+        if isinstance(instance, float) and not math.isfinite(instance):
+            return [f"{path}: expected a finite JSON number, got {instance!r}"]
         minimum = schema.get("minimum")
         if isinstance(minimum, (int, float)) and instance < minimum:
             errors.append(f"{path}: expected value >= {minimum}, got {instance}")
@@ -271,6 +300,32 @@ class _SchemaValidator:
             return isinstance(value, bool)
         if expected == "null":
             return value is None
+        return False
+
+    @classmethod
+    def _json_equal(cls, left: Any, right: Any) -> bool:
+        if isinstance(left, bool) or isinstance(right, bool):
+            return isinstance(left, bool) and isinstance(right, bool) and left == right
+        if left is None or right is None:
+            return left is right
+        if isinstance(left, (int, float)) and isinstance(right, (int, float)):
+            return left == right
+        if isinstance(left, str) or isinstance(right, str):
+            return isinstance(left, str) and isinstance(right, str) and left == right
+        if isinstance(left, list) or isinstance(right, list):
+            return (
+                isinstance(left, list)
+                and isinstance(right, list)
+                and len(left) == len(right)
+                and all(cls._json_equal(a, b) for a, b in zip(left, right))
+            )
+        if isinstance(left, dict) or isinstance(right, dict):
+            return (
+                isinstance(left, dict)
+                and isinstance(right, dict)
+                and left.keys() == right.keys()
+                and all(cls._json_equal(left[key], right[key]) for key in left)
+            )
         return False
 
     @staticmethod

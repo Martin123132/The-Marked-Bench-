@@ -87,6 +87,27 @@ We are tracking progress with target-based checkpoints only (no deadlines).
 
 ## Checkoff Rules
 
+## Current Ordered Targets (No Timelines)
+
+- [ ] **Target AB: Publish submission security hardening**
+  Reject bundle path escapes before file access, pass regressions and release
+  gates, and publish the patch release with unchanged suites and licensing.
+- [ ] **Target AC: Prove cross-platform clean installation**
+  Pass Windows and Ubuntu CI across Python 3.10 through 3.14, including an
+  isolated wheel installation and the evaluator workflow outside the checkout.
+- [ ] **Target AD: Complete an independent evaluator submission**
+  Record a genuinely external run, original predictions, reproducible
+  environment, suite identity, onboarding feedback, and a documented review.
+  Internal examples and agent-driven smoke tests do not satisfy this target.
+- [ ] **Target AE: Strengthen the multi-hop reference baseline**
+  Add task-aware reasoning while preserving suite v0.3.0 and examine identifier
+  and input-order sensitivity without tuning on case identifiers.
+- [ ] **Target AF: Qualify Forge Bridge instruction scope separately**
+  Demonstrate that nested instructions retain their intended directory scope
+  in an isolated pilot before applying any destination kit to a live project.
+
+## Checkoff Evidence
+
 1. A target is checked only after code/docs are committed and validations listed in the target are complete.
 2. For each checkoff, add a short entry in `docs/DEVELOPMENT_TARGET_PROGRESS.md` with the exact files changed and validator commands run.
 3. Score checks should include `python scripts/check_scoring_sanity.py` and `docs/SCORING_SANITY.md` updates when scoring logic changed.
