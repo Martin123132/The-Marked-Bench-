@@ -7,7 +7,7 @@ aggressively.
 ## Current Health
 
 - GitHub Benchmark CI is the required public health gate.
-- Public artifacts are pinned by `releases/marked_bench_release_v0_4_9.json`.
+- Public artifacts are pinned by `releases/marked_bench_release_v0_4_10.json`.
 - Conformance, standard profile, scoring compatibility, scoring specification,
   adoption packet, implementation kit, and evidence ledger checks are wired
   into validation.
@@ -35,8 +35,13 @@ aggressively.
 
 ## Best Next Work
 
-- Collect real external evaluator and submission feedback before adding more
-  benchmark surface.
-- Keep docs focused on reproducibility, claims, licensing, and submission
-  review.
-- Prefer onboarding and real third-party submission evidence over new tracks.
+Follow targets AB through AF in `DEVELOPMENT_TARGETS.md`, in order:
+
+1. Publish the submission boundary and validation hardening.
+2. Prove Windows/Linux and isolated wheel-install reproducibility.
+3. Obtain a genuinely independent evaluator run and reviewed submission.
+4. Strengthen the task-aware multi-hop reference without changing suite v0.3.0.
+5. Qualify Forge Bridge instruction scope separately from benchmark scores.
+
+Do not count internal tests as external adoption. Prefer these trust and
+usability targets over new benchmark tracks, dashboards, or a broad refactor.

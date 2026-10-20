@@ -12,8 +12,51 @@ Use this file to check off completed targets.
 
 ## Cycle notes (no timelines)
 
-- [x] Current in-progress target: `none`
-- [x] Next target after current: `identify Target X onward`
+## Security And Installation Qualification
+
+Targets AB and AC are prepared for publication; their checkboxes remain open
+until the public CI and release steps complete.
+
+- Security implementation: `marked_bench/benchmark_submission.py`.
+- Additional validation hardening: `marked_bench/schema_validation.py` and
+  `marked_bench/contradiction/benchmark_suite.py`.
+- Regressions: `tests/test_benchmark_suite.py` and
+  `tests/test_submission_security.py`.
+- Clean-install proof: `scripts/check_installed_package.py`.
+- Cross-platform gate: `.github/workflows/benchmark-ci.yml`.
+- Release evidence: `scripts/regenerate_release_artifacts.py`,
+  `docs/RELEASE_NOTES_v0_4_10.md`, and the parallel v0.4.10 artifacts.
+- Local result: 120 tests passed on Windows / Python 3.13.13, without skips.
+- Fresh wheel installation passed outside the checkout: package v0.4.10,
+  18 multi-hop cases, checked-example score 11.11, and pinned suite hash
+  `07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f`.
+- Public CI must also pass Windows and Ubuntu / Python 3.10 through 3.14.
+- The existing local edit to the v0.4.9 manifest is not included; historical
+  v0.4.9 release files are preserved in GitHub.
+- Suite files and licensing files are unchanged.
+
+Validation commands completed locally:
+
+```bash
+python -m unittest discover -s tests
+python scripts/check_installed_package.py
+python scripts/validate_benchmark_artifacts.py
+python -m marked_bench.benchmark_cli --check-standard-status
+python scripts/check_scoring_sanity.py
+python scripts/check_case_quality.py
+python scripts/check_baseline_robustness.py
+python scripts/check_evaluator_walkthrough.py
+python scripts/check_submission_proof.py
+python scripts/check_review_workflow.py
+python scripts/check_license_notice.py
+python scripts/regenerate_release_artifacts.py --check
+git diff --check
+```
+
+## Target Queue
+
+- [ ] Current in-progress target: `AB - publish submission security hardening`
+- [ ] Next target after current: `AC - cross-platform clean installation`
 - [x] Completed targets:
   - Target A: release-ready checks completed.
   - Target B: contributor PR/checklist guidance updated.

@@ -1,9 +1,13 @@
+import hashlib
 import json
+import os
 from pathlib import Path
 import shutil
+import subprocess
 from contextlib import redirect_stdout
 from io import StringIO
 import unittest
+from unittest import mock
 
 from marked_bench.benchmark_leaderboard import LEADERBOARD_SCHEMA, build_leaderboard, report_sha256
 from marked_bench.benchmark_adoption import (
@@ -336,15 +340,15 @@ class BenchmarkSuiteTests(unittest.TestCase):
         root = Path(__file__).resolve().parent.parent
         checked_pairs = [
             ("benchmark_registry.json", "schemas/benchmark_registry.schema.json"),
-            ("releases/marked_bench_release_v0_4_9.json", "schemas/release_manifest.schema.json"),
-            ("conformance/marked_bench_conformance_v0_4_9.json", "schemas/conformance_report.schema.json"),
-            ("adoption/marked_bench_adoption_packet_v0_4_9.json", "schemas/adoption_packet.schema.json"),
-            ("adoption/third_party_evidence_ledger_v0_4_9.json", "schemas/third_party_evidence_ledger.schema.json"),
-            ("adoption/marked_bench_implementation_kit_v0_4_9.json", "schemas/implementation_kit.schema.json"),
-            ("standard/marked_bench_standard_profile_v0_4_9.json", "schemas/standard_profile.schema.json"),
-            ("standard/marked_bench_change_control_v0_4_9.json", "schemas/change_control.schema.json"),
-            ("standard/marked_bench_scoring_compatibility_v0_4_9.json", "schemas/scoring_compatibility.schema.json"),
-            ("standard/marked_bench_scoring_spec_v0_4_9.json", "schemas/scoring_spec.schema.json"),
+            ("releases/marked_bench_release_v0_4_10.json", "schemas/release_manifest.schema.json"),
+            ("conformance/marked_bench_conformance_v0_4_10.json", "schemas/conformance_report.schema.json"),
+            ("adoption/marked_bench_adoption_packet_v0_4_10.json", "schemas/adoption_packet.schema.json"),
+            ("adoption/third_party_evidence_ledger_v0_4_10.json", "schemas/third_party_evidence_ledger.schema.json"),
+            ("adoption/marked_bench_implementation_kit_v0_4_10.json", "schemas/implementation_kit.schema.json"),
+            ("standard/marked_bench_standard_profile_v0_4_10.json", "schemas/standard_profile.schema.json"),
+            ("standard/marked_bench_change_control_v0_4_10.json", "schemas/change_control.schema.json"),
+            ("standard/marked_bench_scoring_compatibility_v0_4_10.json", "schemas/scoring_compatibility.schema.json"),
+            ("standard/marked_bench_scoring_spec_v0_4_10.json", "schemas/scoring_spec.schema.json"),
             ("suites/marked_bench_contradiction_standard_v0_1_0.json", "schemas/contradiction_suite_manifest.schema.json"),
             ("suites/marked_bench_contradiction_standard_v0_1_1.json", "schemas/contradiction_suite_manifest.schema.json"),
             ("suites/marked_bench_contradiction_adversarial_v0_2_0.json", "schemas/contradiction_suite_manifest.schema.json"),
@@ -400,6 +404,36 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
         self.assertTrue(any("missing required property 'case_results'" in error for error in errors))
 
+    def test_schema_validator_enforces_scoring_range_tuple(self) -> None:
+        root = Path(__file__).resolve().parent.parent
+        schema_path = root / "schemas" / "scoring_spec.schema.json"
+        schema = json.loads(schema_path.read_text(encoding="utf-8-sig"))
+        spec = build_scoring_spec(root)
+
+        wrong_bounds = json.loads(json.dumps(spec))
+        wrong_bounds["input_contract"]["detector_score_range"] = [1.0, 0.0]
+        wrong_bound_errors = validate_json_schema(wrong_bounds, schema, schema_path=schema_path)
+
+        boolean_bounds = json.loads(json.dumps(spec))
+        boolean_bounds["input_contract"]["detector_score_range"] = [False, True]
+        boolean_bound_errors = validate_json_schema(boolean_bounds, schema, schema_path=schema_path)
+
+        extra_bound = json.loads(json.dumps(spec))
+        extra_bound["input_contract"]["detector_score_range"] = [0.0, 1.0, 2.0]
+        extra_bound_errors = validate_json_schema(extra_bound, schema, schema_path=schema_path)
+
+        self.assertTrue(any("detector_score_range[0]" in error for error in wrong_bound_errors))
+        self.assertTrue(any("detector_score_range[0]" in error for error in boolean_bound_errors))
+        self.assertTrue(any("expected at most 2 items" in error for error in extra_bound_errors))
+        non_finite_errors = validate_json_schema(float("nan"), {"type": "number", "minimum": 0})
+        self.assertTrue(any("finite JSON number" in error for error in non_finite_errors))
+
+    def test_schema_validator_uses_json_equality_for_enum(self) -> None:
+        self.assertEqual(validate_json_schema(1, {"enum": [1]}), [])
+        errors = validate_json_schema(True, {"enum": [1]})
+
+        self.assertTrue(any("not in enum" in error for error in errors))
+
     def test_public_registry_advertises_submission_review_schema(self) -> None:
         registry = build_benchmark_registry()
 
@@ -431,7 +465,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_release_manifest_matches_current_artifacts(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "releases" / "marked_bench_release_v0_4_9.json"
+        path = root / "releases" / "marked_bench_release_v0_4_10.json"
 
         manifest = json.loads(path.read_text(encoding="utf-8"))
         artifact_paths = {entry["path"] for entry in manifest["artifacts"]}
@@ -442,14 +476,14 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertGreater(manifest["artifact_count"], 20)
         self.assertIn("submissions/example_external_jsonl/predictions.jsonl", artifact_paths)
         self.assertIn("submissions/example_external_jsonl/example_external_submission_review.json", artifact_paths)
-        self.assertIn("conformance/marked_bench_conformance_v0_4_9.json", artifact_paths)
-        self.assertIn("standard/marked_bench_standard_profile_v0_4_9.json", artifact_paths)
-        self.assertIn("standard/marked_bench_change_control_v0_4_9.json", artifact_paths)
-        self.assertIn("standard/marked_bench_scoring_compatibility_v0_4_9.json", artifact_paths)
-        self.assertIn("standard/marked_bench_scoring_spec_v0_4_9.json", artifact_paths)
-        self.assertIn("adoption/marked_bench_adoption_packet_v0_4_9.json", artifact_paths)
-        self.assertIn("adoption/third_party_evidence_ledger_v0_4_9.json", artifact_paths)
-        self.assertIn("adoption/marked_bench_implementation_kit_v0_4_9.json", artifact_paths)
+        self.assertIn("conformance/marked_bench_conformance_v0_4_10.json", artifact_paths)
+        self.assertIn("standard/marked_bench_standard_profile_v0_4_10.json", artifact_paths)
+        self.assertIn("standard/marked_bench_change_control_v0_4_10.json", artifact_paths)
+        self.assertIn("standard/marked_bench_scoring_compatibility_v0_4_10.json", artifact_paths)
+        self.assertIn("standard/marked_bench_scoring_spec_v0_4_10.json", artifact_paths)
+        self.assertIn("adoption/marked_bench_adoption_packet_v0_4_10.json", artifact_paths)
+        self.assertIn("adoption/third_party_evidence_ledger_v0_4_10.json", artifact_paths)
+        self.assertIn("adoption/marked_bench_implementation_kit_v0_4_10.json", artifact_paths)
         self.assertIn("adoption/implementation_kit/github_actions_validate_result.yml", artifact_paths)
         self.assertIn("suites/marked_bench_contradiction_controls_v0_4_0.json", artifact_paths)
         self.assertIn("leaderboard/leaderboard_controls_v0_4_0.json", artifact_paths)
@@ -469,9 +503,25 @@ class BenchmarkSuiteTests(unittest.TestCase):
         self.assertIn("submissions/example_publication_packet/publication_packet.json", artifact_paths)
         self.assertIn("submissions/example_publication_packet/result_claim.json", artifact_paths)
 
+    def test_release_regenerator_normalizes_generated_newlines(self) -> None:
+        from scripts.regenerate_release_artifacts import _normalize_generated_newlines
+
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        generated_path = output_root / "benchmark_registry.json"
+
+        try:
+            output_root.mkdir(parents=True, exist_ok=True)
+            generated_path.write_bytes(b'{\r\n  "schema": "test"\r\n}\r\n')
+
+            _normalize_generated_newlines(output_root)
+
+            self.assertEqual(generated_path.read_bytes(), b'{\n  "schema": "test"\n}\n')
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
     def test_checked_in_conformance_report_matches_current_evidence(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "conformance" / "marked_bench_conformance_v0_4_9.json"
+        path = root / "conformance" / "marked_bench_conformance_v0_4_10.json"
 
         report = load_conformance_report(path)
         validation = validate_conformance_report(report, root=root)
@@ -492,7 +542,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_adoption_packet_matches_current_evidence(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "adoption" / "marked_bench_adoption_packet_v0_4_9.json"
+        path = root / "adoption" / "marked_bench_adoption_packet_v0_4_10.json"
 
         packet = load_adoption_packet(path)
         validation = validate_adoption_packet(packet, root=root)
@@ -519,7 +569,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_evidence_ledger_matches_current_evidence(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "adoption" / "third_party_evidence_ledger_v0_4_9.json"
+        path = root / "adoption" / "third_party_evidence_ledger_v0_4_10.json"
 
         ledger = load_evidence_ledger(path)
         validation = validate_evidence_ledger(ledger, root=root)
@@ -578,7 +628,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_implementation_kit_matches_current_release(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "adoption" / "marked_bench_implementation_kit_v0_4_9.json"
+        path = root / "adoption" / "marked_bench_implementation_kit_v0_4_10.json"
 
         kit = load_implementation_kit(path)
         validation = validate_implementation_kit(kit, root=root)
@@ -592,7 +642,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_standard_profile_matches_current_release(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "standard" / "marked_bench_standard_profile_v0_4_9.json"
+        path = root / "standard" / "marked_bench_standard_profile_v0_4_10.json"
 
         profile = load_standard_profile(path)
         validation = validate_standard_profile(profile, root=root)
@@ -607,7 +657,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_change_control_matches_current_release(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "standard" / "marked_bench_change_control_v0_4_9.json"
+        path = root / "standard" / "marked_bench_change_control_v0_4_10.json"
 
         profile = load_change_control(path)
         validation = validate_change_control(profile, root=root)
@@ -621,7 +671,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_scoring_compatibility_profile_matches_current_release(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "standard" / "marked_bench_scoring_compatibility_v0_4_9.json"
+        path = root / "standard" / "marked_bench_scoring_compatibility_v0_4_10.json"
 
         profile = load_scoring_compatibility_profile(path)
         validation = validate_scoring_compatibility_profile(profile, root=root)
@@ -637,7 +687,7 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
     def test_checked_in_scoring_spec_matches_current_release(self) -> None:
         root = Path(__file__).resolve().parent.parent
-        path = root / "standard" / "marked_bench_scoring_spec_v0_4_9.json"
+        path = root / "standard" / "marked_bench_scoring_spec_v0_4_10.json"
         doc_path = root / "docs" / "SCORING_SPEC.md"
 
         spec = load_scoring_spec(path)
@@ -812,6 +862,17 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
         self.assertFalse(validation["valid"])
         self.assertTrue(any("suite_hash mismatch" in error for error in validation["errors"]))
+
+    def test_report_validator_rejects_unknown_suite_without_raising(self) -> None:
+        report = evaluate_standard_suite()
+        report["suite_id"] = "unknown-suite"
+        report["suite_version"] = "9.9.9"
+
+        validation = validate_benchmark_report(report)
+
+        self.assertFalse(validation["valid"])
+        self.assertEqual(validation["suite_id"], "unknown-suite")
+        self.assertTrue(any("Unknown benchmark suite" in error for error in validation["errors"]))
 
     def test_report_validator_rejects_modified_suite_case(self) -> None:
         report = evaluate_standard_suite()
@@ -1085,6 +1146,244 @@ class BenchmarkSuiteTests(unittest.TestCase):
 
             self.assertFalse(validation["valid"])
             self.assertTrue(any("sha256 mismatch" in error for error in validation["errors"]))
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_submission_bundle_builder_rejects_nested_report_traversal_without_opening_it(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        packet_root = output_root / "packet"
+        report_path = packet_root / "report.json"
+        submission_path = packet_root / "submission.json"
+
+        try:
+            packet_root.mkdir(parents=True, exist_ok=True)
+            write_benchmark_report(evaluate_standard_suite(system_name="UnsafeBuilder"), report_path)
+            submission = build_leaderboard_submission(
+                "report.json",
+                system_version="1.0.0",
+                submitter="Marked Bench Test",
+                base_dir=packet_root,
+            )
+            submission["report_path"] = "../outside-report.json"
+            write_leaderboard_submission(submission, submission_path)
+            (output_root / "outside-report.json").write_text("{}", encoding="utf-8")
+
+            with (
+                mock.patch("marked_bench.benchmark_submission.load_benchmark_report") as load_report,
+                self.assertRaisesRegex(ValueError, "report_path must resolve within the bundle root"),
+            ):
+                build_submission_bundle("submission.json", base_dir=packet_root)
+
+            load_report.assert_not_called()
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_submission_bundle_rejects_nested_report_traversal_without_opening_it(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        packet_root = output_root / "packet"
+        report_path = packet_root / "report.json"
+        submission_path = packet_root / "submission.json"
+        outside_report_path = output_root / "outside-report.json"
+
+        try:
+            packet_root.mkdir(parents=True, exist_ok=True)
+            write_benchmark_report(evaluate_standard_suite(system_name="NestedTraversal"), report_path)
+            submission = build_leaderboard_submission(
+                "report.json",
+                system_version="1.0.0",
+                submitter="Marked Bench Test",
+                base_dir=packet_root,
+            )
+            write_leaderboard_submission(submission, submission_path)
+            bundle = build_submission_bundle("submission.json", base_dir=packet_root)
+
+            outside_report_path.write_text("{}", encoding="utf-8")
+            submission["report_path"] = "../outside-report.json"
+            write_leaderboard_submission(submission, submission_path)
+            submission_data = submission_path.read_bytes().replace(b"\r\n", b"\n")
+            submission_entry = next(item for item in bundle["files"] if item["role"] == "submission")
+            submission_entry["sha256"] = hashlib.sha256(submission_data).hexdigest()
+            submission_entry["bytes"] = len(submission_data)
+
+            opened_paths: list[Path] = []
+
+            def tracked_report_load(path: str | Path) -> dict[str, object]:
+                resolved_path = Path(path).resolve()
+                opened_paths.append(resolved_path)
+                return json.loads(resolved_path.read_text(encoding="utf-8"))
+
+            with mock.patch(
+                "marked_bench.benchmark_submission.load_benchmark_report",
+                side_effect=tracked_report_load,
+            ):
+                validation = validate_submission_bundle(bundle, base_dir=packet_root)
+
+            self.assertFalse(validation["valid"])
+            self.assertTrue(any("report_path must resolve within the bundle root" in error for error in validation["errors"]))
+            self.assertEqual(opened_paths, [report_path.resolve()])
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_submission_bundle_rejects_nested_report_link_escape_without_opening_it(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        packet_root = output_root / "packet"
+        outside_root = output_root / "outside"
+        report_path = packet_root / "report.json"
+        submission_path = packet_root / "submission.json"
+
+        try:
+            packet_root.mkdir(parents=True, exist_ok=True)
+            outside_root.mkdir(parents=True, exist_ok=True)
+            write_benchmark_report(evaluate_standard_suite(system_name="NestedLink"), report_path)
+            submission = build_leaderboard_submission(
+                "report.json",
+                system_version="1.0.0",
+                submitter="Marked Bench Test",
+                base_dir=packet_root,
+            )
+            write_leaderboard_submission(submission, submission_path)
+            bundle = build_submission_bundle("submission.json", base_dir=packet_root)
+            (outside_root / "report.json").write_text("{}", encoding="utf-8")
+
+            link_path = packet_root / "linked"
+            if os.name == "nt":
+                result = subprocess.run(
+                    ["cmd", "/c", "mklink", "/J", str(link_path), str(outside_root)],
+                    capture_output=True,
+                    text=True,
+                    check=False,
+                )
+                if result.returncode != 0:
+                    self.skipTest(f"directory junctions are unavailable: {result.stderr.strip()}")
+            else:
+                try:
+                    link_path.symlink_to(outside_root, target_is_directory=True)
+                except (NotImplementedError, OSError) as exc:
+                    self.skipTest(f"directory symlinks are unavailable: {exc}")
+
+            submission["report_path"] = "linked/report.json"
+            write_leaderboard_submission(submission, submission_path)
+            submission_data = submission_path.read_bytes().replace(b"\r\n", b"\n")
+            submission_entry = next(item for item in bundle["files"] if item["role"] == "submission")
+            submission_entry["sha256"] = hashlib.sha256(submission_data).hexdigest()
+            submission_entry["bytes"] = len(submission_data)
+
+            opened_paths: list[Path] = []
+
+            def tracked_report_load(path: str | Path) -> dict[str, object]:
+                resolved_path = Path(path).resolve()
+                opened_paths.append(resolved_path)
+                return json.loads(resolved_path.read_text(encoding="utf-8"))
+
+            with mock.patch(
+                "marked_bench.benchmark_submission.load_benchmark_report",
+                side_effect=tracked_report_load,
+            ):
+                validation = validate_submission_bundle(bundle, base_dir=packet_root)
+
+            self.assertFalse(validation["valid"])
+            self.assertTrue(any("report_path must resolve within the bundle root" in error for error in validation["errors"]))
+            self.assertEqual(opened_paths, [report_path.resolve()])
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_submission_bundle_does_not_open_unsafe_paths(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        packet_root = output_root / "packet"
+
+        try:
+            packet_root.mkdir(parents=True, exist_ok=True)
+            (output_root / "outside-submission.json").write_text("{}", encoding="utf-8")
+            (output_root / "outside-report.json").write_text("{}", encoding="utf-8")
+            bundle = {
+                "schema": SUBMISSION_BUNDLE_SCHEMA,
+                "submission_path": "../outside-submission.json",
+                "report_path": "../outside-report.json",
+                "prediction_path": None,
+                "system_name": "UnsafeBundle",
+                "system_version": "1.0.0",
+                "submitter": "test",
+                "suite_id": SUITE_ID,
+                "suite_version": "0.1.1",
+                "suite_hash": build_suite_hash(),
+                "report_sha256": "0" * 64,
+                "files": [],
+                "review_checklist": {},
+            }
+
+            with (
+                mock.patch("marked_bench.benchmark_submission.load_leaderboard_submission") as load_submission,
+                mock.patch("marked_bench.benchmark_submission.load_benchmark_report") as load_report,
+            ):
+                validation = validate_submission_bundle(bundle, base_dir=packet_root)
+
+            self.assertFalse(validation["valid"])
+            self.assertTrue(any("submission_path must be a safe relative path" in error for error in validation["errors"]))
+            self.assertTrue(any("report_path must be a safe relative path" in error for error in validation["errors"]))
+            load_submission.assert_not_called()
+            load_report.assert_not_called()
+        finally:
+            shutil.rmtree(output_root, ignore_errors=True)
+
+    def test_submission_bundle_rejects_symlink_escape(self) -> None:
+        output_root = Path(__file__).resolve().parent.parent / ".test-output"
+        packet_root = output_root / "packet"
+        outside_root = output_root / "outside"
+
+        try:
+            packet_root.mkdir(parents=True, exist_ok=True)
+            outside_root.mkdir(parents=True, exist_ok=True)
+            (outside_root / "report.json").write_text("{}", encoding="utf-8")
+            link_path = packet_root / "linked"
+            if os.name == "nt":
+                result = subprocess.run(
+                    ["cmd", "/c", "mklink", "/J", str(link_path), str(outside_root)],
+                    capture_output=True,
+                    text=True,
+                    check=False,
+                )
+                if result.returncode != 0:
+                    self.skipTest(f"directory junctions are unavailable: {result.stderr.strip()}")
+            else:
+                try:
+                    link_path.symlink_to(outside_root, target_is_directory=True)
+                except (NotImplementedError, OSError) as exc:
+                    self.skipTest(f"directory symlinks are unavailable: {exc}")
+
+            bundle = {
+                "schema": SUBMISSION_BUNDLE_SCHEMA,
+                "submission_path": "",
+                "report_path": "linked/report.json",
+                "prediction_path": None,
+                "system_name": "LinkedBundle",
+                "system_version": "1.0.0",
+                "submitter": "test",
+                "suite_id": SUITE_ID,
+                "suite_version": "0.1.1",
+                "suite_hash": build_suite_hash(),
+                "report_sha256": "0" * 64,
+                "files": [
+                    {
+                        "role": "report",
+                        "path": "linked/report.json",
+                        "sha256": "0" * 64,
+                        "bytes": 2,
+                    }
+                ],
+                "review_checklist": {},
+            }
+
+            with (
+                mock.patch("marked_bench.benchmark_submission.load_benchmark_report") as load_report,
+                mock.patch("marked_bench.benchmark_submission._canonical_file_bytes") as canonical_file_bytes,
+            ):
+                validation = validate_submission_bundle(bundle, base_dir=packet_root)
+
+            self.assertFalse(validation["valid"])
+            self.assertTrue(any("report_path must be a safe relative path" in error for error in validation["errors"]))
+            self.assertTrue(any("files[0].path must be a safe relative path" in error for error in validation["errors"]))
+            load_report.assert_not_called()
+            canonical_file_bytes.assert_not_called()
         finally:
             shutil.rmtree(output_root, ignore_errors=True)
 

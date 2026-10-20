@@ -1315,7 +1315,25 @@ def validate_benchmark_report(
     invalid labels, and inconsistent claimed scores.
     """
 
-    suite_key = _suite_key(suite or _suite_key_from_report(report))
+    try:
+        suite_key = _suite_key(suite or _suite_key_from_report(report))
+    except ValueError as exc:
+        return {
+            "schema": VALIDATION_SCHEMA,
+            "suite_id": str(report.get("suite_id", "")),
+            "suite_version": str(report.get("suite_version", "")),
+            "valid": False,
+            "errors": [str(exc)],
+            "warnings": [],
+            "summary": {
+                "system_name": report.get("system_name"),
+                "case_count": report.get("case_count"),
+                "overall_score": report.get("overall_score"),
+                "failure_count": (
+                    len(report.get("failures", [])) if isinstance(report.get("failures"), list) else None
+                ),
+            },
+        }
     suite_id, suite_version = _suite_identity(suite_key)
     suite_cases = list(cases or build_suite(suite_key))
     canonical_ids = [case.id for case in suite_cases]

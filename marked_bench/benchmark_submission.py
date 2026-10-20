@@ -97,8 +97,15 @@ def build_submission_bundle(
 
     root = Path(base_dir or Path.cwd()).resolve()
     resolved_submission_path = _resolve_bundle_path(submission_path, root)
+    resolved_prediction_path = (
+        _resolve_bundle_path(prediction_path, root) if prediction_path is not None else None
+    )
     submission = load_leaderboard_submission(resolved_submission_path)
-    validation = validate_leaderboard_submission(submission, base_dir=root)
+    validation = validate_leaderboard_submission(
+        submission,
+        base_dir=root,
+        contained_report_root=root,
+    )
     if not validation["valid"]:
         raise ValueError(f"submission validation failed: {validation['errors']}")
 
@@ -108,8 +115,8 @@ def build_submission_bundle(
         _bundle_file_entry("submission", resolved_submission_path, root),
         _bundle_file_entry("report", resolved_report_path, root),
     ]
-    if prediction_path is not None:
-        files.append(_bundle_file_entry("predictions", _resolve_bundle_path(prediction_path, root), root))
+    if resolved_prediction_path is not None:
+        files.append(_bundle_file_entry("predictions", resolved_prediction_path, root))
 
     return {
         "schema": SUBMISSION_BUNDLE_SCHEMA,
@@ -117,8 +124,8 @@ def build_submission_bundle(
         "submission_path": _portable_relative_path(resolved_submission_path, root),
         "report_path": _portable_relative_path(resolved_report_path, root),
         "prediction_path": (
-            _portable_relative_path(_resolve_bundle_path(prediction_path, root), root)
-            if prediction_path is not None
+            _portable_relative_path(resolved_prediction_path, root)
+            if resolved_prediction_path is not None
             else None
         ),
         "system_name": submission["system_name"],
@@ -180,12 +187,14 @@ def validate_submission_bundle(
     submission_path = str(bundle.get("submission_path", ""))
     report_path = str(bundle.get("report_path", ""))
     prediction_path = bundle.get("prediction_path")
+    safe_paths: dict[str, bool] = {}
     for key, value in [
         ("submission_path", submission_path),
         ("report_path", report_path),
         ("prediction_path", prediction_path),
     ]:
-        if value and not _is_safe_relative_path(str(value)):
+        safe_paths[key] = not value or _is_safe_relative_path(str(value), root)
+        if not safe_paths[key]:
             errors.append(f"{key} must be a safe relative path")
 
     files = bundle.get("files")
@@ -196,7 +205,7 @@ def validate_submission_bundle(
 
     submission = None
     submission_validation = None
-    if submission_path:
+    if submission_path and safe_paths["submission_path"]:
         resolved_submission_path = _resolve_bundle_path(submission_path, root)
         if not resolved_submission_path.exists():
             errors.append(f"submission_path does not exist: {submission_path}")
@@ -206,13 +215,17 @@ def validate_submission_bundle(
             except (OSError, json.JSONDecodeError) as exc:
                 errors.append(f"could not load submission_path: {exc}")
             else:
-                submission_validation = validate_leaderboard_submission(submission, base_dir=root)
+                submission_validation = validate_leaderboard_submission(
+                    submission,
+                    base_dir=root,
+                    contained_report_root=root,
+                )
                 if not submission_validation["valid"]:
                     errors.append(f"referenced submission is invalid: {submission_validation['errors']}")
                 warnings.extend(submission_validation["warnings"])
 
     report = None
-    if report_path:
+    if report_path and safe_paths["report_path"]:
         resolved_report_path = _resolve_bundle_path(report_path, root)
         if not resolved_report_path.exists():
             errors.append(f"report_path does not exist: {report_path}")
@@ -286,8 +299,14 @@ def validate_leaderboard_submission(
     submission: Mapping[str, Any],
     *,
     base_dir: str | Path | None = None,
+    contained_report_root: str | Path | None = None,
 ) -> dict[str, Any]:
-    """Validate submission metadata and the referenced benchmark report."""
+    """Validate submission metadata and the referenced benchmark report.
+
+    When ``contained_report_root`` is provided, ``report_path`` must resolve
+    beneath that root before the report is opened. Traversal and link escapes
+    are rejected; contained absolute paths remain valid for compatibility.
+    """
 
     errors: list[str] = []
     warnings: list[str] = []
@@ -314,8 +333,14 @@ def validate_leaderboard_submission(
     validation = None
     report_path = str(submission.get("report_path", ""))
     if report_path:
-        resolved_report_path = _resolve_report_path(report_path, base_dir)
-        if not resolved_report_path.exists():
+        resolved_report_path = (
+            _resolve_report_path(report_path, base_dir)
+            if contained_report_root is None
+            else _resolve_contained_path(report_path, Path(contained_report_root))
+        )
+        if resolved_report_path is None:
+            errors.append("report_path must resolve within the bundle root without traversal")
+        elif not resolved_report_path.exists():
             errors.append(f"report_path does not exist: {report_path}")
         else:
             try:
@@ -375,10 +400,10 @@ def _resolve_report_path(report_path: str, base_dir: str | Path | None) -> Path:
 
 
 def _resolve_bundle_path(path: str | Path, base_dir: Path) -> Path:
-    raw_path = Path(path)
-    if raw_path.is_absolute():
-        return raw_path.resolve()
-    return (base_dir / raw_path).resolve()
+    resolved = _resolve_contained_path(path, base_dir)
+    if resolved is None:
+        raise ValueError(f"path is outside bundle base directory or contains traversal: {path}")
+    return resolved
 
 
 def _portable_relative_path(path: Path, base_dir: Path) -> str:
@@ -388,18 +413,49 @@ def _portable_relative_path(path: Path, base_dir: Path) -> str:
         raise ValueError(f"path is outside bundle base directory: {path}") from exc
 
 
-def _is_safe_relative_path(path: str) -> bool:
+def _is_safe_relative_path(path: str, base_dir: Path | None = None) -> bool:
     normalized = Path(path)
-    return not normalized.is_absolute() and ".." not in normalized.parts
+    if normalized.is_absolute() or normalized.drive or ".." in normalized.parts:
+        return False
+    if base_dir is None:
+        return True
+    return _resolve_safe_relative_path(normalized, base_dir) is not None
+
+
+def _resolve_safe_relative_path(path: str | Path, base_dir: Path) -> Path | None:
+    normalized = Path(path)
+    if normalized.is_absolute() or normalized.drive or ".." in normalized.parts:
+        return None
+    try:
+        root = base_dir.resolve()
+        resolved = (root / normalized).resolve()
+        resolved.relative_to(root)
+    except (OSError, RuntimeError, ValueError):
+        return None
+    return resolved
+
+
+def _resolve_contained_path(path: str | Path, base_dir: Path) -> Path | None:
+    normalized = Path(path)
+    if ".." in normalized.parts or (normalized.drive and not normalized.is_absolute()):
+        return None
+    try:
+        root = base_dir.resolve()
+        resolved = normalized.resolve() if normalized.is_absolute() else (root / normalized).resolve()
+        resolved.relative_to(root)
+    except (OSError, RuntimeError, ValueError):
+        return None
+    return resolved
 
 
 def _bundle_file_entry(role: str, path: Path, base_dir: Path) -> dict[str, Any]:
+    stored_path = _portable_relative_path(path, base_dir)
     if not path.exists():
         raise FileNotFoundError(f"{role} file does not exist: {path}")
     data = _canonical_file_bytes(path)
     return {
         "role": role,
-        "path": _portable_relative_path(path, base_dir),
+        "path": stored_path,
         "sha256": hashlib.sha256(data).hexdigest(),
         "bytes": len(data),
     }
@@ -427,7 +483,7 @@ def _validate_bundle_files(
         if not path:
             errors.append(f"files[{index}].path is required")
             continue
-        if not _is_safe_relative_path(path):
+        if not _is_safe_relative_path(path, base_dir):
             errors.append(f"files[{index}].path must be a safe relative path")
             continue
         resolved_path = _resolve_bundle_path(path, base_dir)
