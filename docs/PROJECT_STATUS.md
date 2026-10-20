@@ -29,9 +29,11 @@ aggressively.
 - The detailed evidence in `docs/BASELINE_ROBUSTNESS.md` treats this as an
   explained watchlist, not evidence that the hash-prior baseline is a stronger
   contradiction system.
-- Preserve suite v0.3.0 unchanged. Before expanding the track, add a genuinely
-  multi-hop task-aware reference; use a held-out evaluation path if future
-  ranking claims need resistance to answer lookup.
+- The separate bounded `MultiHopReference` links typed facts rather than using
+  IDs or tags. Its results, invariance checks and limitations are recorded in
+  `docs/MULTIHOP_REFERENCE.md`. It does not erase the legacy engine watchlist.
+- Preserve suite v0.3.0 unchanged. A held-out evaluation path is still required
+  if future ranking claims need resistance to answer lookup.
 
 ## Best Next Work
 
@@ -40,9 +42,10 @@ Follow targets AB through AF in `DEVELOPMENT_TARGETS.md`, in order:
 1. Completed in v0.4.10: publish submission boundary and validation hardening.
 2. Completed in v0.4.10: Windows/Linux CI across Python 3.10 through 3.14,
    including isolated wheel-install reproducibility.
-3. Active: obtain a genuinely independent evaluator run and reviewed submission
+3. Open for volunteers: obtain a genuinely independent evaluator run and reviewed submission
    through https://github.com/Martin123132/The-Marked-Bench-/issues/11.
-4. Strengthen the task-aware multi-hop reference without changing suite v0.3.0.
+4. Active by maintainer request: qualify the task-aware multi-hop reference
+   without changing suite v0.3.0 while volunteer intake remains open.
 5. Qualify Forge Bridge instruction scope separately from benchmark scores.
 
 Do not count internal tests as external adoption. Prefer these trust and

@@ -1,0 +1,1336 @@
+{
+  "case_count": 18,
+  "case_results": [
+    {
+      "capability": "policy_chain_negation",
+      "case_id": "marked-hop-direct-001",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "expert",
+      "domain": "governance",
+      "evidence": [],
+      "expected": "direct_negation",
+      "predicted": "none",
+      "rationale": "No supported, unambiguous contradiction proof was found.",
+      "tags": [
+        "multihop",
+        "negation",
+        "policy",
+        "entity_linking"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "membership_polarity",
+      "case_id": "marked-hop-direct-002",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "hard",
+      "domain": "security",
+      "evidence": [],
+      "expected": "direct_negation",
+      "predicted": "none",
+      "rationale": "No supported, unambiguous contradiction proof was found.",
+      "tags": [
+        "multihop",
+        "negation",
+        "security",
+        "entity_linking"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "permission_chain_control",
+      "case_id": "marked-hop-direct-003",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "research",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": "No supported, unambiguous contradiction proof was found.",
+      "tags": [
+        "multihop",
+        "control",
+        "policy"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "profile_numeric_link",
+      "case_id": "marked-hop-property-001",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.85,
+      "difficulty": "hard",
+      "domain": "benchmarking",
+      "evidence": [
+        "Context profile C8 has a maximum context window of 8,192 tokens",
+        "Model Delta was evaluated under context profile C8"
+      ],
+      "expected": "property_mismatch",
+      "predicted": "property_mismatch",
+      "rationale": "Linked property differs after canonical unit conversion.",
+      "tags": [
+        "multihop",
+        "numeric",
+        "benchmarking",
+        "entity_linking"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "inherited_unit_conflict",
+      "case_id": "marked-hop-property-002",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.85,
+      "difficulty": "hard",
+      "domain": "measurement",
+      "evidence": [
+        "Crate C17 is assigned to shipment Route-9",
+        "The Route-9 manifest lists assigned crate mass as 12 kg after calibration"
+      ],
+      "expected": "property_mismatch",
+      "predicted": "property_mismatch",
+      "rationale": "Linked property differs after canonical unit conversion.",
+      "tags": [
+        "multihop",
+        "unit",
+        "property",
+        "entity_linking"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "inherited_property_control",
+      "case_id": "marked-hop-property-003",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "measurement",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": "No supported, unambiguous contradiction proof was found.",
+      "tags": [
+        "multihop",
+        "control",
+        "property"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "classification_definition",
+      "case_id": "marked-hop-definition-001",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.85,
+      "difficulty": "expert",
+      "domain": "data_governance",
+      "evidence": [
+        "A sealed record is defined as a record that cannot be modified after publication",
+        "Dataset Ledger-4 is classified as a sealed record"
+      ],
+      "expected": "definitional_violation",
+      "predicted": "definitional_violation",
+      "rationale": "Classification inherits a no-modification definition for this phase.",
+      "tags": [
+        "multihop",
+        "definition",
+        "data"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "threshold_definition",
+      "case_id": "marked-hop-definition-002",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.85,
+      "difficulty": "hard",
+      "domain": "compliance",
+      "evidence": [
+        "Quorum approval requires at least three independent reviewers",
+        "Release R19 had exactly two independent reviewers"
+      ],
+      "expected": "definitional_violation",
+      "predicted": "definitional_violation",
+      "rationale": "The observed count is below the qualification's required minimum.",
+      "tags": [
+        "multihop",
+        "definition",
+        "numeric"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "definition_boundary_control",
+      "case_id": "marked-hop-definition-003",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "data_governance",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": "No supported, unambiguous contradiction proof was found.",
+      "tags": [
+        "multihop",
+        "control",
+        "definition"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "universal_membership_counterexample",
+      "case_id": "marked-hop-universal-001",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.85,
+      "difficulty": "expert",
+      "domain": "ai_safety",
+      "evidence": [
+        "Every high-risk deployment must pass red-team review before production",
+        "System Nova is a high-risk deployment"
+      ],
+      "expected": "universal_counterexample",
+      "predicted": "universal_counterexample",
+      "rationale": "A category member entered the phase without the universally required review.",
+      "tags": [
+        "multihop",
+        "universal",
+        "safety",
+        "entity_linking"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "collection_counterexample",
+      "case_id": "marked-hop-universal-002",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.85,
+      "difficulty": "hard",
+      "domain": "records",
+      "evidence": [
+        "All records in collection Beta are immutable after publication",
+        "Record B7 belongs to collection Beta"
+      ],
+      "expected": "universal_counterexample",
+      "predicted": "universal_counterexample",
+      "rationale": "Membership inherits universal immutability for this phase.",
+      "tags": [
+        "multihop",
+        "universal",
+        "data",
+        "entity_linking"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "non_universal_membership_control",
+      "case_id": "marked-hop-universal-003",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "hard",
+      "domain": "ai_safety",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": "No supported, unambiguous contradiction proof was found.",
+      "tags": [
+        "multihop",
+        "control",
+        "universal",
+        "quantifier"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "temporal_membership_scope",
+      "case_id": "marked-hop-temporal-001",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.85,
+      "difficulty": "expert",
+      "domain": "operations",
+      "evidence": [
+        "Fleet Delta used manual approval for all launches from 2019 through 2022",
+        "System Sable launched under Fleet Delta in 2020"
+      ],
+      "expected": "temporal_conflict",
+      "predicted": "temporal_conflict",
+      "rationale": "The launch belongs to the fleet inside its incompatible approval interval.",
+      "tags": [
+        "multihop",
+        "temporal",
+        "operations",
+        "entity_linking"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "replacement_date_conflict",
+      "case_id": "marked-hop-temporal-002",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.85,
+      "difficulty": "hard",
+      "domain": "infrastructure",
+      "evidence": [
+        "API v2 replaced API v1 as the current endpoint on 2021-06-01",
+        "Request Q was processed on 2022-02-10"
+      ],
+      "expected": "temporal_conflict",
+      "predicted": "temporal_conflict",
+      "rationale": "The event follows the latest declared replacement of the current endpoint.",
+      "tags": [
+        "multihop",
+        "temporal",
+        "api"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "temporal_transition_control",
+      "case_id": "marked-hop-temporal-003",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "operations",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": "No supported, unambiguous contradiction proof was found.",
+      "tags": [
+        "multihop",
+        "control",
+        "temporal"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "benchmark_metadata_control",
+      "case_id": "marked-hop-control-001",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "benchmarking",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": "No supported, unambiguous contradiction proof was found.",
+      "tags": [
+        "multihop",
+        "control",
+        "benchmarking"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "state_inheritance_control",
+      "case_id": "marked-hop-control-002",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "operations",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": "No supported, unambiguous contradiction proof was found.",
+      "tags": [
+        "multihop",
+        "control",
+        "state"
+      ],
+      "type_correct": true
+    },
+    {
+      "capability": "privacy_chain_control",
+      "case_id": "marked-hop-control-003",
+      "detection_correct": true,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "medium",
+      "domain": "privacy",
+      "evidence": [],
+      "expected": "none",
+      "predicted": "none",
+      "rationale": "No supported, unambiguous contradiction proof was found.",
+      "tags": [
+        "multihop",
+        "control",
+        "privacy"
+      ],
+      "type_correct": true
+    }
+  ],
+  "confusion_matrix": {
+    "definitional_violation": {
+      "definitional_violation": 2,
+      "direct_negation": 0,
+      "none": 0,
+      "property_mismatch": 0,
+      "temporal_conflict": 0,
+      "universal_counterexample": 0
+    },
+    "direct_negation": {
+      "definitional_violation": 0,
+      "direct_negation": 0,
+      "none": 2,
+      "property_mismatch": 0,
+      "temporal_conflict": 0,
+      "universal_counterexample": 0
+    },
+    "none": {
+      "definitional_violation": 0,
+      "direct_negation": 0,
+      "none": 8,
+      "property_mismatch": 0,
+      "temporal_conflict": 0,
+      "universal_counterexample": 0
+    },
+    "property_mismatch": {
+      "definitional_violation": 0,
+      "direct_negation": 0,
+      "none": 0,
+      "property_mismatch": 2,
+      "temporal_conflict": 0,
+      "universal_counterexample": 0
+    },
+    "temporal_conflict": {
+      "definitional_violation": 0,
+      "direct_negation": 0,
+      "none": 0,
+      "property_mismatch": 0,
+      "temporal_conflict": 2,
+      "universal_counterexample": 0
+    },
+    "universal_counterexample": {
+      "definitional_violation": 0,
+      "direct_negation": 0,
+      "none": 0,
+      "property_mismatch": 0,
+      "temporal_conflict": 0,
+      "universal_counterexample": 2
+    }
+  },
+  "created_at": 0.0,
+  "duration_seconds": 0.0,
+  "explanation_audit": {
+    "case_count": 18,
+    "correct_explanation_ready_rate": 0.5,
+    "evidence_count": 8,
+    "evidence_coverage": 0.444444,
+    "explanation_ready_count": 8,
+    "explanation_ready_rate": 0.444444,
+    "rationale_count": 18,
+    "rationale_coverage": 1.0
+  },
+  "failures": [
+    {
+      "capability": "policy_chain_negation",
+      "case_id": "marked-hop-direct-001",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "expert",
+      "domain": "governance",
+      "evidence": [],
+      "expected": "direct_negation",
+      "predicted": "none",
+      "rationale": "No supported, unambiguous contradiction proof was found.",
+      "tags": [
+        "multihop",
+        "negation",
+        "policy",
+        "entity_linking"
+      ],
+      "type_correct": false
+    },
+    {
+      "capability": "membership_polarity",
+      "case_id": "marked-hop-direct-002",
+      "detection_correct": false,
+      "detector_note": null,
+      "detector_score": 0.0,
+      "difficulty": "hard",
+      "domain": "security",
+      "evidence": [],
+      "expected": "direct_negation",
+      "predicted": "none",
+      "rationale": "No supported, unambiguous contradiction proof was found.",
+      "tags": [
+        "multihop",
+        "negation",
+        "security",
+        "entity_linking"
+      ],
+      "type_correct": false
+    }
+  ],
+  "metrics": {
+    "calibration": {
+      "bin_count": 10,
+      "bins": [
+        {
+          "case_count": 10,
+          "empirical_positive_rate": 0.2,
+          "lower": 0.0,
+          "mean_confidence": 0.0,
+          "upper": 0.1
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.1,
+          "mean_confidence": 0.0,
+          "upper": 0.2
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.2,
+          "mean_confidence": 0.0,
+          "upper": 0.3
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.3,
+          "mean_confidence": 0.0,
+          "upper": 0.4
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.4,
+          "mean_confidence": 0.0,
+          "upper": 0.5
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.5,
+          "mean_confidence": 0.0,
+          "upper": 0.6
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.6,
+          "mean_confidence": 0.0,
+          "upper": 0.7
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.7,
+          "mean_confidence": 0.0,
+          "upper": 0.8
+        },
+        {
+          "case_count": 8,
+          "empirical_positive_rate": 1.0,
+          "lower": 0.8,
+          "mean_confidence": 0.85,
+          "upper": 0.9
+        },
+        {
+          "case_count": 0,
+          "empirical_positive_rate": 0.0,
+          "lower": 0.9,
+          "mean_confidence": 0.0,
+          "upper": 1.0
+        }
+      ],
+      "brier_score": 0.121111,
+      "expected_calibration_error": 0.177778,
+      "mean_confidence": 0.377778,
+      "positive_rate": 0.555556
+    },
+    "contradiction_macro_f1": 0.8,
+    "contradiction_type_accuracy": 0.8,
+    "coverage_index": 0.8,
+    "detection": {
+      "accuracy": 0.888889,
+      "f1": 0.888889,
+      "false_negative": 2,
+      "false_positive": 0,
+      "precision": 1.0,
+      "recall": 0.8,
+      "true_negative": 8,
+      "true_positive": 8
+    },
+    "per_class": {
+      "definitional_violation": {
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "support": 2
+      },
+      "direct_negation": {
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "support": 2
+      },
+      "none": {
+        "f1": 0.888889,
+        "precision": 0.8,
+        "recall": 1.0,
+        "support": 8
+      },
+      "property_mismatch": {
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "support": 2
+      },
+      "temporal_conflict": {
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "support": 2
+      },
+      "universal_counterexample": {
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "support": 2
+      }
+    },
+    "slices": {
+      "capability": {
+        "benchmark_metadata_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "classification_definition": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "collection_counterexample": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "definition_boundary_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "inherited_property_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "inherited_unit_conflict": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "membership_polarity": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "non_universal_membership_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "permission_chain_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "policy_chain_negation": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "privacy_chain_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "profile_numeric_link": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "replacement_date_conflict": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "state_inheritance_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "temporal_membership_scope": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "temporal_transition_control": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "threshold_definition": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "universal_membership_counterexample": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        }
+      },
+      "difficulty": {
+        "expert": {
+          "case_count": 4,
+          "contradiction_case_count": 4,
+          "contradiction_type_accuracy": 0.75,
+          "detection_f1": 0.857143,
+          "failure_count": 1,
+          "type_accuracy": 0.75
+        },
+        "hard": {
+          "case_count": 7,
+          "contradiction_case_count": 6,
+          "contradiction_type_accuracy": 0.833333,
+          "detection_f1": 0.909091,
+          "failure_count": 1,
+          "type_accuracy": 0.857143
+        },
+        "medium": {
+          "case_count": 7,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        }
+      },
+      "domain": {
+        "ai_safety": {
+          "case_count": 2,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "benchmarking": {
+          "case_count": 2,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "compliance": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "data_governance": {
+          "case_count": 2,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "governance": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "infrastructure": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "measurement": {
+          "case_count": 2,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "operations": {
+          "case_count": 3,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "privacy": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "records": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "research": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "security": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        }
+      },
+      "tag": {
+        "api": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "benchmarking": {
+          "case_count": 2,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "control": {
+          "case_count": 8,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "data": {
+          "case_count": 2,
+          "contradiction_case_count": 2,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "definition": {
+          "case_count": 3,
+          "contradiction_case_count": 2,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "entity_linking": {
+          "case_count": 7,
+          "contradiction_case_count": 7,
+          "contradiction_type_accuracy": 0.714286,
+          "detection_f1": 0.833333,
+          "failure_count": 2,
+          "type_accuracy": 0.714286
+        },
+        "multihop": {
+          "case_count": 18,
+          "contradiction_case_count": 10,
+          "contradiction_type_accuracy": 0.8,
+          "detection_f1": 0.888889,
+          "failure_count": 2,
+          "type_accuracy": 0.888889
+        },
+        "negation": {
+          "case_count": 2,
+          "contradiction_case_count": 2,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 2,
+          "type_accuracy": 0.0
+        },
+        "numeric": {
+          "case_count": 2,
+          "contradiction_case_count": 2,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "operations": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "policy": {
+          "case_count": 2,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.5
+        },
+        "privacy": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "property": {
+          "case_count": 2,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "quantifier": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "safety": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "security": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 1,
+          "type_accuracy": 0.0
+        },
+        "state": {
+          "case_count": 1,
+          "contradiction_case_count": 0,
+          "contradiction_type_accuracy": 0.0,
+          "detection_f1": 0.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "temporal": {
+          "case_count": 3,
+          "contradiction_case_count": 2,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "unit": {
+          "case_count": 1,
+          "contradiction_case_count": 1,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        },
+        "universal": {
+          "case_count": 3,
+          "contradiction_case_count": 2,
+          "contradiction_type_accuracy": 1.0,
+          "detection_f1": 1.0,
+          "failure_count": 0,
+          "type_accuracy": 1.0
+        }
+      }
+    },
+    "type_accuracy": 0.888889
+  },
+  "overall_score": 84.0,
+  "schema": "marked_bench.contradiction-benchmark-report.v2",
+  "suite_cases": [
+    {
+      "capability": "policy_chain_negation",
+      "difficulty": "expert",
+      "domain": "governance",
+      "expected": "direct_negation",
+      "id": "marked-hop-direct-001",
+      "note": "The policy must be linked through Atlas before permitted/forbidden conflict is visible.",
+      "premise": "Service Orion inherits export policy P7 from platform Atlas. Policy P7 says research-user exports are permitted.",
+      "query": "The Orion release note says research-user exports are forbidden.",
+      "tags": [
+        "multihop",
+        "negation",
+        "policy",
+        "entity_linking"
+      ]
+    },
+    {
+      "capability": "membership_polarity",
+      "difficulty": "hard",
+      "domain": "security",
+      "expected": "direct_negation",
+      "id": "marked-hop-direct-002",
+      "note": "The key inherits vault validity before the valid/invalid conflict appears.",
+      "premise": "Key K-42 belongs to vault Alpha. Vault Alpha records say resident keys remained valid during the audit window.",
+      "query": "The audit summary says K-42 was invalid during the audit window.",
+      "tags": [
+        "multihop",
+        "negation",
+        "security",
+        "entity_linking"
+      ]
+    },
+    {
+      "capability": "permission_chain_control",
+      "difficulty": "medium",
+      "domain": "research",
+      "expected": "none",
+      "id": "marked-hop-direct-003",
+      "note": "The query is licensed by the inherited approval profile.",
+      "premise": "Experiment E5 used approval profile Gold. Approval profile Gold allows offline review for internal replication studies.",
+      "query": "Experiment E5 used offline review for an internal replication study.",
+      "tags": [
+        "multihop",
+        "control",
+        "policy"
+      ]
+    },
+    {
+      "capability": "profile_numeric_link",
+      "difficulty": "hard",
+      "domain": "benchmarking",
+      "expected": "property_mismatch",
+      "id": "marked-hop-property-001",
+      "note": "The numeric mismatch depends on linking Delta to profile C8.",
+      "premise": "Model Delta was evaluated under context profile C8. Context profile C8 has a maximum context window of 8,192 tokens.",
+      "query": "The Delta evaluation used a 32,768 token maximum context window under profile C8.",
+      "tags": [
+        "multihop",
+        "numeric",
+        "benchmarking",
+        "entity_linking"
+      ]
+    },
+    {
+      "capability": "inherited_unit_conflict",
+      "difficulty": "hard",
+      "domain": "measurement",
+      "expected": "property_mismatch",
+      "id": "marked-hop-property-002",
+      "note": "The unit mismatch is inherited through the shipment assignment.",
+      "premise": "Crate C17 is assigned to shipment Route-9. The Route-9 manifest lists assigned crate mass as 12 kg after calibration.",
+      "query": "Crate C17 has calibrated mass 12 lb on Route-9.",
+      "tags": [
+        "multihop",
+        "unit",
+        "property",
+        "entity_linking"
+      ]
+    },
+    {
+      "capability": "inherited_property_control",
+      "difficulty": "medium",
+      "domain": "measurement",
+      "expected": "none",
+      "id": "marked-hop-property-003",
+      "note": "The inherited quantity and unit match.",
+      "premise": "Crate C17 is assigned to shipment Route-9. The Route-9 manifest lists assigned crate mass as 12 kg after calibration.",
+      "query": "Crate C17 has calibrated mass 12 kg on Route-9.",
+      "tags": [
+        "multihop",
+        "control",
+        "property"
+      ]
+    },
+    {
+      "capability": "classification_definition",
+      "difficulty": "expert",
+      "domain": "data_governance",
+      "expected": "definitional_violation",
+      "id": "marked-hop-definition-001",
+      "note": "The definition must be applied to the classified dataset.",
+      "premise": "A sealed record is defined as a record that cannot be modified after publication. Dataset Ledger-4 is classified as a sealed record.",
+      "query": "Ledger-4 was modified after publication while remaining a sealed record.",
+      "tags": [
+        "multihop",
+        "definition",
+        "data"
+      ]
+    },
+    {
+      "capability": "threshold_definition",
+      "difficulty": "hard",
+      "domain": "compliance",
+      "expected": "definitional_violation",
+      "id": "marked-hop-definition-002",
+      "note": "The release fails the quorum definition through the reviewer count.",
+      "premise": "Quorum approval requires at least three independent reviewers. Release R19 had exactly two independent reviewers.",
+      "query": "Release R19 satisfied quorum approval.",
+      "tags": [
+        "multihop",
+        "definition",
+        "numeric"
+      ]
+    },
+    {
+      "capability": "definition_boundary_control",
+      "difficulty": "medium",
+      "domain": "data_governance",
+      "expected": "none",
+      "id": "marked-hop-definition-003",
+      "note": "A metadata note does not necessarily modify sealed content.",
+      "premise": "A sealed record is defined as a record whose content cannot be modified after publication. Dataset Ledger-4 received an external citation note.",
+      "query": "Ledger-4 received a citation note without changing its sealed content.",
+      "tags": [
+        "multihop",
+        "control",
+        "definition"
+      ]
+    },
+    {
+      "capability": "universal_membership_counterexample",
+      "difficulty": "expert",
+      "domain": "ai_safety",
+      "expected": "universal_counterexample",
+      "id": "marked-hop-universal-001",
+      "note": "The universal rule applies through Nova's high-risk membership.",
+      "premise": "Every high-risk deployment must pass red-team review before production. System Nova is a high-risk deployment.",
+      "query": "System Nova entered production without red-team review.",
+      "tags": [
+        "multihop",
+        "universal",
+        "safety",
+        "entity_linking"
+      ]
+    },
+    {
+      "capability": "collection_counterexample",
+      "difficulty": "hard",
+      "domain": "records",
+      "expected": "universal_counterexample",
+      "id": "marked-hop-universal-002",
+      "note": "A specific collection member counters the universal immutability claim.",
+      "premise": "All records in collection Beta are immutable after publication. Record B7 belongs to collection Beta.",
+      "query": "Record B7 was edited after publication.",
+      "tags": [
+        "multihop",
+        "universal",
+        "data",
+        "entity_linking"
+      ]
+    },
+    {
+      "capability": "non_universal_membership_control",
+      "difficulty": "hard",
+      "domain": "ai_safety",
+      "expected": "none",
+      "id": "marked-hop-universal-003",
+      "note": "Most allows exceptions, so the Nova fact is not a contradiction.",
+      "premise": "Most high-risk deployments pass red-team review before production. System Nova is a high-risk deployment.",
+      "query": "System Nova entered production without red-team review.",
+      "tags": [
+        "multihop",
+        "control",
+        "universal",
+        "quantifier"
+      ]
+    },
+    {
+      "capability": "temporal_membership_scope",
+      "difficulty": "expert",
+      "domain": "operations",
+      "expected": "temporal_conflict",
+      "id": "marked-hop-temporal-001",
+      "note": "The launch date and fleet membership put Sable inside the manual-approval interval.",
+      "premise": "Fleet Delta used manual approval for all launches from 2019 through 2022. System Sable launched under Fleet Delta in 2020.",
+      "query": "System Sable used automated approval at launch.",
+      "tags": [
+        "multihop",
+        "temporal",
+        "operations",
+        "entity_linking"
+      ]
+    },
+    {
+      "capability": "replacement_date_conflict",
+      "difficulty": "hard",
+      "domain": "infrastructure",
+      "expected": "temporal_conflict",
+      "id": "marked-hop-temporal-002",
+      "note": "The request date falls after the replacement date.",
+      "premise": "API v2 replaced API v1 as the current endpoint on 2021-06-01. Request Q was processed on 2022-02-10.",
+      "query": "Request Q used API v1 as the current endpoint.",
+      "tags": [
+        "multihop",
+        "temporal",
+        "api"
+      ]
+    },
+    {
+      "capability": "temporal_transition_control",
+      "difficulty": "medium",
+      "domain": "operations",
+      "expected": "none",
+      "id": "marked-hop-temporal-003",
+      "note": "The query falls after the documented transition.",
+      "premise": "Fleet Delta used manual approval for launches from 2019 through 2022. Fleet Delta adopted automated approval for launches in 2023.",
+      "query": "A Fleet Delta launch used automated approval in 2023.",
+      "tags": [
+        "multihop",
+        "control",
+        "temporal"
+      ]
+    },
+    {
+      "capability": "benchmark_metadata_control",
+      "difficulty": "medium",
+      "domain": "benchmarking",
+      "expected": "none",
+      "id": "marked-hop-control-001",
+      "note": "The query summarizes the linked registry and adoption-guide facts.",
+      "premise": "The benchmark registry points the default track to contradiction-multihop. The adoption guide tells users to pin suite ID, version, and hash.",
+      "query": "The adoption guide asks users to pin reproducibility metadata for the default track.",
+      "tags": [
+        "multihop",
+        "control",
+        "benchmarking"
+      ]
+    },
+    {
+      "capability": "state_inheritance_control",
+      "difficulty": "medium",
+      "domain": "operations",
+      "expected": "none",
+      "id": "marked-hop-control-002",
+      "note": "The query follows from the unresolved-ticket rule.",
+      "premise": "The incident board says ticket T11 is unresolved. The handoff note says unresolved tickets remain open until an owner closes them.",
+      "query": "Ticket T11 remains open until an owner closes it.",
+      "tags": [
+        "multihop",
+        "control",
+        "state"
+      ]
+    },
+    {
+      "capability": "privacy_chain_control",
+      "difficulty": "medium",
+      "domain": "privacy",
+      "expected": "none",
+      "id": "marked-hop-control-003",
+      "note": "The query follows from the dataset classification and privacy policy.",
+      "premise": "Dataset Echo is a public synthetic dataset. The privacy policy says public synthetic datasets contain no private user records.",
+      "query": "Dataset Echo contains no private user records.",
+      "tags": [
+        "multihop",
+        "control",
+        "privacy"
+      ]
+    }
+  ],
+  "suite_hash": "07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f",
+  "suite_id": "marked-bench-contradiction-multihop",
+  "suite_version": "0.3.0",
+  "system_name": "MultiHopReference"
+}

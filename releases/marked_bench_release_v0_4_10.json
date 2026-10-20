@@ -1,5 +1,5 @@
 {
-  "artifact_count": 173,
+  "artifact_count": 178,
   "artifacts": [
     {
       "bytes": 1269,
@@ -44,10 +44,10 @@
       "sha256": "04b4f8868245975b7d9d9e3602ef54a2a3fb8fb083d08ba02c85c3b8510551b1"
     },
     {
-      "bytes": 1750,
+      "bytes": 1861,
       "category": "support",
       "path": ".github/workflows/benchmark-ci.yml",
-      "sha256": "300bb584e2d182996991cb34e05c6242396f5e0f80eb75bda5819b5edb251e0b"
+      "sha256": "bce0440cdbc7aeb1fb2a8c9ea02c745f58a399649d5e5e3697cf84a3f28fb1ed"
     },
     {
       "bytes": 568,
@@ -68,10 +68,10 @@
       "sha256": "33b1715247f2628e7233825b6cd547a5fb5e1dabaa016a98b2c78d0d30d32ac6"
     },
     {
-      "bytes": 7287,
+      "bytes": 7392,
       "category": "root",
       "path": "DEVELOPMENT_TARGETS.md",
-      "sha256": "1106db57da6abc3dab7c45c33808a4fb68891e2283d1df6d2a2657ee8282758c"
+      "sha256": "5a8cb10839b69a1893c52a313ddb8e207ecce5bc6c870d183bec3d6166f9693a"
     },
     {
       "bytes": 5038,
@@ -134,10 +134,10 @@
       "sha256": "8a321bc4724193713036c493e3f89676bbc996a7724469976e451ba06c965241"
     },
     {
-      "bytes": 1873,
+      "bytes": 2298,
       "category": "support",
       "path": "baselines/README.md",
-      "sha256": "c7bb4a71d135cda55357d2a8df9afde07da8830b1896b2c330e0a753545e1162"
+      "sha256": "77109f4ffa5abe1aa6fcf73649c66509e6b591b50d9919ed61c4fe81a90d7c77"
     },
     {
       "bytes": 40813,
@@ -212,10 +212,16 @@
       "sha256": "d552ab41c082cd37c1338c948c76cceeeed0e16861949e0f39563d0dab9f495b"
     },
     {
-      "bytes": 25237,
+      "bytes": 40951,
+      "category": "track:contradiction-multihop:baseline",
+      "path": "baselines/multihop_reference_v0_3_0.json",
+      "sha256": "6cb2ccea763c23fc404ad3243d41fe859a9904f9c725a6add80d95319ddddfcd"
+    },
+    {
+      "bytes": 25289,
       "category": "root",
       "path": "benchmark_registry.json",
-      "sha256": "1aa7aa288406542a99bfb83f4e991e17919608b9c5dd5dfd4634ffa11d9a6442"
+      "sha256": "0be5fc7e8140facda2c37a04bb5e6031714243c22b73b2d4af9739d41d104ff3"
     },
     {
       "bytes": 849,
@@ -227,7 +233,7 @@
       "bytes": 3662,
       "category": "conformance",
       "path": "conformance/marked_bench_conformance_v0_4_10.json",
-      "sha256": "0c05017844f1d7c9036c61df118eb3dda6e0edea57fce22c5ff2b7b2058dfd2e"
+      "sha256": "9807237b3f9976c4d1aada6aed1a4eb3cb2eb809c5f5f489adb7859089ef579a"
     },
     {
       "bytes": 7091,
@@ -242,10 +248,10 @@
       "sha256": "1c9c4bfe05b33fd1ee6fddcc49f3409a158bcde911935b59c897d32a225e0c47"
     },
     {
-      "bytes": 7702,
+      "bytes": 7710,
       "category": "support",
       "path": "docs/BASELINE_ROBUSTNESS.md",
-      "sha256": "13abf825494c0081a98ef218b4467dff62ee94a3f51894b96e513c327616ae9d"
+      "sha256": "1a33318d8a1884382179f3346e13a9fb040ae17fea3a1df1847ff6d8d7b4dffa"
     },
     {
       "bytes": 5214,
@@ -272,10 +278,10 @@
       "sha256": "4bf1934822ebf838b1c011fc9bcf9ea549dd42980f158f84ca9aeaea13498f74"
     },
     {
-      "bytes": 18355,
+      "bytes": 18349,
       "category": "support",
       "path": "docs/DEVELOPMENT_TARGET_PROGRESS.md",
-      "sha256": "5972f9f3261eb2f48c1877a48412ac3844433156c5a29efcb6ffe3508899a5ae"
+      "sha256": "4775b174c2575413566b3e3884a45b6566cbcfab69f08838064b564f4cae7fa2"
     },
     {
       "bytes": 2972,
@@ -302,10 +308,16 @@
       "sha256": "be693f4aed007fd6bf490c3fd778f674e3931ecd1a2dbb1f853b6604c3afccac"
     },
     {
-      "bytes": 2652,
+      "bytes": 4892,
+      "category": "support",
+      "path": "docs/MULTIHOP_REFERENCE.md",
+      "sha256": "4cf92f37c1222cc6655e684e44fc72a01221c88e8b49e7e9a152fa2df725f357"
+    },
+    {
+      "bytes": 2903,
       "category": "support",
       "path": "docs/PROJECT_STATUS.md",
-      "sha256": "3e0dc006dca1044a5a0a4de562659395b81f330d97e568faf7a7b42645edff3b"
+      "sha256": "509962976d72afa64a78ffb460c4c77c6875b2d0fc6d585921763aaf91e0c4c1"
     },
     {
       "bytes": 7190,
@@ -500,10 +512,10 @@
       "sha256": "aa8ddd1ad04876abbb567991e018b2a7f48001b5da32de753b2e599a7b129fe9"
     },
     {
-      "bytes": 6475,
+      "bytes": 6570,
       "category": "governance",
       "path": "docs/TECHNICAL_NOTE.md",
-      "sha256": "4cf7af90c726e9cc9a392bdbde369f41b46401a565111727f31e7f6238100a62"
+      "sha256": "9b560c370725522bc15d6431a32cc13ba9e81fbe27be1325dcb3342ceed63cf3"
     },
     {
       "bytes": 2559,
@@ -530,10 +542,10 @@
       "sha256": "3c21ca74d4ee91add056ce2a9aaf36aa5a02c4379c586294e6c6541d4869dec3"
     },
     {
-      "bytes": 2576,
+      "bytes": 3364,
       "category": "track:contradiction-multihop:leaderboard",
       "path": "leaderboard/leaderboard_multihop_v0_3_0.json",
-      "sha256": "e5b7367f713b2753ea0eb260a89c87c6b1cdb2ce53d76fd4493b34712b40c664"
+      "sha256": "e00cfa6ba350013de3b7decc437c20b0a6e4b62a797b0ccd0fc2403a5f081da7"
     },
     {
       "bytes": 2542,
@@ -566,10 +578,10 @@
       "sha256": "dcad68113e1515d415b4c59115e05a5908c195b66c94c02414d5caf908fa4340"
     },
     {
-      "bytes": 28233,
+      "bytes": 28345,
       "category": "source",
       "path": "marked_bench/benchmark_conformance.py",
-      "sha256": "d7c61856f393a9660e5f40155c1622464946b005a9a28182c365d8b56249ffb0"
+      "sha256": "e01839e85c68a28c0877a50372f04397cfa1fa442be7419a21999069ce193914"
     },
     {
       "bytes": 13801,
@@ -596,16 +608,16 @@
       "sha256": "2caaadbf58f7683e37af253c05e30720708d0e1fa3ee4635cdd415d4ee5675bb"
     },
     {
-      "bytes": 14241,
+      "bytes": 14297,
       "category": "source",
       "path": "marked_bench/benchmark_registry.py",
-      "sha256": "f1cecc21d9720f01e2f86ff8bc4c33681fc9094fe9c9cb19bb5465c451e3b1c5"
+      "sha256": "fe235abe87223c960f2e3600d62e6d65f7027c7ae56a5e82377358fd2dca5d13"
     },
     {
-      "bytes": 9029,
+      "bytes": 9202,
       "category": "source",
       "path": "marked_bench/benchmark_release.py",
-      "sha256": "30a413bfc5843db665637271e77e23197ff73ca3fb15533dd581abae508a7881"
+      "sha256": "b05c057913f5741f0424868d67166994bf19f43aeac907cb561fbb3e122df09a"
     },
     {
       "bytes": 11363,
@@ -666,6 +678,12 @@
       "category": "source",
       "path": "marked_bench/contradiction/engine.py",
       "sha256": "ec7f7b776044400423e221c3ed35432c4812dceefe99d663c22757167a18cda9"
+    },
+    {
+      "bytes": 13406,
+      "category": "source",
+      "path": "marked_bench/contradiction/multihop_reference.py",
+      "sha256": "02471953c36b58d0509f4c80f3fbf9419423841681f3ffd8ab86957ddc6b8ef6"
     },
     {
       "bytes": 796,
@@ -812,10 +830,10 @@
       "sha256": "a2239f59dd3a67a34f1fa33a02bf73a65a99d1a3762473f9debfd8093a3337b1"
     },
     {
-      "bytes": 28474,
+      "bytes": 28482,
       "category": "source",
       "path": "scripts/check_baseline_robustness.py",
-      "sha256": "062b4b981da833201c831930968f3ad2a6e4814dfe22f36b73f569128b80d4b2"
+      "sha256": "6c3c916471d47b34ec440ef0b40ee5b30751ccac4fa3cc6d21c498e95bcf3ea2"
     },
     {
       "bytes": 6070,
@@ -842,6 +860,12 @@
       "sha256": "03275b761eb30872ccadfb31e84105fff95260d6e191dd1e4b0a6e67594a2e37"
     },
     {
+      "bytes": 10497,
+      "category": "source",
+      "path": "scripts/check_multihop_reference.py",
+      "sha256": "9fff40055a86b5787a0bf07643798d1b19e077765f69c06a588e397887d632fc"
+    },
+    {
       "bytes": 2666,
       "category": "source",
       "path": "scripts/check_review_workflow.py",
@@ -860,16 +884,16 @@
       "sha256": "f51f516ab1a8c3d6caa73d20f36a67de7c9448cafa6b3f762b96e3221dd938ed"
     },
     {
-      "bytes": 7930,
+      "bytes": 8171,
       "category": "source",
       "path": "scripts/regenerate_release_artifacts.py",
-      "sha256": "fd48cf58544b0fe8d57924c605907c22e1ac208cb02835cb176661a44ed7bd51"
+      "sha256": "b523c0b78cfd1c295f1a4a0de9a4b5f98bad910df29adb9b2f34e11276f487a0"
     },
     {
-      "bytes": 31018,
+      "bytes": 31130,
       "category": "source",
       "path": "scripts/validate_benchmark_artifacts.py",
-      "sha256": "f7f72e2690a8695b36c4980136c7703a79e59dbdc728a2559bafad38ee64b192"
+      "sha256": "d4026de84ec1c91f3319d95465ba02722da120b025917856342f82d8d1f6ec83"
     },
     {
       "bytes": 428,
@@ -1022,10 +1046,16 @@
       "sha256": "5fb78b28810ce9ec1cd430e956a18f8d5517f96c0a3600f82f866914dd65ae3a"
     },
     {
-      "bytes": 127746,
+      "bytes": 128014,
       "category": "source",
       "path": "tests/test_benchmark_suite.py",
-      "sha256": "633dd19ac0e893ed935a64cc0f77c444849a3ad2f8e9d433c86cf3aea1e1fd80"
+      "sha256": "331c9c5f8f622716c87641bb3459e967925ded912ff51be129f65423f9c41a60"
+    },
+    {
+      "bytes": 8746,
+      "category": "source",
+      "path": "tests/test_multihop_reference.py",
+      "sha256": "c105b31c7055197dad6a22f1bcae93b57791180b220fcf7ada2fdc06b488ab54"
     },
     {
       "bytes": 3017,
@@ -1045,7 +1075,7 @@
   "project": "The Marked Bench",
   "registry_path": "benchmark_registry.json",
   "registry_schema": "marked_bench.benchmark-registry.v1",
-  "registry_sha256": "1aa7aa288406542a99bfb83f4e991e17919608b9c5dd5dfd4634ffa11d9a6442",
+  "registry_sha256": "0be5fc7e8140facda2c37a04bb5e6031714243c22b73b2d4af9739d41d104ff3",
   "release_id": "marked-bench-contradiction-standard-release-0.4.10",
   "schema": "marked_bench.benchmark-release-manifest.v1",
   "tracks": [

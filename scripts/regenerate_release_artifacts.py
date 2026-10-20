@@ -13,6 +13,7 @@ sys.path.insert(0, str(SCRIPT_PATH))
 
 from check_case_quality import build_case_quality_artifact, run_case_quality
 from check_baseline_robustness import build_baseline_robustness_artifact, run_baseline_robustness
+from check_multihop_reference import regenerate_multihop_reference
 from check_scoring_sanity import build_scoring_sanity_artifact, run_scoring_sanity
 from check_submission_proof import (
     build_submission_proof_artifact,
@@ -34,6 +35,9 @@ from marked_bench.contradiction.benchmark_suite import write_suite_manifest
 
 
 GENERATED_PATHS = (
+    "baselines/multihop_reference_v0_3_0.json",
+    "leaderboard/leaderboard_multihop_v0_3_0.json",
+    "docs/MULTIHOP_REFERENCE.md",
     "suites/marked_bench_contradiction_standard_v0_1_1.json",
     "benchmark_registry.json",
     "docs/TECHNICAL_NOTE.md",
@@ -58,6 +62,7 @@ GENERATED_PATHS = (
 
 
 def regenerate_release_artifacts(root: Path = ROOT_PATH) -> None:
+    regenerate_multihop_reference(root)
     write_suite_manifest(root / "suites" / "marked_bench_contradiction_standard_v0_1_1.json", suite="contradiction")
     write_benchmark_registry(root / "benchmark_registry.json")
     write_technical_note(root / "docs" / "TECHNICAL_NOTE.md")

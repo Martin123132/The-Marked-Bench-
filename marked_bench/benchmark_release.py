@@ -48,10 +48,12 @@ BENCHMARK_SOURCE_ARTIFACTS = (
     "marked_bench/contradiction/__init__.py",
     "marked_bench/contradiction/benchmark_suite.py",
     "marked_bench/contradiction/engine.py",
+    "marked_bench/contradiction/multihop_reference.py",
     "marked_bench/examples/external_submission_demo.py",
     "marked_bench/examples/benchmark_standard_demo.py",
     "scripts/check_case_quality.py",
     "scripts/check_baseline_robustness.py",
+    "scripts/check_multihop_reference.py",
     "scripts/check_license_notice.py",
     "scripts/check_review_workflow.py",
     "scripts/check_scoring_sanity.py",
@@ -62,6 +64,7 @@ BENCHMARK_SOURCE_ARTIFACTS = (
     "scripts/validate_benchmark_artifacts.py",
     "tests/test_benchmark_suite.py",
     "tests/test_submission_security.py",
+    "tests/test_multihop_reference.py",
     "tests/test_scoring_sanity.py",
 )
 
@@ -74,6 +77,7 @@ SUPPORT_ARTIFACTS = (
     "conformance/README.md",
     "docs/CASE_QUALITY.md",
     "docs/BASELINE_ROBUSTNESS.md",
+    "docs/MULTIHOP_REFERENCE.md",
     "docs/FIVE_MINUTE_EVALUATOR_WALKTHROUGH.md",
     "docs/SUBMISSION_PROOF.md",
     "docs/SCORING_SPEC.md",

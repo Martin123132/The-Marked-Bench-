@@ -92,6 +92,7 @@ _TRACKS: tuple[Mapping[str, Any], ...] = (
         "leaderboard": "leaderboard/leaderboard_multihop_v0_3_0.json",
         "baseline_reports": [
             "baselines/contradiction_engine_multihop_v0_3_0.json",
+            "baselines/multihop_reference_v0_3_0.json",
             "baselines/hash_prior_multihop_v0_3_0.json",
             "baselines/always_none_multihop_v0_3_0.json",
         ],

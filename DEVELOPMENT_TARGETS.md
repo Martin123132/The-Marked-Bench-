@@ -124,4 +124,6 @@ We are tracking progress with target-based checkpoints only (no deadlines).
 - Completed: Target Z
 - Completed: Target AA
 - Completed: Target AB and Target AC in v0.4.10.
-- Active: Target AD; Target AE and Target AF remain queued in order.
+- Open for volunteers: Target AD; no independent result has been claimed.
+- Active by maintainer request: Target AE while volunteer intake remains open.
+- Queued: Target AF.

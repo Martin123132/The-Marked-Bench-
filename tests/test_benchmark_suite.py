@@ -2504,18 +2504,21 @@ class BenchmarkSuiteTests(unittest.TestCase):
         weak_path = root / "baselines" / "always_none_multihop_v0_3_0.json"
         hash_prior_path = root / "baselines" / "hash_prior_multihop_v0_3_0.json"
         strong_path = root / "baselines" / "contradiction_engine_multihop_v0_3_0.json"
+        reference_path = root / "baselines" / "multihop_reference_v0_3_0.json"
         leaderboard_path = root / "leaderboard" / "leaderboard_multihop_v0_3_0.json"
 
         leaderboard = json.loads(leaderboard_path.read_text(encoding="utf-8"))
 
         self.assertEqual(leaderboard["schema"], LEADERBOARD_SCHEMA)
-        self.assertEqual(leaderboard["entry_count"], 3)
+        self.assertEqual(leaderboard["entry_count"], 4)
         self.assertEqual(leaderboard["rejected_count"], 0)
         entries_by_system = {entry["system_name"]: entry for entry in leaderboard["entries"]}
         self.assertEqual(entries_by_system["ContradictionEngine"]["suite_id"], MULTIHOP_SUITE_ID)
         self.assertEqual(entries_by_system["ContradictionEngine"]["report_sha256"], report_sha256(strong_path))
         self.assertEqual(entries_by_system["HashPriorBaseline"]["report_sha256"], report_sha256(hash_prior_path))
         self.assertEqual(entries_by_system["AlwaysNoneDetector"]["report_sha256"], report_sha256(weak_path))
+        self.assertEqual(entries_by_system["MultiHopReference"]["report_sha256"], report_sha256(reference_path))
+        self.assertEqual(entries_by_system["MultiHopReference"]["rank"], 1)
 
     def test_checked_in_control_leaderboard_matches_baseline_reports(self) -> None:
         root = Path(__file__).resolve().parent.parent

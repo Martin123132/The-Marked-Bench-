@@ -63,8 +63,8 @@ git diff --check
 
 - [x] Completed target: `AB - publish submission security hardening`
 - [x] Completed target: `AC - cross-platform clean installation`
-- [ ] Current in-progress target: `AD - independent evaluator submission`
-- [ ] Next target after current: `AE - task-aware multi-hop reference`
+- [ ] Open for volunteers: `AD - independent evaluator submission`
+- [ ] Current in-progress target: `AE - task-aware multi-hop reference`
 - [ ] Queued supporting target: `AF - Forge Bridge instruction scope`
 - [x] Completed targets:
   - Target A: release-ready checks completed.
