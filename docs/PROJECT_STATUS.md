@@ -44,8 +44,9 @@ Follow targets AB through AF in `DEVELOPMENT_TARGETS.md`, in order:
    including isolated wheel-install reproducibility.
 3. Open for volunteers: obtain a genuinely independent evaluator run and reviewed submission
    through https://github.com/Martin123132/The-Marked-Bench-/issues/11.
-4. Active by maintainer request: qualify the task-aware multi-hop reference
-   without changing suite v0.3.0 while volunteer intake remains open.
+4. Completed on main after v0.4.10: the bounded task-aware reference scores
+   84.00, detects 8/10 contradictions, and makes no false positives on the
+   eight controls. Suite v0.3.0 remains unchanged; volunteer intake stays open.
 5. Qualify Forge Bridge instruction scope separately from benchmark scores.
 
 Do not count internal tests as external adoption. Prefer these trust and

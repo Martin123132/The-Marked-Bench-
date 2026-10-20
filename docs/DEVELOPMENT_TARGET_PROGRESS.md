@@ -2,6 +2,75 @@
 
 Use this file to check off completed targets.
 
+## Target AE: Multi-Hop Reference Complete
+
+The maintainer explicitly kept Target AD open for volunteers and authorized
+Target AE to proceed independently. No external evaluator or adoption result
+is claimed. Target AF remains queued, not executed by this change.
+
+- Implementation commit: `6589e312cda0e6e303b1d743f0fafa1fc223d78d`.
+- Pull request: https://github.com/Martin123132/The-Marked-Bench-/pull/13.
+- Public qualification: https://github.com/Martin123132/The-Marked-Bench-/actions/runs/39487007226.
+- All ten Windows/Ubuntu jobs passed across Python 3.10 through 3.14.
+- All 136 local tests passed without skips.
+- Score 84.00, 16/18 exact labels, 8/10 contradictions detected, 0/8 control false positives.
+- Ninety ID/metadata, entity-renaming, sentence/batch-order and disconnected-distractor checks passed.
+- Sixteen removals of required source facts removed the corresponding proof.
+- Additional synthetic cases cover longer chains, cycles, entity mismatches,
+  unit conversion, ambiguous quantities, definition boundaries, quantifiers,
+  count thresholds, temporal intervals, replacement dates and reversals.
+- Frozen suite files/hash, scoring code, legacy engine and baseline reports,
+  company licensing, and the published v0.4.10 tag/assets are unchanged.
+- This is a documented bounded grammar developed against public cases, not
+  held-out performance. Inherited permission/validity polarity is unsupported.
+
+Implementation and integration scope:
+
+- `marked_bench/contradiction/multihop_reference.py`
+- `scripts/check_multihop_reference.py`
+- `tests/test_multihop_reference.py`
+- `marked_bench/benchmark_registry.py`
+- `marked_bench/benchmark_conformance.py`
+- `marked_bench/benchmark_release.py`
+- `scripts/validate_benchmark_artifacts.py`
+- `scripts/regenerate_release_artifacts.py`
+- `scripts/check_baseline_robustness.py`
+- `tests/test_benchmark_suite.py`
+- `.github/workflows/benchmark-ci.yml`
+
+Evidence and documentation scope:
+
+- `baselines/multihop_reference_v0_3_0.json`
+- `leaderboard/leaderboard_multihop_v0_3_0.json`
+- `benchmark_registry.json`
+- `docs/MULTIHOP_REFERENCE.md`
+- `docs/BASELINE_ROBUSTNESS.md`
+- `docs/TECHNICAL_NOTE.md`
+- `baselines/README.md`
+- `DEVELOPMENT_TARGETS.md`
+- `docs/PROJECT_STATUS.md`
+- `docs/DEVELOPMENT_TARGET_PROGRESS.md`
+- `releases/marked_bench_release_v0_4_10.json` (main snapshot, not the published asset)
+- `conformance/marked_bench_conformance_v0_4_10.json` (main snapshot)
+
+Validation completed:
+
+```bash
+python scripts/check_multihop_reference.py
+python -m unittest discover -s tests
+python scripts/validate_benchmark_artifacts.py
+python -m marked_bench.benchmark_cli --check-standard-status
+python scripts/check_scoring_sanity.py
+python scripts/check_case_quality.py
+python scripts/check_baseline_robustness.py
+python scripts/check_evaluator_walkthrough.py
+python scripts/check_submission_proof.py
+python scripts/check_review_workflow.py
+python scripts/check_license_notice.py
+python scripts/regenerate_release_artifacts.py --check
+git diff --check
+```
+
 ## Active targets
 
 - [x] Keep the contradiction suite API stable while introducing suite version 0.1.1 and expanding standard-case coverage.
@@ -64,7 +133,7 @@ git diff --check
 - [x] Completed target: `AB - publish submission security hardening`
 - [x] Completed target: `AC - cross-platform clean installation`
 - [ ] Open for volunteers: `AD - independent evaluator submission`
-- [ ] Current in-progress target: `AE - task-aware multi-hop reference`
+- [x] Completed target: `AE - task-aware multi-hop reference`
 - [ ] Queued supporting target: `AF - Forge Bridge instruction scope`
 - [x] Completed targets:
   - Target A: release-ready checks completed.
