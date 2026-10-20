@@ -14,8 +14,14 @@ Use this file to check off completed targets.
 
 ## Security And Installation Qualification
 
-Targets AB and AC passed local and public qualification; their checkboxes remain open
-until the release is published. Independent evaluator intake is tracked in https://github.com/Martin123132/The-Marked-Bench-/issues/11; no external result is claimed.
+Targets AB and AC are complete. The security and installation work was merged
+in https://github.com/Martin123132/The-Marked-Bench-/pull/10 and published as
+https://github.com/Martin123132/The-Marked-Bench-/releases/tag/v0.4.10 at commit
+`18b29d4e86fd17f53848a46868c7ebaeb0f12cfa`.
+
+Independent evaluator intake is now active in
+https://github.com/Martin123132/The-Marked-Bench-/issues/11. It awaits a real
+external participant; no external result or adoption is claimed.
 
 - Security implementation: `marked_bench/benchmark_submission.py`.
 - Additional validation hardening: `marked_bench/schema_validation.py` and
@@ -30,7 +36,7 @@ until the release is published. Independent evaluator intake is tracked in https
 - Fresh wheel installation passed outside the checkout: package v0.4.10,
   18 multi-hop cases, checked-example score 11.11, and pinned suite hash
   `07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f`.
-- Public CI passed all ten Windows/Ubuntu jobs across Python 3.10 through 3.14: https://github.com/Martin123132/The-Marked-Bench-/actions/runs/39477840419.
+- Release-candidate CI passed all ten Windows/Ubuntu jobs across Python 3.10 through 3.14: https://github.com/Martin123132/The-Marked-Bench-/actions/runs/39478152498.
 - The existing local edit to the v0.4.9 manifest is not included; historical
   v0.4.9 release files are preserved in GitHub.
 - Suite files and licensing files are unchanged.
@@ -55,8 +61,11 @@ git diff --check
 
 ## Target Queue
 
-- [ ] Current in-progress target: `AB - publish submission security hardening`
-- [ ] Next target after current: `AC - cross-platform clean installation`
+- [x] Completed target: `AB - publish submission security hardening`
+- [x] Completed target: `AC - cross-platform clean installation`
+- [ ] Current in-progress target: `AD - independent evaluator submission`
+- [ ] Next target after current: `AE - task-aware multi-hop reference`
+- [ ] Queued supporting target: `AF - Forge Bridge instruction scope`
 - [x] Completed targets:
   - Target A: release-ready checks completed.
   - Target B: contributor PR/checklist guidance updated.

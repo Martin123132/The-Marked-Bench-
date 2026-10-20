@@ -68,10 +68,10 @@
       "sha256": "33b1715247f2628e7233825b6cd547a5fb5e1dabaa016a98b2c78d0d30d32ac6"
     },
     {
-      "bytes": 7091,
+      "bytes": 7287,
       "category": "root",
       "path": "DEVELOPMENT_TARGETS.md",
-      "sha256": "aa3b3c8e544e9fde22e661d5c83e9fdbbcf4d5949ff7cbe8830f83a36a977456"
+      "sha256": "1106db57da6abc3dab7c45c33808a4fb68891e2283d1df6d2a2657ee8282758c"
     },
     {
       "bytes": 5038,
@@ -272,10 +272,10 @@
       "sha256": "4bf1934822ebf838b1c011fc9bcf9ea549dd42980f158f84ca9aeaea13498f74"
     },
     {
-      "bytes": 17930,
+      "bytes": 18355,
       "category": "support",
       "path": "docs/DEVELOPMENT_TARGET_PROGRESS.md",
-      "sha256": "6f5bd626cb5df1290270388abf0cacadff2afbb1abad408ad90cc532cbfcd81b"
+      "sha256": "5972f9f3261eb2f48c1877a48412ac3844433156c5a29efcb6ffe3508899a5ae"
     },
     {
       "bytes": 2972,
@@ -302,10 +302,10 @@
       "sha256": "be693f4aed007fd6bf490c3fd778f674e3931ecd1a2dbb1f853b6604c3afccac"
     },
     {
-      "bytes": 2494,
+      "bytes": 2652,
       "category": "support",
       "path": "docs/PROJECT_STATUS.md",
-      "sha256": "4aeb4c90d1a35e314ef4d7648341383844e577c64dca8bf859b4780757d5bb44"
+      "sha256": "3e0dc006dca1044a5a0a4de562659395b81f330d97e568faf7a7b42645edff3b"
     },
     {
       "bytes": 7190,

@@ -37,9 +37,11 @@ aggressively.
 
 Follow targets AB through AF in `DEVELOPMENT_TARGETS.md`, in order:
 
-1. Publish the submission boundary and validation hardening.
-2. Prove Windows/Linux and isolated wheel-install reproducibility.
-3. Obtain a genuinely independent evaluator run and reviewed submission.
+1. Completed in v0.4.10: publish submission boundary and validation hardening.
+2. Completed in v0.4.10: Windows/Linux CI across Python 3.10 through 3.14,
+   including isolated wheel-install reproducibility.
+3. Active: obtain a genuinely independent evaluator run and reviewed submission
+   through https://github.com/Martin123132/The-Marked-Bench-/issues/11.
 4. Strengthen the task-aware multi-hop reference without changing suite v0.3.0.
 5. Qualify Forge Bridge instruction scope separately from benchmark scores.
 
