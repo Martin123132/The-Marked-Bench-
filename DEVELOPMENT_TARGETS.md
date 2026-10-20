@@ -89,16 +89,17 @@ We are tracking progress with target-based checkpoints only (no deadlines).
 
 ## Current Ordered Targets (No Timelines)
 
-- [ ] **Target AB: Publish submission security hardening**
+- [x] **Target AB: Publish submission security hardening**
   Reject bundle path escapes before file access, pass regressions and release
   gates, and publish the patch release with unchanged suites and licensing.
-- [ ] **Target AC: Prove cross-platform clean installation**
+- [x] **Target AC: Prove cross-platform clean installation**
   Pass Windows and Ubuntu CI across Python 3.10 through 3.14, including an
   isolated wheel installation and the evaluator workflow outside the checkout.
 - [ ] **Target AD: Complete an independent evaluator submission**
   Record a genuinely external run, original predictions, reproducible
   environment, suite identity, onboarding feedback, and a documented review.
   Internal examples and agent-driven smoke tests do not satisfy this target.
+  Active intake: https://github.com/Martin123132/The-Marked-Bench-/issues/11.
 - [ ] **Target AE: Strengthen the multi-hop reference baseline**
   Add task-aware reasoning while preserving suite v0.3.0 and examine identifier
   and input-order sensitivity without tuning on case identifiers.
@@ -122,3 +123,5 @@ We are tracking progress with target-based checkpoints only (no deadlines).
 - Completed: Target Y
 - Completed: Target Z
 - Completed: Target AA
+- Completed: Target AB and Target AC in v0.4.10.
+- Active: Target AD; Target AE and Target AF remain queued in order.
