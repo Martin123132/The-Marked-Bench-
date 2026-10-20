@@ -2,7 +2,7 @@
 
 The Marked Bench should evolve through public, versioned, evidence-backed
 changes. This document describes the human process; the machine-readable
-profile is `standard/marked_bench_change_control_v0_4_9.json`.
+profile is `standard/marked_bench_change_control_v0_4_10.json`.
 
 ## What Requires A Proposal
 
@@ -45,7 +45,7 @@ Every standard-changing pull request should include:
 ## Validation
 
 ```bash
-marked-bench --validate-change-control standard/marked_bench_change_control_v0_4_9.json
+marked-bench --validate-change-control standard/marked_bench_change_control_v0_4_10.json
 python scripts/validate_benchmark_artifacts.py
 python -m unittest discover -s tests
 ```

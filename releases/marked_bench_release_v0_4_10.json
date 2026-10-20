@@ -92,22 +92,22 @@
       "sha256": "54c5380336f8e8e52a1497b231def9186895c20cd2ca171f1acdabcd0363fc15"
     },
     {
-      "bytes": 2150,
+      "bytes": 2163,
       "category": "support",
       "path": "adoption/README.md",
-      "sha256": "f5b838b74d5121875265403cf57c74cdea25fa24b473917247246f830c87c791"
+      "sha256": "277c574702ae0eed8d19faad4f79993c489dabfaf3527b0357b9f3dca7f02856"
     },
     {
-      "bytes": 1600,
+      "bytes": 1602,
       "category": "support",
       "path": "adoption/implementation_kit/README.md",
-      "sha256": "51db576a7f7d3f429ba2130d8f0dcf3c669737f74407a76e9db710168514c29e"
+      "sha256": "4b2c3ef2090ed2470b1f6cd76f81beaa78c0385a4e3bfe39d804320abcf13317"
     },
     {
-      "bytes": 694,
+      "bytes": 695,
       "category": "support",
       "path": "adoption/implementation_kit/github_actions_validate_result.yml",
-      "sha256": "7688241b679b73b68b27b8670d4cf26db8797f7117182a9534c292de5109ff03"
+      "sha256": "1913193a42fe6c603759443f29651ade7de5b388de32b8691929278ff0fabfb4"
     },
     {
       "bytes": 619,
@@ -218,10 +218,10 @@
       "sha256": "1aa7aa288406542a99bfb83f4e991e17919608b9c5dd5dfd4634ffa11d9a6442"
     },
     {
-      "bytes": 847,
+      "bytes": 849,
       "category": "support",
       "path": "conformance/README.md",
-      "sha256": "7dbcdcba5cdab3526e2f13f0feaa28af4e6fa3b75b82f16326b48eed0819d30e"
+      "sha256": "85df6e2a9c627696daa7786b5d13b0446bb58801724dad7463194905b834fdae"
     },
     {
       "bytes": 3662,
@@ -230,10 +230,10 @@
       "sha256": "0c05017844f1d7c9036c61df118eb3dda6e0edea57fce22c5ff2b7b2058dfd2e"
     },
     {
-      "bytes": 7082,
+      "bytes": 7091,
       "category": "governance",
       "path": "docs/ADOPTION_GUIDE.md",
-      "sha256": "eb0f40f281763c6cd5ae440464760e2520853fa11a39324bcaa2997fbd6a5b85"
+      "sha256": "d1cc3e5d4b16db00005e26857ba7d19f9db4115ce19c79deef3c8bad373cf824"
     },
     {
       "bytes": 7603,
@@ -254,10 +254,10 @@
       "sha256": "8dc5ac6c30b6659c7cfe7c7a0b24a396e3af88924dd595ffe1081c0f1c4b1b7f"
     },
     {
-      "bytes": 18115,
+      "bytes": 18131,
       "category": "governance",
       "path": "docs/BENCHMARK_STANDARD.md",
-      "sha256": "b33c8f721c605b5ff40654fd8ba0fcc6bd61bec287de3c9e513cae600e59a3b4"
+      "sha256": "fa0a485387b12e2d042f0c2443e367222600a25770c06fb6486537fb1b4d6a61"
     },
     {
       "bytes": 1121,
@@ -266,16 +266,16 @@
       "sha256": "e6d1f8298cddf72a22f5beecbcf623aed71e9f30788d6f60686c011c762fbc9f"
     },
     {
-      "bytes": 1914,
+      "bytes": 1916,
       "category": "support",
       "path": "docs/CHANGE_CONTROL.md",
-      "sha256": "0ac096e7e7a725fb6132b722ebe143d606ed23a4fff69d9d85edf1e75813a64c"
+      "sha256": "4bf1934822ebf838b1c011fc9bcf9ea549dd42980f158f84ca9aeaea13498f74"
     },
     {
-      "bytes": 17720,
+      "bytes": 17930,
       "category": "support",
       "path": "docs/DEVELOPMENT_TARGET_PROGRESS.md",
-      "sha256": "08644bce50c568d3af41097722734d6703a853cc3daf13735ffae196f3cc4ff6"
+      "sha256": "6f5bd626cb5df1290270388abf0cacadff2afbb1abad408ad90cc532cbfcd81b"
     },
     {
       "bytes": 2972,
@@ -476,10 +476,10 @@
       "sha256": "ca783a633970b9bd11a47012a9f45e579ef02a5e7f5c7d4f7b532b8035810078"
     },
     {
-      "bytes": 3565,
+      "bytes": 3573,
       "category": "governance",
       "path": "docs/STANDARDIZATION_STATUS.md",
-      "sha256": "9523a912f96181cc035acdfeda24546dde07cbd7a784a8cbd526e9576121b036"
+      "sha256": "237fe11b78f88e533dd4b63b116556149bdb26a2094bf65c4a477103574de54b"
     },
     {
       "bytes": 9576,
@@ -506,10 +506,10 @@
       "sha256": "4cf7af90c726e9cc9a392bdbde369f41b46401a565111727f31e7f6238100a62"
     },
     {
-      "bytes": 2557,
+      "bytes": 2559,
       "category": "governance",
       "path": "docs/THIRD_PARTY_EVIDENCE.md",
-      "sha256": "78f49bf306b2d89a64be8abb21f35b9fd7c324fa19a865633c005a14dee63626"
+      "sha256": "796e4dae0d8d8744324723901dc63fe8ca34611032f866ab1d5b1b43c731e43d"
     },
     {
       "bytes": 4324,
@@ -686,10 +686,10 @@
       "sha256": "8b7a9aac2cfb81b4febad8236e21a2059e69790776dff4a08b0e2d6f720cd195"
     },
     {
-      "bytes": 543,
+      "bytes": 544,
       "category": "support",
       "path": "releases/README.md",
-      "sha256": "2ffe350582e721b8efe02bc9486c563940b53f7c9276275c5c2a31307dee09ee"
+      "sha256": "6583cd3724c1943ffe1bbba46577b8841195a3ffc34cf6bf989b5019febefd90"
     },
     {
       "bytes": 7439,
@@ -878,10 +878,10 @@
       "sha256": "2da717961f43d5258c7b44b5fa5722e2d8f50a70e9c8b25378a8410f3acdc81f"
     },
     {
-      "bytes": 1920,
+      "bytes": 1928,
       "category": "support",
       "path": "standard/README.md",
-      "sha256": "4327a0330d53633d4f2a67bd23153c9f0117e55e193bf59eec03ff66e193ed60"
+      "sha256": "03dac04241d5df0f7c2ecb3aeb95f22dbb4e336cb50e98f3465488e7c21ccf4b"
     },
     {
       "bytes": 7702,

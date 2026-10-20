@@ -14,8 +14,8 @@ Use this file to check off completed targets.
 
 ## Security And Installation Qualification
 
-Targets AB and AC are prepared for publication; their checkboxes remain open
-until the public CI and release steps complete.
+Targets AB and AC passed local and public qualification; their checkboxes remain open
+until the release is published. Independent evaluator intake is tracked in https://github.com/Martin123132/The-Marked-Bench-/issues/11; no external result is claimed.
 
 - Security implementation: `marked_bench/benchmark_submission.py`.
 - Additional validation hardening: `marked_bench/schema_validation.py` and
@@ -30,7 +30,7 @@ until the public CI and release steps complete.
 - Fresh wheel installation passed outside the checkout: package v0.4.10,
   18 multi-hop cases, checked-example score 11.11, and pinned suite hash
   `07a2bb9c0e8356d1cdab98b5b1b35a3c8bd29beff695816dfb151dbb5f6d0d1f`.
-- Public CI must also pass Windows and Ubuntu / Python 3.10 through 3.14.
+- Public CI passed all ten Windows/Ubuntu jobs across Python 3.10 through 3.14: https://github.com/Martin123132/The-Marked-Bench-/actions/runs/39477840419.
 - The existing local edit to the v0.4.9 manifest is not included; historical
   v0.4.9 release files are preserved in GitHub.
 - Suite files and licensing files are unchanged.
