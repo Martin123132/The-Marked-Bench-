@@ -100,7 +100,7 @@ We are tracking progress with target-based checkpoints only (no deadlines).
   environment, suite identity, onboarding feedback, and a documented review.
   Internal examples and agent-driven smoke tests do not satisfy this target.
   Active intake: https://github.com/Martin123132/The-Marked-Bench-/issues/11.
-- [ ] **Target AE: Strengthen the multi-hop reference baseline**
+- [x] **Target AE: Strengthen the multi-hop reference baseline**
   Add task-aware reasoning while preserving suite v0.3.0 and examine identifier
   and input-order sensitivity without tuning on case identifiers.
 - [ ] **Target AF: Qualify Forge Bridge instruction scope separately**
@@ -124,4 +124,6 @@ We are tracking progress with target-based checkpoints only (no deadlines).
 - Completed: Target Z
 - Completed: Target AA
 - Completed: Target AB and Target AC in v0.4.10.
-- Active: Target AD; Target AE and Target AF remain queued in order.
+- Open for volunteers: Target AD; no independent result has been claimed.
+- Completed: Target AE; reference score 84.00 on unchanged suite v0.3.0.
+- Queued: Target AF.

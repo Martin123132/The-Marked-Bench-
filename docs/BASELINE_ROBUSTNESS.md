@@ -5,8 +5,8 @@
 - Overall guard status: **PASS**.
 - The multi-hop ranking gap is explained, not removed: `HashPriorBaseline` scores 45.93 versus 24.14, a 21.79-point lead.
 - The observed hash assignment is unusually favorable: only 1.8% of 4,096 deterministic salted-ID variants score as highly.
-- The task-aware reference is also underpowered for this track: it finds 1 of 10 contradiction cases, while the hash baseline finds 9 by predicting a contradiction on 15 of 18 cases.
-- Identifier luck alone is not the full cause: 54.9% of salted-ID variants still beat the current engine. The leaderboard order must remain an explained watchlist item until a genuinely multi-hop reference baseline is added.
+- The legacy engine is also underpowered for this track: it finds 1 of 10 contradiction cases, while the hash baseline finds 9 by predicting a contradiction on 15 of 18 cases.
+- Identifier luck alone is not the full cause: 54.9% of salted-ID variants still beat the legacy engine. This diagnosis preserves that pairwise watchlist; see `docs/MULTIHOP_REFERENCE.md` for the separately evaluated linked-fact reference.
 
 ## Track comparison
 
@@ -16,7 +16,7 @@ Low-information baselines are diagnostic references, not task-aware systems.
 | --- | ---: | ---: | ---: | ---: | --- | --- |
 | contradiction | 1 | 100.00 | 2 | 24.11 | pass | low-information baseline does not outrank task-aware baseline |
 | contradiction-adversarial | 1 | 52.37 | 2 | 25.78 | pass | low-information baseline does not outrank task-aware baseline |
-| contradiction-multihop | 2 | 24.14 | 1 | 45.93 | explained watchlist | explained watchlist: the task-aware reference lacks multi-hop coverage and the observed hash assignment is unusually favorable; keep this track watchlisted before expansion |
+| contradiction-multihop | 3 | 24.14 | 2 | 45.93 | explained watchlist | explained watchlist: the legacy engine lacks multi-hop coverage and the observed hash assignment is unusually favorable; keep this track watchlisted before expansion |
 | contradiction-controls | 1 | 100.00 | 3 | 15.68 | pass | low-information baseline does not outrank task-aware baseline |
 
 ## Detection breadth and chance alignment create the score gap
@@ -108,11 +108,11 @@ python scripts/check_baseline_robustness.py --artifact docs/BASELINE_ROBUSTNESS.
 ## Recommended next steps
 
 1. Preserve published multi-hop suite v0.3.0 and its case IDs unchanged.
-2. Keep the current leaderboard marked as an explained watchlist, not evidence that the hash baseline is a stronger contradiction system.
-3. Before expanding the track, add a genuinely multi-hop task-aware reference and require it to beat low-information sensitivity medians across detection, type, and coverage components.
+2. Keep the legacy engine/hash-prior comparison marked as an explained watchlist, not evidence that the hash baseline is a stronger contradiction system.
+3. Qualify the linked-fact reference separately using `docs/MULTIHOP_REFERENCE.md`, including meaning-preserving variants, broken reasoning links and explicit parser limitations.
 4. If future claims need gaming resistance, design a separately versioned held-out evaluation path.
 
 ## Further questions
 
-- Which deterministic multi-hop reasoning baseline should become the next task-aware reference?
+- How well does the bounded linked-fact reference transfer to independently authored wording?
 - Should a future public release separate transparent development cases from held-out ranking cases?

@@ -83,6 +83,7 @@ BASELINE_REPORTS = [
     Path("baselines/hash_prior_adversarial_v0_2_0.json"),
     Path("baselines/always_none_adversarial_v0_2_0.json"),
     Path("baselines/contradiction_engine_multihop_v0_3_0.json"),
+    Path("baselines/multihop_reference_v0_3_0.json"),
     Path("baselines/hash_prior_multihop_v0_3_0.json"),
     Path("baselines/always_none_multihop_v0_3_0.json"),
     Path("baselines/contradiction_engine_controls_v0_4_0.json"),
@@ -109,6 +110,7 @@ LEADERBOARDS = {
         Path("baselines/always_none_multihop_v0_3_0.json"),
         Path("baselines/hash_prior_multihop_v0_3_0.json"),
         Path("baselines/contradiction_engine_multihop_v0_3_0.json"),
+        Path("baselines/multihop_reference_v0_3_0.json"),
     ],
     Path("leaderboard/leaderboard_controls_v0_4_0.json"): [
         Path("baselines/always_none_controls_v0_4_0.json"),
