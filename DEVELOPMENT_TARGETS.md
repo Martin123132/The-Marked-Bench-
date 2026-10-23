@@ -103,9 +103,11 @@ We are tracking progress with target-based checkpoints only (no deadlines).
 - [x] **Target AE: Strengthen the multi-hop reference baseline**
   Add task-aware reasoning while preserving suite v0.3.0 and examine identifier
   and input-order sensitivity without tuning on case identifiers.
-- [ ] **Target AF: Qualify Forge Bridge instruction scope separately**
+- [x] **Target AF: Qualify Forge Bridge instruction scope separately**
   Demonstrate that nested instructions retain their intended directory scope
   in an isolated pilot before applying any destination kit to a live project.
+  Completed for the isolated Codex export only; see the bounded qualification
+  in [the progress log](docs/DEVELOPMENT_TARGET_PROGRESS.md#target-af-isolated-codex-scope-preservation-complete).
 
 ## Checkoff Evidence
 
@@ -126,4 +128,5 @@ We are tracking progress with target-based checkpoints only (no deadlines).
 - Completed: Target AB and Target AC in v0.4.10.
 - Open for volunteers: Target AD; no independent result has been claimed.
 - Completed: Target AE; reference score 84.00 on unchanged suite v0.3.0.
-- Queued: Target AF.
+- Completed: Target AF; four nested instruction scopes and byte-identical bodies
+  verified in an isolated Codex export, without live-project deployment.

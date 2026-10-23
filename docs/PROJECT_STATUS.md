@@ -47,7 +47,15 @@ Follow targets AB through AF in `DEVELOPMENT_TARGETS.md`, in order:
 4. Completed on main after v0.4.10: the bounded task-aware reference scores
    84.00, detects 8/10 contradictions, and makes no false positives on the
    eight controls. Suite v0.3.0 remains unchanged; volunteer intake stays open.
-5. Qualify Forge Bridge instruction scope separately from benchmark scores.
+5. Completed for an isolated Codex export: Forge Bridge retained all four nested
+   instruction locations and byte-identical bodies; independent export
+   verification passed. See [Target AF evidence](DEVELOPMENT_TARGET_PROGRESS.md#target-af-isolated-codex-scope-preservation-complete).
+
+Target AF is a bounded, provider-free artifact qualification, separate from
+benchmark scores. No destination kit was applied to a live project. Runtime
+model behavior, other destination formats, and conditional/glob scope handling
+were not qualified by this pilot. The public summary excludes private instructions
+and local paths; the independent evaluator target remains open for volunteers.
 
 Do not count internal tests as external adoption. Prefer these trust and
 usability targets over new benchmark tracks, dashboards, or a broad refactor.
