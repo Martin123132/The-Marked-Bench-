@@ -2,11 +2,84 @@
 
 Use this file to check off completed targets.
 
+## Target AF: Isolated Codex Scope Preservation Complete
+
+Target AF is complete for one developer-owned, configuration-only pilot and
+its isolated Codex-format export. This is an internal, provider-free artifact
+qualification, not an independent evaluator submission or external adoption.
+Target AD remains open for volunteers in
+https://github.com/Martin123132/The-Marked-Bench-/issues/11.
+
+Observed qualification evidence:
+
+- The source fixture contained four nested instruction files. Their contents,
+  private directory names, local paths, and generated artifacts are not
+  published here.
+- A fresh portable migration retained four explicit directory-scope bindings.
+  Each source/body byte count and SHA-256 matched.
+- Independent portable-workspace verification passed with an empty error list
+  and exit status zero, including the pre-render verification.
+- The separately approved Codex render ran once into a new isolated directory.
+  Existing outputs were not overwritten and no kit was applied to a live project.
+- The export records four `codex_hierarchical_agents_md` bindings with
+  `exact_portable_body` content. Each destination retained its source-relative
+  location and matched both its source and portable-body SHA-256 and byte count.
+- Two instruction bodies were identical but retained distinct directory scopes.
+- Independent `verify-export codex` passed with an empty error list and exit
+  status zero. The declared inventory is eight payload files plus the export manifest.
+- Export manifest SHA-256:
+  `042f4b3c2335291dca1fc20f0fee50a9a1dfb2da9329ccef47df2b7f6bf1d445`.
+- Provenance records deterministic local transformation, zero model executions,
+  and zero provider-model executions. No MCP activation or provider invocation
+  was performed. No secret requirements or MCP warnings were reported by the export.
+- Migration reported zero MCP redactions, no unsupported sources, and four
+  portable-storage flattening warnings with explicit scope bindings. The export
+  retained the nested hierarchy; those warnings are not hidden or treated as
+  permission to widen instruction scope.
+- The fixture's separate provenance note was not selected as an instruction input.
+
+Qualification commands completed, with private paths replaced by descriptive
+tokens below. These are command shapes, not copied machine JSON or executable
+commands for the public repository. The managed skill launcher was used for
+every Forge Bridge operation; its original CLI results are the machine record.
+
+```text
+<managed-launcher> plan <configuration-only-pilot> --output <fresh-portable-workspace>
+<managed-launcher> migrate <configuration-only-pilot> --output <fresh-portable-workspace>
+<managed-launcher> verify <fresh-portable-workspace>
+<managed-launcher> render codex <fresh-portable-workspace> --output <isolated-codex-export>
+<managed-launcher> verify-export codex <isolated-codex-export>
+```
+
+Acceptance is limited to this fixture's exported directory bindings and body
+integrity. It does not establish live model instruction-following, root-only
+instruction coverage, conditional/glob activation, negative refusal coverage,
+Claude-format compatibility, or general Forge Bridge engine qualification.
+The CLI outputs did not identify an engine version, so no version-specific
+claim is made. The public digest identifies a privately retained artifact;
+this summary is not a public reproduction package or a benchmark score.
+
+Documentation and generated evidence changed for this checkoff:
+
+- `DEVELOPMENT_TARGETS.md`
+- `docs/DEVELOPMENT_TARGET_PROGRESS.md`
+- `docs/PROJECT_STATUS.md`
+- `releases/marked_bench_release_v0_4_10.json` (current main snapshot only)
+
+The conformance snapshot was refreshed by regeneration and remained unchanged:
+`conformance/marked_bench_conformance_v0_4_10.json`.
+
+Repository publication checks are separate from the private Forge Bridge
+qualification and are reported by the publishing pull request's Benchmark CI.
+No benchmark suites, scoring logic, baselines, licensing, published release
+tags, or published release assets are changed by this documentation checkoff.
+
 ## Target AE: Multi-Hop Reference Complete
 
 The maintainer explicitly kept Target AD open for volunteers and authorized
 Target AE to proceed independently. No external evaluator or adoption result
-is claimed. Target AF remains queued, not executed by this change.
+is claimed. Target AF was queued at that point; its later isolated qualification
+is recorded above and was not part of the AE implementation.
 
 - Implementation commit: `6589e312cda0e6e303b1d743f0fafa1fc223d78d`.
 - Pull request: https://github.com/Martin123132/The-Marked-Bench-/pull/13.
@@ -134,7 +207,7 @@ git diff --check
 - [x] Completed target: `AC - cross-platform clean installation`
 - [ ] Open for volunteers: `AD - independent evaluator submission`
 - [x] Completed target: `AE - task-aware multi-hop reference`
-- [ ] Queued supporting target: `AF - Forge Bridge instruction scope`
+- [x] Completed supporting target: `AF - isolated Codex instruction scope`
 - [x] Completed targets:
   - Target A: release-ready checks completed.
   - Target B: contributor PR/checklist guidance updated.
