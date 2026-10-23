@@ -65,7 +65,9 @@ Documentation and generated evidence changed for this checkoff:
 - `docs/DEVELOPMENT_TARGET_PROGRESS.md`
 - `docs/PROJECT_STATUS.md`
 - `releases/marked_bench_release_v0_4_10.json` (current main snapshot only)
-- `conformance/marked_bench_conformance_v0_4_10.json` (current main snapshot only)
+
+The conformance snapshot was refreshed by regeneration and remained unchanged:
+`conformance/marked_bench_conformance_v0_4_10.json`.
 
 Repository publication checks are separate from the private Forge Bridge
 qualification and are reported by the publishing pull request's Benchmark CI.
